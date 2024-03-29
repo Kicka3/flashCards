@@ -1,10 +1,10 @@
-import LogOut from '@/assets/icons/log-out'
-import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 
 export function App() {
   return (
     <div>
-      <Button icon={<LogOut />}>Btn with icon</Button>
+      {/*<Button icon={<LogOut />}>Btn with icon</Button>*/}
+      <Card>{<div>QWE</div>} </Card>
     </div>
   )
 }
