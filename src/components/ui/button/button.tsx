@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import s from './button.module.scss'
 
-export type ButtonProps<T extends ElementType = 'button'> = {
+export type Props<T extends ElementType = 'button'> = {
   as?: T
   fullWidth?: boolean
   icon?: ReactNode
@@ -12,7 +12,7 @@ export type ButtonProps<T extends ElementType = 'button'> = {
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(
-  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
+  props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
 ) => {
   const {
     as: Component = 'button',
