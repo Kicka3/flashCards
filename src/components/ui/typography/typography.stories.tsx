@@ -32,14 +32,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const AllTypography: Story = {
-  args: {
-    as: 'div',
-    children: 'HEADOMG1',
-    variant: 'h1',
-  },
-}
-
 export const Heading1: Story = {
   args: {
     as: 'h1',
