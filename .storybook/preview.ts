@@ -5,6 +5,9 @@ import '@fontsource/roboto/700.css'
 
 const preview: Preview = {
   parameters: {
+    backgrounds: {
+      default: 'dark', // Set default background color to black
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
