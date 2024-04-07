@@ -1,86 +1,77 @@
 .checkboxContainer {
   display: flex;
   align-items: center;
+  width: fit-content;
 }
 
-.markWrapper {
+.label {
+  margin-left: 10px;
+}
+
+.checkbox {
+  all: unset;
+
   cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
 
-  border-radius: 50%;
+  width: 18px;
+  height: 18px;
 
-  .checkbox {
-    cursor: pointer;
+  background-color: transparent;
+  border: 2px solid var(--color-light-900);
+  border-radius: 5px;
 
-    overflow: hidden;
+  &::before {
+    content: '';
 
-    width: 24px;
-    height: 24px;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 0;
+    height: 0;
     padding: 0;
 
-    background-color: var(--color-dark-900);
-    border-radius: 3px;
-    outline: none;
-
-    .svg {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    & > span {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-    }
+    border-radius: 50%;
   }
 
-  &:hover {
+  &:hover::before,
+  &:active::before,
+  &:focus-visible::before {
+    width: 36px;
+    height: 36px;
+  }
+
+  &:hover::before {
     background-color: var(--color-dark-500);
-
-    .checkbox {
-      background-color: var(--color-dark-500);
-    }
   }
 
-  &:active,
-  &:focus {
+  &:active::before,
+  &:focus-visible::before {
     background-color: var(--color-dark-100);
+  }
 
-    .checkbox {
-      background-color: var(--color-dark-100);
+  &:disabled {
+    pointer-events: none;
+    color: var(--color-dark-100);
+    border: 2px solid var(--color-dark-100);
+
+    & + .label {
+      color: var(--color-dark-100);
     }
   }
 
-  .autoSize {
-    width: 1rem;
-    height: 1rem;
+  svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-.disabled {
-  background-color: transparent;
-
-  .markWrapper {
-    .checkbox {
-      cursor: not-allowed;
-      border: 3px solid var(--color-dark-100) !important;
-    }
-
-    &:hover {
-      background-color: transparent;
-
-      .checkbox {
-        background-color: transparent;
-      }
-    }
-  }
-
-  .span {
-    color: var(--color-dark-100);
-  }
+.autoSize {
+  width: 1rem;
+  height: 1rem;
 }
