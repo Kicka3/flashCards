@@ -60,6 +60,7 @@
     border: 2px solid var(--color-dark-100);
 
     & + .label {
+      pointer-events: none;
       color: var(--color-dark-100);
     }
   }
