@@ -16,15 +16,7 @@ type InputType = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = (props: InputType) => {
-  const {
-    className = 'default',
-    error,
-    onClearClick,
-    placeholder,
-    value,
-    variant = 'default',
-    ...rest
-  } = props
+  const { className, error, onClearClick, placeholder, value, variant = 'default', ...rest } = props
 
   const searchVariant = variant === 'search'
   const passwordVariant = variant === 'password'
