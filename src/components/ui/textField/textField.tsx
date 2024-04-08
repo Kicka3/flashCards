@@ -16,7 +16,7 @@ type InputType = {
 } & ComponentPropsWithoutRef<'input'>
 
 export const TextField = (props: InputType) => {
-  const { className = 'default', error, onClearClick, placeholder, value, variant, ...rest } = props
+  const { className, error, onClearClick, placeholder, value, variant = 'default', ...rest } = props
 
   const searchVariant = variant === 'search'
   const passwordVariant = variant === 'password'
@@ -35,7 +35,7 @@ export const TextField = (props: InputType) => {
     }
   }
 
-  const classNames: Record<string, string> = {
+  const classNames = {
     buttonIcon: s.buttonIcon,
     container: s.container,
     errorMessage: s.errorMessage,
@@ -80,8 +80,7 @@ export const TextField = (props: InputType) => {
           </button>
         )}
       </div>
-
-      {error && <div className={classNames.errorMessage}>{error}</div>}
+      <div className={classNames.errorMessage}>{error}</div>
     </div>
   )
 }
