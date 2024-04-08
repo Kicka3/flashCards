@@ -62,7 +62,11 @@ export const TextField = (props: InputType) => {
           type={inputType}
           value={value}
         />
-        {!searchVariant && <label htmlFor={inputID}>{placeholder}</label>}
+        {!searchVariant && (
+          <label className={s.label} htmlFor={inputID}>
+            {placeholder}
+          </label>
+        )}
 
         {passwordVariant && (
           <button className={classNames.buttonIcon} onClick={onShowPassword}>

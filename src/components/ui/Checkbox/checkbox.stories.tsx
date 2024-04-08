@@ -6,7 +6,6 @@ const meta = {
   argTypes: {
     //   autoSize: { control: 'boolean' },
     backgroundColor: { control: 'color' },
-    //   checked: { control: 'boolean' },
     color: { control: 'color' },
     //   size: { control: 'number' },
   },
