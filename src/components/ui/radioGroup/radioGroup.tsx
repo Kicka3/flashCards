@@ -5,9 +5,9 @@ import clsx from 'clsx'
 
 import s from './radioGroup.module.scss'
 
-export type RadioGroupProps = {} & ComponentPropsWithoutRef<typeof RadioGroupRadix.Root>
+export type Props = {} & ComponentPropsWithoutRef<typeof RadioGroupRadix.Root>
 
-export const RadioGroup = forwardRef<ElementRef<typeof RadioGroupRadix.Root>, RadioGroupProps>(
+export const RadioGroup = forwardRef<ElementRef<typeof RadioGroupRadix.Root>, Props>(
   ({ children, className, id, ...rest }, ref) => {
     const classNames = clsx(s.radio, className)
     const generatedId = useId()

@@ -9,7 +9,7 @@ const preview: Preview = {
       default: 'black', // Set default background color to black
       values: [
         {
-          name: 'back',
+          name: 'black',
           value: '#000',
         },
         {

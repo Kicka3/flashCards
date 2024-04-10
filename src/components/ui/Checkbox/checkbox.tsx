@@ -6,12 +6,12 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-export type CheckboxProps = {
+export type Props = {
   backgroundColor?: string
   color?: string
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>
 
-export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
+export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Props>(
   ({ backgroundColor, children, className, color, id, ...rest }, ref) => {
     const generatedId = useId()
     const domainId = id ?? generatedId
