@@ -4,9 +4,9 @@ import clsx from 'clsx'
 
 import s from './table.module.scss'
 
-type TableProps = ComponentPropsWithoutRef<'table'>
+type Props = ComponentPropsWithoutRef<'table'>
 
-export const Table = forwardRef<ElementRef<'table'>, TableProps>(({ className, ...rest }, ref) => {
+export const Table = forwardRef<ElementRef<'table'>, Props>(({ className, ...rest }, ref) => {
   const computedClass = clsx(s.table, className)
 
   return <table className={computedClass} ref={ref} {...rest} />
