@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
 import * as RadioGroupRadix from '@radix-ui/react-radio-group'
 import clsx from 'clsx'
-import { v1 as uuid } from 'uuid'
+// import { v1 as uuid } from 'uuid'
 
 import s from './radioGroup.module.scss'
 
@@ -19,7 +19,8 @@ export const RadioGroup = forwardRef<ElementRef<typeof RadioGroupRadix.Root>, Pr
     return (
       <RadioGroupRadix.Root className={classNames} ref={ref} {...rest}>
         {options.map(item => {
-          const generatedId = uuid()
+          // const generatedId = uuid()
+          const generatedId = crypto.randomUUID()
 
           return (
             <div className={s.container} key={generatedId}>
