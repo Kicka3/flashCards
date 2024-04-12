@@ -5,24 +5,41 @@ import clsx from 'clsx'
 
 import s from './slider.module.scss'
 
+import { Typography } from '..'
+
 export type Props = {
-  backgroundColor?: string
-  color?: string
+  minStepsBetweenThumbs?: number
+  value: number[]
 } & ComponentPropsWithoutRef<typeof SliderRadix.Root>
 
 export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
-  ({ backgroundColor, className, id, ...rest }, ref) => {
-    const classNames = {
-      sliderContainer: clsx(className),
-    }
+  ({ className, minStepsBetweenThumbs = 1, value, ...rest }, ref) => {
+    const classNames = clsx(s.SliderRoot, className)
 
     return (
-      <SliderRadix.Root className={s.SliderRoot} defaultValue={[50]} max={100} step={1}>
-        <SliderRadix.Track className={s.SliderTrack}>
-          <SliderRadix.Range className={s.SliderRange} />
-        </SliderRadix.Track>
-        <SliderRadix.Thumb aria-label={'Volume'} className={s.SliderThumb} />
-      </SliderRadix.Root>
+      <div className={s.sliderWrapper}>
+        <Typography as={'label'} className={s.value} variant={'body2'}>
+          {value?.[0]}
+        </Typography>
+        <SliderRadix.Root
+          className={classNames}
+          minStepsBetweenThumbs={minStepsBetweenThumbs}
+          ref={ref}
+          value={value}
+          {...rest}
+        >
+          <SliderRadix.Track className={s.SliderTrack}>
+            <SliderRadix.Range className={s.SliderRange} />
+          </SliderRadix.Track>
+
+          {value.map((_, i) => (
+            <SliderRadix.Thumb aria-label={'Volume'} className={s.SliderThumb} key={i} />
+          ))}
+        </SliderRadix.Root>
+        <Typography as={'label'} className={s.value} variant={'body2'}>
+          {value?.[1]}
+        </Typography>
+      </div>
     )
   }
 )

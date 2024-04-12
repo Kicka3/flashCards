@@ -18,33 +18,51 @@
 
   height: 3px;
 
-  background-color: #d4b3b3;
+  opacity: 0.5;
+  background-color: var(--color-accent-500);
   border-radius: 9999px;
 }
 
 .SliderRange {
   position: absolute;
   height: 100%;
-  background-color: white;
+  background-color: var(--color-accent-500);
   border-radius: 9999px;
 }
 
 .SliderThumb {
   display: block;
 
-  width: 20px;
-  height: 20px;
+  // box-shadow: 0 2px 10px #333;
 
-  background-color: rgb(180 108 108);
-  border-radius: 10px;
-  box-shadow: 0 2px 10px #333;
+  width: 16px;
+  height: 16px;
+
+  background-color: var(--color-light-100);
+  border: 4px solid var(--color-accent-500);
+  border-radius: 50%;
+
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: 0 0 0 5px var(--color-dark-500);
+  }
 }
 
-.SliderThumb:hover {
-  background-color: #b41919;
+.value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  margin: 0 12px;
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
 }
 
-.SliderThumb:focus {
-  outline: none;
-  box-shadow: 0 0 0 5px #7a1e1e;
+.sliderWrapper {
+  display: flex;
+  align-items: center;
 }
