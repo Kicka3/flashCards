@@ -21,8 +21,6 @@ export const PaginationDefault: Story = {
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const [currentPage, setCurrentPage] = useState(1)
     const onChangePagination = (newPage: number, newCount: number) => {
-      // делает студент
-
       setCurrentPage(newPage)
       setItemsPerPage(newCount)
     }
