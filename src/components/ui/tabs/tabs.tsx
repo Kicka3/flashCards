@@ -7,24 +7,34 @@ import s from './tabs.module.scss'
 
 import { Typography } from '..'
 
-export type Props = { tabs: { content: ReactNode; title: string }[] } & ComponentPropsWithoutRef<
-  typeof TabsRadix.Root
->
+export type Props = {
+  tabs: { content: ReactNode; disabled: boolean; title: string }[]
+} & ComponentPropsWithoutRef<typeof TabsRadix.Root>
 
 export const Tabs = ({ className, tabs, ...rest }: Props) => {
+  const tabTitles = tabs.map(i => i.title)
+  const tabContents = tabs.map(i => i.content)
+
   return (
-    <TabsRadix.Root className={s.tabs} {...rest}>
+    <TabsRadix.Root className={clsx(s.tabs, className)} {...rest}>
       <TabsRadix.List className={s.tabsList}>
-        {tabs.map((tab, i) => (
-          <TabsRadix.Trigger className={s.tabsTrigger} key={i} value={tab.title}>
-            <Typography variant={'body1'}>{tab.title}</Typography>
+        {tabTitles?.map((title, i) => (
+          <TabsRadix.Trigger
+            className={s.tabsTrigger}
+            disabled={tabs[i].disabled}
+            key={i}
+            value={title}
+          >
+            <Typography as={'span'} className={s.title} variant={'body1'}>
+              {title}
+            </Typography>
           </TabsRadix.Trigger>
         ))}
       </TabsRadix.List>
 
-      {tabs.map((tab, i) => (
-        <TabsRadix.Content className={s.tabsContent} key={i} value={tab.title}>
-          {tab.content}
+      {tabContents?.map((content, i) => (
+        <TabsRadix.Content className={s.tabsContent} key={i} value={tabs[i].title}>
+          {content}
         </TabsRadix.Content>
       ))}
     </TabsRadix.Root>

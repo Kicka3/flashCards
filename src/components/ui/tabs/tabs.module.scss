@@ -9,53 +9,54 @@
 }
 
 .tabsTrigger {
+  all: unset;
+
   user-select: none;
 
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: center;
 
-  height: 45px;
-  padding: 0 20px;
+  padding: 6px 24px;
 
-  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-300);
 
   &:first-child {
-    border-top-left-radius: 6px;
+    border-right: none;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
   }
 
   &:last-child {
-    border-top-right-radius: 6px;
+    border-left: none;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
   }
 
   &:hover {
-    color: var(--color-accent-500);
+    background-color: var(--color-dark-300);
+    border-color: var(--color-dark-100);
   }
 
   &[data-state='active'] {
-    color: var(--color-accent-500);
-    box-shadow:
-      inset 0 -1px 0 0 currentcolor,
-      0 1px 0 0 currentcolor;
+    background-color: var(--color-accent-500);
+    border-color: var(--color-accent-500);
   }
 
-  &:focus {
-    position: relative;
-    box-shadow: 0 0 0 2px var(--color-accent-500);
+  &[data-disabled] {
+    pointer-events: none;
+    background-color: var(--color-dark-700);
+    border-color: var(--color-dark-300);
+
+    & > .title {
+      color: var(--color-dark-300);
+    }
   }
 }
 
 .tabsContent {
-  flex-grow: 1;
-
   padding: 20px;
-
-  background-color: var(--color-dark-500);
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   outline: none;
-
-  &:focus {
-  }
 }
