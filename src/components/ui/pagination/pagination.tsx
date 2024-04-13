@@ -9,7 +9,6 @@ import { Typography } from '..'
 
 export type Props = {
   currentPage: number
-  id?: string
   itemsPerPage: number
   onChange: (page: number, count: number) => void
   totalCount: number
@@ -37,10 +36,12 @@ export const Pagination = ({
   // }
 
   const renderPageNumbers = () => {
+    // страницы выводятся путем добавления в массив
     const pageNumbers = []
     const startPage = Math.max(1, currentPage - 1)
     const endPage = Math.min(totalPages, startPage + 2)
 
+    // 1-ая страница
     if (startPage > 1) {
       pageNumbers.push(
         <button className={s.page} key={1} onClick={() => onChangeCallback(1)}>
@@ -49,7 +50,7 @@ export const Pagination = ({
           </Typography>
         </button>
       )
-
+      // если стартовая страница больше 2, то вторым в массив попадает "...
       if (startPage > 2) {
         pageNumbers.push(
           <button className={s.page} disabled key={'startEllipsis'}>
@@ -60,7 +61,7 @@ export const Pagination = ({
         )
       }
     }
-
+    // далее в массив попадает 3 значения: текущая страница + та, что перед ней + та, что после неё
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <button
@@ -74,7 +75,7 @@ export const Pagination = ({
         </button>
       )
     }
-
+    // далее в массив "..." при условии, что это не последние страницы
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         pageNumbers.push(
@@ -85,7 +86,7 @@ export const Pagination = ({
           </button>
         )
       }
-
+      // и в конце последняя страница
       pageNumbers.push(
         <button className={s.page} key={totalPages} onClick={() => onChangeCallback(totalPages)}>
           <Typography as={'span'} variant={'body2'}>
@@ -107,6 +108,7 @@ export const Pagination = ({
       <button className={s.arrowForward} onClick={() => onChangeCallback(currentPage + 1)}>
         <ArrowForwardOutline />
       </button>
+
       <div className={s.selectWrapper}>
         <Typography as={'span'} variant={'body2'}>
           показать
@@ -129,6 +131,7 @@ export const Pagination = ({
             100
           </option>
         </select>
+
         <Typography as={'span'} variant={'body2'}>
           на странице
         </Typography>
