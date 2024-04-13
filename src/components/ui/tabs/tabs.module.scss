@@ -1,0 +1,61 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabsList {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.tabsTrigger {
+  user-select: none;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  height: 45px;
+  padding: 0 20px;
+
+  background-color: var(--color-dark-300);
+
+  &:first-child {
+    border-top-left-radius: 6px;
+  }
+
+  &:last-child {
+    border-top-right-radius: 6px;
+  }
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+
+  &[data-state='active'] {
+    color: var(--color-accent-500);
+    box-shadow:
+      inset 0 -1px 0 0 currentcolor,
+      0 1px 0 0 currentcolor;
+  }
+
+  &:focus {
+    position: relative;
+    box-shadow: 0 0 0 2px var(--color-accent-500);
+  }
+}
+
+.tabsContent {
+  flex-grow: 1;
+
+  padding: 20px;
+
+  background-color: var(--color-dark-500);
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  outline: none;
+
+  &:focus {
+  }
+}
