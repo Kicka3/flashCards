@@ -4,10 +4,8 @@ import { Checkbox } from '.'
 
 const meta = {
   argTypes: {
-    //   autoSize: { control: 'boolean' },
     backgroundColor: { control: 'color' },
     color: { control: 'color' },
-    //   size: { control: 'number' },
   },
   component: Checkbox,
   tags: ['autodocs'],
@@ -26,12 +24,7 @@ export const CheckboxWithLabel: Story = {
     children: 'Checked',
   },
 }
-// export const AutoSizedCheckbox: Story = {
-//   args: {
-//     autoSize: true,
-//     children: 'Checked',
-//   },
-// }
+
 export const CheckboxColored: Story = {
   args: {
     backgroundColor: 'blue',
@@ -39,14 +32,7 @@ export const CheckboxColored: Story = {
     color: 'red',
   },
 }
-// export const CheckboxResized: Story = {
-//   args: {
-//     backgroundColor: 'blue',
-//     children: 'Checked',
-//     color: 'red',
-//     size: 30,
-//   },
-// }
+
 export const CheckboxDisabled: Story = {
   args: {
     children: 'Checked',
