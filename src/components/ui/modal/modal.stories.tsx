@@ -6,7 +6,7 @@ import { Modal } from '@/components/ui/modal/modal'
 const meta = {
   argTypes: {},
   component: Modal,
-  tags: ['autodocs'],
+  // tags: ['autodocs'],
   title: 'Components/Modal',
 } satisfies Meta<typeof Modal>
 
@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>
 
 export const ModalWitchTitle: Story = {
   args: {
-    onOpenChange: (open: boolean) => console.log('is open'),
+    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal',
   },
@@ -54,7 +54,7 @@ export const ModalWitchContent: Story = {
         voluptas?
       </Typography>
     ),
-    onOpenChange: (open: boolean) => console.log('is open'),
+    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal with content',
   },
@@ -62,7 +62,7 @@ export const ModalWitchContent: Story = {
 
 export const ModalFullExample: Story = {
   args: {
-    onOpenChange: (open: boolean) => console.log('is open'),
+    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal',
   },
