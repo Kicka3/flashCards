@@ -54,6 +54,7 @@
   }
 
   &:disabled {
+    pointer-events: none;
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
     box-shadow: 0 4px 18px 0 var(--color-accent-900/25%);
