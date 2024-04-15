@@ -1,8 +1,8 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
-import { Close } from '@/assets/icons/components/close'
-import { EyeOutline } from '@/assets/icons/components/eyeOutline'
-import { Search } from '@/assets/icons/components/search'
+import { Close } from '@/assets/icons/components/old/closeXXX'
+import { EyeOutline } from '@/assets/icons/components/old/eyeOutlineXXX'
+import { Search } from '@/assets/icons/components/old/searchXXX'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
