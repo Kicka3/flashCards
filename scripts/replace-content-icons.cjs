@@ -16,7 +16,10 @@ async function replaceAttr() {
     const fileContent = await fsp.readFile(filePath, 'utf-8')
 
     /** Меняю #fff => currentColor для отображение нужного мне цвета svg-иконки */
-    const newFileContent = fileContent.replaceAll('#fff', 'currentcolor')
+    const newFileContent = fileContent
+       .replaceAll('#fff', 'currentColor')
+       .replaceAll('currentcolor', 'currentColor')
+       .replaceAll('#000', 'currentColor')
 
     /** Перезаписываем файлы */
     fsp.writeFile(filePath, newFileContent)
