@@ -48,7 +48,7 @@ export const TextField = (props: InputType) => {
       <div className={classNames.inputContainer}>
         {searchVariant && (
           <span className={classNames.iconSearch}>
-            <Search />
+            <Search height={'20px'} width={'20px'} />
           </span>
         )}
 
@@ -68,13 +68,13 @@ export const TextField = (props: InputType) => {
 
         {passwordVariant && (
           <button className={classNames.buttonIcon} onClick={onShowPassword}>
-            <EyeOutline />
+            <EyeOutline height={'20px'} width={'20px'} />
           </button>
         )}
 
         {isShowClearButton && (
           <button className={classNames.buttonIcon} onClick={onClearClick}>
-            <Close></Close>
+            <Close height={'18px'} width={'18px'} />
           </button>
         )}
       </div>
