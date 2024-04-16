@@ -1,12 +1,13 @@
 .checkboxContainer {
   display: flex;
+  gap: 8px;
   align-items: center;
   width: fit-content;
 }
 
 .label {
   user-select: none;
-  margin-left: 10px;
+  height: 36px;
 }
 
 .checkbox {
@@ -76,4 +77,13 @@
 .autoSize {
   width: 1rem;
   height: 1rem;
+}
+
+.typography {
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  color: var(--color-dark-100);
 }
