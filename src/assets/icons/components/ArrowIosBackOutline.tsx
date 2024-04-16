@@ -1,20 +1,31 @@
-import type { SVGProps } from 'react'
-import { Ref, forwardRef, memo } from 'react'
+import { Ref, SVGProps, forwardRef, memo } from 'react'
+
 const SvgArrowIosBackOutline = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill="none" ref={ref} {...props}>
-    <g clipPath="url(#arrow-ios-back-outline_svg__a)">
+  <svg
+    fill={'none'}
+    height={'12'}
+    ref={ref}
+    viewBox={'0 0 24 24'}
+    width={'12'}
+    xmlns={'http://www.w3.org/2000/svg'}
+    {...props}
+  >
+    <g clipPath={'url(#arrow-ios-back-outline_svg__a)'}>
       <path
-        fill="currentColor"
-        d="M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1.001 1.001 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64"
+        d={
+          'M13.83 19a1 1 0 0 1-.78-.37l-4.83-6a1 1 0 0 1 0-1.27l5-6a1.001 1.001 0 0 1 1.54 1.28L10.29 12l4.32 5.36a1 1 0 0 1-.78 1.64'
+        }
+        fill={'currentColor'}
       />
     </g>
     <defs>
-      <clipPath id="arrow-ios-back-outline_svg__a">
-        <path fill="currentColor" d="M0 0h24v24H0z" />
+      <clipPath id={'arrow-ios-back-outline_svg__a'}>
+        <path d={'M0 0h24v24H0z'} fill={'currentColor'} />
       </clipPath>
     </defs>
   </svg>
 )
 const ForwardRef = forwardRef(SvgArrowIosBackOutline)
 const Memo = memo(ForwardRef)
+
 export default Memo

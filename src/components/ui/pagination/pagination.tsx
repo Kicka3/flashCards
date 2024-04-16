@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { ArrowForwardOutline } from '@/assets/icons/arrow-ios-forward-outline'
+import { ArrowForwardOutline } from '@/assets/icons/components'
+// import { ArrowForwardOutline } from '@/assets/icons/arrow-ios-forward-outline'
 import clsx from 'clsx'
 
 import s from './pagination.module.scss'
@@ -50,7 +51,7 @@ export const Pagination = ({
           </Typography>
         </button>
       )
-      // если стартовая страница больше 2, то вторым в массив попадает "...
+      /** если стартовая страница больше 2, то вторым в массив попадает ...*/
       if (startPage > 2) {
         pageNumbers.push(
           <button className={s.page} disabled key={'startEllipsis'}>
@@ -61,7 +62,7 @@ export const Pagination = ({
         )
       }
     }
-    // далее в массив попадает 3 значения: текущая страница + та, что перед ней + та, что после неё
+    /** далее в массив попадает 3 значения: текущая страница + та, что перед ней + та, что после неё */
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <button
@@ -75,7 +76,7 @@ export const Pagination = ({
         </button>
       )
     }
-    // далее в массив "..." при условии, что это не последние страницы
+    /** далее в массив "..." при условии, что это не последние страницы */
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         pageNumbers.push(
@@ -86,7 +87,7 @@ export const Pagination = ({
           </button>
         )
       }
-      // и в конце последняя страница
+      /** и в конце последняя страница */
       pageNumbers.push(
         <button className={s.page} key={totalPages} onClick={() => onChangeCallback(totalPages)}>
           <Typography as={'span'} variant={'body2'}>

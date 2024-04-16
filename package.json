@@ -12,8 +12,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "rename-icons": "node scripts/rename-icons.cjs",
-    "replace-content": "node scripts/replace-content-icons.cjs",
-    "generate-icons": "pnpm run rename-icons && npx @svgr/cli --out-dir src/assets/icons/components --jsx-runtime automatic --typescript --ref --memo --replace-attr-values white=currentcolor -- src/assets/icons/svg && pnpm run replace-content"
+    "replace-content": "node scripts/replace-content-icons.cjs"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.12",

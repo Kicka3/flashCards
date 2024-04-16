@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { Close } from '@/assets/icons/components/old/closeXXX'
+import { Close } from '@/assets/icons/components'
 import { Typography } from '@/components/ui'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 

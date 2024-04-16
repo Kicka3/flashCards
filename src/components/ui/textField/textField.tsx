@@ -1,8 +1,6 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
-import { Close } from '@/assets/icons/components/old/closeXXX'
-import { EyeOutline } from '@/assets/icons/components/old/eyeOutlineXXX'
-import { Search } from '@/assets/icons/components/old/searchXXX'
+import { Close, EyeOutline, Search } from '@/assets/icons/components'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
@@ -50,7 +48,7 @@ export const TextField = (props: InputType) => {
       <div className={classNames.inputContainer}>
         {searchVariant && (
           <span className={classNames.iconSearch}>
-            <Search size={'20px'} />
+            <Search />
           </span>
         )}
 
@@ -70,13 +68,13 @@ export const TextField = (props: InputType) => {
 
         {passwordVariant && (
           <button className={classNames.buttonIcon} onClick={onShowPassword}>
-            <EyeOutline size={'20px'} />
+            <EyeOutline />
           </button>
         )}
 
         {isShowClearButton && (
           <button className={classNames.buttonIcon} onClick={onClearClick}>
-            <Close size={'16px'}></Close>
+            <Close></Close>
           </button>
         )}
       </div>
