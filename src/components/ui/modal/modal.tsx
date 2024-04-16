@@ -18,22 +18,30 @@ export const Modal = ({ children, title, ...rest }: Props) => {
     rest.onOpenChange(false)
   }
 
+  const classNames = {
+    closeIcon: s.closeIcon,
+    contentBox: s.contentBox,
+    contentWrapper: s.contentWrapper,
+    header: s.header,
+    overlay: s.overlay,
+  }
+
   return (
     <DialogPrimitive.Root {...rest}>
-      <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className={s.overlay} />
-        <DialogPrimitive.Content className={s.content}>
+      <DialogPrimitive.Portal forceMount>
+        <DialogPrimitive.Overlay className={classNames.overlay} />
+        <DialogPrimitive.Content className={classNames.contentWrapper}>
           {title && (
-            <div className={s.header}>
-              <DialogPrimitive.Title>
+            <div className={classNames.header}>
+              <DialogPrimitive.Title asChild>
                 <Typography variant={'h2'}>{title}</Typography>
               </DialogPrimitive.Title>
-              <DialogPrimitive.Close aria-label={'Close'} onClick={handleCloseModal}>
-                <Close />
+              <DialogPrimitive.Close aria-label={'Close'} asChild onClick={handleCloseModal}>
+                <Close className={classNames.closeIcon} height={'24px'} width={'24px'} />
               </DialogPrimitive.Close>
             </div>
           )}
-          {children}
+          <div className={classNames.contentBox}>{children}</div>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

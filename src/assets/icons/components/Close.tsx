@@ -3,10 +3,10 @@ import { Ref, SVGProps, forwardRef, memo } from 'react'
 const SvgClose = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <svg
     fill={'none'}
-    height={'12'}
+    height={'24'}
     ref={ref}
     viewBox={'0 0 24 24'}
-    width={'12'}
+    width={'24'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >

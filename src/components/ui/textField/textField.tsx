@@ -1,6 +1,7 @@
-import { ComponentPropsWithoutRef, useState } from 'react'
+import React, { ComponentPropsWithoutRef, useState } from 'react'
 
 import { Close, EyeOutline, Search } from '@/assets/icons/components'
+import { Typography } from '@/components/ui'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
@@ -9,12 +10,23 @@ type VariantInput = 'default' | 'password' | 'search'
 
 type InputType = {
   error?: string
+  label?: string
   onClearClick?: () => void
   variant?: VariantInput
 } & ComponentPropsWithoutRef<'input'>
 
-export const TextField = (props: InputType) => {
-  const { className, error, onClearClick, placeholder, value, variant = 'default', ...rest } = props
+export const TextField = React.forwardRef<HTMLInputElement, InputType>((props, frowardRef) => {
+  const {
+    className,
+    error,
+    id,
+    label,
+    onClearClick,
+    placeholder,
+    value,
+    variant = 'default',
+    ...rest
+  } = props
 
   const searchVariant = variant === 'search'
   const passwordVariant = variant === 'password'
@@ -54,9 +66,10 @@ export const TextField = (props: InputType) => {
 
         <input
           className={classNames.input}
-          id={inputID}
+          id={id ?? inputID}
           {...rest}
           placeholder={placeholder}
+          ref={frowardRef}
           type={inputType}
           value={value}
         />
@@ -78,7 +91,11 @@ export const TextField = (props: InputType) => {
           </button>
         )}
       </div>
-      <div className={classNames.errorMessage}>{error}</div>
+      {error && (
+        <Typography className={classNames.errorMessage} variant={'error'}>
+          {error}
+        </Typography>
+      )}
     </div>
   )
-}
+})
