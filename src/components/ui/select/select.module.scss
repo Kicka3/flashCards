@@ -1,0 +1,56 @@
+.label {
+  color: var(--color-dark-100);
+}
+
+.selectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 6px 12px;
+
+  background-color: var(--color-dark-900);
+  border: solid 1px var(--color-dark-100);
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus {
+    border: solid 1px var(--color-info-700);
+    outline: solid 1px var(--color-info-700);
+  }
+}
+
+.selectTrigger[data-disabled] {
+  color: var(--color-dark-300);
+  border: solid 1px var(--color-dark-300);
+}
+
+.selectTrigger[data-state='open'] {
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.selectIcon {
+  padding-left: 5px;
+}
+
+.selectContent {
+  width: var(--radix-select-trigger-width);
+  max-height: var(--radix-select-content-available-height);
+  background-color: var(--color-dark-900);
+  border: solid 1px var(--color-dark-100);
+}
+
+.selectItem {
+  user-select: none;
+  padding: 6px 11px;
+}
+
+.selectItem[data-highlighted] {
+  color: var(--color-accent-300);
+  background-color: var(--color-accent-900);
+  outline: none;
+}

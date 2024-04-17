@@ -14,7 +14,7 @@
   content: "";
   position: absolute;
   top: -10px;
-  left: 85%;
+  left: 50%;
   transform: translateX(-50%);
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
@@ -22,4 +22,10 @@
 }
 
 .trigger{
+  all: unset;
+  cursor: pointer;
+}
+
+.trigger::before{
+  content: "";
 }

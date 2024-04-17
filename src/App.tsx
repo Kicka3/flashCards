@@ -12,7 +12,7 @@ export function App() {
   return (
     <>
       <UserDropDown description={user.alt} email={user.email} img={user.img} name={user.name} />
-      <IconDropDown description={user.alt} icon={user.img} />
+      <IconDropDown />
     </>
   )
 }

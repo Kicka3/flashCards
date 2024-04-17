@@ -1,3 +1,5 @@
+import LogOutOutline from '@/assets/icons/components/LogOutOutline'
+import PersonOutline from '@/assets/icons/components/PersonOutline'
 import { Typography } from '@/components/ui'
 import { DropdownMenu } from '@/components/ui/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem'
@@ -25,12 +27,12 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          User Icon
+          <PersonOutline />
           <Typography variant={'caption'}>My Profile</Typography>
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          Exit Icon
+          <LogOutOutline />
           <Typography variant={'caption'}>Sign Out</Typography>
         </DropdownItem>
       </DropdownMenu>
