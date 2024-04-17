@@ -26,7 +26,7 @@ const meta = {
   },
   component: Typography,
   tags: ['autodocs'],
-  title: 'Components/Typography/Light',
+  title: 'Components/Typography/Dark',
 } satisfies Meta<typeof Typography>
 
 export default meta
@@ -37,18 +37,42 @@ export const AllTypography: Story = {
   render: () => {
     return (
       <>
-        <Typography variant={'h1'}>Heading 1</Typography>
-        <Typography variant={'h2'}>Heading 2</Typography>
-        <Typography variant={'h3'}>Heading 3</Typography>
-        <Typography variant={'h4'}>Heading 4</Typography>
-        <Typography variant={'sub1'}>Subtitle 1</Typography>
-        <Typography variant={'sub2'}>Subtitle 2</Typography>
-        <Typography variant={'body1'}>Body 1</Typography>
-        <Typography variant={'body2'}>Body 2</Typography>
-        <Typography variant={'overline'}>Overline</Typography>
-        <Typography variant={'caption'}>Caption</Typography>
-        <Typography variant={'link1'}>Link 1</Typography>
-        <Typography variant={'link2'}>Link 2</Typography>
+        <Typography theme={'dark'} variant={'h1'}>
+          Heading 1
+        </Typography>
+        <Typography theme={'dark'} variant={'h2'}>
+          Heading 2
+        </Typography>
+        <Typography theme={'dark'} variant={'h3'}>
+          Heading 3
+        </Typography>
+        <Typography theme={'dark'} variant={'h4'}>
+          Heading 4
+        </Typography>
+        <Typography theme={'dark'} variant={'sub1'}>
+          Subtitle 1
+        </Typography>
+        <Typography theme={'dark'} variant={'sub2'}>
+          Subtitle 2
+        </Typography>
+        <Typography theme={'dark'} variant={'body1'}>
+          Body 1
+        </Typography>
+        <Typography theme={'dark'} variant={'body2'}>
+          Body 2
+        </Typography>
+        <Typography theme={'dark'} variant={'overline'}>
+          Overline
+        </Typography>
+        <Typography theme={'dark'} variant={'caption'}>
+          Caption
+        </Typography>
+        <Typography theme={'dark'} variant={'link1'}>
+          Link 1
+        </Typography>
+        <Typography theme={'dark'} variant={'link2'}>
+          Link 2
+        </Typography>
       </>
     )
   },
