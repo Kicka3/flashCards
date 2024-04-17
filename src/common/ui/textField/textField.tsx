@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, useState } from 'react'
 
 import { Close, EyeOutline, Search } from '@/assets/icons/components'
-import { Typography } from '@/components/ui'
+import { Typography } from '@/common/ui'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
