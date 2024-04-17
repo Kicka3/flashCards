@@ -15,7 +15,13 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const PaginationDefault: Story = {
-  args: { currentPage: 1, itemsPerPage: 10, onChange: () => {}, totalCount: 100 },
+  args: {
+    currentPage: 1,
+    itemsPerPage: 10,
+    onChange: () => {},
+    totalCount: 100,
+  },
+  /** Ругается на etTotalCount is declared but its value is never read */
   render: () => {
     const [totalCount, setTotalCount] = useState(100)
     const [itemsPerPage, setItemsPerPage] = useState(10)

@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography } from '@/components/ui'
+import { Checkbox } from '@/components/ui/Checkbox'
+import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal/modal'
+import { Select, SelectItem } from '@/components/ui/select'
+import { TextField } from '@/components/ui/textField'
 
 const meta = {
   argTypes: {},
   component: Modal,
-  // tags: ['autodocs'],
   title: 'Components/Modal',
 } satisfies Meta<typeof Modal>
 
@@ -62,6 +65,35 @@ export const ModalWitchContent: Story = {
 
 export const ModalFullExample: Story = {
   args: {
+    children: (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '34px',
+          width: '100%',
+        }}
+      >
+        <Select>
+          <SelectItem value={'some'}>Some</SelectItem>
+          <SelectItem value={'select'}>Select</SelectItem>
+          <SelectItem value={'pls'}>Pls</SelectItem>
+        </Select>
+        <TextField placeholder={'input'} />
+        <TextField placeholder={'input'} />
+        <Checkbox text={`Don't click me!`} />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row-reverse',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button variant={'primary'}>Button primary</Button>
+          <Button variant={'secondary'}>Button secondary</Button>
+        </div>
+      </div>
+    ),
     onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal',

@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 
-import { ArrowIosDown } from '@/assets/icons/arrow-ios-Down'
+import { ArrowIosDownOutline } from '@/assets/icons/components'
 import { Typography } from '@/components/ui/typography/typography'
 import * as SelectPrimitive from '@radix-ui/react-select'
 
@@ -30,7 +30,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof SelectPrimitive.R
           >
             <SelectPrimitive.Value placeholder={placeholder} />
             <SelectPrimitive.Icon className={s.selectIcon}>
-              <ArrowIosDown />
+              <ArrowIosDownOutline height={'20px'} width={'20px'} />
             </SelectPrimitive.Icon>
           </SelectPrimitive.Trigger>
           <SelectPrimitive.Portal>
@@ -44,7 +44,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof SelectPrimitive.R
                 {children}
               </SelectPrimitive.Viewport>
               <SelectPrimitive.ScrollDownButton>
-                <ArrowIosDown />
+                <ArrowIosDownOutline height={'20px'} width={'20px'} />
               </SelectPrimitive.ScrollDownButton>
             </SelectPrimitive.Content>
           </SelectPrimitive.Portal>
