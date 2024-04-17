@@ -2,14 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { IconDropDown } from '@/components/layout/header/icon-dropdown/iconDropdown'
 import { UserDropDown } from '@/components/layout/header/user-dropdown/userDropdown'
-import { DropdownMenu } from '@/components/ui/dropdown/dropdownMenu'
+import { DropDownMenu } from '@/components/ui/dropdown/dropdownMenu'
 
 const meta = {
   argTypes: {},
-  component: DropdownMenu,
+  component: DropDownMenu,
   tags: ['autodocs'],
   title: 'Components/Dropdown',
-} satisfies Meta<typeof DropdownMenu>
+} satisfies Meta<typeof DropDownMenu>
 
 export default meta
 type Story = StoryObj<typeof meta>

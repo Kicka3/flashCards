@@ -1,7 +1,8 @@
 .item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor:pointer;
+
+  display: flex;
   gap: 6px;
+  align-items: center;
+  justify-content: center;
 }

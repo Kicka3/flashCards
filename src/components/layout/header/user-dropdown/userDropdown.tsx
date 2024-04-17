@@ -1,7 +1,7 @@
 import LogOutOutline from '@/assets/icons/components/LogOutOutline'
 import PersonOutline from '@/assets/icons/components/PersonOutline'
 import { Typography } from '@/components/ui'
-import { DropdownMenu } from '@/components/ui/dropdown'
+import { DropDownMenu } from '@/components/ui/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator'
 
@@ -17,7 +17,7 @@ type Props = {
 export const UserDropDown = ({ description, email, img, name }: Props) => {
   return (
     <>
-      <DropdownMenu trigger={<img alt={description} src={img} width={36} />}>
+      <DropDownMenu trigger={<img alt={description} src={img} width={36} />}>
         <DropdownItem className={s.userItem}>
           <img alt={''} className={s.avatar} src={img} />
           <div className={s.userInfo}>
@@ -35,7 +35,7 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
           <LogOutOutline />
           <Typography variant={'caption'}>Sign Out</Typography>
         </DropdownItem>
-      </DropdownMenu>
+      </DropDownMenu>
     </>
   )
 }

@@ -1,56 +1,64 @@
-.dropDownMenuContent {
-  position: relative;
-  right: 86px;
+.dropDownMenu {
+  &Trigger {
+    cursor: pointer;
+  }
 
-  display: flex;
-  flex-direction: column;
+  &Content {
+    will-change: transform, opacity;
 
-  width: 100%;
-  min-width: 217px;
-  margin-top: 5px;
-  padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
-  background: var(--color-dark-700);
-  border: 2px solid var(--color-dark-500);
-  border-radius: 4px;
+    min-width: 217px;
+    padding: 12px;
 
-  //Сделать позиционированием
-  //подвинуть контейнер
-}
+    color: var(--color-light-100);
 
-//.dropDownMenuContent::before {
-//  content: '';
-//
-//  position: absolute;
-//  top: -10px;
-//  left: 50%;
-//  transform: translateX(-50%);
-//
-//  border-right: 10px solid transparent;
-//  border-bottom: 10px solid var(--color-dark-500);
-//  border-left: 10px solid transparent;
-//}
+    background: var(--color-dark-700);
+    border: 1px solid var(--color-dark-500);
+    border-radius: 4px;
+    box-shadow:
+      0 10px 38px -10px rgb(22 23 24 / 35%),
+      0 10px 20px -15px rgb(22 23 24 / 20%);
 
-.dropDownMenuContent::after {
-  content: '';
+    animation-duration: 400ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 
-  position: absolute;
-  top: -10px;
-  left: calc(50% + 86px);
-  transform: translateX(-50%);
+    &[data-side='top'] {
+      animation-name: slideDownAndFade;
+    }
 
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid var(--color-dark-500);
-  border-left: 10px solid transparent;
-}
+    &[data-side='right'] {
+      animation-name: slideLeftAndFade;
+    }
 
-.dropDownMenuTrigger {
-  all: unset;
-  cursor: pointer;
-}
+    &[data-side='bottom'] {
+      animation-name: slideUpAndFade;
+    }
 
-.dropDownMenuTrigger::before {
-  content: '';
+    &[data-side='left'] {
+      animation-name: slideRightAndFade;
+    }
+  }
+
+  &Arrow {
+    position: absolute;
+
+    &Div {
+      top: -3px;
+      left: calc(50% - 3px);
+      transform: rotate(45deg);
+
+      width: 9px;
+      height: 9px;
+
+      background-color: var(--color-dark-700);
+      border: 1px solid var(--color-dark-500);
+      border-top: none;
+      border-left: none;
+    }
+  }
 }
 
 @keyframes slideUpAndFade {
