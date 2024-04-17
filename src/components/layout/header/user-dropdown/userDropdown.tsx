@@ -17,7 +17,7 @@ type Props = {
 export const UserDropDown = ({ description, email, img, name }: Props) => {
   return (
     <>
-      <DropdownMenu trigger={<img alt={description} src={img} />}>
+      <DropdownMenu trigger={<img alt={description} src={img} width={36} />}>
         <DropdownItem className={s.userItem}>
           <img alt={''} className={s.avatar} src={img} />
           <div className={s.userInfo}>

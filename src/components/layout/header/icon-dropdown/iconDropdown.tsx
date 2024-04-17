@@ -13,7 +13,7 @@ type Props = {}
 export const IconDropDown = ({}: Props) => {
   return (
     <>
-      <DropdownMenu trigger={<MoreVerticalOutline />}>
+      <DropdownMenu trigger={<MoreVerticalOutline height={25} width={25} />}>
         <DropdownItem className={s.item}>
           <PlayCircleOutline />
           <Typography variant={'caption'}>Learn</Typography>
