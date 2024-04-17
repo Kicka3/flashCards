@@ -1,4 +1,4 @@
-import { PlayCircleOutline } from '@/assets/icons/components'
+import { MoreVerticalOutline, PlayCircleOutline } from '@/assets/icons/components'
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import { Typography } from '@/components/ui'
@@ -13,7 +13,7 @@ type Props = {}
 export const IconDropDown = ({}: Props) => {
   return (
     <>
-      <DropDownMenu>
+      <DropDownMenu trigger={<MoreVerticalOutline height={25} width={25} />}>
         <DropdownItem className={s.item}>
           <PlayCircleOutline />
           <Typography variant={'caption'}>Learn</Typography>
