@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { ArrowForwardOutline } from '@/assets/icons/components'
-// import { ArrowForwardOutline } from '@/assets/icons/arrow-ios-forward-outline'
 import clsx from 'clsx'
 
 import s from './pagination.module.scss'
@@ -37,12 +36,12 @@ export const Pagination = ({
   // }
 
   const renderPageNumbers = () => {
-    // страницы выводятся путем добавления в массив
+    /** страницы выводятся путем добавления в массив */
     const pageNumbers = []
     const startPage = Math.max(1, currentPage - 1)
     const endPage = Math.min(totalPages, startPage + 2)
 
-    // 1-ая страница
+    /** 1-ая страница */
     if (startPage > 1) {
       pageNumbers.push(
         <button className={s.page} key={1} onClick={() => onChangeCallback(1)}>
