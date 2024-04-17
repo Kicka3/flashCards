@@ -7,19 +7,12 @@ import s from './dropdownMenu.module.scss'
 type Props = {
   children: ReactNode
   defaultOpen?: boolean
-  modal?: boolean
   trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Content>
-export const DropDownMenu = ({
-  children,
-  defaultOpen = true,
-  modal = false,
-  trigger,
-  ...rest
-}: Props) => {
+export const DropDownMenu = ({ children, trigger, ...rest }: Props) => {
   return (
     <>
-      <DropdownMenu.Root defaultOpen={defaultOpen} modal={modal}>
+      <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild className={s.dropDownMenuTrigger}>
           {trigger}
         </DropdownMenu.Trigger>

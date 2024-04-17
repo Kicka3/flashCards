@@ -8,9 +8,6 @@
 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-
-    min-width: 217px;
     padding: 12px;
 
     color: var(--color-light-100);
@@ -46,7 +43,7 @@
     position: absolute;
 
     &Div {
-      top: -3px;
+      top: -4px;
       left: calc(50% - 3px);
       transform: rotate(45deg);
 
