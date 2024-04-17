@@ -1,7 +1,7 @@
 import { MoreVerticalOutline, PlayCircleOutline } from '@/assets/icons/components'
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
-import { Typography } from '@/components/ui'
+import { Typography } from '@/common/ui'
 import { DropDownMenu } from '@/components/ui/dropdown'
 import { DropdownItem } from '@/components/ui/dropdown/dropdownItem'
 import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator'
