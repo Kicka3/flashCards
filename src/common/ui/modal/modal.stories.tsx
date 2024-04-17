@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Typography } from '@/components/ui'
-import { Checkbox } from '@/components/ui/Checkbox'
-import { Button } from '@/components/ui/button'
-import { Modal } from '@/components/ui/modal/modal'
-import { Select, SelectItem } from '@/components/ui/select'
-import { TextField } from '@/components/ui/textField'
+import { Typography } from '@/common/ui'
+import { Checkbox } from '@/common/ui/Checkbox'
+import { Button } from '@/common/ui/button'
+import { Modal } from '@/common/ui/modal/modal'
+import { Select, SelectItem } from '@/common/ui/select'
+import { TextField } from '@/common/ui/textField'
 
 const meta = {
   argTypes: {},
