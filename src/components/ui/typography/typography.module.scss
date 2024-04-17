@@ -51,9 +51,9 @@
 
 .sub1,
 .sub2 {
+  cursor: pointer;
   color: #397df6;
   text-decoration: underline;
-  cursor: pointer;
 }
 
 .caption,
@@ -63,8 +63,8 @@
 }
 
 .captionLink {
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .overline {
