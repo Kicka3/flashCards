@@ -1,0 +1,23 @@
+.item {
+  display: flex;
+  cursor:pointer;
+}
+
+.userItem{
+  display: flex;
+}
+
+.userInfo{
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.avatar{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 36px;
+  height: 36px;
+}
