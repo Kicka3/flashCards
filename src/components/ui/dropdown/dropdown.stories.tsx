@@ -26,12 +26,14 @@ export const DropdownWithAvatar: Story = {
 
     return (
       <>
-        <UserDropDown
-          description={user.description}
-          email={user.email}
-          img={user.img}
-          name={user.name}
-        />
+        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+          <UserDropDown
+            description={user.description}
+            email={user.email}
+            img={user.img}
+            name={user.name}
+          />
+        </div>
       </>
     )
   },
@@ -41,6 +43,10 @@ export const DropdownWithIcons: Story = {
   args: {},
 
   render: () => {
-    return <IconDropDown />
+    return (
+      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+        <IconDropDown />
+      </div>
+    )
   },
 }
