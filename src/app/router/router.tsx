@@ -6,6 +6,8 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import Layout from '../layout/layout'
+
 const publicRoutes: RouteObject[] = [
   {
     element: <div>login</div>,
@@ -15,8 +17,13 @@ const publicRoutes: RouteObject[] = [
 
 const privatRoutes: RouteObject[] = [
   {
-    element: <div>main</div>,
-    path: '/',
+    children: [
+      {
+        element: <div style={{ display: 'flex', justifyContent: 'center' }}>main</div>,
+        path: '/',
+      },
+    ],
+    element: <Layout />,
   },
 ]
 

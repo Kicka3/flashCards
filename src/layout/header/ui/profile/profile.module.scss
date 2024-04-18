@@ -1,0 +1,19 @@
+.avatar {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.profile {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.userName {
+  all: unset;
+  cursor: pointer;
+}
