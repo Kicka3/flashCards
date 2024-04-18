@@ -1,8 +1,9 @@
 .dropdownItem {
-  position: relative;
+  all: unset;
+
+  cursor: pointer;
 
   display: flex;
-  flex-direction: row;
   gap: 8px;
   align-items: center;
 
@@ -11,5 +12,4 @@
 
   background-color: var(--color-dark-700);
   border-radius: 4px;
-  outline: none;
 }

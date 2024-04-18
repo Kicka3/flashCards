@@ -1,8 +1,15 @@
 .item {
-  cursor:pointer;
+  @media (hover: hover) {
+    &:hover {
+      width: 94%;
+      background-color: var(--color-dark-500);
+    }
+  }
 
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
+  @media (hover: none) {
+    &:active {
+      width: 94%;
+      background-color: var(--color-dark-500);
+    }
+  }
 }
