@@ -15,18 +15,18 @@ export const IconDropDown = ({}: Props) => {
     <>
       <DropDownMenu trigger={<MoreVerticalOutline height={25} width={25} />}>
         <DropdownItem className={s.item}>
-          <PlayCircleOutline />
+          <PlayCircleOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Learn</Typography>
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          <Edit2Outline />
+          <Edit2Outline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Edit</Typography>
         </DropdownItem>
         <DropdownSeparator />
 
         <DropdownItem className={s.item}>
-          <TrashOutline />
+          <TrashOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Delete</Typography>
         </DropdownItem>
       </DropDownMenu>

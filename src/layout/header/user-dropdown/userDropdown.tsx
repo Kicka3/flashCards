@@ -27,12 +27,12 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          <PersonOutline />
+          <PersonOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>My Profile</Typography>
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          <LogOutOutline />
+          <LogOutOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Sign Out</Typography>
         </DropdownItem>
       </DropDownMenu>

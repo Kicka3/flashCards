@@ -9,7 +9,7 @@ type Props = {} & ComponentPropsWithoutRef<typeof DropdownMenuRadix.Item>
 
 export const DropdownItem = ({ className, ...rest }: Props) => {
   const classNames = {
-    dropdownItem: clsx(className, s.dropdownItem),
+    dropdownItem: clsx(className, s.dropdownItem, s.active),
   }
 
   return (
