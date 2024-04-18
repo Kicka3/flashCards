@@ -1,5 +1,5 @@
-import { IconDropDown } from '@/layout/header/icon-dropdown/iconDropdown'
-import { UserDropDown } from '@/layout/header/user-dropdown/userDropdown'
+import { IconDropDown } from '@/components/layout/header/icon-dropdown/iconDropdown'
+import { UserDropDown } from '@/components/layout/header/user-dropdown/userDropdown'
 
 const user = {
   alt: 'no card',
