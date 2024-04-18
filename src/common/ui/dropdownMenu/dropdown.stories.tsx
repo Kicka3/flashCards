@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DropDownMenu } from '@/components/ui/dropdown/dropdownMenu'
+import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
 import { IconDropDown } from '@/layout/header/icon-dropdown/iconDropdown'
 import { UserDropDown } from '@/layout/header/user-dropdown/userDropdown'
 

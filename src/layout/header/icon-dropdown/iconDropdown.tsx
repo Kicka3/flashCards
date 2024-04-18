@@ -2,9 +2,9 @@ import { MoreVerticalOutline, PlayCircleOutline } from '@/assets/icons/component
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import { Typography } from '@/common/ui'
-import { DropDownMenu } from '@/components/ui/dropdown'
-import { DropdownItem } from '@/components/ui/dropdown/dropdownItem'
-import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator'
+import { DropdownItem } from '@/common/ui/dropdownMenu/dropdownItem'
+import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
+import { DropdownSeparator } from '@/common/ui/dropdownMenu/dropdownSeparator'
 
 import s from './iconDropdown.module.scss'
 
@@ -15,18 +15,18 @@ export const IconDropDown = ({}: Props) => {
     <>
       <DropDownMenu trigger={<MoreVerticalOutline height={25} width={25} />}>
         <DropdownItem className={s.item}>
-          <PlayCircleOutline />
+          <PlayCircleOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Learn</Typography>
         </DropdownItem>
         <DropdownSeparator />
         <DropdownItem className={s.item}>
-          <Edit2Outline />
+          <Edit2Outline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Edit</Typography>
         </DropdownItem>
         <DropdownSeparator />
 
         <DropdownItem className={s.item}>
-          <TrashOutline />
+          <TrashOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>Delete</Typography>
         </DropdownItem>
       </DropDownMenu>

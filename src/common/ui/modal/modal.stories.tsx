@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Typography } from '@/common/ui'
-import { Checkbox } from '@/common/ui/Checkbox'
 import { Button } from '@/common/ui/button'
 import { Modal } from '@/common/ui/modal/modal'
 import { Select, SelectItem } from '@/common/ui/select'
 import { TextField } from '@/common/ui/textField'
+
+import { Checkbox } from '../сheckbox'
 
 const meta = {
   argTypes: {},
