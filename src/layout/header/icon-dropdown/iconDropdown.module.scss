@@ -1,0 +1,15 @@
+.item {
+  @media (hover: hover) {
+    &:hover {
+      width: 94%;
+      background-color: var(--color-dark-500);
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      width: 94%;
+      background-color: var(--color-dark-500);
+    }
+  }
+}
