@@ -1,0 +1,15 @@
+.dropdownItem {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+
+  width: 100%;
+  padding: 5px;
+
+  background-color: var(--color-dark-700);
+  border-radius: 4px;
+  outline: none;
+}
