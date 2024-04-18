@@ -1,19 +1,22 @@
-import { Modal } from '@/components/ui/modal'
-import { Typography } from '@/components/ui/typography'
+import { Typography } from '@/common/ui'
+import { Checkbox } from '@/common/ui/сheckbox'
 
 export function App() {
-  const open = () => {
-    console.log('open')
-
-    return true
-  }
-
   return (
-    <>
+    <div
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        height: '100vh',
+        justifyContent: 'center',
+      }}
+    >
       <Typography as={'p'} theme={'dark'} variant={'captionLink'}>
         H33LO
       </Typography>
-      <Modal onOpenChange={open} open />
-    </>
+      <Checkbox disabled text={'Check me'} />
+    </div>
   )
 }
