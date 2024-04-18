@@ -59,8 +59,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
     buttonIcon: s.buttonIcon,
     container: s.container,
     errorMessage: s.errorMessage,
-    // iconSearch: clsx(s.iconSearch, disabled && s.iconSearch_disabled),
-    iconSearch: clsx(disabled ? s.iconSearch : ''),
+    iconSearch: clsx(disabled ? s.iconSearchDisabled : s.iconSearch),
     input: clsx(s.input, errorMessage && s.error, value && s.inputActive),
     inputContainer: clsx(s.textFieldContainer, s[variant]),
     textFieldContainer: clsx(s.container, className),
@@ -70,8 +69,13 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
     <div className={classNames.container}>
       <div className={classNames.inputContainer}>
         {searchVariant && (
-          <Typography as={'label'} htmlFor={inputID} variant={'body2'}>
-            <Search className={classNames.iconSearch} height={'20px'} width={'20px'} />
+          <Typography
+            as={'label'}
+            className={classNames.iconSearch}
+            htmlFor={inputID}
+            variant={'body2'}
+          >
+            <Search height={'20px'} width={'20px'} />
           </Typography>
         )}
 
