@@ -32,6 +32,52 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+export const AllTypography: Story = {
+  args: {},
+  render: () => {
+    return (
+      <>
+        <Typography theme={'light'} variant={'h1'}>
+          Heading 1
+        </Typography>
+        <Typography theme={'light'} variant={'h2'}>
+          Heading 2
+        </Typography>
+        <Typography theme={'light'} variant={'h3'}>
+          Heading 3
+        </Typography>
+        <Typography theme={'light'} variant={'h4'}>
+          Heading 4
+        </Typography>
+        <Typography theme={'light'} variant={'sub1'}>
+          Subtitle 1
+        </Typography>
+        <Typography theme={'light'} variant={'sub2'}>
+          Subtitle 2
+        </Typography>
+        <Typography theme={'light'} variant={'body1'}>
+          Body 1
+        </Typography>
+        <Typography theme={'light'} variant={'body2'}>
+          Body 2
+        </Typography>
+        <Typography theme={'light'} variant={'overline'}>
+          Overline
+        </Typography>
+        <Typography theme={'light'} variant={'caption'}>
+          Caption
+        </Typography>
+        <Typography theme={'light'} variant={'link1'}>
+          Link 1
+        </Typography>
+        <Typography theme={'light'} variant={'link2'}>
+          Link 2
+        </Typography>
+      </>
+    )
+  },
+}
+
 export const Heading1: Story = {
   args: {
     as: 'h1',
@@ -76,7 +122,7 @@ export const Link1: Story = {
   args: {
     as: 'a',
     children: 'Link 1',
-    variant: 'link',
+    variant: 'link1',
   },
 }
 
@@ -84,7 +130,7 @@ export const Link2: Story = {
   args: {
     as: 'a',
     children: 'Link 2',
-    variant: 'link',
+    variant: 'link2',
   },
 }
 
@@ -112,26 +158,10 @@ export const Caption: Story = {
   },
 }
 
-export const CaptionLink: Story = {
-  args: {
-    as: 'a',
-    children: 'Caption Link',
-    variant: 'captionLink',
-  },
-}
-
 export const Overline: Story = {
   args: {
     as: 'span',
     children: 'Overline',
     variant: 'overline',
-  },
-}
-
-export const Error: Story = {
-  args: {
-    as: 'p',
-    children: 'Error',
-    variant: 'error',
   },
 }

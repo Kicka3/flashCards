@@ -1,7 +1,4 @@
-:root {
-  --font-weight-bold: 700;
-  --font-weight-regular: 400;
-}
+
 
 .className {
   color: white;
@@ -12,67 +9,60 @@
 }
 
 .h1 {
-  font-size: 26px;
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xxl);
 }
 
 .h2 {
-  font-size: 20px;
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
+}
+
+.h1,.h2{
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-l);
+}
+
+.h3,.h4,.overline,.sub1,.sub2{
+  font-weight: var(--font-weight-bold);
+
 }
 
 .h3 {
-  font-size: 18px;
+  font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
 }
 
-.h4 {
-  font-size: 16px;
-  font-weight: var(--font-weight-bold);
+.h3,.body1,.body2,.sub1,.sub2,.link1,.h4{
+  line-height: var(--line-height-m);
 }
 
 .body1,
+.sub1,.error,.h4{
+  font-size: var(--font-size-m);
+}
+
 .body2,
+.sub2,.link1{
+  font-size: var(--font-size-s);
+}
+
+.caption, .overline, .link2{
+  font-size: var(--font-size-xs);
+}
+
+
 .link1,
-.error {
-  font-size: 16px;
-}
-
-.body1,
-.sub1 {
-  font-weight: var(--font-weight-bold);
-}
-
-.body2,
-.sub2,
-.link2 {
-  font-size: 14px;
-}
-
-.sub1,
-.sub2 {
+.link2{
   cursor: pointer;
-  color: #397df6;
+  color: var(--color-info-500);
   text-decoration: underline;
-}
 
-.caption,
-.captionLink {
-  font-size: 12px;
-  font-weight: var(--font-weight-regular);
-}
-
-.captionLink {
-  cursor: pointer;
-  text-decoration: underline;
+  &:hover{
+    text-decoration: none;
+  }
 }
 
 .overline {
-  font-size: 12px;
-  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
 }
 
-.error {
-  color: #f3305b;
-}
