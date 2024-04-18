@@ -7,6 +7,8 @@ import { TextField } from '@/common/ui/textField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
+import s from './signUp.module.scss'
+
 type Props = {}
 
 const loginSchema = z
@@ -35,29 +37,47 @@ export const SignUp = ({}: Props) => {
   }
 
   return (
-    <>
-      <Card>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextField {...register('email')} error={errors.email?.message} label={'email'} />
+    <Card className={s.container}>
+      <Typography as={'h1'} className={s.header} variant={'h1'}>
+        Sign Up
+      </Typography>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.textFieldContainer}>
+          <TextField
+            {...register('email')}
+            className={s.textField}
+            error={errors.email?.message}
+            label={'email'}
+            placeholder={'Email'}
+          />
           <TextField
             {...register('password')}
             error={errors.password?.message}
             label={'password'}
+            placeholder={'Password'}
             variant={'password'}
           />
           <TextField
             {...register('confirmPassword')}
             error={errors.confirmPassword?.message}
-            label={'password'}
+            label={'confirmPassword'}
+            placeholder={'Confirm Password'}
             variant={'password'}
           />
-          <Button type={'submit'}>Sign Up</Button>
-          <Typography variant={'body2'}>Already have an account?</Typography>
-          <Typography as={'a'} variant={'link1'}>
+        </div>
+        <Button className={s.button} fullWidth type={'submit'}>
+          Sign Up
+        </Button>
+        <div className={s.footerContainer}>
+          <Typography className={s.questionMark} variant={'body2'}>
+            Already have an account?
+          </Typography>
+          <Typography as={'a'} className={s.signLink} variant={'link1'}>
             Sign In
           </Typography>
-        </form>
-      </Card>
-    </>
+        </div>
+      </form>
+    </Card>
   )
 }

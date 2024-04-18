@@ -15,4 +15,11 @@ export const SignUpTest: Story = {
   args: {
     children: 'TEST COMPONENT',
   },
+  render: () => {
+    return (
+      <>
+        <SignUp />
+      </>
+    )
+  },
 }
