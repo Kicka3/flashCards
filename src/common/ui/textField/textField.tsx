@@ -59,7 +59,11 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
     buttonIcon: s.buttonIcon,
     container: s.container,
     errorMessage: s.errorMessage,
-    iconSearch: clsx(disabled ? s.iconSearchDisabled : s.iconSearch),
+    iconSearch: clsx(
+      s.iconSearch,
+      disabled && s.iconSearchDisabled,
+      errorMessage && s.iconSearchError
+    ),
     input: clsx(s.input, errorMessage && s.error, value && s.inputActive),
     inputContainer: clsx(s.textFieldContainer, s[variant]),
     textFieldContainer: clsx(s.container, className),
@@ -122,7 +126,11 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
           </button>
         )}
       </div>
-      {errorMessage && <Typography className={classNames.errorMessage}>{errorMessage}</Typography>}
+      {errorMessage && (
+        <Typography className={classNames.errorMessage} variant={'caption'}>
+          {errorMessage}
+        </Typography>
+      )}
     </div>
   )
 })

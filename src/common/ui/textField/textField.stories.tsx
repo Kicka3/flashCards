@@ -6,7 +6,7 @@ import { fn } from '@storybook/test'
 const meta = {
   argTypes: {
     disabled: { control: 'boolean' },
-    error: {
+    errorMessage: {
       control: 'text',
     },
     onClearClick: fn(),
@@ -34,7 +34,7 @@ export const DefaultInput: Story = {
 
 export const InputWithError: Story = {
   args: {
-    error: 'Error!',
+    errorMessage: 'Error!',
     label: 'InputWithError',
     value: 'With Error',
     variant: 'default',
@@ -45,7 +45,7 @@ export const DefaultInputDisabled: Story = {
   args: {
     disabled: true,
     label: 'Default input disabled',
-    placeholder: 'Default input disabled',
+    // placeholder: 'Default input disabled',
     variant: 'default',
   },
 }
@@ -61,7 +61,7 @@ export const InputPassword: Story = {
 
 export const InputPasswordError: Story = {
   args: {
-    error: 'Some error!',
+    errorMessage: 'Some error!',
     label: 'Password error!',
     placeholder: 'Password input',
     value: 'Input Password',
@@ -91,7 +91,7 @@ export const InputSearch: Story = {
 
 export const InputSearchError: Story = {
   args: {
-    error: 'Search error!',
+    errorMessage: 'Search error!',
     label: 'Search error',
     onClearClick: () => {},
     placeholder: 'Search error',
