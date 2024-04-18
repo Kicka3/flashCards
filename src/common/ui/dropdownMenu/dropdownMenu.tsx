@@ -5,7 +5,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './dropdownMenu.module.scss'
 
 type Props = {
-  children: ReactNode
+  children?: ReactNode
   defaultOpen?: boolean
   modal?: boolean
   trigger?: ReactNode

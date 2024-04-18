@@ -1,9 +1,9 @@
 import LogOutOutline from '@/assets/icons/components/LogOutOutline'
 import PersonOutline from '@/assets/icons/components/PersonOutline'
-import { Typography } from '@/components/ui'
-import { DropDownMenu } from '@/components/ui/dropdown'
-import { DropdownItem } from '@/components/ui/dropdown/dropdownItem'
-import { DropdownSeparator } from '@/components/ui/dropdown/dropdownSeparator'
+import { Typography } from '@/common/ui'
+import { DropdownItem } from '@/common/ui/dropdownMenu/dropdownItem'
+import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
+import { DropdownSeparator } from '@/common/ui/dropdownMenu/dropdownSeparator'
 
 import s from './userDropdown.module.scss'
 
