@@ -122,7 +122,7 @@ export const Link1: Story = {
   args: {
     as: 'a',
     children: 'Link 1',
-    variant: 'link',
+    variant: 'link1',
   },
 }
 
@@ -130,7 +130,7 @@ export const Link2: Story = {
   args: {
     as: 'a',
     children: 'Link 2',
-    variant: 'link',
+    variant: 'link2',
   },
 }
 
@@ -158,26 +158,10 @@ export const Caption: Story = {
   },
 }
 
-export const CaptionLink: Story = {
-  args: {
-    as: 'a',
-    children: 'Caption Link',
-    variant: 'captionLink',
-  },
-}
-
 export const Overline: Story = {
   args: {
     as: 'span',
     children: 'Overline',
     variant: 'overline',
-  },
-}
-
-export const Error: Story = {
-  args: {
-    as: 'p',
-    children: 'Error',
-    variant: 'error',
   },
 }
