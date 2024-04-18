@@ -20,7 +20,7 @@ export const RadioGroup = forwardRef<
 })
 
 type ItemProps = {
-  label: string
+  label?: string
 } & ComponentPropsWithoutRef<typeof RadioGroupRadix.Item>
 
 export const RadioItem = forwardRef<ElementRef<typeof RadioGroupRadix.Item>, ItemProps>(
