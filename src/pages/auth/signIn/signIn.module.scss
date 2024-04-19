@@ -1,0 +1,49 @@
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.signInTitle {
+  align-content: center;
+}
+
+.fieldsWrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 48px;
+  justify-content: center;
+
+  margin: 51px 0 21px;
+}
+
+.rememberMe {
+  margin-bottom: 10px;
+}
+
+.forgotPasswordField {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 66px;
+
+  &:hover {
+    color: var(--color-light-900);
+  }
+}
+
+.dontHaveAcc {
+  margin: 20px 0 7px;
+  color: var(--color-light-700);
+  text-align: center;
+}
+
+.headerForm {
+  margin: 0 auto;
+}
+
+.footerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

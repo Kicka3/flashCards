@@ -6,6 +6,9 @@ import { fn } from '@storybook/test'
 const meta = {
   argTypes: {
     disabled: { control: 'boolean' },
+    errorMessage: {
+      control: 'text',
+    },
     onClearClick: fn(),
     placeholder: { control: 'text' },
     value: { control: 'text' },
@@ -22,44 +25,85 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const DefaultInput: Story = {
   args: {
     disabled: false,
+    label: 'DefaultInput',
     variant: 'default',
   },
 }
 
-export const DefaultWithError: Story = {
+export const InputWithError: Story = {
   args: {
-    disabled: false,
-    error: 'd',
+    errorMessage: 'Error!',
+    label: 'InputWithError',
     value: 'With Error',
+    variant: 'default',
+  },
+}
+
+export const DefaultInputDisabled: Story = {
+  args: {
+    disabled: true,
+    label: 'Default input disabled',
+    variant: 'default',
   },
 }
 
 export const InputPassword: Story = {
   args: {
-    placeholder: 'pass',
+    label: 'Password input',
+    placeholder: 'Password input',
     value: 'Input Password',
     variant: 'password',
   },
 }
 
-export const InputDisable: Story = {
+export const InputPasswordError: Story = {
+  args: {
+    errorMessage: 'Some error!',
+    label: 'Password error!',
+    placeholder: 'Password input',
+    value: 'Input Password',
+    variant: 'password',
+  },
+}
+
+export const InputPasswordDisabled: Story = {
   args: {
     disabled: true,
-    placeholder: 'pass',
-    value: 'Input Disable',
+    label: 'Disabled pass input',
+    placeholder: 'Disabled password input',
+    value: 'Disabled pass input',
     variant: 'password',
   },
 }
 
 export const InputSearch: Story = {
   args: {
-    disabled: false,
     onClearClick: () => {},
-    placeholder: 'dsd',
+    placeholder: 'Search input',
     value: 'Input for search',
+    variant: 'search',
+  },
+}
+
+export const InputSearchError: Story = {
+  args: {
+    errorMessage: 'Search error!',
+    onClearClick: () => {},
+    placeholder: 'Search error',
+    value: 'Search error',
+    variant: 'search',
+  },
+}
+
+export const InputSearchDisabled: Story = {
+  args: {
+    disabled: true,
+    onClearClick: () => {},
+    placeholder: 'Search disabled',
+    value: 'Search disabled',
     variant: 'search',
   },
 }
