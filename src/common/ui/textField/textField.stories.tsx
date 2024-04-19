@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>
 export const DefaultInput: Story = {
   args: {
     disabled: false,
+    label: 'DefaultInput',
     variant: 'default',
   },
 }
@@ -80,7 +81,6 @@ export const InputPasswordDisabled: Story = {
 
 export const InputSearch: Story = {
   args: {
-    label: 'Search input',
     onClearClick: () => {},
     placeholder: 'Search input',
     value: 'Input for search',
@@ -91,7 +91,6 @@ export const InputSearch: Story = {
 export const InputSearchError: Story = {
   args: {
     errorMessage: 'Search error!',
-    label: 'Search error',
     onClearClick: () => {},
     placeholder: 'Search error',
     value: 'Search error',
@@ -102,7 +101,6 @@ export const InputSearchError: Story = {
 export const InputSearchDisabled: Story = {
   args: {
     disabled: true,
-    label: 'Search disabled',
     onClearClick: () => {},
     placeholder: 'Search disabled',
     value: 'Search disabled',

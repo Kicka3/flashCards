@@ -73,12 +73,13 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
     ),
     inputContainer: clsx(s.textFieldContainer, s[variant]),
     textFieldContainer: clsx(s.container, className),
+    textFieldLabel: clsx(s.label, disabled && s.label_disabled),
   }
 
   return (
     <div className={classNames.container}>
       <div className={classNames.inputContainer}>
-        {searchVariant && (
+        {searchVariant ? (
           <Typography
             as={'label'}
             className={classNames.iconSearch}
@@ -86,6 +87,10 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
             variant={'body2'}
           >
             <Search height={'20px'} width={'20px'} />
+          </Typography>
+        ) : (
+          <Typography as={'label'} className={classNames.textFieldLabel} variant={'body2'}>
+            {label}
           </Typography>
         )}
 
@@ -100,11 +105,6 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
           type={inputType}
           value={value}
         />
-        {!searchVariant && (
-          <label className={s.label} htmlFor={inputID}>
-            {placeholder}
-          </label>
-        )}
 
         {passwordVariant && (
           <div className={classNames.eyeIcon}>

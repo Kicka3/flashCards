@@ -1,4 +1,4 @@
-import { SignIn } from '@/pages/auth/login/signIn'
+import { SignIn } from '@/pages/auth/signIn/signIn'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -11,8 +11,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const SignInTest: Story = {
+export const ExampleSignIn: Story = {
   args: {
     children: 'TEST COMPONENT',
+  },
+  render: () => {
+    return <SignIn />
   },
 }

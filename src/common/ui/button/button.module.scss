@@ -21,7 +21,7 @@
 
 .primary {
   background-color: var(--color-accent-500);
-  box-shadow: 0 4px 18px 0 var(--color-accent-500/35%);
+  box-shadow: 0 4px 18px 0 #8c61ff59;
 
   &:hover {
     background-color: var(--color-accent-300);
@@ -59,6 +59,29 @@
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
     box-shadow: 0 4px 18px 0 var(--color-accent-900/25%);
+  }
+}
+
+.link {
+  font-size: 16px;
+  color: var(--color-accent-500);
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    color: var(--color-accent-300);
+  }
+
+  &:active {
+    color: var(--color-accent-700);
+  }
+
+  &:focus-visible {
+    border-radius: 130px;
+  }
+
+  &:disabled {
+    opacity: 0.8;
   }
 }
 
