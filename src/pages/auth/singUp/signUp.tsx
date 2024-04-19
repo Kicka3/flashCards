@@ -47,20 +47,20 @@ export const SignUp = ({}: Props) => {
           <TextField
             {...register('email')}
             className={s.textField}
-            error={errors.email?.message}
+            errorMessage={errors.email?.message}
             label={'email'}
             placeholder={'Email'}
           />
           <TextField
             {...register('password')}
-            error={errors.password?.message}
+            errorMessage={errors.password?.message}
             label={'password'}
             placeholder={'Password'}
             variant={'password'}
           />
           <TextField
             {...register('confirmPassword')}
-            error={errors.confirmPassword?.message}
+            errorMessage={errors.confirmPassword?.message}
             label={'confirmPassword'}
             placeholder={'Confirm Password'}
             variant={'password'}
