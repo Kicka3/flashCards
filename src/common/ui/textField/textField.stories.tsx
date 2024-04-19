@@ -45,7 +45,6 @@ export const DefaultInputDisabled: Story = {
   args: {
     disabled: true,
     label: 'Default input disabled',
-    // placeholder: 'Default input disabled',
     variant: 'default',
   },
 }
