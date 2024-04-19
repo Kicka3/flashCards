@@ -11,7 +11,7 @@ import Layout from '../layout/layout'
 const publicRoutes: RouteObject[] = [
   {
     element: <div>login</div>,
-    path: '/login',
+    path: '/signIn',
   },
 ]
 
@@ -39,5 +39,5 @@ export const Router = () => {
 function PrivateRoutes() {
   const isAuthentificated = true
 
-  return isAuthentificated ? <Outlet /> : <Navigate to={'/login'} />
+  return isAuthentificated ? <Outlet /> : <Navigate to={'/signIn'} />
 }

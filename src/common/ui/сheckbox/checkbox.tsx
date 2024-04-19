@@ -7,56 +7,58 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-export type Props = {
+export type CheckboxProps = {
   backgroundColor?: string
   color?: string
   onChangeValue?: (value: boolean) => void
   text?: string
 } & ComponentPropsWithoutRef<typeof CheckboxRadix.Root>
 
-export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, Props>((props, ref) => {
-  const {
-    backgroundColor,
-    className,
-    color,
-    defaultChecked,
-    disabled = false,
-    id,
-    text,
-    ...rest
-  } = props
-  const generatedId = useId()
-  const domainId = id ?? generatedId
+export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxProps>(
+  (props, ref) => {
+    const {
+      backgroundColor,
+      className,
+      color,
+      defaultChecked,
+      disabled = false,
+      id,
+      text,
+      ...rest
+    } = props
+    const generatedId = useId()
+    const domainId = id ?? generatedId
 
-  const classNames = {
-    checkBoxLabel: clsx(s.typography, disabled && s.disabled),
-    checkboxContainer: clsx(s.checkboxContainer, className),
-  }
+    const classNames = {
+      checkBoxLabel: clsx(s.typography, disabled && s.disabled),
+      checkboxContainer: clsx(s.checkboxContainer, className),
+    }
 
-  return (
-    <div className={classNames.checkboxContainer}>
-      <CheckboxRadix.Root
-        {...rest}
-        className={s.checkboxRoot}
-        defaultChecked={defaultChecked}
-        disabled={disabled}
-        id={domainId}
-        style={{ backgroundColor, borderColor: color, color }}
-      >
-        <CheckboxRadix.Indicator className={s.checkboxIndicator} ref={ref}>
-          <CheckIcon height={18} width={18} />
-        </CheckboxRadix.Indicator>
-      </CheckboxRadix.Root>
-      {text && (
-        <Typography
-          as={'label'}
-          className={classNames.checkBoxLabel}
-          htmlFor={id ?? domainId}
-          variant={'body2'}
+    return (
+      <div className={classNames.checkboxContainer}>
+        <CheckboxRadix.Root
+          {...rest}
+          className={s.checkboxRoot}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          id={domainId}
+          style={{ backgroundColor, borderColor: color, color }}
         >
-          {text}
-        </Typography>
-      )}
-    </div>
-  )
-})
+          <CheckboxRadix.Indicator className={s.checkboxIndicator} ref={ref}>
+            <CheckIcon height={18} width={18} />
+          </CheckboxRadix.Indicator>
+        </CheckboxRadix.Root>
+        {text && (
+          <Typography
+            as={'label'}
+            className={classNames.checkBoxLabel}
+            htmlFor={id ?? domainId}
+            variant={'body2'}
+          >
+            {text}
+          </Typography>
+        )}
+      </div>
+    )
+  }
+)
