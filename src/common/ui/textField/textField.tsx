@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ComponentPropsWithoutRef, ElementType, useState } from 'react'
+import React, { ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Close, EyeOffOutline, EyeOutline, Search } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
@@ -38,9 +38,10 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
   const [passVisibility, setPassVisibility] = useState(false)
   const isShowClearButton = searchVariant && onClearClick && value && !errorMessage
 
-  const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value)
-  }
+  /** Заккоментил потому что задолбала консолить */
+  // const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const a = e.currentTarget.value
+  // }
 
   const onShowPassword = () => {
     if (passwordVariant) {
@@ -99,7 +100,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
           id={inputID}
           {...rest}
           disabled={disabled}
-          onChange={onChangeValue}
+          // onChange={onChangeValue}
           placeholder={placeholder}
           ref={frowardRef}
           type={inputType}
