@@ -64,7 +64,12 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
       disabled && s.iconSearchDisabled,
       errorMessage && s.iconSearchError
     ),
-    input: clsx(s.input, errorMessage && s.error, value && s.inputActive),
+    input: clsx(
+      s.input,
+      errorMessage && s.error,
+      value && s.inputActive,
+      errorMessage && s.inputActiveError
+    ),
     inputContainer: clsx(s.textFieldContainer, s[variant]),
     textFieldContainer: clsx(s.container, className),
   }
