@@ -100,12 +100,8 @@ input:not(:placeholder-shown) + label {
 }
 
 .inputActiveError {
-  &:active {
-    border: 1px solid var(--color-danger-300);
-  }
-
   &:focus {
-    border: 1px solid var(--color-danger-300);
+    border-color: var(--color-danger-500);
   }
 }
 
@@ -171,4 +167,8 @@ input:not(:placeholder-shown) + label {
 
 .iconSearchError {
   color: (var(--color-danger-300));
+}
+
+.eyeIconError {
+  color: var(--color-danger-300);
 }

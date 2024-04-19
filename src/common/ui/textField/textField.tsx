@@ -59,6 +59,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
     buttonIcon: s.buttonIcon,
     container: s.container,
     errorMessage: s.errorMessage,
+    eyeIcon: clsx(s.eyeIcon, errorMessage && s.eyeIconError),
     iconSearch: clsx(
       s.iconSearch,
       disabled && s.iconSearchDisabled,
@@ -106,7 +107,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
         )}
 
         {passwordVariant && (
-          <div>
+          <div className={classNames.eyeIcon}>
             {passVisibility ? (
               <EyeOutline
                 className={classNames.buttonIcon}
