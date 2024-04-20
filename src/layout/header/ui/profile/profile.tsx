@@ -11,7 +11,7 @@ type Props = {} & ComponentPropsWithoutRef<'header'>
 
 const Profile = ({ className, ...rest }: Props) => {
   const onOpenProfile = () => {
-    /* логика открытия профиля модалка или другая страница отрисовываться будет с editProfile*/
+    /** логика открытия профиля модалка или другая страница отрисовываться будет с editProfile*/
   }
 
   return (
@@ -29,7 +29,7 @@ const Profile = ({ className, ...rest }: Props) => {
 
 export default Profile
 
-// временные файлы пока не будет подключена авторизация
+/** временные файлы пока не будет подключена авторизация */
 const tempUser = {
   description: 'userAvatar',
   email: 'email@gmail.com',
