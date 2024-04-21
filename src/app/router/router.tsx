@@ -11,6 +11,7 @@ import { SignUp } from '@/pages/auth/singUp'
 import { CheckEmail } from '@/pages/checkEmail'
 import { CreateNewPassword } from '@/pages/createNewPassword'
 import { ForgotPassword } from '@/pages/forgotPasword'
+import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
 import Layout from '../layout/layout'
 
@@ -65,21 +66,28 @@ const privateRoutes: RouteObject[] = [
         path: '/',
       },
     ],
-    element: <Layout />,
   },
 ]
 
 const router = createBrowserRouter([
-  { children: privateRoutes, element: <PrivateRoutes /> },
-  ...publicRoutes,
+  {
+    children: [{ children: privateRoutes, element: <PrivateRoutes /> }, { children: publicRoutes }],
+    element: <Layout />,
+    errorElement: (
+      <Layout>
+        <PageNotFound />
+      </Layout>
+    ),
+    path: '/',
+  },
 ])
 
 export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-function PrivateRoutes() {
-  const isAuthentificated = false
+const isAuthenticated = false
 
-  return isAuthentificated ? <Outlet /> : <Navigate to={'/signIn'} />
+function PrivateRoutes() {
+  return isAuthenticated ? <Outlet /> : <Navigate to={'/signIn'} />
 }
