@@ -6,12 +6,24 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { SignIn } from '@/pages/auth/signIn'
+import { SignUp } from '@/pages/auth/singUp'
+import PageNotFound from '@/pages/pageNotFound/pageNotFound'
+
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <div>login</div>,
-    path: '/signIn',
+    children: [
+      {
+        element: <SignIn />,
+        path: '/signIn',
+      },
+      {
+        element: <SignUp />,
+        path: '/signUp',
+      },
+    ],
   },
 ]
 
@@ -23,21 +35,31 @@ const privatRoutes: RouteObject[] = [
         path: '/',
       },
     ],
-    element: <Layout />,
   },
 ]
 
 const router = createBrowserRouter([
-  { children: privatRoutes, element: <PrivateRoutes /> },
-  ...publicRoutes,
+  {
+    children: [{ children: privatRoutes, element: <PrivateRoutes /> }, { children: publicRoutes }],
+    element: <Layout />,
+    errorElement: (
+      <Layout>
+        <PageNotFound />
+      </Layout>
+    ),
+    path: '/',
+  },
 ])
 
 export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-function PrivateRoutes() {
-  const isAuthentificated = true
+const isAuthentificated = false
 
+function PrivateRoutes() {
   return isAuthentificated ? <Outlet /> : <Navigate to={'/signIn'} />
 }
+// function PublicRoutes() {
+//   return isAuthentificated ? <Navigate to={'/'} /> : <Outlet />
+// }
