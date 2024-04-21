@@ -11,7 +11,7 @@ type Props = {} & ComponentPropsWithoutRef<'header'>
 
 const Profile = ({ className, ...rest }: Props) => {
   const onOpenProfile = () => {
-    /** логика открытия профиля модалка или другая страница отрисовываться будет с editProfile*/
+    /** логика открытия профиля модалка или другая страница отрисовываться будет с editProfileWithoutInput*/
   }
 
   return (
