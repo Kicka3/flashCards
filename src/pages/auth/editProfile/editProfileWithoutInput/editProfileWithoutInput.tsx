@@ -4,7 +4,7 @@ import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 
-import s from './editProfile.module.scss'
+import s from './editProfileWithoutInput.module.scss'
 
 // fake user data
 const user = {
@@ -13,7 +13,7 @@ const user = {
   name: 'Nick',
 }
 
-export const EditProfile = () => {
+export const EditProfileWithoutInput = () => {
   return (
     <Card className={s.container}>
       <Typography color={'textSecondary'} variant={'h1'}>
