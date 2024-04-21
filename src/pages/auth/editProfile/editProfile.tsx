@@ -21,13 +21,15 @@ export const EditProfile = () => {
       </Typography>
       <div className={s.avatarContainer}>
         <img alt={'avatar'} className={s.avatar} src={user.avatar} />
-        <Button className={s.avatarButton} variant={'secondary'}>
-          <Edit2Outline />
+        <Button className={s.avatarButtonIcon} variant={'secondary'}>
+          <Edit2Outline height={16} width={16} />
         </Button>
       </div>
       <div className={s.nameContainer}>
         <Typography variant={'h2'}>{user.name}</Typography>
-        <Edit2Outline height={16} width={16} />
+        <Button className={s.nameButtonIcon}>
+          <Edit2Outline height={16} width={16} />
+        </Button>
       </div>
       <Typography className={s.email} variant={'body2'}>
         {user.email}
