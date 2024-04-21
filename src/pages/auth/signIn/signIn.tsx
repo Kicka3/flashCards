@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -57,16 +58,18 @@ export const SignIn = ({}: Props) => {
             text={'Remember me'}
           />
         </div>
-        {/* ‼ Прикрутить после того как обернём роутером ‼ */}
-        {/*<NavLink to={'#'}>Forgot Password ?</NavLink>*/}
-        <a className={s.forgotPasswordField}>Forgot Password ?</a>
+        <Link className={s.forgotPasswordField} to={'/forgotPassword'}>
+          Forgot Password ?
+        </Link>
         <Button fullWidth>Sign In</Button>
       </form>
       <div className={s.footerForm}>
         <Typography className={s.dontHaveAcc} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Button variant={'link'}>Sign Up</Button>
+        <Button as={Link} to={'/signUp'} variant={'link'}>
+          Sign Up
+        </Button>
       </div>
     </Card>
   )

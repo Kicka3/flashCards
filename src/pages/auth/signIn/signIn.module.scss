@@ -21,9 +21,13 @@
 }
 
 .forgotPasswordField {
+  all: unset;
+
   cursor: pointer;
+
   display: flex;
   justify-content: flex-end;
+
   margin-bottom: 66px;
 
   &:hover {

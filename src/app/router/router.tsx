@@ -43,7 +43,7 @@ const publicRoutes: RouteObject[] = [
   {
     element: (
       <div style={{ marginTop: '36px' }}>
-        <CheckEmail email={'@asd'} />
+        <CheckEmail email={'mail@mail.com'} />
       </div>
     ),
     path: '/checkEmail',
