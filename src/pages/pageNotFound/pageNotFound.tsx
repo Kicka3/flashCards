@@ -11,7 +11,7 @@ type Props = {}
 const PageNotFound = ({}: Props) => {
   return (
     <section className={s.wrapper}>
-      <img src={image} />
+      <img alt={'image'} src={image} />
       <Typography variant={'body1'}>Sorry! Page not found!</Typography>
       <Button as={Link} to={'/'} variant={'primary'}>
         Back to home page
