@@ -12,15 +12,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const options = ['radio1', 'radio2', 'radio3']
-
 const tabs = [
   { content: 'Content1', disabled: false, title: 'Switcher1' },
   { content: 'Content2', disabled: false, title: 'Switcher2' },
   {
     content: (
       <div>
-        <RadioGroup options={options} />
+        <RadioGroup />
       </div>
     ),
     disabled: false,
