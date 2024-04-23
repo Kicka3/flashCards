@@ -8,7 +8,7 @@ import s from './textField.module.scss'
 
 type VariantInput = 'default' | 'password' | 'search'
 
-type Props<T extends ElementType = 'input'> = {
+export type TextFieldProps<T extends ElementType = 'input'> = {
   errorMessage?: string
   label?: string
   onClearClick?: () => void
@@ -16,7 +16,7 @@ type Props<T extends ElementType = 'input'> = {
   variant?: VariantInput
 } & ComponentPropsWithoutRef<T>
 
-export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowardRef) => {
+export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((props, frowardRef) => {
   const {
     className,
     disabled = false,
@@ -38,7 +38,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
   const [passVisibility, setPassVisibility] = useState(false)
   const isShowClearButton = searchVariant && onClearClick && value && !errorMessage
 
-  /** Заккоментил потому что задолбала консолить */
+  /** Закомментил потому что задолбала консолить */
   // const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
   //   const a = e.currentTarget.value
   // }
@@ -100,6 +100,7 @@ export const TextField = React.forwardRef<HTMLInputElement, Props>((props, frowa
           id={inputID}
           {...rest}
           disabled={disabled}
+          name={'controlledTextField'}
           // onChange={onChangeValue}
           placeholder={placeholder}
           ref={frowardRef}

@@ -5,6 +5,8 @@ import clsx from 'clsx'
 
 import s from './radioGroup.module.scss'
 
+export type RadioGroupProps = ComponentPropsWithoutRef<typeof RadioGroupRadix.Root>
+
 export const RadioGroup = forwardRef<
   ElementRef<typeof RadioGroupRadix.Root>,
   ComponentPropsWithoutRef<typeof RadioGroupRadix.Root>

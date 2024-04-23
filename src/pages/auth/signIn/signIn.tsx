@@ -5,16 +5,14 @@ import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/controlledCheckbox'
-import { TextField } from '@/common/ui/textField'
+import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './signIn.module.scss'
 
-type Props = {}
-
-export const SignIn = ({}: Props) => {
+export const SignIn = () => {
   const {
     control,
     formState: { errors },
@@ -37,13 +35,15 @@ export const SignIn = ({}: Props) => {
             </Typography>
           </div>
           <div className={s.fieldsWrapper}>
-            <TextField
+            <ControlledTextField
+              control={control}
               {...register('email')}
               errorMessage={errors.email?.message}
               label={'Email'}
               placeholder={'j&johnson@gmail.com'}
             />
-            <TextField
+            <ControlledTextField
+              control={control}
               {...register('password')}
               errorMessage={errors.password?.message}
               label={'Password'}
