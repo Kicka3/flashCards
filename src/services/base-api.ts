@@ -8,9 +8,7 @@ export const baseApi = createApi({
       headers.append('x-auth-skip', 'true')
     },
   }),
-  endpoints: builder => {
-    return {}
-  },
+  endpoints: () => ({}),
   reducerPath: 'baseApi',
 })
 
