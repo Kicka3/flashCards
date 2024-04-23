@@ -5,7 +5,16 @@ import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
 import { UserDropDown } from '@/layout/header/ui/user-dropdown/userDropdown'
 
 const meta = {
-  argTypes: {},
+  argTypes: {
+    defaultOpen: {
+      control: { type: 'button' },
+      options: [true, false],
+    },
+    disabled: {
+      control: { type: 'button' },
+      options: [true, false],
+    },
+  },
   component: DropDownMenu,
   tags: ['autodocs'],
   title: 'Components/Dropdown',
@@ -15,7 +24,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const DropdownWithAvatar: Story = {
-  args: {},
+  args: {
+    defaultOpen: true,
+    disabled: false,
+  },
   render: () => {
     const user = {
       description: 'User Icon',
@@ -40,7 +52,10 @@ export const DropdownWithAvatar: Story = {
 }
 
 export const DropdownWithIcons: Story = {
-  args: {},
+  args: {
+    defaultOpen: true,
+    disabled: false,
+  },
 
   render: () => {
     return (

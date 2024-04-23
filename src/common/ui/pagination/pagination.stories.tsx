@@ -23,7 +23,7 @@ export const PaginationDefault: Story = {
   },
   /** Ругается на etTotalCount is declared but its value is never read */
   render: () => {
-    const [totalCount, setTotalCount] = useState(100)
+    const [totalCount] = useState(100)
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const [currentPage, setCurrentPage] = useState(1)
     const onChangePagination = (newPage: number, newCount: number) => {

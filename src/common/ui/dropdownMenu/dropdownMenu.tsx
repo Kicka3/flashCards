@@ -5,10 +5,14 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import s from './dropdownMenu.module.scss'
 
 type Props = {
-  children: ReactNode
+  children?: ReactNode
+  defaultOpen?: boolean
+  disabled?: boolean
   trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Content>
-export const DropDownMenu = ({ children, trigger, ...rest }: Props) => {
+export const DropDownMenu = (props: Props) => {
+  const { children, defaultOpen, disabled, trigger, ...rest } = props
+
   return (
     <>
       <DropdownMenu.Root>
