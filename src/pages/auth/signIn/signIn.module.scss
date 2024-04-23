@@ -29,6 +29,11 @@
 
 .forgotPasswordText {
   cursor: pointer;
+  color: var(--color-light-100);
+
+  &:visited {
+    color: var(--color-light-100);
+  }
 
   @media (hover: hover) {
     &:hover {
@@ -52,4 +57,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.signUpLink {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--color-accent-500);
 }

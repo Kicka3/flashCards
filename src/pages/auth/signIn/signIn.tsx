@@ -67,7 +67,7 @@ export const SignIn = () => {
         <Typography className={s.dontHaveAcc} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Button as={Link} to={'/signUp'} variant={'link'}>
+        <Button as={Link} className={s.signUpLink} to={'/signUp'} variant={'link'}>
           Sign Up
         </Button>
       </div>
