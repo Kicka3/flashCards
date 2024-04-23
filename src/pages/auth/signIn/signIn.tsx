@@ -59,7 +59,7 @@ export const SignIn = () => {
           />
         </div>
         <Link className={s.forgotPasswordField} to={'/forgotPassword'}>
-          Forgot Password ?
+          <div className={s.forgotPasswordText}>Forgot Password ?</div>
         </Link>
         <Button fullWidth>Sign In</Button>
       </form>

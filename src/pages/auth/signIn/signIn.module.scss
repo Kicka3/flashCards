@@ -22,16 +22,18 @@
 
 .forgotPasswordField {
   all: unset;
-
-  cursor: pointer;
-
   display: flex;
   justify-content: flex-end;
-
   margin-bottom: 66px;
+}
 
-  &:hover {
-    color: var(--color-light-900);
+.forgotPasswordText {
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-light-900);
+    }
   }
 }
 

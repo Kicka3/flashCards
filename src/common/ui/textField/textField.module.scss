@@ -46,6 +46,8 @@
 
 .input,
 .inputActiveError {
+  z-index: 2;
+
   width: 100%;
   height: 36px;
   padding: 6px 12px;
@@ -61,10 +63,6 @@
 
   &:focus-visible {
     outline: none;
-  }
-
-  &:hover {
-    background-color: var(--color-dark-600);
   }
 
   &:focus {
@@ -85,6 +83,12 @@
   &:disabled {
     color: var(--color-dark-300);
     border: 1px solid var(--color-dark-300);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-dark-600);
+    }
   }
 }
 
@@ -126,6 +130,7 @@
   cursor: pointer;
 
   position: absolute;
+  z-index: 3;
   top: 50%;
   right: 12px;
   transform: translateY(-50%);
@@ -166,4 +171,14 @@
 
 .eyeIconError {
   color: var(--color-danger-300);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px var(--color-dark-900) inset !important;
+  caret-color: #fff !important;
+
+  -webkit-text-fill-color: var(--color-light-100) !important;
 }

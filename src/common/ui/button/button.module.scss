@@ -23,11 +23,6 @@
   background-color: var(--color-accent-500);
   box-shadow: 0 4px 18px 0 #8c61ff59;
 
-  &:hover {
-    background-color: var(--color-accent-300);
-    box-shadow: 0 4px 18px 0 var(--color-accent-300/35%);
-  }
-
   &:active {
     background-color: var(--color-accent-700);
     box-shadow: 0 4px 18px 0 var(--color-accent-700/35%);
@@ -39,15 +34,17 @@
     background-color: var(--color-accent-900);
     box-shadow: 0 4px 18px 0 var(--color-accent-900/35%);
   }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-accent-300);
+      box-shadow: 0 4px 18px 0 var(--color-accent-300/35%);
+    }
+  }
 }
 
 .secondary {
   background-color: var(--color-dark-300);
-
-  &:hover {
-    background-color: var(--color-dark-100);
-    box-shadow: 0 4px 18px 0 var(--color-accent-300/25%);
-  }
 
   &:active {
     background-color: var(--color-dark-500);
@@ -60,6 +57,13 @@
     background-color: var(--color-dark-300);
     box-shadow: 0 4px 18px 0 var(--color-accent-900/25%);
   }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-dark-100);
+      box-shadow: 0 4px 18px 0 var(--color-accent-300/25%);
+    }
+  }
 }
 
 .link {
@@ -67,10 +71,6 @@
   color: var(--color-accent-500);
   background-color: transparent;
   border: none;
-
-  &:hover {
-    color: var(--color-accent-300);
-  }
 
   &:active {
     color: var(--color-accent-700);
@@ -82,6 +82,12 @@
 
   &:disabled {
     opacity: 0.8;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-accent-300);
+    }
   }
 }
 
