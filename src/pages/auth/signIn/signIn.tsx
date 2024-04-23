@@ -7,6 +7,7 @@ import { Card } from '@/common/ui/card'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/controlledCheckbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
+import { useLoginMutation } from '@/services/auth'
 import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -20,8 +21,10 @@ export const SignIn = () => {
     register,
   } = useForm<FormValues>({ resolver: zodResolver(loginSchema) })
 
+  const [login] = useLoginMutation()
+
   const onSubmit = (data: FormValues) => {
-    console.log(data)
+    login(data).unwrap()
   }
 
   return (
