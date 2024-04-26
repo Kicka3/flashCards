@@ -3,34 +3,26 @@ import { useForm } from 'react-hook-form'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
-import { TextField } from '@/common/ui/textField'
+import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { FormValues, signUpSchema } from '@/pages/auth/singUp/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
 type Props = {}
 
-const loginSchema = z
-  .object({
-    confirmPassword: z.string(),
-    email: z.string().email(),
-    password: z.string().min(3),
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'The passwords must match.',
-    path: ['confirmPassword'],
-  })
-
-type FormValues = z.infer<typeof loginSchema>
-
 export const SignUp = ({}: Props) => {
   const {
+    control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+    },
+    resolver: zodResolver(signUpSchema),
   })
   const onSubmit = (data: FormValues) => {
     console.log(data)
@@ -44,22 +36,25 @@ export const SignUp = ({}: Props) => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.textFieldContainer}>
-          <TextField
-            {...register('email')}
+          <ControlledTextField
             className={s.textField}
+            control={control}
             errorMessage={errors.email?.message}
             label={'Email'}
+            name={'email'}
           />
-          <TextField
-            {...register('password')}
+          <ControlledTextField
+            control={control}
             errorMessage={errors.password?.message}
             label={'Password'}
+            name={'password'}
             variant={'password'}
           />
-          <TextField
-            {...register('confirmPassword')}
+          <ControlledTextField
+            control={control}
             errorMessage={errors.confirmPassword?.message}
             label={'Confirm Password'}
+            name={'confirmPassword'}
             variant={'password'}
           />
         </div>
