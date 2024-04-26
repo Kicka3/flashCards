@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType, useState } from 'react'
+import React, { ChangeEvent, ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Close, EyeOffOutline, EyeOutline, Search } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
@@ -11,10 +11,9 @@ type VariantInput = 'default' | 'password' | 'search'
 export type TextFieldProps<T extends ElementType = 'input'> = {
   errorMessage?: string
   label?: string
-  onClearClick?: () => void
-  onValueChange?: () => void
+  onChange?: (value: string) => void
   variant?: VariantInput
-} & ComponentPropsWithoutRef<T>
+} & Omit<ComponentPropsWithoutRef<T>, 'onChange'>
 
 export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((props, frowardRef) => {
   const {
@@ -23,8 +22,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((pro
     errorMessage = '',
     id,
     label,
-    onClearClick,
-    onValueChange,
+    onChange,
     placeholder,
     value,
     variant = 'default',
@@ -36,12 +34,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((pro
 
   const [inputType, setInputType] = useState(passwordVariant ? 'password' : 'text')
   const [passVisibility, setPassVisibility] = useState(false)
-  const isShowClearButton = searchVariant && onClearClick && value && !errorMessage
-
-  /** Закомментил потому что задолбала консолить */
-  // const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const a = e.currentTarget.value
-  // }
+  const isShowClearButton = searchVariant && value && !errorMessage
 
   const onShowPassword = () => {
     if (passwordVariant) {
@@ -50,8 +43,12 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((pro
     }
   }
 
+  const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(e.currentTarget.value)
+  }
+
   const clearValue = () => {
-    console.log('Зачистить инпут')
+    onChange && onChange('')
   }
 
   const inputID = id ?? crypto.randomUUID()
@@ -101,7 +98,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((pro
           {...rest}
           disabled={disabled}
           name={'controlledTextField'}
-          // onChange={onChangeValue}
+          onChange={onChangeValue}
           placeholder={placeholder}
           ref={frowardRef}
           type={inputType}
@@ -129,8 +126,8 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>((pro
         )}
 
         {isShowClearButton && (
-          <button className={classNames.buttonIcon} onClick={onClearClick}>
-            <Close height={'18px'} onClick={clearValue} width={'18px'} />
+          <button className={classNames.buttonIcon} onClick={clearValue}>
+            <Close height={'18px'} width={'18px'} />
           </button>
         )}
       </div>
