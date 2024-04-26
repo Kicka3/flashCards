@@ -4,29 +4,27 @@ import { Link } from 'react-router-dom'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
-import { TextField } from '@/common/ui/textField'
+import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import {
+  NewPasswordFormValues,
+  createNewPasswordSchema,
+} from '@/pages/auth/createNewPassword/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './createNewPassword.module.scss'
 
-type Props = {}
-
-const loginSchema = z.object({
-  password: z.string().min(3),
-})
-
-type FormValues = z.infer<typeof loginSchema>
-
-export const CreateNewPassword = ({}: Props) => {
+export const CreateNewPassword = () => {
   const {
+    control,
     formState: { errors },
     handleSubmit,
-    register,
-  } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<NewPasswordFormValues>({
+    defaultValues: {
+      password: '',
+    },
+    resolver: zodResolver(createNewPasswordSchema),
   })
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = (data: NewPasswordFormValues) => {
     console.log(data)
   }
 
@@ -37,10 +35,11 @@ export const CreateNewPassword = ({}: Props) => {
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
-          {...register('password')}
+        <ControlledTextField
+          control={control}
           errorMessage={errors.password?.message}
           label={'Password'}
+          name={'password'}
           placeholder={'Password'}
           variant={'password'}
         />

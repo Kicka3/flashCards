@@ -1,12 +1,11 @@
 import { BrowserRouter } from 'react-router-dom'
 
+import { CheckEmail } from '@/pages/auth/checkEmail/checkEmail'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { ForgotPassword } from '.'
 
 const meta = {
   argTypes: {},
-  component: ForgotPassword,
+  component: CheckEmail,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -15,18 +14,18 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/ForgotPassword',
-} satisfies Meta<typeof ForgotPassword>
+  title: 'Auth/CheckEmail',
+} satisfies Meta<typeof CheckEmail>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ForgotPasswordDefault: Story = {
-  args: {},
+export const CheckEmailDefault: Story = {
+  args: { email: 'mail@mail.com' },
   render: () => {
     return (
       <>
-        <ForgotPassword />
+        <CheckEmail email={'mail@mail.com'} />
       </>
     )
   },

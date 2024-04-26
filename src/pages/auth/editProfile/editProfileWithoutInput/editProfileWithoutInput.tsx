@@ -6,7 +6,7 @@ import { Card } from '@/common/ui/card'
 
 import s from './editProfileWithoutInput.module.scss'
 
-// fake user data
+/** fake user data */
 const user = {
   avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
   email: 'example123@gmail.com',

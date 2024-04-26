@@ -4,27 +4,24 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
-import { TextField } from '@/common/ui/textField'
+import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { FormValues, forgotPasswordSchema } from '@/pages/auth/forgotPasword/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './forgotPassword.module.scss'
 
 type Props = {}
 
-const loginSchema = z.object({
-  email: z.string().email(),
-})
-
-type FormValues = z.infer<typeof loginSchema>
-
 export const ForgotPassword = ({}: Props) => {
   const {
+    control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+    },
+    resolver: zodResolver(forgotPasswordSchema),
   })
 
   const navigate = useNavigate()
@@ -44,11 +41,12 @@ export const ForgotPassword = ({}: Props) => {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.textFieldContainer}>
-          <TextField
-            {...register('email')}
+          <ControlledTextField
             className={s.textField}
+            control={control}
             errorMessage={errors.email?.message}
             label={'Email'}
+            name={'email'}
             placeholder={'Email'}
           />
           <Typography className={s.description} variant={'body2'}>

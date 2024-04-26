@@ -1,8 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 
+import { CreateNewPassword } from '@/pages/auth/createNewPassword/createNewPassword'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { CreateNewPassword } from '.'
 
 const meta = {
   argTypes: {},
