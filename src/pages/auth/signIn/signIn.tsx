@@ -18,8 +18,14 @@ export const SignIn = () => {
     control,
     formState: { errors },
     handleSubmit,
-    register,
-  } = useForm<FormValues>({ resolver: zodResolver(loginSchema) })
+  } = useForm<FormValues>({
+    defaultValues: {
+      email: '',
+      password: '',
+      rememberMe: undefined,
+    },
+    resolver: zodResolver(loginSchema),
+  })
 
   const [login] = useLoginMutation()
 
@@ -40,16 +46,16 @@ export const SignIn = () => {
           <div className={s.fieldsWrapper}>
             <ControlledTextField
               control={control}
-              {...register('email')}
               errorMessage={errors.email?.message}
               label={'Email'}
+              name={'email'}
               placeholder={'j&johnson@gmail.com'}
             />
             <ControlledTextField
               control={control}
-              {...register('password')}
               errorMessage={errors.password?.message}
               label={'Password'}
+              name={'password'}
               placeholder={'Your password'}
               variant={'password'}
             />
