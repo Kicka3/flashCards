@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '@/common/ui/textField/textField'
-import { fn } from '@storybook/test'
 
 const meta = {
   argTypes: {
@@ -9,7 +8,6 @@ const meta = {
     errorMessage: {
       control: 'text',
     },
-    onClearClick: fn(),
     placeholder: { control: 'text' },
     value: { control: 'text' },
     variant: {
@@ -81,7 +79,6 @@ export const InputPasswordDisabled: Story = {
 
 export const InputSearch: Story = {
   args: {
-    onClearClick: () => {},
     placeholder: 'Search input',
     value: 'Input for search',
     variant: 'search',
@@ -91,7 +88,6 @@ export const InputSearch: Story = {
 export const InputSearchError: Story = {
   args: {
     errorMessage: 'Search error!',
-    onClearClick: () => {},
     placeholder: 'Search error',
     value: 'Search error',
     variant: 'search',
@@ -101,7 +97,6 @@ export const InputSearchError: Story = {
 export const InputSearchDisabled: Story = {
   args: {
     disabled: true,
-    onClearClick: () => {},
     placeholder: 'Search disabled',
     value: 'Search disabled',
     variant: 'search',
