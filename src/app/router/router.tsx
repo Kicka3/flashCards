@@ -6,13 +6,13 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { CheckEmail } from '@/pages/auth/checkEmail'
+import { CreateNewPassword } from '@/pages/auth/createNewPassword'
+import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
-import { CheckEmail } from '../../pages/auth/checkEmail'
-import { CreateNewPassword } from '../../pages/auth/createNewPassword'
-import { ForgotPassword } from '../../pages/auth/forgotPasword'
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
