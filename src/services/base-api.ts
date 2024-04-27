@@ -10,6 +10,7 @@ export const baseApi = createApi({
   }),
   endpoints: () => ({}),
   reducerPath: 'baseApi',
+  tagTypes: ['Me'],
 })
 
 export const {} = baseApi
