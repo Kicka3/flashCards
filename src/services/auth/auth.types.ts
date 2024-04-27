@@ -13,3 +13,13 @@ export type LoginRequest = {
   password: string
   rememberMe: boolean
 }
+
+export type UserData = {
+  avatar: string
+  created: string
+  email: string
+  id: string
+  isEmailVerified: boolean
+  name: string
+  updated: string
+}
