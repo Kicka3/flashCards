@@ -1,4 +1,4 @@
-export type LoginRequest = {
+export type LoginArgs = {
   email: string
   password: string
   rememberMe: boolean
@@ -13,11 +13,16 @@ export type UserData = {
   name: string
   updated: string
 }
-export type SingUpRequest = {
+export type SingUpArgs = {
   email: string
   html: string
   name: string
   password: string
   sendConfirmationEmail: boolean
   subject: string
+}
+
+export type UpdateUserDataArgs = {
+  avatar: string
+  name: string
 }
