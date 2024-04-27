@@ -5,13 +5,13 @@ const mokDataLogin = {
   accessToken: 'qwertyMOK1',
   mokMessage: 'is logg in: true',
   refreshToken: 'qwertyMOK2',
-  userIsloggin: {
+  userIslogged: {
     email: 'testing@gmail.com',
     password: 'qwerty1234',
   },
 }
 
-/** Перехват запросов на сервер*/
+/** Перехват запросов на сервер для всего приложения!!!*/
 export const handlers = [
   /** Auth */
   http.post('https://api.flashcards.andrii.es/v1/auth/me', () => {
