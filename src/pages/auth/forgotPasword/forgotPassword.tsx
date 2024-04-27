@@ -47,7 +47,7 @@ export const ForgotPassword = ({}: Props) => {
             errorMessage={errors.email?.message}
             label={'Email'}
             name={'email'}
-            placeholder={'Email'}
+            placeholder={'Qwerty123'}
           />
           <Typography className={s.description} variant={'body2'}>
             Enter your address and we will send you further instructions

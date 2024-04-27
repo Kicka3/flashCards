@@ -40,7 +40,7 @@ export const CreateNewPassword = () => {
           errorMessage={errors.password?.message}
           label={'Password'}
           name={'password'}
-          placeholder={'Password'}
+          placeholder={'Qwerty123'}
           variant={'password'}
         />
         <Typography className={s.description} variant={'body2'}>

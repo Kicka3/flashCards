@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { LogOut } from '@/assets/icons/components'
+import { fn } from '@storybook/test'
 
 import { Button } from './button'
 
@@ -10,6 +11,10 @@ const meta = {
       control: { type: 'radio' },
       options: ['primary', 'secondary'],
     },
+  },
+  /** Выводит Action вместо console.log */
+  args: {
+    onClick: fn(),
   },
   component: Button,
   tags: ['autodocs'],
