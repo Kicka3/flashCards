@@ -26,3 +26,14 @@ export type UpdateUserDataArgs = {
   avatar: string
   name: string
 }
+
+export type ResendVerificationEmailArgs = {
+  html: string
+  subject: string
+  userId: string
+}
+export type RecoverPassword = {
+  email: string
+  html: string
+  subject: string
+}
