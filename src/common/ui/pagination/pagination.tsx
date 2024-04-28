@@ -11,8 +11,8 @@ import { Select } from '../select'
 export type Props = {
   currentPage: number
   itemsPerPage: number
-  onChange: (page: number, count: number) => void
-  onValueChange: () => void
+  onChangeItemsPerPage: (count: string) => void
+  onChangePage: (page: number) => void
   options?: string[]
   totalCount: number
 } & Omit<ComponentPropsWithoutRef<'div'>, 'onChange'>
@@ -21,16 +21,17 @@ export const Pagination = ({
   className,
   currentPage,
   itemsPerPage,
-  onChange,
-  onValueChange,
+  onChangeItemsPerPage,
+  onChangePage,
   options,
   totalCount,
 }: Props) => {
   const totalPages = Math.ceil(totalCount / itemsPerPage)
+  const PAGINATION_OPTIONS = options?.length ? options : ['10', '20', '30', '50', '100']
 
-  const onChangeCallback = (page: number) => {
+  const onChangePageCallback = (page: number) => {
     if (page > 0 && page <= totalPages) {
-      onChange(page, itemsPerPage)
+      onChangePage(page)
     }
   }
 
@@ -45,7 +46,7 @@ export const Pagination = ({
     /** 1-ая страница */
     if (startPage > 1) {
       pageNumbers.push(
-        <button className={s.page} key={1} onClick={() => onChangeCallback(1)}>
+        <button className={s.page} key={1} onClick={() => onChangePageCallback(1)}>
           <Typography as={'span'} variant={'body2'}>
             {1}
           </Typography>
@@ -68,7 +69,7 @@ export const Pagination = ({
         <button
           className={`${s.page} ${currentPage === i ? s.active : ''}`}
           key={i}
-          onClick={() => onChangeCallback(i)}
+          onClick={() => onChangePageCallback(i)}
         >
           <Typography as={'span'} variant={'body2'}>
             {i}
@@ -89,7 +90,11 @@ export const Pagination = ({
       }
       /** и в конце последняя страница */
       pageNumbers.push(
-        <button className={s.page} key={totalPages} onClick={() => onChangeCallback(totalPages)}>
+        <button
+          className={s.page}
+          key={totalPages}
+          onClick={() => onChangePageCallback(totalPages)}
+        >
           <Typography as={'span'} variant={'body2'}>
             {totalPages}
           </Typography>
@@ -102,11 +107,11 @@ export const Pagination = ({
 
   return (
     <div className={classNames.pagination}>
-      <button className={s.arrowBack} onClick={() => onChangeCallback(currentPage - 1)}>
+      <button className={s.arrowBack} onClick={() => onChangePageCallback(currentPage - 1)}>
         <ArrowForwardOutline />
       </button>
       {renderPageNumbers()}
-      <button className={s.arrowForward} onClick={() => onChangeCallback(currentPage + 1)}>
+      <button className={s.arrowForward} onClick={() => onChangePageCallback(currentPage + 1)}>
         <ArrowForwardOutline />
       </button>
 
@@ -119,8 +124,8 @@ export const Pagination = ({
           <Select
             className={s.select}
             defaultValue={options[0]}
-            onValueChange={onValueChange}
-            options={options}
+            onValueChange={onChangeItemsPerPage}
+            options={PAGINATION_OPTIONS}
           />
 
           <Typography as={'span'} variant={'body2'}>
