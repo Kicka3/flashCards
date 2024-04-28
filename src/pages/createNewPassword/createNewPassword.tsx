@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
-import { TextField } from '@/common/ui/textField'
+import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
@@ -12,20 +12,24 @@ import s from './createNewPassword.module.scss'
 
 type Props = {}
 
-const loginSchema = z.object({
-  password: z.string().min(3),
+const resetPasswordSchema = z.object({
+  password: z.string().min(4),
 })
 
-type FormValues = z.infer<typeof loginSchema>
+type FormValues = z.infer<typeof resetPasswordSchema>
 
 export const CreateNewPassword = ({}: Props) => {
   const {
+    control,
     formState: { errors },
     handleSubmit,
     register,
   } = useForm<FormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(resetPasswordSchema),
   })
+
+  // const [password] = useResetPasswordMutation()
+
   const onSubmit = (data: FormValues) => {
     console.log(data)
   }
@@ -37,11 +41,12 @@ export const CreateNewPassword = ({}: Props) => {
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField
+        <ControlledTextField
+          control={control}
           {...register('password')}
           errorMessage={errors.password?.message}
           label={'Password'}
-          placeholder={'Password'}
+          placeholder={'example123'}
           variant={'password'}
         />
         <Typography className={s.description} variant={'body2'}>
