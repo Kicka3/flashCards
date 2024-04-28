@@ -15,11 +15,11 @@ export type UserData = {
 }
 export type SingUpArgs = {
   email: string
-  html: string
-  name: string
+  html?: string
+  name?: string
   password: string
-  sendConfirmationEmail: boolean
-  subject: string
+  sendConfirmationEmail?: boolean
+  subject?: string
 }
 
 export type UpdateUserDataArgs = {
