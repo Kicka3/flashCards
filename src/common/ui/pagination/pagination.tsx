@@ -6,11 +6,14 @@ import clsx from 'clsx'
 import s from './pagination.module.scss'
 
 import { Typography } from '..'
+import { Select } from '../select'
 
 export type Props = {
   currentPage: number
   itemsPerPage: number
   onChange: (page: number, count: number) => void
+  onValueChange: () => void
+  options?: string[]
   totalCount: number
 } & Omit<ComponentPropsWithoutRef<'div'>, 'onChange'>
 
@@ -19,6 +22,8 @@ export const Pagination = ({
   currentPage,
   itemsPerPage,
   onChange,
+  onValueChange,
+  options,
   totalCount,
 }: Props) => {
   const totalPages = Math.ceil(totalCount / itemsPerPage)
@@ -30,10 +35,6 @@ export const Pagination = ({
   }
 
   const classNames = { pagination: clsx(s.pagination, className) }
-
-  // const onChangeSelect = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   onChange(page, Number(event.currentTarget.value))
-  // }
 
   const renderPageNumbers = () => {
     /** страницы выводятся путем добавления в массив */
@@ -109,33 +110,24 @@ export const Pagination = ({
         <ArrowForwardOutline />
       </button>
 
-      <div className={s.selectWrapper}>
-        <Typography as={'span'} variant={'body2'}>
-          показать
-        </Typography>
+      {options?.length && (
+        <div className={s.selectWrapper}>
+          <Typography as={'span'} variant={'body2'}>
+            показать
+          </Typography>
 
-        <select className={s.select} defaultValue={100} id={'1'} name={'value'}>
-          <option className={s.option} key={10} value={10}>
-            10
-          </option>
-          <option className={s.option} key={20} value={20}>
-            20
-          </option>
-          <option className={s.option} key={30} value={30}>
-            30
-          </option>
-          <option className={s.option} key={50} value={50}>
-            50
-          </option>
-          <option className={s.option} key={100} value={100}>
-            100
-          </option>
-        </select>
+          <Select
+            className={s.select}
+            defaultValue={options[0]}
+            onValueChange={onValueChange}
+            options={options}
+          />
 
-        <Typography as={'span'} variant={'body2'}>
-          на странице
-        </Typography>
-      </div>
+          <Typography as={'span'} variant={'body2'}>
+            на странице
+          </Typography>
+        </div>
+      )}
     </div>
   )
 }

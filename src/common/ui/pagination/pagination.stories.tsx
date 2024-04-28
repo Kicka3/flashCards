@@ -19,11 +19,42 @@ export const PaginationDefault: Story = {
     currentPage: 1,
     itemsPerPage: 10,
     onChange: () => {},
+    onValueChange: () => {},
+    options: ['10', '20', '30', '50', '100'],
     totalCount: 100,
   },
-  /** Ругается на etTotalCount is declared but its value is never read */
   render: () => {
-    const [totalCount] = useState(100)
+    const totalCount = 100
+    const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [currentPage, setCurrentPage] = useState(1)
+    const onChangePagination = (newPage: number, newCount: number) => {
+      setCurrentPage(newPage)
+      setItemsPerPage(newCount)
+    }
+    const options = ['10', '20', '30', '50', '100']
+
+    return (
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        onChange={onChangePagination}
+        onValueChange={() => setItemsPerPage}
+        options={options}
+        totalCount={totalCount}
+      />
+    )
+  },
+}
+export const PaginationWithoutSelect: Story = {
+  args: {
+    currentPage: 1,
+    itemsPerPage: 10,
+    onChange: () => {},
+    onValueChange: () => {},
+    totalCount: 100,
+  },
+  render: () => {
+    const totalCount = 100
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const [currentPage, setCurrentPage] = useState(1)
     const onChangePagination = (newPage: number, newCount: number) => {
@@ -32,14 +63,13 @@ export const PaginationDefault: Story = {
     }
 
     return (
-      <>
-        <Pagination
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          onChange={onChangePagination}
-          totalCount={totalCount}
-        />
-      </>
+      <Pagination
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        onChange={onChangePagination}
+        onValueChange={() => setItemsPerPage}
+        totalCount={totalCount}
+      />
     )
   },
 }
