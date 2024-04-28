@@ -14,31 +14,28 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const options = ['10', '20', '30', '50', '100']
+const totalCount = 1000
+
 export const PaginationDefault: Story = {
   args: {
     currentPage: 1,
     itemsPerPage: 10,
-    onChange: () => {},
-    onValueChange: () => {},
-    options: ['10', '20', '30', '50', '100'],
-    totalCount: 100,
+    onChangeItemsPerPage: () => {},
+    onChangePage: () => {},
+    options: options,
+    totalCount: totalCount,
   },
   render: () => {
-    const totalCount = 100
-    const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [itemsPerPage, setItemsPerPage] = useState('10')
     const [currentPage, setCurrentPage] = useState(1)
-    const onChangePagination = (newPage: number, newCount: number) => {
-      setCurrentPage(newPage)
-      setItemsPerPage(newCount)
-    }
-    const options = ['10', '20', '30', '50', '100']
 
     return (
       <Pagination
         currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        onChange={onChangePagination}
-        onValueChange={() => setItemsPerPage}
+        itemsPerPage={Number(itemsPerPage)}
+        onChangeItemsPerPage={setItemsPerPage}
+        onChangePage={setCurrentPage}
         options={options}
         totalCount={totalCount}
       />
@@ -49,25 +46,21 @@ export const PaginationWithoutSelect: Story = {
   args: {
     currentPage: 1,
     itemsPerPage: 10,
-    onChange: () => {},
-    onValueChange: () => {},
-    totalCount: 100,
+    onChangeItemsPerPage: () => {},
+    onChangePage: () => {},
+    options: options,
+    totalCount: totalCount,
   },
   render: () => {
-    const totalCount = 100
-    const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [itemsPerPage, setItemsPerPage] = useState('10')
     const [currentPage, setCurrentPage] = useState(1)
-    const onChangePagination = (newPage: number, newCount: number) => {
-      setCurrentPage(newPage)
-      setItemsPerPage(newCount)
-    }
 
     return (
       <Pagination
         currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        onChange={onChangePagination}
-        onValueChange={() => setItemsPerPage}
+        itemsPerPage={Number(itemsPerPage)}
+        onChangeItemsPerPage={setItemsPerPage}
+        onChangePage={setCurrentPage}
         totalCount={totalCount}
       />
     )
