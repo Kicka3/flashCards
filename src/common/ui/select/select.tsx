@@ -12,7 +12,7 @@ type SelectType = {
   ariaLabel?: string
   className?: string
   label?: string
-  options?: string[]
+  options?: number[] | string[]
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof Root>
 
@@ -22,7 +22,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectType
     forwardedRef
   ) => {
     const selectItems = options?.map(el => (
-      <SelectItem key={el} value={el}>
+      <SelectItem key={el} value={String(el)}>
         {el}
       </SelectItem>
     ))
