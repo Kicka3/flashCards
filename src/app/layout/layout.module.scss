@@ -1,3 +1,7 @@
 .wrapper {
+  box-sizing: content-box;
+  max-width: 1010px;
+  margin: 0 auto;
   margin-top: 36px;
+  padding-inline: 12px;
 }
