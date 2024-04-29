@@ -8,7 +8,7 @@ import s from './select.module.scss'
 const { Content, Group, Icon, Item, ItemText, Portal, Root, Trigger, Value, Viewport } =
   SelectPrimitive
 
-type SelectType = {
+export type SelectProps = {
   ariaLabel?: string
   className?: string
   label?: string
@@ -16,7 +16,7 @@ type SelectType = {
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof Root>
 
-export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectType>(
+export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProps>(
   (
     { ariaLabel, children, className, defaultValue, options, placeholder, ...props },
     forwardedRef

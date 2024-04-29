@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import s from './pagination.module.scss'
 
 import { Typography } from '..'
-import { Select } from '../select'
+import { Select, SelectProps } from '../select'
 
 export type Props = {
   currentPage: number
@@ -15,7 +15,8 @@ export type Props = {
   onChangePage: (page: number) => void
   options?: string[]
   totalCount: number
-} & Omit<ComponentPropsWithoutRef<'div'>, 'onChange'>
+} & Omit<ComponentPropsWithoutRef<'div'>, 'onChange'> &
+  SelectProps
 
 export const Pagination = ({
   className,
@@ -25,9 +26,9 @@ export const Pagination = ({
   onChangePage,
   options,
   totalCount,
+  ...restProps
 }: Props) => {
   const totalPages = Math.ceil(totalCount / itemsPerPage)
-  const PAGINATION_OPTIONS = options?.length ? options : ['10', '20', '30', '50', '100']
 
   const onChangePageCallback = (page: number) => {
     if (page > 0 && page <= totalPages) {
@@ -125,7 +126,8 @@ export const Pagination = ({
             className={s.select}
             defaultValue={options[0]}
             onValueChange={onChangeItemsPerPage}
-            options={PAGINATION_OPTIONS}
+            options={options}
+            {...restProps}
           />
 
           <Typography as={'span'} variant={'body2'}>
