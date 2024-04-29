@@ -17,6 +17,9 @@ const meta = {
     onClick: fn(),
   },
   component: Button,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/Button',
 } satisfies Meta<typeof Button>
