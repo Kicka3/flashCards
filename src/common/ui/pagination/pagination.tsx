@@ -123,7 +123,6 @@ export const Pagination = ({
           </Typography>
 
           <Select
-            className={s.select}
             defaultValue={options[0]}
             onValueChange={onChangeItemsPerPage}
             options={options}
