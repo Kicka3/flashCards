@@ -2,6 +2,10 @@ import type { Preview } from '@storybook/react'
 import '../src/styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
+import { initialize } from 'msw-storybook-addon'
+import { handlers } from '../src/services/mocks/handlers'
+
+initialize({}, handlers)
 
 const preview: Preview = {
   parameters: {
