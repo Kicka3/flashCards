@@ -29,7 +29,6 @@ export const Pagination = ({
   ...restProps
 }: Props) => {
   const totalPages = Math.ceil(totalCount / itemsPerPage)
-  const PAGINATION_OPTIONS = options?.length ? options : ['10', '20', '30', '50', '100']
 
   const onChangePageCallback = (page: number) => {
     if (page > 0 && page <= totalPages) {
@@ -127,7 +126,7 @@ export const Pagination = ({
             className={s.select}
             defaultValue={options[0]}
             onValueChange={onChangeItemsPerPage}
-            options={PAGINATION_OPTIONS}
+            options={options}
             {...restProps}
           />
 
