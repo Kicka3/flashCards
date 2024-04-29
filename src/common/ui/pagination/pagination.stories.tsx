@@ -33,6 +33,7 @@ export const PaginationDefault: Story = {
     return (
       <Pagination
         currentPage={currentPage}
+        defaultValue={options[0]}
         itemsPerPage={Number(itemsPerPage)}
         onChangeItemsPerPage={setItemsPerPage}
         onChangePage={setCurrentPage}
@@ -48,7 +49,6 @@ export const PaginationWithoutSelect: Story = {
     itemsPerPage: 10,
     onChangeItemsPerPage: () => {},
     onChangePage: () => {},
-    options: options,
     totalCount: totalCount,
   },
   render: () => {
@@ -58,6 +58,7 @@ export const PaginationWithoutSelect: Story = {
     return (
       <Pagination
         currentPage={currentPage}
+        defaultValue={itemsPerPage}
         itemsPerPage={Number(itemsPerPage)}
         onChangeItemsPerPage={setItemsPerPage}
         onChangePage={setCurrentPage}
