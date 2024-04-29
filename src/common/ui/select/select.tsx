@@ -5,6 +5,7 @@ import { Typography } from '@/common/ui'
 import * as SelectPrimitive from '@radix-ui/react-select'
 
 import s from './select.module.scss'
+
 const { Content, Group, Icon, Item, ItemText, Portal, Root, Trigger, Value, Viewport } =
   SelectPrimitive
 
@@ -29,14 +30,13 @@ export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProp
 
     return (
       <>
-        {props.label && (
-          <Typography as={'label'} className={s.label} variant={'body2'}>
-            label
-          </Typography>
-        )}
-
         <Root defaultValue={defaultValue} {...props}>
-          <Trigger aria-label={ariaLabel} className={s.selectTrigger} ref={forwardedRef}>
+          <Trigger aria-label={ariaLabel} ref={forwardedRef}>
+            {props.label && (
+              <Typography as={'label'} className={s.label} variant={'body2'}>
+                {props.label}
+              </Typography>
+            )}
             <Value placeholder={placeholder} />
             <Icon className={s.selectIcon}>
               <ArrowIosDownOutline height={'16px'} width={'16px'} />
