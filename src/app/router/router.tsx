@@ -12,7 +12,7 @@ import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import { MockPack } from '@/pages/mockPack'
-import { Cards } from '@/pages/mockPack/Pack'
+import { Cards } from '@/pages/mockPack/Cards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
 import Layout from '../layout/layout'
