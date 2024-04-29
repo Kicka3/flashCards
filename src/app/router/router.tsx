@@ -11,49 +11,31 @@ import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
+import { MockPack } from '@/pages/mockPack'
+import { Cards } from '@/pages/mockPack/Pack'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: (
-      <div style={{ marginTop: '36px' }}>
-        <ForgotPassword />
-      </div>
-    ),
+    element: <ForgotPassword />,
     path: '/forgotPassword',
   },
   {
-    element: (
-      <div style={{ marginTop: '36px' }}>
-        <SignIn />
-      </div>
-    ),
+    element: <SignIn />,
     path: '/signIn',
   },
   {
-    element: (
-      <div style={{ marginTop: '36px' }}>
-        <SignUp />
-      </div>
-    ),
+    element: <SignUp />,
     path: '/signUp',
   },
   {
-    element: (
-      <div style={{ marginTop: '36px' }}>
-        <CheckEmail email={'mail@mail.com'} />
-      </div>
-    ),
+    element: <CheckEmail email={'mail@mail.com'} />,
     path: '/checkEmail',
   },
   {
-    element: (
-      <div style={{ marginTop: '36px' }}>
-        <CreateNewPassword />
-      </div>
-    ),
+    element: <CreateNewPassword />,
     path: '/createNewPassword',
   },
 ]
@@ -62,8 +44,12 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
-        element: <div style={{ display: 'flex', justifyContent: 'center' }}>main</div>,
-        path: '/',
+        element: <MockPack />,
+        path: '/packs',
+      },
+      {
+        element: <Cards />,
+        path: '/packs/:id',
       },
     ],
   },
@@ -86,7 +72,7 @@ export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-const isAuthenticated = false
+const isAuthenticated = true
 
 function PrivateRoutes() {
   return isAuthenticated ? <Outlet /> : <Navigate to={'/signIn'} />
