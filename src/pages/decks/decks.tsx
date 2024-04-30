@@ -5,8 +5,12 @@ import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { TextField } from '@/common/ui/textField'
+import {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+} from '@/pages/decks/decks.service'
 import { DecksTable } from '@/pages/decks/decks-table/decksTable'
-import { useGetDecksQuery } from '@/services/base-api'
 
 export const Decks = () => {
   const [search, setSearch] = useState<string>('')
@@ -20,8 +24,8 @@ export const Decks = () => {
   const { data, isLoading } = useGetDecksQuery({
     name: search,
   })
-
-  console.log(data)
+  const [createDeck, { isLoading: isDeckBeingCreated }] = useCreateDeckMutation()
+  const [deleteDeck] = useDeleteDeckMutation()
 
   if (isLoading) {
     return <h1>LOADING...</h1>
@@ -39,16 +43,16 @@ export const Decks = () => {
     <div>
       <form
         onSubmit={handleSubmit(data => {
-          console.log(data)
+          createDeck(data as any)
         })}
         style={{ border: '1px solid #ccc', margin: '24px 0', padding: '24px' }}
       >
         <ControlledTextField control={control} label={'Name'} name={'name'} />
         <ControlledCheckbox control={control} name={'isPrivate'} text={'Private deck'} />
-        <Button>Create Deck</Button>
+        <Button disabled={isDeckBeingCreated}>Create Deck</Button>
       </form>
       <TextField onChange={setSearch} value={search} variant={'search'} />
-      <DecksTable decks={mappedData} />
+      <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
     </div>
   )
 }

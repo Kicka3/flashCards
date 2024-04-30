@@ -21,7 +21,7 @@ export type Deck = {
   userId: string
 }
 
-/** Create Deck Request */
+/** Create Deck */
 export type CreateDeckRequest = {
   author: DeckAuthor
   cardsCount: number
@@ -95,6 +95,9 @@ export type DeleteDeck = {
   updated: string
   userId: string
 }
+export type DeleteDeckReq = {
+  id: string
+}
 
 /** Get (Retrieve) cards in a deck */
 export type GetCardsInDeck = {
@@ -163,10 +166,8 @@ export type GetDecksArgs = {
   orderBy?: null | string
 }
 
-//-------------------
-
 /** Deck Body */
-export type DeckBody = {
+export type DeckBodyRequest = {
   cover: File | null | string
   isPrivate: boolean
   name: string
