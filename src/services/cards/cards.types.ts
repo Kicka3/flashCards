@@ -31,4 +31,5 @@ export type GetCardsArgs = {
   currentPage?: number
   itemsPerPage?: number
   orederBy?: string
+  question?: string
 }

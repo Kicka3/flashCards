@@ -3,6 +3,7 @@ import React, { ComponentPropsWithoutRef } from 'react'
 import { ArrowIosDownOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import * as SelectPrimitive from '@radix-ui/react-select'
+import clsx from 'clsx'
 
 import s from './select.module.scss'
 
@@ -14,12 +15,13 @@ export type SelectProps = {
   className?: string
   label?: string
   options?: number[] | string[]
+  pagination?: boolean
   placeholder?: string
 } & ComponentPropsWithoutRef<typeof Root>
 
 export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProps>(
   (
-    { ariaLabel, children, className, defaultValue, options, placeholder, ...props },
+    { ariaLabel, children, className, defaultValue, options, pagination, placeholder, ...props },
     forwardedRef
   ) => {
     const selectItems = options?.map(el => (
@@ -27,11 +29,15 @@ export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProp
         {el}
       </SelectItem>
     ))
+    const classNames = {
+      contentStyles: clsx(pagination ?? s.paginatedContent, s.selectContent),
+      triggerStyles: clsx(s.selectTrigger, className, pagination ?? s.paginatedTrigger),
+    }
 
     return (
       <>
         <Root defaultValue={defaultValue} {...props}>
-          <Trigger aria-label={ariaLabel} ref={forwardedRef}>
+          <Trigger aria-label={ariaLabel} className={classNames.triggerStyles} ref={forwardedRef}>
             {props.label && (
               <Typography as={'label'} className={s.label} variant={'body2'}>
                 {props.label}
@@ -43,7 +49,7 @@ export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProp
             </Icon>
           </Trigger>
           <Portal>
-            <Content className={s.selectContent} position={'popper'}>
+            <Content className={classNames.contentStyles} position={'popper'}>
               <Viewport asChild className={s.selectViewport}>
                 <Group className={s.selectGroup}>{selectItems}</Group>
               </Viewport>
