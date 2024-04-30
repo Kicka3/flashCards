@@ -5,20 +5,18 @@ import { TextField } from '@/common/ui/textField'
 
 import s from './editProfileWithInput.module.scss'
 
-// fake user data
-const user = {
-  avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
-  name: 'Nick',
+type Props = {
+  avatar: string
 }
 
-export const EditProfileWithInput = () => {
+export const EditProfileWithInput = ({ avatar }: Props) => {
   return (
     <Card>
       <div className={s.headerContainer}>
         <Typography color={'textSecondary'} variant={'h1'}>
           Personal Information
         </Typography>
-        <img alt={'avatar'} className={s.avatar} src={user.avatar} />
+        <img alt={'avatar'} className={s.avatar} src={avatar} />
       </div>
       <div className={s.footerContainer}>
         <TextField label={'Nickname'} />
