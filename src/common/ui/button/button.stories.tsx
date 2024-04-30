@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { LogOut } from '@/assets/icons/components'
+import { LogOut, TrashOutline } from '@/assets/icons/components'
 import { fn } from '@storybook/test'
 
 import { Button } from './button'
@@ -17,6 +17,9 @@ const meta = {
     onClick: fn(),
   },
   component: Button,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/Button',
 } satisfies Meta<typeof Button>
@@ -46,6 +49,14 @@ export const PrimaryWithIcon: Story = {
     disabled: false,
     icon: <LogOut height={'24px'} width={'24px'} />,
     variant: 'primary',
+  },
+}
+
+export const ButtonLikeIcon: Story = {
+  args: {
+    children: <TrashOutline height={'24px'} width={'24px'} />,
+    disabled: false,
+    variant: 'icon',
   },
 }
 

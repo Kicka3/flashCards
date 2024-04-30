@@ -8,7 +8,7 @@ export type Props<T extends ElementType = 'button'> = {
   as?: T
   fullWidth?: boolean
   icon?: ReactNode
-  variant?: 'link' | 'primary' | 'secondary'
+  variant?: 'icon' | 'link' | 'primary' | 'secondary'
 } & ComponentPropsWithoutRef<T>
 
 export const Button = <T extends ElementType = 'button'>(
@@ -35,7 +35,7 @@ export const Button = <T extends ElementType = 'button'>(
 
   return (
     <div className={s.btnWrapper}>
-      <div className={s.iconWrapper}>{icon ?? icon}</div>
+      {icon && <div className={s.iconWrapper}>{icon ?? icon}</div>}
       <Component className={classNames.buttonStyles} {...rest} />
     </div>
   )

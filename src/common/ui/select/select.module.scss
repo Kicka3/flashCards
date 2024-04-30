@@ -1,5 +1,10 @@
 .label {
   user-select: none;
+
+  position: absolute;
+  top: -26px;
+  left: 0;
+
   color: var(--color-dark-100);
 }
 
@@ -9,10 +14,12 @@
   cursor: pointer;
   user-select: none;
 
+  position: relative;
+
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 
   padding: 6px 12px;
 

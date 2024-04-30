@@ -5,21 +5,27 @@ import { Button } from '@/common/ui/button'
 import { Modal } from '@/common/ui/modal/modal'
 import { Select, SelectItem } from '@/common/ui/select'
 import { TextField } from '@/common/ui/textField'
+import { fn } from '@storybook/test'
 
 import { Checkbox } from '../сheckbox'
 
 const meta = {
   argTypes: {},
+  args: {
+    onOpenChange: fn(),
+  },
   component: Modal,
+
   title: 'Components/Modal',
 } satisfies Meta<typeof Modal>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
+const selectBox = ['mers', 'ford', 'gazzel']
+
 export const ModalWitchTitle: Story = {
   args: {
-    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal',
   },
@@ -58,7 +64,6 @@ export const ModalWitchContent: Story = {
         voluptas?
       </Typography>
     ),
-    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal with content',
   },
@@ -75,11 +80,12 @@ export const ModalFullExample: Story = {
           width: '100%',
         }}
       >
-        <Select>
-          <SelectItem value={'some'}>Some</SelectItem>
-          <SelectItem value={'select'}>Select</SelectItem>
-          <SelectItem value={'pls'}>Pls</SelectItem>
+        <Select defaultValue={selectBox[2]} label={'select-box'} options={selectBox}>
+          <SelectItem value={'Some'}>Some</SelectItem>
+          <SelectItem value={'Select'}>Select</SelectItem>
+          <SelectItem value={'Pls'}>Pls</SelectItem>
         </Select>
+
         <TextField placeholder={'input'} />
         <TextField placeholder={'input'} />
         <Checkbox text={`Don't click me!`} />
@@ -90,12 +96,15 @@ export const ModalFullExample: Story = {
             justifyContent: 'space-between',
           }}
         >
-          <Button variant={'primary'}>Button primary</Button>
-          <Button variant={'secondary'}>Button secondary</Button>
+          <Button onClick={() => console.log('Primary')} variant={'primary'}>
+            Button primary
+          </Button>
+          <Button onClick={() => console.log('Secondary')} variant={'secondary'}>
+            Button secondary
+          </Button>
         </div>
       </div>
     ),
-    onOpenChange: (open: boolean) => console.log('is open', open),
     open: true,
     title: 'Title modal',
   },
