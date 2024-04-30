@@ -1,3 +1,4 @@
+import { DecksTable } from '@/pages/decks/decks-table/decksTable'
 import { useGetDecksQuery } from '@/services/base-api'
 
 export const Decks = () => {
@@ -9,5 +10,17 @@ export const Decks = () => {
     return <h1>LOADING...</h1>
   }
 
-  return <div>{JSON.stringify(data)}</div>
+  const mappedData = data?.items.map(deck => ({
+    cards: deck.cardsCount,
+    createdBy: deck.created,
+    id: deck.id,
+    lastUpdated: deck.updated,
+    name: deck.name,
+  }))
+
+  return (
+    <div>
+      <DecksTable decks={mappedData} />
+    </div>
+  )
 }
