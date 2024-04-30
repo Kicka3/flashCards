@@ -1,6 +1,8 @@
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import Layout from '@/app/layout/layout'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { MockPack } from '.'
@@ -11,7 +13,9 @@ const meta = {
   decorators: [
     Story => (
       <BrowserRouter>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </BrowserRouter>
     ),
   ],
