@@ -8,6 +8,19 @@ export type DeckAuthor = {
   name: string
 }
 
+/** Deck */
+export type Deck = {
+  author: DeckAuthor
+  cardsCount: number
+  cover: null | string
+  created: string
+  id: string
+  isPrivate: boolean
+  name: string
+  updated: string
+  userId: string
+}
+
 /** Create Deck Request */
 export type CreateDeckRequest = {
   author: DeckAuthor
@@ -139,22 +152,6 @@ export type SaveRatingCard = {
   userId: string
 }
 
-//-------------------
-
-/** Deck */
-export type Deck = {
-  cardsCount: number
-  cover: null | string
-  /** Format: date-time */
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  /** Format: date-time */
-  updated: string
-  userId: string
-}
-
 /** Get Deck Args */
 export type GetDecksArgs = {
   authorId?: string
@@ -165,6 +162,8 @@ export type GetDecksArgs = {
   name?: string
   orderBy?: null | string
 }
+
+//-------------------
 
 /** Deck Body */
 export type DeckBody = {

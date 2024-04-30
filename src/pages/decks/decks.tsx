@@ -1,8 +1,15 @@
+import { useState } from 'react'
+
+import { TextField } from '@/common/ui/textField'
 import { DecksTable } from '@/pages/decks/decks-table/decksTable'
 import { useGetDecksQuery } from '@/services/base-api'
 
 export const Decks = () => {
-  const { data, isLoading } = useGetDecksQuery()
+  const [search, setSearch] = useState<string>('')
+
+  const { data, isLoading } = useGetDecksQuery({
+    name: search,
+  })
 
   console.log(data)
 
@@ -12,7 +19,7 @@ export const Decks = () => {
 
   const mappedData = data?.items.map(deck => ({
     cards: deck.cardsCount,
-    createdBy: deck.created,
+    createdBy: deck.author.name,
     id: deck.id,
     lastUpdated: deck.updated,
     name: deck.name,
@@ -20,6 +27,7 @@ export const Decks = () => {
 
   return (
     <div>
+      <TextField onChange={setSearch} value={search} variant={'search'} />
       <DecksTable decks={mappedData} />
     </div>
   )
