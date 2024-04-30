@@ -5,12 +5,12 @@ import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { TextField } from '@/common/ui/textField'
+import { DecksTable } from '@/pages/decks/decks-table/decksTable'
 import {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDecksQuery,
-} from '@/pages/decks/decks.service'
-import { DecksTable } from '@/pages/decks/decks-table/decksTable'
+} from '@/services/decks/decks.service'
 
 export const Decks = () => {
   const [search, setSearch] = useState<string>('')
