@@ -22,8 +22,8 @@ import s from './decks.module.scss'
 export const Decks = () => {
   /** Tabs Вынести в отдельный файл?? */
   const tabs = [
-    { content: 'My Cards', disabled: false, title: 'Switcher1' },
-    { content: 'All Cards', disabled: false, title: 'Switcher2' },
+    { content: 'My Cards', disabled: false, title: 'My Cards' },
+    { content: 'All Cards', disabled: false, title: 'All Cards' },
   ]
 
   /** Value-state для Slider */
@@ -79,13 +79,18 @@ export const Decks = () => {
           <Button>Add new deck</Button>
         </div>
         <div className={s.filterGroupWrapper}>
-          <TextField
-            onChange={setSearch}
-            placeholder={'Search deck'}
-            value={search}
-            variant={'search'}
-          />
-          <Tabs tabs={tabs} />
+          <div className={s.decksSearch}>
+            <TextField
+              onChange={setSearch}
+              placeholder={'Search deck'}
+              value={search}
+              variant={'search'}
+            />
+          </div>
+
+          <div className={s.decksTabs}>
+            <Tabs label={'lololo'} tabs={tabs} />
+          </div>
           <Slider
             max={32}
             min={0}
