@@ -20,6 +20,9 @@ export const CreateNewPassword = () => {
     handleSubmit,
     register,
   } = useForm<NewPasswordFormValues>({
+    defaultValues: {
+      password: '',
+    },
     resolver: zodResolver(createNewPasswordSchema),
   })
 
