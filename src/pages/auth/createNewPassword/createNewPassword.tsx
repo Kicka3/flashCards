@@ -18,7 +18,6 @@ export const CreateNewPassword = () => {
     control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<NewPasswordFormValues>({
     defaultValues: {
       password: '',
@@ -40,7 +39,6 @@ export const CreateNewPassword = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <ControlledTextField
           control={control}
-          {...register('password')}
           errorMessage={errors.password?.message}
           label={'Password'}
           name={'password'}
