@@ -3,52 +3,59 @@ import React, { ComponentPropsWithoutRef } from 'react'
 import { ArrowIosDownOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import * as SelectPrimitive from '@radix-ui/react-select'
+import clsx from 'clsx'
 
 import s from './select.module.scss'
 
-type SelectType = {
-  ariaLabel?: string
-  label?: string
-  placeholder?: string
-} & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
+const { Content, Group, Icon, Item, ItemText, Portal, Root, Trigger, Value, Viewport } =
+  SelectPrimitive
 
-export const Select = React.forwardRef<React.ElementRef<typeof SelectPrimitive.Root>, SelectType>(
-  ({ ariaLabel, children, placeholder, ...props }, forwardedRef) => {
+export type SelectProps = {
+  ariaLabel?: string
+  className?: string
+  label?: string
+  options?: number[] | string[]
+  pagination?: boolean
+  placeholder?: string
+} & ComponentPropsWithoutRef<typeof Root>
+
+export const Select = React.forwardRef<React.ElementRef<typeof Root>, SelectProps>(
+  (
+    { ariaLabel, children, className, defaultValue, options, pagination, placeholder, ...props },
+    forwardedRef
+  ) => {
+    const selectItems = options?.map(el => (
+      <SelectItem key={el} value={String(el)}>
+        {el}
+      </SelectItem>
+    ))
+    const classNames = {
+      contentStyles: clsx(pagination ?? s.paginatedContent, s.selectContent),
+      triggerStyles: clsx(s.selectTrigger, className, pagination ?? s.paginatedTrigger),
+    }
+
     return (
       <>
-        {props.label && (
-          <Typography as={'label'} className={s.label} variant={'body2'}>
-            label{' '}
-          </Typography>
-        )}
-
-        <SelectPrimitive.Root {...props}>
-          <SelectPrimitive.Trigger
-            aria-label={ariaLabel}
-            className={s.selectTrigger}
-            ref={forwardedRef}
-          >
-            <SelectPrimitive.Value placeholder={placeholder} />
-            <SelectPrimitive.Icon className={s.selectIcon}>
-              <ArrowIosDownOutline height={'20px'} width={'20px'} />
-            </SelectPrimitive.Icon>
-          </SelectPrimitive.Trigger>
-          <SelectPrimitive.Portal>
-            <SelectPrimitive.Content
-              className={s.selectContent}
-              collisionPadding={0}
-              position={'popper'}
-            >
-              <SelectPrimitive.ScrollUpButton></SelectPrimitive.ScrollUpButton>
-              <SelectPrimitive.Viewport className={s.selectViewport}>
-                {children}
-              </SelectPrimitive.Viewport>
-              <SelectPrimitive.ScrollDownButton>
-                <ArrowIosDownOutline height={'20px'} width={'20px'} />
-              </SelectPrimitive.ScrollDownButton>
-            </SelectPrimitive.Content>
-          </SelectPrimitive.Portal>
-        </SelectPrimitive.Root>
+        <Root defaultValue={defaultValue} {...props}>
+          <Trigger aria-label={ariaLabel} className={classNames.triggerStyles} ref={forwardedRef}>
+            {props.label && (
+              <Typography as={'label'} className={s.label} variant={'body2'}>
+                {props.label}
+              </Typography>
+            )}
+            <Value placeholder={placeholder} />
+            <Icon className={s.selectIcon}>
+              <ArrowIosDownOutline height={'16px'} width={'16px'} />
+            </Icon>
+          </Trigger>
+          <Portal>
+            <Content className={classNames.contentStyles} position={'popper'}>
+              <Viewport asChild className={s.selectViewport}>
+                <Group className={s.selectGroup}>{selectItems}</Group>
+              </Viewport>
+            </Content>
+          </Portal>
+        </Root>
       </>
     )
   }
@@ -59,8 +66,8 @@ export const SelectItem = React.forwardRef<
   ComponentPropsWithoutRef<typeof SelectPrimitive.Item>
 >(({ children, ...props }, forwardedRef) => {
   return (
-    <SelectPrimitive.Item className={s.selectItem} {...props} ref={forwardedRef}>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-    </SelectPrimitive.Item>
+    <Item className={s.selectItem} {...props} ref={forwardedRef}>
+      <ItemText>{children}</ItemText>
+    </Item>
   )
 })

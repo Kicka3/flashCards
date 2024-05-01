@@ -16,6 +16,9 @@ const meta = {
     },
   },
   component: DropDownMenu,
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   title: 'Components/Dropdown',
 } satisfies Meta<typeof DropDownMenu>
@@ -37,16 +40,12 @@ export const DropdownWithAvatar: Story = {
     }
 
     return (
-      <>
-        <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-          <UserDropDown
-            description={user.description}
-            email={user.email}
-            img={user.img}
-            name={user.name}
-          />
-        </div>
-      </>
+      <UserDropDown
+        description={user.description}
+        email={user.email}
+        img={user.img}
+        name={user.name}
+      />
     )
   },
 }
@@ -58,10 +57,6 @@ export const DropdownWithIcons: Story = {
   },
 
   render: () => {
-    return (
-      <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-        <IconDropDown />
-      </div>
-    )
+    return <IconDropDown />
   },
 }

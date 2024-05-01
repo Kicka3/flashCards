@@ -1,16 +1,35 @@
 .label {
+  user-select: none;
+
+  position: absolute;
+  top: -26px;
+  left: 0;
+
   color: var(--color-dark-100);
 }
 
 .selectTrigger {
+  all: unset;
+
+  cursor: pointer;
+  user-select: none;
+
+  position: relative;
+
   display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: space-between;
 
   padding: 6px 12px;
 
   background-color: var(--color-dark-900);
-  border: solid 1px var(--color-dark-100);
+  border: solid 1px var(--color-dark-300);
+  border-radius: 2px;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
 
   &:hover {
     background-color: var(--color-dark-500);
@@ -18,39 +37,63 @@
 
   &:focus {
     border: solid 1px var(--color-info-700);
-    outline: solid 1px var(--color-info-700);
   }
-}
 
-.selectTrigger[data-disabled] {
-  color: var(--color-dark-300);
-  border: solid 1px var(--color-dark-300);
-}
+  &[data-disabled] {
+    pointer-events: none;
+    color: var(--color-dark-300);
+    border: solid 1px var(--color-dark-300);
+  }
 
-.selectTrigger[data-state='open'] {
-  svg {
-    transform: rotate(180deg);
+  &[data-state='open'] {
+    border-color: var(--color-dark-100);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    svg {
+      transform: rotate(180deg);
+    }
   }
 }
 
 .selectIcon {
-  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .selectContent {
+  cursor: pointer;
+
+  overflow: hidden;
+
   width: var(--radix-select-trigger-width);
   max-height: var(--radix-select-content-available-height);
+
   background-color: var(--color-dark-900);
   border: solid 1px var(--color-dark-100);
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
 }
 
 .selectItem {
   user-select: none;
-  padding: 6px 11px;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+
+  &[data-highlighted] {
+    color: var(--color-accent-300);
+    background-color: var(--color-accent-900);
+    outline: none;
+  }
 }
 
-.selectItem[data-highlighted] {
-  color: var(--color-accent-300);
-  background-color: var(--color-accent-900);
-  outline: none;
+.paginatedTrigger {
+  padding: 3px;
+  background-color: var(--color-dark-700);
+}
+
+.paginatedContent {
+  background-color: var(--color-dark-700);
 }

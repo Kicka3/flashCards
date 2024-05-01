@@ -1,12 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
 
+import Layout from '@/app/layout/layout'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { CreateNewPassword } from '.'
+import { MockPack } from '.'
 
 const meta = {
   argTypes: {},
-  component: CreateNewPassword,
+  component: MockPack,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -15,19 +16,18 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/CreateNewPassword',
-} satisfies Meta<typeof CreateNewPassword>
+  title: 'Pages/MockPack',
+} satisfies Meta<typeof MockPack>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CreateNewPasswordDefault: Story = {
-  args: {},
+export const MockPackDefault: Story = {
   render: () => {
     return (
-      <>
-        <CreateNewPassword />
-      </>
+      <Layout>
+        <MockPack />
+      </Layout>
     )
   },
 }

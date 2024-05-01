@@ -1,12 +1,13 @@
 import { BrowserRouter } from 'react-router-dom'
 
+import Layout from '@/app/layout/layout'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { CheckEmail } from '.'
+import { Cards } from '.'
 
 const meta = {
   argTypes: {},
-  component: CheckEmail,
+  component: Cards,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -15,19 +16,19 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/CheckEmail',
-} satisfies Meta<typeof CheckEmail>
+  title: 'Pages/Cards',
+} satisfies Meta<typeof Cards>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const CheckEmailDefault: Story = {
-  args: { email: 'mail@mail.com' },
+export const MockPackDefault: Story = {
+  args: {},
   render: () => {
     return (
-      <>
-        <CheckEmail email={'mail@mail.com'} />
-      </>
+      <Layout>
+        <Cards />
+      </Layout>
     )
   },
 }

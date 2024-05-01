@@ -21,6 +21,7 @@ export const DropDownMenu = (props: Props) => {
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
+            // Сделать через пропсы
             align={'end'}
             className={s.dropDownMenuContent}
             sideOffset={12}

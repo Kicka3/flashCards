@@ -1,12 +1,11 @@
 import { BrowserRouter } from 'react-router-dom'
 
+import { CreateNewPassword } from '@/pages/auth/createNewPassword/createNewPassword'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { ForgotPassword } from '.'
 
 const meta = {
   argTypes: {},
-  component: ForgotPassword,
+  component: CreateNewPassword,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -15,18 +14,18 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/ForgotPassword',
-} satisfies Meta<typeof ForgotPassword>
+  title: 'Auth/CreateNewPassword',
+} satisfies Meta<typeof CreateNewPassword>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ForgotPasswordDefault: Story = {
+export const CreateNewPasswordDefault: Story = {
   args: {},
   render: () => {
     return (
       <>
-        <ForgotPassword />
+        <CreateNewPassword />
       </>
     )
   },

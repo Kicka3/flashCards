@@ -66,6 +66,16 @@
   }
 }
 
+.icon {
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-light-100);
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}
+
 .link {
   font-size: 16px;
   color: var(--color-accent-500);

@@ -1,6 +1,8 @@
 .pagination {
+  user-select: none;
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .page,
@@ -16,9 +18,19 @@
 
   width: 24px;
   height: 24px;
-  padding: 8px;
+  padding: 3px;
+
+  text-align: center;
 
   border-radius: 2px;
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+
+  &:focus {
+    background-color: var(--color-info-700);
+  }
 }
 
 .arrowBack {
@@ -26,17 +38,12 @@
 }
 
 .selectWrapper {
+  user-select: none;
+
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
-}
-
-.select {
-  background-color: var(--color-dark-700);
-  border: 1px solid var(--color-dark-500);
-  border-radius: 2px;
-  outline: none;
 }
 
 .active {

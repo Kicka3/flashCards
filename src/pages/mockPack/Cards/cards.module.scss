@@ -1,0 +1,72 @@
+.wrapper {
+  width: 100%;
+}
+
+.backLink {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.deckIntro {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deckTitle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.searchField {
+  margin-top: 24px;
+}
+
+.deckTable {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    position: initial;
+
+    & > div {
+      display: none;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: var(--color-light-900);
+  }
+}
+
+.cardImg {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}

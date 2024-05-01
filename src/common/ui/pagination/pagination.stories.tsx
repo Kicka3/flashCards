@@ -14,32 +14,56 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+const options = ['10', '20', '30', '50', '100']
+const totalCount = 1000
+
 export const PaginationDefault: Story = {
   args: {
     currentPage: 1,
     itemsPerPage: 10,
-    onChange: () => {},
-    totalCount: 100,
+    onChangeItemsPerPage: () => {},
+    onChangePage: () => {},
+    options: options,
+    totalCount: totalCount,
   },
-  /** Ругается на etTotalCount is declared but its value is never read */
   render: () => {
-    const [totalCount] = useState(100)
-    const [itemsPerPage, setItemsPerPage] = useState(10)
+    const [itemsPerPage, setItemsPerPage] = useState('10')
     const [currentPage, setCurrentPage] = useState(1)
-    const onChangePagination = (newPage: number, newCount: number) => {
-      setCurrentPage(newPage)
-      setItemsPerPage(newCount)
-    }
 
     return (
-      <>
-        <Pagination
-          currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
-          onChange={onChangePagination}
-          totalCount={totalCount}
-        />
-      </>
+      <Pagination
+        currentPage={currentPage}
+        defaultValue={options[0]}
+        itemsPerPage={Number(itemsPerPage)}
+        onChangeItemsPerPage={setItemsPerPage}
+        onChangePage={setCurrentPage}
+        options={options}
+        totalCount={totalCount}
+      />
+    )
+  },
+}
+export const PaginationWithoutSelect: Story = {
+  args: {
+    currentPage: 1,
+    itemsPerPage: 10,
+    onChangeItemsPerPage: () => {},
+    onChangePage: () => {},
+    totalCount: totalCount,
+  },
+  render: () => {
+    const [itemsPerPage, setItemsPerPage] = useState('10')
+    const [currentPage, setCurrentPage] = useState(1)
+
+    return (
+      <Pagination
+        currentPage={currentPage}
+        defaultValue={itemsPerPage}
+        itemsPerPage={Number(itemsPerPage)}
+        onChangeItemsPerPage={setItemsPerPage}
+        onChangePage={setCurrentPage}
+        totalCount={totalCount}
+      />
     )
   },
 }

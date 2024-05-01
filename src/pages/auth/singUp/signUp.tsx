@@ -4,34 +4,25 @@ import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { FormValues, signUpSchema } from '@/pages/auth/singUp/utils'
 import { useSignUpMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import s from './signUp.module.scss'
 
 type Props = {}
-
-const signUpSchema = z
-  .object({
-    confirmPassword: z.string(),
-    email: z.string().email(),
-    password: z.string().min(4),
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'The passwords must match.',
-    path: ['confirmPassword'],
-  })
-
-type FormValues = z.infer<typeof signUpSchema>
 
 export const SignUp = ({}: Props) => {
   const {
     control,
     formState: { errors },
     handleSubmit,
-    register,
   } = useForm<FormValues>({
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      password: '',
+    },
     resolver: zodResolver(signUpSchema),
   })
 
@@ -51,25 +42,26 @@ export const SignUp = ({}: Props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.textFieldContainer}>
           <ControlledTextField
+            className={s.textField}
             control={control}
-            {...register('email')}
             errorMessage={errors.email?.message}
             label={'Email'}
-            placeholder={'j&johnson@gmail.com'}
-          />
-          <ControlledTextField
-            control={control}
-            {...register('password')}
-            errorMessage={errors.email?.message}
-            label={'Email'}
+            name={'email'}
             placeholder={'example123'}
           />
           <ControlledTextField
             control={control}
-            {...register('confirmPassword')}
-            errorMessage={errors.email?.message}
-            label={'Email'}
-            placeholder={'example123'}
+            errorMessage={errors.password?.message}
+            label={'Password'}
+            name={'password'}
+            variant={'password'}
+          />
+          <ControlledTextField
+            control={control}
+            errorMessage={errors.confirmPassword?.message}
+            label={'Confirm Password'}
+            name={'confirmPassword'}
+            variant={'password'}
           />
         </div>
         <Button className={s.button} fullWidth type={'submit'}>

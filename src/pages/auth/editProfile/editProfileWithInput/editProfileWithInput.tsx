@@ -5,8 +5,15 @@ import { TextField } from '@/common/ui/textField'
 
 import s from './editProfileWithInput.module.scss'
 
+<<<<<<< HEAD
 type Props = {
   avatar: string
+=======
+// fake user data сделать через props
+const user = {
+  avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
+  name: 'Nick',
+>>>>>>> dev
 }
 
 export const EditProfileWithInput = ({ avatar }: Props) => {
