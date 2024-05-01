@@ -24,8 +24,8 @@ export const DecksTable = ({ decks, onDeleteClick, onEditClick }: Props) => {
   const handleDeleteClick = (id: string) => () => onDeleteClick?.(id)
 
   return (
-    <div className={s.tableContainer}>
-      <Table>
+    <>
+      <Table className={s.tableContainer}>
         <TableHead>
           <TableRow>
             <TableHeadCell>Name</TableHeadCell>
@@ -64,6 +64,6 @@ export const DecksTable = ({ decks, onDeleteClick, onEditClick }: Props) => {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </>
   )
 }
