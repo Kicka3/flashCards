@@ -19,12 +19,14 @@ export const EditProfileWithoutInput = () => {
       <Typography color={'textSecondary'} variant={'h1'}>
         Personal Info
       </Typography>
-      <div className={s.avatarContainer}>
-        <img alt={'avatar'} className={s.avatar} src={user.avatar} />
-        <Button className={s.avatarButtonIcon} variant={'secondary'}>
-          <Edit2Outline height={16} width={16} />
-        </Button>
-      </div>
+      <form>
+        <div className={s.avatarContainer}>
+          <img alt={'avatar'} className={s.avatar} src={user.avatar} />
+          <Button className={s.avatarButtonIcon} variant={'secondary'}>
+            <Edit2Outline height={16} width={16} />
+          </Button>
+        </div>
+      </form>
       <div className={s.nameContainer}>
         <Typography variant={'h2'}>{user.name}</Typography>
         <Button className={s.nameButtonIcon}>
