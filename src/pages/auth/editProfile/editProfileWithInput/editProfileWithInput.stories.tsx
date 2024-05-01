@@ -2,7 +2,6 @@ import { EditProfileWithInput } from '@/pages/auth/editProfile/editProfileWithIn
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  argTypes: {},
   component: EditProfileWithInput,
   tags: ['autodocs'],
   title: 'Auth/EditProfile/EditProfileWithInput',
@@ -13,12 +12,14 @@ type Story = StoryObj<typeof meta>
 
 export const EditWithInput: Story = {
   args: {
-    children: 'TEST COMPONENT',
+    avatar: 'TEST',
   },
   render: () => {
+    const avatar = 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg'
+
     return (
       <>
-        <EditProfileWithInput />
+        <EditProfileWithInput avatar={avatar} />
       </>
     )
   },

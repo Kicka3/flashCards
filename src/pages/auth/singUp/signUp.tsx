@@ -5,6 +5,7 @@ import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { FormValues, signUpSchema } from '@/pages/auth/singUp/utils'
+import { useSignUpMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './signUp.module.scss'
@@ -24,8 +25,12 @@ export const SignUp = ({}: Props) => {
     },
     resolver: zodResolver(signUpSchema),
   })
+
+  const [signUp] = useSignUpMutation()
   const onSubmit = (data: FormValues) => {
-    console.log(data)
+    const { email, password } = data
+
+    signUp({ email, password }).unwrap()
   }
 
   return (
@@ -42,6 +47,7 @@ export const SignUp = ({}: Props) => {
             errorMessage={errors.email?.message}
             label={'Email'}
             name={'email'}
+            placeholder={'example123'}
           />
           <ControlledTextField
             control={control}
