@@ -48,7 +48,7 @@ export const CreateNewPassword = () => {
         <Typography className={s.description} variant={'body2'}>
           Create a new password, and we will send you further instructions via email.
         </Typography>
-        <Button as={Link} fullWidth to={'/signIn'} type={'submit'}>
+        <Button fullWidth type={'submit'}>
           Create New Password
         </Button>
       </form>
