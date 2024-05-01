@@ -16,9 +16,16 @@ export const EditProfileTest: Story = {
     children: 'TEST COMPONENT',
   },
   render: () => {
+    /** fake user data */
+    const user = {
+      avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
+      email: 'example123@gmail.com',
+      name: 'Nick',
+    }
+
     return (
       <>
-        <EditProfileWithoutInput />
+        <EditProfileWithoutInput avatar={user.avatar} email={user.email} name={user.name} />
       </>
     )
   },
