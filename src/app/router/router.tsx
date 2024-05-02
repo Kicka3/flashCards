@@ -11,6 +11,7 @@ import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
+import { Decks } from '@/pages/decks/decks'
 import { MockPack } from '@/pages/mockPack'
 import { Cards } from '@/pages/mockPack/Cards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
@@ -50,6 +51,10 @@ const privateRoutes: RouteObject[] = [
       {
         element: <Cards />,
         path: '/packs/:id',
+      },
+      {
+        element: <Decks />,
+        path: '/decks',
       },
     ],
   },

@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -24,7 +23,9 @@ export const CreateNewPassword = () => {
     },
     resolver: zodResolver(createNewPasswordSchema),
   })
+
   const onSubmit = (data: NewPasswordFormValues) => {
+    // Handle form submission (e.g., send data to the server)
     console.log(data)
   }
 
@@ -44,9 +45,9 @@ export const CreateNewPassword = () => {
           variant={'password'}
         />
         <Typography className={s.description} variant={'body2'}>
-          Create new password and we will send you further instructions to email
+          Create a new password, and we will send you further instructions via email.
         </Typography>
-        <Button as={Link} fullWidth to={'/signIn'} type={'submit'}>
+        <Button fullWidth type={'submit'}>
           Create New Password
         </Button>
       </form>

@@ -25,10 +25,11 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const ExampleSignIn: Story = {
-  args: {
-    children: 'TEST COMPONENT',
-  },
-  render: () => {
-    return <SignIn />
-  },
+  /** По сути это не нужно. */
+  // args: {
+  //   children: 'TEST COMPONENT',
+  // },
+  // render: () => {
+  //   return <SignIn />
+  // },
 }

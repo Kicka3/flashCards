@@ -1,4 +1,10 @@
-export type User = {
+export type LoginArgs = {
+  email: string
+  password: string
+  rememberMe: boolean
+}
+
+export type UserData = {
   avatar: string
   created: string
   email: string
@@ -7,9 +13,27 @@ export type User = {
   name: string
   updated: string
 }
-
-export type LoginRequest = {
+export type SingUpArgs = {
   email: string
+  html?: string
+  name?: string
   password: string
-  rememberMe: boolean
+  sendConfirmationEmail?: boolean
+  subject?: string
+}
+
+export type UpdateUserDataArgs = {
+  avatar: string
+  name: string
+}
+
+export type ResendVerificationEmailArgs = {
+  html: string
+  subject: string
+  userId: string
+}
+export type RecoverPassword = {
+  email: string
+  html: string
+  subject: string
 }

@@ -1,9 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Tabs } from '.'
-import { RadioGroup } from '../radioGroup'
+import { Tabs } from '@/common/ui/tabs/tabs'
 
 const meta = {
+  argTypes: {
+    tabs: {
+      disabled: {
+        control: { type: 'button' },
+        options: [true, false],
+      },
+      title: {
+        control: { type: 'button' },
+        options: [''],
+      },
+      value: {
+        control: { type: 'button' },
+        options: [''],
+      },
+    },
+  },
   component: Tabs,
   tags: ['autodocs'],
   title: 'Components/Tabs',
@@ -12,50 +27,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-const tabs = [
-  { content: 'Content1', disabled: false, title: 'Switcher1' },
-  { content: 'Content2', disabled: false, title: 'Switcher2' },
-  {
-    content: (
-      <div>
-        <RadioGroup />
-      </div>
-    ),
-    disabled: false,
-    title: 'Switcher3',
-  },
-]
-
-export const TabsDefault: Story = {
-  argTypes: {},
-  args: { tabs },
-  render: () => {
-    return (
-      <Tabs
-        tabs={tabs.map(i => ({
-          content: '',
-          disabled: false,
-          title: i.title,
-        }))}
-      />
-    )
-  },
-}
-export const TabsWithContent: Story = {
-  argTypes: {},
-  args: { tabs },
-  render: () => {
-    return <Tabs tabs={tabs} />
-  },
-}
-export const TabsDisabled: Story = {
-  argTypes: {},
-  args: { tabs },
-  render: () => {
-    const disabledFirstTab = tabs.map((i, index) =>
-      index === 0 ? { content: 'Content1', disabled: true, title: 'Switcher1' } : i
-    )
-
-    return <Tabs tabs={disabledFirstTab} />
+export const TabSwitcherDemo: Story = {
+  args: {
+    tabs: [
+      { title: 'Hello', value: 'Hello' },
+      { title: 'I am a', value: 'I am a' },
+      { title: 'Tab-switcher', value: 'switcher' },
+    ],
   },
 }
