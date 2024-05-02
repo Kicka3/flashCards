@@ -12,7 +12,7 @@ import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.
 import s from './decks.module.scss'
 
 type DecksProps = {
-  isLoading: boolean
+  isLoading?: boolean
   onClick?: () => void
 }
 
@@ -75,7 +75,7 @@ export const Decks = ({}: DecksProps) => {
           </div>
 
           <div className={s.decksTabs}>
-            <Tabs label={'Show decks cards'} tabs={tabs} />
+            <Tabs defaultValue={tabs[1].value} label={'Show decks cards'} tabs={tabs} />
           </div>
           <Slider
             max={32}
@@ -95,10 +95,12 @@ export const Decks = ({}: DecksProps) => {
 
       <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
       {/*<Pagination*/}
+      {/*//From server*/}
       {/*  currentPage={}*/}
       {/*  itemsPerPage={}*/}
       {/*  onChangeItemsPerPage={}*/}
       {/*  onChangePage={}*/}
+      {/*//From server*/}
       {/*  totalCount={}*/}
       {/*/>*/}
     </>

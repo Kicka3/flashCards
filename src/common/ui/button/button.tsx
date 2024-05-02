@@ -6,6 +6,7 @@ import s from './button.module.scss'
 
 export type Props<T extends ElementType = 'button'> = {
   as?: T
+  className?: string
   fullWidth?: boolean
   icon?: ReactNode
   variant?: 'icon' | 'link' | 'primary' | 'secondary'
@@ -31,11 +32,12 @@ export const Button = <T extends ElementType = 'button'>(
       icon && s.withIcon,
       className
     ),
+    fullWidthIcon: clsx(fullWidth ? s.fullWidthIconWrapper : s.iconWrapper),
   }
 
   return (
     <div className={s.btnWrapper}>
-      {icon && <div className={s.iconWrapper}>{icon ?? icon}</div>}
+      {icon && <div className={classNames.fullWidthIcon}>{icon ?? icon}</div>}
       <Component className={classNames.buttonStyles} {...rest} />
     </div>
   )
