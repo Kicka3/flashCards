@@ -12,7 +12,7 @@ import { Pagination } from '@/common/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
-import { Card, useGetCardsQuery } from '@/services/cards'
+import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import clsx from 'clsx'
 
 import s from './cards.module.scss'
@@ -27,6 +27,7 @@ export const Cards = ({}: Props) => {
   const [orderBy, setOrderBy] = useState('')
   const debouncedSearch = useDebounce(search)
   const paginationOptions = ['10', '20', '30', '50', '100']
+  const [deleteCard, {}] = useDeleteCardMutation()
   const { data: cards, isLoading } = useGetCardsQuery({
     id: id || '',
     params: {
@@ -168,7 +169,7 @@ export const Cards = ({}: Props) => {
                   <Button variant={'icon'}>
                     <Edit2Outline height={16} width={16} />
                   </Button>
-                  <Button variant={'icon'}>
+                  <Button onClick={() => deleteCard(card.id)} variant={'icon'}>
                     <TrashOutline height={16} width={16} />
                   </Button>
                 </div>

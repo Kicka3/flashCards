@@ -5,12 +5,12 @@ import { CardsResponse, GetCardsArgs } from './cards.types'
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      // deleteCard: builder.mutation<unknown, { id: string }>({
-      //   query: id => ({
-      //     method: 'DELETE',
-      //     url: `/v1/cards/${id}`,
-      //   }),
-      // }),
+      deleteCard: builder.mutation<unknown, string>({
+        query: id => ({
+          method: 'DELETE',
+          url: `/v1/cards/${id}`,
+        }),
+      }),
       getCards: builder.query<CardsResponse, { id: string; params: GetCardsArgs | void }>({
         query: ({ id, params }) => ({
           params: params ?? undefined,
@@ -28,4 +28,4 @@ const cardsService = baseApi.injectEndpoints({
   },
 })
 
-export const { useGetCardsQuery } = cardsService
+export const { useDeleteCardMutation, useGetCardsQuery } = cardsService

@@ -45,6 +45,10 @@
       border-left: 1px solid transparent;
     }
 
+    &:hover {
+      background-color: var(--color-dark-300);
+    }
+
     &.asc::after {
       border-color: white;
     }
@@ -77,10 +81,35 @@
   }
 
   button {
+    position: relative;
+
     display: flex;
     align-items: center;
+
     padding: 0;
+
     color: var(--color-light-900);
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 24px;
+      height: 24px;
+
+      border-radius: 50%;
+
+      transition: 0.2s ease-in-out;
+    }
+
+    &:hover::after {
+      background-color: var(--color-dark-500);
+    }
   }
 }
 
