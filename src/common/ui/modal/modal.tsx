@@ -30,7 +30,7 @@ export const Modal = ({ children, className, title, ...rest }: Props) => {
 
   return (
     <DialogPrimitive.Root {...rest}>
-      <DialogPrimitive.Portal forceMount>
+      <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className={classNames.overlay} />
         <DialogPrimitive.Content className={classNames.contentWrapper}>
           {title && (

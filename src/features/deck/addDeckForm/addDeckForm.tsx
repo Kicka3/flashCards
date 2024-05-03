@@ -1,3 +1,4 @@
+import { RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image } from '@/assets/icons/components'
@@ -5,34 +6,83 @@ import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { Modal } from '@/common/ui/modal'
+import { AddDeckFormValues, addDeckSchema } from '@/features/deck/utils/addDeckSchema'
+import { DeckBodyRequest } from '@/services/decks/decks.types'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './addDeckForm.module.scss'
 
-type AddDeckFormProps = {
+/** form Компонента */
+
+export type EditDeckType = {
+  cover: null | string | undefined
+  id?: string
+  isPrivate: boolean
+  name: string
+}
+
+type Props = {
+  deck?: EditDeckType
   disabled?: boolean
   isOpen: boolean
   onOpenChange: (open: boolean) => void
+  onSubmitDeck: (data: DeckBodyRequest) => void
   title: string
 }
 
-export const AddDeckForm = ({ disabled, isOpen, onOpenChange, title }: AddDeckFormProps) => {
+export const AddDeckForm = ({
+  deck,
+  disabled,
+  isOpen,
+  onOpenChange,
+  onSubmitDeck,
+  title,
+}: Props) => {
+  const [photo, setPhoto] = useState<File | null | string>(null)
+
+  const fileinputRef: RefObject<HTMLInputElement> = useRef(null)
+
   const {
     control,
-    // formState: { error },
+    formState: { errors },
     handleSubmit,
-    // reset,
-    // setValue,
-  } = useForm({
-    defaultValues: { isPrivate: false, newDeckName: '' },
-    //Add validation scheme
+    reset,
+    setValue,
+  } = useForm<AddDeckFormValues>({
+    defaultValues: { isPrivate: false, name: '' },
+    resolver: zodResolver(addDeckSchema),
   })
 
-  const loadImg = () => {
-    console.log('load img')
+  /** Когда компонента монитурется, проверяем deck и устанавливаем занчения для полей */
+  useEffect(() => {
+    if (deck) {
+      setValue('name', deck.name || '')
+      setValue('isPrivate', deck.isPrivate || false)
+      setPhoto(deck.cover ?? null)
+    }
+  }, [deck, setValue])
+
+  const onSubmit = (data: AddDeckFormValues) => {
+    onOpenChange(false)
+    console.log(data)
+
+    const deckBodyReq: DeckBodyRequest = { ...data, cover: photo }
+
+    onSubmitDeck(deckBodyReq)
+    setPhoto(null)
+    reset()
   }
 
-  const onSubmit = () => {
-    console.log('create deck')
+  /** Добавить загрузку изображений */
+  const openFiles = () => {
+    if (fileinputRef.current) {
+      fileinputRef.current.click()
+    }
+  }
+
+  const HandlerClose = () => {
+    onOpenChange(false)
+    console.log('close modal')
   }
 
   return (
@@ -42,8 +92,9 @@ export const AddDeckForm = ({ disabled, isOpen, onOpenChange, title }: AddDeckFo
           <ControlledTextField
             control={control}
             disabled={disabled}
+            errorMessage={errors.name?.message}
             label={'Name pack'}
-            name={'newDeckName'}
+            name={'name'}
             variant={'default'}
           />
           <Button
@@ -52,7 +103,7 @@ export const AddDeckForm = ({ disabled, isOpen, onOpenChange, title }: AddDeckFo
             icon={<Image height={'12px'} width={'12px'} />}
             onClick={e => {
               e.preventDefault()
-              loadImg
+              openFiles()
             }}
             variant={'secondary'}
           >
@@ -65,10 +116,10 @@ export const AddDeckForm = ({ disabled, isOpen, onOpenChange, title }: AddDeckFo
             text={'Private pack'}
           />
           <div className={s.ActionsBtnWrapper}>
-            <Button disabled={disabled} variant={'primary'}>
+            <Button disabled={disabled} type={'submit'} variant={'primary'}>
               Add new Pack
             </Button>
-            <Button disabled={disabled} variant={'secondary'}>
+            <Button disabled={disabled} onClick={HandlerClose} type={'reset'} variant={'secondary'}>
               Cancel
             </Button>
           </div>
