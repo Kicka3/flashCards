@@ -77,6 +77,7 @@ export const ModalFullExample: Story = {
           display: 'flex',
           flexDirection: 'column',
           gap: '34px',
+          marginTop: '18px',
           width: '100%',
         }}
       >

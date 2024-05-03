@@ -64,7 +64,6 @@ export const AddDeckForm = ({
 
   const onSubmit = (data: AddDeckFormValues) => {
     onOpenChange(false)
-    console.log(data)
 
     const deckBodyReq: DeckBodyRequest = { ...data, cover: photo }
 
@@ -82,7 +81,6 @@ export const AddDeckForm = ({
 
   const HandlerClose = () => {
     onOpenChange(false)
-    console.log('close modal')
   }
 
   return (

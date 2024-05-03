@@ -19,6 +19,8 @@ type Story = StoryObj<typeof meta>
 export const AddNewDeckForm: Story = {
   args: {
     isOpen: true,
+    onOpenChange: fn(),
+    onSubmitDeck: fn(),
     title: 'Add new deck',
   },
 }

@@ -7,42 +7,32 @@ import { Slider } from '@/common/ui/slider'
 import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
+import { TabsType } from '@/pages/decks/decksContainer'
 
 import s from './deckHeader.module.scss'
 
-/** Тупая UI компонента */
+/** UI компонента */
 
 type Props = {
   isLoading?: boolean
   onClick?: () => void
   search: string
   setSearch: (value: string) => void
+  setValue: (newValue: number[]) => void
+  tabs: TabsType[]
+  value: number[]
 }
 
-export const DeckHeader = ({ search, setSearch }: Props) => {
+export const DeckHeader = ({ search, setSearch, setValue, tabs, value }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-
-  /** Tabs Вынести в отдельный файл?? */
-  const tabs = [
-    { title: 'My Cards', value: 'My Cards' },
-    { title: 'All Cards', value: 'All Cards' },
-  ]
-
-  /** Value-state для Slider */
-  type SliderType = number[]
-  const [value, setValue] = useState<SliderType>([1, 20])
-  /** Вынести из этого файла */
-  // const [search, setSearch] = useState<string>('')
 
   const HandlerCreateDeck = () => {
     setIsOpenModal(true)
-    console.log('createDeck')
   }
 
   return (
     <>
       <CreateDeck isOpen={isOpenModal} onOpenChange={setIsOpenModal} title={'Add New Deck'} />
-      {/*<div>*/}
       <div className={s.deckHead}>
         <Typography variant={'h1'}>Decks list</Typography>
         <Button onClick={HandlerCreateDeck} type={'button'}>
@@ -50,7 +40,7 @@ export const DeckHeader = ({ search, setSearch }: Props) => {
         </Button>
       </div>
       <div className={s.deckFilterWrapper}>
-        <div className={s.decksSearch}>
+        <div>
           <TextField
             onChange={setSearch}
             placeholder={'Search deck'}
@@ -60,14 +50,14 @@ export const DeckHeader = ({ search, setSearch }: Props) => {
         </div>
 
         <div className={s.deckFilterGroup}>
-          <div className={s.decksTabs}>
-            <Tabs label={'Show decks cards'} tabs={tabs} />
+          <div>
+            <Tabs defaultValue={tabs[1].value} label={'Show decks cards'} tabs={tabs} />
           </div>
           <Slider
             max={32}
             min={0}
             minStepsBetweenThumbs={1}
-            onValueChange={(newValue: number[]) => {
+            onValueChange={newValue => {
               setValue(newValue)
             }}
             step={1}
@@ -78,7 +68,6 @@ export const DeckHeader = ({ search, setSearch }: Props) => {
           </Button>
         </div>
       </div>
-      {/*</div>*/}
     </>
   )
 }

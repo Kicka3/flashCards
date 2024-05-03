@@ -6,30 +6,36 @@ import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.
 
 /** Контейнерная компонента для логики DECKS */
 
+export type TabsType = {
+  title: string
+  value: string
+}
+type SliderType = number[]
+
 type Props = {
-  //Для storybook
+  /** Для storybook */
   isLoading?: boolean
   onClick?: () => void
 }
 
 export const Decks = ({}: Props) => {
   /** Tabs Вынести в отдельный файл?? */
-  // const tabs = [
-  //   { title: 'My Cards', value: 'My Cards' },
-  //   { title: 'All Cards', value: 'All Cards' },
-  // ]
+  const tabs = [
+    { title: 'My Cards', value: 'My Cards' },
+    { title: 'All Cards', value: 'All Cards' },
+  ]
 
   /** Стейт для поиска */
   const [search, setSearch] = useState<string>('')
 
   /** Value-state для Slider */
-  // type SliderType = number[]
-  // const [value, setValue] = useState<SliderType>([1, 20])
+  const [value, setValue] = useState<SliderType>([1, 20])
 
+  /** Crud-operations */
   const { data, isLoading } = useGetDecksQuery({
     name: search,
   })
-  // const [createDeck, { isLoading: isDeckBeingCreated }] = useCreateDeckMutation()
+
   const [deleteDeck] = useDeleteDeckMutation()
 
   if (isLoading) {
@@ -50,7 +56,13 @@ export const Decks = ({}: Props) => {
 
   return (
     <>
-      <DeckHeader search={search} setSearch={setSearch} />
+      <DeckHeader
+        search={search}
+        setSearch={setSearch}
+        setValue={setValue}
+        tabs={tabs}
+        value={value}
+      />
       <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
       {/*<Pagination*/}
       {/*//From server*/}
@@ -66,34 +78,14 @@ export const Decks = ({}: Props) => {
 }
 {
   /*<form*/
-}
-{
   /*  onSubmit={handleSubmit(data => {*/
-}
-{
   /*    createDeck(data as any)*/
-}
-{
   /*  })}*/
-}
-{
   /*  style={{ border: '1px solid #ccc', margin: '24px 0', padding: '24px' }}*/
-}
-{
   /*>*/
-}
-{
   /*  <ControlledTextField control={control} label={'Name'} name={'name'} />*/
-}
-{
   /*  <ControlledCheckbox control={control} name={'isPrivate'} text={'Private deck'} />*/
-}
-{
   /*  <Button disabled={isDeckBeingCreated}>Create Deck</Button>*/
-}
-{
   /*</form>*/
-}
-{
   /*<TextField onChange={setSearch} value={search} variant={'search'} />*/
 }
