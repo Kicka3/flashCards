@@ -17,9 +17,9 @@ const meta = {
     onClick: fn(),
   },
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
+  // parameters: {
+  //   layout: 'centered',
+  // },
   tags: ['autodocs'],
   title: 'Components/Button',
 } satisfies Meta<typeof Button>
@@ -91,6 +91,16 @@ export const Fullwidth: Story = {
     disabled: false,
     fullWidth: true,
     variant: 'primary',
+  },
+}
+
+export const FullwidthWithIcon: Story = {
+  args: {
+    children: 'Full Width Primary Button',
+    disabled: false,
+    fullWidth: true,
+    icon: <LogOut height={'24px'} width={'24px'} />,
+    variant: 'secondary',
   },
 }
 

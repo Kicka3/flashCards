@@ -3,24 +3,26 @@ import { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Close } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import clsx from 'clsx'
 
 import s from './modal.module.scss'
 
 type Props = {
   children?: ReactNode
+  className?: string
   onOpenChange: (open: boolean) => void
   open: boolean
   title?: string
 } & Omit<ComponentPropsWithoutRef<typeof DialogPrimitive.Dialog>, 'onOpenChange' | 'open'>
 
-export const Modal = ({ children, title, ...rest }: Props) => {
+export const Modal = ({ children, className, title, ...rest }: Props) => {
   const handleCloseModal = () => {
     rest.onOpenChange(false)
   }
 
   const classNames = {
     closeIcon: s.closeIcon,
-    contentBox: s.contentBox,
+    contentBox: clsx(className, s.contentBox),
     contentWrapper: s.contentWrapper,
     header: s.header,
     overlay: s.overlay,
@@ -28,7 +30,7 @@ export const Modal = ({ children, title, ...rest }: Props) => {
 
   return (
     <DialogPrimitive.Root {...rest}>
-      <DialogPrimitive.Portal forceMount>
+      <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className={classNames.overlay} />
         <DialogPrimitive.Content className={classNames.contentWrapper}>
           {title && (

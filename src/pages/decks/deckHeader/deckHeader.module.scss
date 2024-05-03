@@ -1,17 +1,23 @@
-.decksHeaderWrapper {
-}
-
 .deckHead {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.filterGroupWrapper {
+.deckFilterWrapper {
   display: flex;
+  gap: 10px;
   align-items: flex-end;
   justify-content: space-between;
+
   margin: 8px 0 36px;
+}
+
+.deckFilterGroup {
+  display: flex;
+  gap: 25px;
+  place-content: center space-between;
+  place-items: flex-end center;
 }
 
 .decksSearch {

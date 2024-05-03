@@ -7,6 +7,7 @@
   padding: 6px 28px;
 
   font-family: inherit;
+  font-size: 14px;
   font-weight: 700;
   color: inherit;
 
@@ -105,6 +106,21 @@
   box-sizing: border-box;
   width: 100%;
   text-align: center;
+}
+
+.fullWidthIconWrapper {
+  pointer-events: none;
+
+  position: absolute;
+  top: 58%;
+  left: 0;
+  transform: translate(-50%, -50%);
+
+  align-content: center;
+
+  padding-left: 54px;
+
+  fill: currentcolor;
 }
 
 .btnWrapper {
