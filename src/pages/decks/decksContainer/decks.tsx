@@ -52,40 +52,6 @@ export const Decks = ({}: Props) => {
     <>
       <DeckHeader search={search} setSearch={setSearch} />
       <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
-      {/*<div className={s.decksHeaderWrapper}>*/}
-      {/*  <div className={s.deckHead}>*/}
-      {/*    <Typography variant={'h1'}>Decks list</Typography>*/}
-      {/*    <Button>Add new deck</Button>*/}
-      {/*  </div>*/}
-      {/*  <div className={s.filterGroupWrapper}>*/}
-      {/*    <div className={s.decksSearch}>*/}
-      {/*      <TextField*/}
-      {/*        onChange={setSearch}*/}
-      {/*        placeholder={'Search deck'}*/}
-      {/*        value={search}*/}
-      {/*        variant={'search'}*/}
-      {/*      />*/}
-      {/*    </div>*/}
-
-      {/*    <div className={s.decksTabs}>*/}
-      {/*      <Tabs defaultValue={tabs[1].value} label={'Show decks cards'} tabs={tabs} />*/}
-      {/*    </div>*/}
-      {/*    <Slider*/}
-      {/*      max={32}*/}
-      {/*      min={0}*/}
-      {/*      minStepsBetweenThumbs={1}*/}
-      {/*      onValueChange={(newValue: number[]) => {*/}
-      {/*        setValue(newValue)*/}
-      {/*      }}*/}
-      {/*      step={1}*/}
-      {/*      value={value}*/}
-      {/*    />*/}
-      {/*    <Button icon={<TrashOutline height={'14px'} width={'14px'} />} variant={'secondary'}>*/}
-      {/*      Clear Filter*/}
-      {/*    </Button>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
       {/*<Pagination*/}
       {/*//From server*/}
       {/*  currentPage={}*/}

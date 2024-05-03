@@ -8,7 +8,7 @@ import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
 
-import s from '@/pages/decks/decksContainer/decks.module.scss'
+import s from './deckHeader.module.scss'
 
 /** Тупая UI компонента */
 
@@ -42,23 +42,24 @@ export const DeckHeader = ({ search, setSearch }: Props) => {
   return (
     <>
       <CreateDeck isOpen={isOpenModal} onOpenChange={setIsOpenModal} title={'Add New Deck'} />
-      <div className={s.decksHeaderWrapper}>
-        <div className={s.deckHead}>
-          <Typography variant={'h1'}>Decks list</Typography>
-          <Button onClick={HandlerCreateDeck} type={'button'}>
-            Add new deck
-          </Button>
+      {/*<div>*/}
+      <div className={s.deckHead}>
+        <Typography variant={'h1'}>Decks list</Typography>
+        <Button onClick={HandlerCreateDeck} type={'button'}>
+          Add new deck
+        </Button>
+      </div>
+      <div className={s.deckFilterWrapper}>
+        <div className={s.decksSearch}>
+          <TextField
+            onChange={setSearch}
+            placeholder={'Search deck'}
+            value={search}
+            variant={'search'}
+          />
         </div>
-        <div className={s.filterGroupWrapper}>
-          <div className={s.decksSearch}>
-            <TextField
-              onChange={setSearch}
-              placeholder={'Search deck'}
-              value={search}
-              variant={'search'}
-            />
-          </div>
 
+        <div className={s.deckFilterGroup}>
           <div className={s.decksTabs}>
             <Tabs label={'Show decks cards'} tabs={tabs} />
           </div>
@@ -77,6 +78,7 @@ export const DeckHeader = ({ search, setSearch }: Props) => {
           </Button>
         </div>
       </div>
+      {/*</div>*/}
     </>
   )
 }
