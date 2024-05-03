@@ -13,6 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from 
 import { TextField } from '@/common/ui/textField'
 import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
 import { Card, useGetCardsQuery } from '@/services/cards'
+import clsx from 'clsx'
 
 import s from './cards.module.scss'
 
@@ -32,6 +33,7 @@ export const Cards = ({}: Props) => {
       answer: debouncedSearch,
       currentPage,
       itemsPerPage: Number(itemsPerPage),
+      orderBy: orderBy,
       question: debouncedSearch,
     },
   })
@@ -44,14 +46,54 @@ export const Cards = ({}: Props) => {
     return <div>...Loading</div>
   }
 
+  const onChangeOrderBy = (columnName: string) => {
+    let newOrder = 'asc'
+
+    if (orderBy === `${columnName}-${newOrder}`) {
+      newOrder = 'desc'
+    }
+
+    // нужна ли доп проверка
+    //if (orderBy && orderBy.startsWith(columnName)) {
+    //   newOrder = orderBy.endsWith('asc') ? 'desc' : 'asc';
+    // }
+
+    setOrderBy(`${columnName}-${newOrder}`)
+
+    if (currentPage !== 1) {
+      setCurrentPage(1) // при сортировке сбрасывать на 1 страницу
+    }
+  }
+
+  const classNames = {
+    tableHeadCell: {
+      answer: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'answer-asc',
+        [s.desc]: orderBy === 'answer-desc',
+      }),
+      grade: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'grade-asc',
+        [s.desc]: orderBy === 'grade-desc',
+      }),
+      question: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'question-asc',
+        [s.desc]: orderBy === 'question-desc',
+      }),
+      updated: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'updated-asc',
+        [s.desc]: orderBy === 'updated-desc',
+      }),
+    },
+  }
+
   return (
     <section className={s.wrapper}>
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
         <Typography variant={'body2'}>Back to Decks List</Typography>
       </Link>
-      <div className={s.deckIntro}>
-        <div className={s.deckTitle}>
+      <div className={s.packIntro}>
+        <div className={s.packTitle}>
           <Typography variant={'h1'}>Deck Name</Typography>
           <IconDropDown />
           {imgDeckSrc ?? <img src={imgDeckSrc} />}
@@ -62,13 +104,33 @@ export const Cards = ({}: Props) => {
         <TextField onChange={setSearch} value={search} variant={'search'} />
       </div>
 
-      <Table className={s.deckTable}>
+      <Table className={s.cardsTable}>
         <TableHead>
           <TableRow>
-            <TableHeadCell>Question</TableHeadCell>
-            <TableHeadCell>Answer</TableHeadCell>
-            <TableHeadCell>Last Updated</TableHeadCell>
-            <TableHeadCell>Grade</TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.question}
+              onClick={() => onChangeOrderBy('question')}
+            >
+              Question
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.answer}
+              onClick={() => onChangeOrderBy('answer')}
+            >
+              Answer
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.updated}
+              onClick={() => onChangeOrderBy('updated')}
+            >
+              Last Updated
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.grade}
+              onClick={() => onChangeOrderBy('grade')}
+            >
+              Grade
+            </TableHeadCell>
             <TableHeadCell></TableHeadCell>
           </TableRow>
         </TableHead>

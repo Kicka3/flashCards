@@ -9,12 +9,12 @@
   text-decoration: none;
 }
 
-.deckIntro {
+.packIntro {
   display: flex;
   justify-content: space-between;
 }
 
-.deckTitle {
+.packTitle {
   display: flex;
   gap: 6px;
   align-items: center;
@@ -24,9 +24,36 @@
   margin-top: 24px;
 }
 
-.deckTable {
+.cardsTable {
   width: 100%;
   margin-top: 24px;
+
+  .tableHeadCell {
+    cursor: pointer;
+
+    &::after {
+      content: '';
+
+      transform: rotate(45deg) translate(4px, -6px);
+
+      display: inline-block;
+
+      width: 5px;
+      height: 5px;
+
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
+
+    &.asc::after {
+      border-color: white;
+    }
+
+    &.desc::after {
+      transform: rotate(-135deg) translate(-2px, 6px);
+      border-color: white;
+    }
+  }
 }
 
 .contentWrapper {
