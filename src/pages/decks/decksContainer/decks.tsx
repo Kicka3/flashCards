@@ -19,7 +19,7 @@ type Props = {
 }
 
 export const Decks = ({}: Props) => {
-  /** Tabs Вынести в отдельный файл?? */
+  /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'My Cards' },
     { title: 'All Cards', value: 'All Cards' },
@@ -31,12 +31,12 @@ export const Decks = ({}: Props) => {
   /** Value-state для Slider */
   const [value, setValue] = useState<SliderType>([1, 20])
 
-  /** Crud-operations */
-  const { data, isLoading } = useGetDecksQuery({
+  const { data, isFetching, isLoading } = useGetDecksQuery({
     name: search,
   })
 
-  const [deleteDeck] = useDeleteDeckMutation()
+  /** DELETE */
+  const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
 
   if (isLoading) {
     return (
@@ -54,6 +54,14 @@ export const Decks = ({}: Props) => {
     name: deck.name,
   }))
 
+  // const isOwner = () => {
+  //Являюсь ли я создателем колоды?
+  // return true
+  // }
+  const onDeleteDeck = (id: string) => {
+    deleteDeck({ id })
+  }
+
   return (
     <>
       <DeckHeader
@@ -63,7 +71,7 @@ export const Decks = ({}: Props) => {
         tabs={tabs}
         value={value}
       />
-      <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
+      <DecksTable decks={mappedData} isOwner onDeleteClick={onDeleteDeck} />
       {/*<Pagination*/}
       {/*//From server*/}
       {/*  currentPage={}*/}
@@ -75,17 +83,4 @@ export const Decks = ({}: Props) => {
       {/*/>*/}
     </>
   )
-}
-{
-  /*<form*/
-  /*  onSubmit={handleSubmit(data => {*/
-  /*    createDeck(data as any)*/
-  /*  })}*/
-  /*  style={{ border: '1px solid #ccc', margin: '24px 0', padding: '24px' }}*/
-  /*>*/
-  /*  <ControlledTextField control={control} label={'Name'} name={'name'} />*/
-  /*  <ControlledCheckbox control={control} name={'isPrivate'} text={'Private deck'} />*/
-  /*  <Button disabled={isDeckBeingCreated}>Create Deck</Button>*/
-  /*</form>*/
-  /*<TextField onChange={setSearch} value={search} variant={'search'} />*/
 }

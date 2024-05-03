@@ -1,11 +1,14 @@
+import { useState } from 'react'
+
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
+import { DeleteForm } from '@/features/deck/deleteForm'
 
 import s from './decksTable.module.scss'
 
-type Deck = {
+export type Deck = {
   cards: number
   createdBy: string
   id: string
@@ -15,19 +18,54 @@ type Deck = {
 
 type Props = {
   decks: Deck[] | undefined
+  isOwner: boolean
   onDeleteClick?: (id: string) => void
   onEditClick?: (id: string) => void
 }
 
 export const DecksTable = ({ decks, onDeleteClick, onEditClick }: Props) => {
+  const [deleteForm, setDeleteForm] = useState(false)
+  /** Сохраняю ID колоды */
+  const [IdDeletedDeck, setIdDeletedDeck] = useState<string | undefined>('')
+
   const handleEditeClick = (id: string) => () => onEditClick?.(id)
-  const handleDeleteClick = (id: string) => () => onDeleteClick?.(id)
+
+  const closeDeleteFormHandler = () => {
+    setDeleteForm(false)
+  }
+
+  /** Удаляю по id из form*/
+  const onDeleteDeck = (id: string) => {
+    if (id) {
+      onDeleteClick?.(id)
+    }
+  }
+  /** Нажатие на иконку */
+  const clickDeleteHandler = (id: string) => () => {
+    setIdDeletedDeck(id)
+    setDeleteForm(true)
+  }
+
+  /** Ищу нужную колоду чтобы достать name */
+  const deckWillDelete = decks?.find(d => d.id === IdDeletedDeck)
 
   return (
     <>
       <Table className={s.tableContainer}>
         <TableHead>
           <TableRow>
+            <DeleteForm
+              close={closeDeleteFormHandler}
+              deleteAction={id => {
+                onDeleteDeck(id)
+              }}
+              id={IdDeletedDeck}
+              isDeck
+              isOpen={deleteForm}
+              name={deckWillDelete?.name}
+              onOpenChange={setDeleteForm}
+              title={'Delete Pack'}
+            />
             <TableHeadCell>Name</TableHeadCell>
             <TableHeadCell>Cards</TableHeadCell>
             <TableHeadCell>Last updated</TableHeadCell>
@@ -55,7 +93,7 @@ export const DecksTable = ({ decks, onDeleteClick, onEditClick }: Props) => {
                   <Button onClick={handleEditeClick(deck.id)} variant={'icon'}>
                     <Edit2Outline height={'16px'} width={'16px'} />
                   </Button>
-                  <Button onClick={handleDeleteClick(deck.id)} variant={'icon'}>
+                  <Button onClick={clickDeleteHandler(deck.id)} variant={'icon'}>
                     <TrashOutline height={'16px'} width={'16px'} />
                   </Button>
                 </div>

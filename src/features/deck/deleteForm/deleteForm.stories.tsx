@@ -1,18 +1,19 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { DeleteDeck } from '@/features/deck/deleteDeck/deleteDeck'
+import { DeleteForm } from '@/features/deck/deleteForm/deleteForm'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
+import { fn } from '@storybook/test'
 
 const meta = {
   argTypes: {
     isDeck: { action: 'boolean' },
+    isOpen: { control: 'boolean' },
     onOpenChange: { action: 'onOpenChange' },
-    open: { control: 'boolean' },
     title: { control: 'text' },
   },
-  component: DeleteDeck,
+  component: DeleteForm,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -23,21 +24,24 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Feature/DeleteDeck',
-} satisfies Meta<typeof DeleteDeck>
+  title: 'Feature/DeleteForm',
+} satisfies Meta<typeof DeleteForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const DeleteDeckForm: Story = {
   args: {
+    close: fn(),
+    deleteAction: fn(),
+    id: 'example',
     isDeck: true,
+    isOpen: true,
     name: 'Card Name',
-    onOpenChange: () => {},
-    open: true,
+    onOpenChange: fn(),
     title: 'Do u really wanna delete me?',
   },
   render: args => {
-    return <DeleteDeck {...args} />
+    return <DeleteForm {...args} />
   },
 }
