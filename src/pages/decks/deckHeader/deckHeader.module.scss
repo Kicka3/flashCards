@@ -6,6 +6,7 @@
 
 .deckFilterWrapper {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   align-items: flex-end;
   justify-content: space-between;
@@ -15,13 +16,8 @@
 
 .deckFilterGroup {
   display: flex;
+  flex-wrap: wrap;
   gap: 25px;
   place-content: center space-between;
   place-items: flex-end center;
-}
-
-.decksSearch {
-}
-
-.decksTabs {
 }

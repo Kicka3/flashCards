@@ -6,31 +6,37 @@ import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.
 
 /** Контейнерная компонента для логики DECKS */
 
+export type TabsType = {
+  title: string
+  value: string
+}
+type SliderType = number[]
+
 type Props = {
-  //Для storybook
+  /** Для storybook */
   isLoading?: boolean
   onClick?: () => void
 }
 
 export const Decks = ({}: Props) => {
-  /** Tabs Вынести в отдельный файл?? */
-  // const tabs = [
-  //   { title: 'My Cards', value: 'My Cards' },
-  //   { title: 'All Cards', value: 'All Cards' },
-  // ]
+  /** Tabs Вынести в отдельный файл для констант?? */
+  const tabs = [
+    { title: 'My Cards', value: 'My Cards' },
+    { title: 'All Cards', value: 'All Cards' },
+  ]
 
   /** Стейт для поиска */
   const [search, setSearch] = useState<string>('')
 
   /** Value-state для Slider */
-  // type SliderType = number[]
-  // const [value, setValue] = useState<SliderType>([1, 20])
+  const [value, setValue] = useState<SliderType>([1, 20])
 
-  const { data, isLoading } = useGetDecksQuery({
+  const { data, isFetching, isLoading } = useGetDecksQuery({
     name: search,
   })
-  // const [createDeck, { isLoading: isDeckBeingCreated }] = useCreateDeckMutation()
-  const [deleteDeck] = useDeleteDeckMutation()
+
+  /** DELETE */
+  const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
 
   if (isLoading) {
     return (
@@ -48,10 +54,24 @@ export const Decks = ({}: Props) => {
     name: deck.name,
   }))
 
+  // const isOwner = () => {
+  //Являюсь ли я создателем колоды?
+  // return true
+  // }
+  const onDeleteDeck = (id: string) => {
+    deleteDeck({ id })
+  }
+
   return (
     <>
-      <DeckHeader search={search} setSearch={setSearch} />
-      <DecksTable decks={mappedData} onDeleteClick={id => deleteDeck({ id })} />
+      <DeckHeader
+        search={search}
+        setSearch={setSearch}
+        setValue={setValue}
+        tabs={tabs}
+        value={value}
+      />
+      <DecksTable decks={mappedData} isOwner onDeleteClick={onDeleteDeck} />
       {/*<Pagination*/}
       {/*//From server*/}
       {/*  currentPage={}*/}
@@ -63,37 +83,4 @@ export const Decks = ({}: Props) => {
       {/*/>*/}
     </>
   )
-}
-{
-  /*<form*/
-}
-{
-  /*  onSubmit={handleSubmit(data => {*/
-}
-{
-  /*    createDeck(data as any)*/
-}
-{
-  /*  })}*/
-}
-{
-  /*  style={{ border: '1px solid #ccc', margin: '24px 0', padding: '24px' }}*/
-}
-{
-  /*>*/
-}
-{
-  /*  <ControlledTextField control={control} label={'Name'} name={'name'} />*/
-}
-{
-  /*  <ControlledCheckbox control={control} name={'isPrivate'} text={'Private deck'} />*/
-}
-{
-  /*  <Button disabled={isDeckBeingCreated}>Create Deck</Button>*/
-}
-{
-  /*</form>*/
-}
-{
-  /*<TextField onChange={setSearch} value={search} variant={'search'} />*/
 }

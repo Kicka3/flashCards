@@ -10,7 +10,7 @@ import { AddDeckFormValues, addDeckSchema } from '@/features/deck/utils/addDeckS
 import { DeckBodyRequest } from '@/services/decks/decks.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from './addDeckForm.module.scss'
+import s from './addForm.module.scss'
 
 /** form Компонента */
 
@@ -30,14 +30,7 @@ type Props = {
   title: string
 }
 
-export const AddDeckForm = ({
-  deck,
-  disabled,
-  isOpen,
-  onOpenChange,
-  onSubmitDeck,
-  title,
-}: Props) => {
+export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, title }: Props) => {
   const [photo, setPhoto] = useState<File | null | string>(null)
 
   const fileinputRef: RefObject<HTMLInputElement> = useRef(null)
@@ -64,7 +57,6 @@ export const AddDeckForm = ({
 
   const onSubmit = (data: AddDeckFormValues) => {
     onOpenChange(false)
-    console.log(data)
 
     const deckBodyReq: DeckBodyRequest = { ...data, cover: photo }
 
@@ -82,7 +74,6 @@ export const AddDeckForm = ({
 
   const HandlerClose = () => {
     onOpenChange(false)
-    console.log('close modal')
   }
 
   return (

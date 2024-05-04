@@ -36,6 +36,14 @@ type Story = StoryObj<typeof meta>
 export const DeckHeaderStoryDemo: Story = {
   args: {
     isLoading: false,
+    search: '',
+    setSearch: () => fn,
+    setValue: () => fn,
+    tabs: [
+      { title: 'Pro100', value: 'Pro100' },
+      { title: 'H3LL0', value: 'hello' },
+    ],
+    value: [1],
   },
   render: ({ isLoading }) => {
     if (isLoading) {

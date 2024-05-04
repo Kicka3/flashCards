@@ -24,12 +24,4 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ExampleSignIn: Story = {
-  /** По сути это не нужно. */
-  // args: {
-  //   children: 'TEST COMPONENT',
-  // },
-  // render: () => {
-  //   return <SignIn />
-  // },
-}
+export const ExampleSignIn: Story = {}

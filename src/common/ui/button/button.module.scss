@@ -46,6 +46,7 @@
 
 .secondary {
   background-color: var(--color-dark-300);
+  box-shadow: 0 4px 18px 0 rgba(109, 109, 109, 0.22);
 
   &:active {
     background-color: var(--color-dark-500);

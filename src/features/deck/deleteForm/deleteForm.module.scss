@@ -1,0 +1,16 @@
+.deleteForm {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+}
+
+.bodyText {
+  font-size: var(--font-size-m);
+}
+
+.BtnGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
