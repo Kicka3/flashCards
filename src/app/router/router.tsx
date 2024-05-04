@@ -4,6 +4,7 @@ import {
   RouteObject,
   RouterProvider,
   createBrowserRouter,
+  useOutletContext,
 } from 'react-router-dom'
 
 import { CheckEmail } from '@/pages/auth/checkEmail'
@@ -30,6 +31,7 @@ const publicRoutes: RouteObject[] = [
     element: <SignUp />,
     path: '/signUp',
   },
+  /* поправить email */
   {
     element: <CheckEmail email={'mail@mail.com'} />,
     path: '/checkEmail',
@@ -44,6 +46,10 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
+        element: <Navigate to={'/decks'} />,
+        path: '/',
+      },
+      {
         element: <Cards />,
         path: '/decks/:id',
       },
@@ -57,7 +63,10 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    children: [{ children: privateRoutes, element: <PrivateRoutes /> }, { children: publicRoutes }],
+    children: [
+      { children: privateRoutes, element: <PrivateRoutes /> },
+      { children: publicRoutes, element: <PublicRoutes /> },
+    ],
     element: <Layout />,
     errorElement: (
       <Layout>
@@ -72,8 +81,12 @@ export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-const isAuthenticated = true
+const isAuth = true
 
 function PrivateRoutes() {
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/signIn'} />
+  return isAuth ? <Outlet /> : <Navigate replace to={'/signIn'} />
+}
+
+function PublicRoutes() {
+  return isAuth ? <Navigate replace to={'/decks'} /> : <Outlet />
 }
