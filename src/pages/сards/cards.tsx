@@ -12,6 +12,7 @@ import { Pagination } from '@/common/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
+import { CreateCard } from '@/pages/сards/createCard'
 import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import clsx from 'clsx'
 
@@ -38,6 +39,8 @@ export const Cards = ({}: Props) => {
       question: debouncedSearch,
     },
   })
+  const [isOpenCreate, setIsOpenCreate] = useState<boolean>(false)
+  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
   const totalItems = cards?.pagination.totalItems
 
   /* удалить когда появиться картика DeckImg */
@@ -89,6 +92,12 @@ export const Cards = ({}: Props) => {
 
   return (
     <section className={s.wrapper}>
+      <CreateCard
+        id={id}
+        isOpen={isOpenCreate}
+        onOpenChange={setIsOpenCreate}
+        title={'Add New Deck'}
+      />
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
         <Typography variant={'body2'}>Back to Decks List</Typography>
@@ -99,7 +108,7 @@ export const Cards = ({}: Props) => {
           <IconDropDown />
           {imgDeckSrc ?? <img src={imgDeckSrc} />}
         </div>
-        <Button>Add New Card</Button>
+        <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
       </div>
       <div className={s.searchField}>
         <TextField onChange={setSearch} value={search} variant={'search'} />
