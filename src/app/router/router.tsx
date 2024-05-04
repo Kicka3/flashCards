@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Cards } from '@/pages/Cards'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
@@ -14,6 +13,7 @@ import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import { Decks } from '@/pages/decks/decksContainer'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
+import { Cards } from '@/pages/сards'
 
 import Layout from '../layout/layout'
 
