@@ -6,14 +6,13 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Cards } from '@/pages/Cards'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import { Decks } from '@/pages/decks/decksContainer'
-import { MockPack } from '@/pages/mockPack'
-import { Cards } from '@/pages/mockPack/Cards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
 import Layout from '../layout/layout'
@@ -45,12 +44,8 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
-        element: <MockPack />,
-        path: '/packs',
-      },
-      {
         element: <Cards />,
-        path: '/packs/:id',
+        path: '/decks/:id',
       },
       {
         element: <Decks />,
