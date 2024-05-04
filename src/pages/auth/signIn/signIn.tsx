@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -26,11 +26,13 @@ export const SignIn = () => {
     },
     resolver: zodResolver(loginSchema),
   })
+  const navigate = useNavigate()
 
   const [login] = useLoginMutation()
 
   const onSubmit = (data: FormValues) => {
     login(data).unwrap()
+    navigate('/')
   }
 
   return (
