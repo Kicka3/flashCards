@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 
-import Layout from '@/app/layout/layout'
+import Layout from '@/layout/header/layout'
 import { Meta, StoryObj } from '@storybook/react'
 
 import PageNotFound from './pageNotFound'
