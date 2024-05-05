@@ -13,19 +13,17 @@ type Story = StoryObj<typeof meta>
 
 export const EditProfileTest: Story = {
   args: {
-    children: 'TEST COMPONENT',
+    avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
+    email: 'example123@gmail.com',
+    name: 'Nick',
   },
-  render: () => {
+  render: args => {
     /** fake user data */
-    const user = {
-      avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
-      email: 'example123@gmail.com',
-      name: 'Nick',
-    }
+    const { avatar, email, name } = args
 
     return (
       <>
-        <EditProfileWithoutInput avatar={user.avatar} email={user.email} name={user.name} />
+        <EditProfileWithoutInput avatar={avatar} email={email} name={name} />
       </>
     )
   },
