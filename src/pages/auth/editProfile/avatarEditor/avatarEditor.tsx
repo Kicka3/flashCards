@@ -1,4 +1,3 @@
-// AvatarEditor.tsx
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
@@ -6,12 +5,13 @@ import { Button } from '@/common/ui/button'
 
 import s from './avatarEditor.module.scss'
 
-interface AvatarEditorProps {
+type Props = {
   avatar: string
-  onAvatarChange: (file: File | null) => void
+  onAvatarChange: (url: null | string) => void
+  updateAvatar: (file: File) => Promise<string>
 }
 
-export const AvatarEditor = ({ avatar, onAvatarChange }: AvatarEditorProps) => {
+export const AvatarEditor = ({ avatar, onAvatarChange, updateAvatar }: Props) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [avatarImage, setAvatarImage] = useState<string>('')
 
@@ -19,14 +19,23 @@ export const AvatarEditor = ({ avatar, onAvatarChange }: AvatarEditorProps) => {
     setAvatarImage(avatar)
   }, [avatar])
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null
 
     if (file) {
       const blobUrl = URL.createObjectURL(file)
 
       setAvatarImage(blobUrl)
-      onAvatarChange(file)
+
+      try {
+        const uploadedAvatarUrl = await updateAvatar(file)
+
+        setAvatarImage(uploadedAvatarUrl)
+        onAvatarChange(uploadedAvatarUrl)
+      } catch (error) {
+        console.error('Error uploading avatar:', error)
+        onAvatarChange(null)
+      }
     }
   }
 
