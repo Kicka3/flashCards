@@ -4,7 +4,6 @@ import {
   RouteObject,
   RouterProvider,
   createBrowserRouter,
-  useOutletContext,
 } from 'react-router-dom'
 
 import { CheckEmail } from '@/pages/auth/checkEmail'
@@ -12,7 +11,7 @@ import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
-import { Decks } from '@/pages/decks/decksContainer'
+import { Decks } from '@/pages/decks/deckContainer'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 

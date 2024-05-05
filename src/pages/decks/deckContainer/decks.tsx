@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { DeckHeader } from '@/pages/decks/deckHeader'
-import { DecksTable } from '@/pages/decks/decks-table/decksTable'
+import { DecksTable } from '@/pages/decks/deckTable/decksTable'
 import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.service'
 
 /** Контейнерная компонента для логики DECKS */
