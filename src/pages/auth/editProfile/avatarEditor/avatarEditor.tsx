@@ -1,43 +1,24 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import { Button } from '@/common/ui/button'
+import { handleFileChange } from '@/pages/auth/editProfile/profileInfo/utils/fileChange'
 
 import s from './avatarEditor.module.scss'
 
-type Props = {
+interface AvatarEditorProps {
   avatar: string
   onAvatarChange: (url: null | string) => void
-  updateAvatar: (file: File) => Promise<string>
+  updateAvatar: (file: string) => Promise<string>
 }
 
-export const AvatarEditor = ({ avatar, onAvatarChange, updateAvatar }: Props) => {
+export const AvatarEditor = ({ avatar, onAvatarChange, updateAvatar }: AvatarEditorProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [avatarImage, setAvatarImage] = useState<string>('')
 
   useEffect(() => {
     setAvatarImage(avatar)
   }, [avatar])
-
-  const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null
-
-    if (file) {
-      const blobUrl = URL.createObjectURL(file)
-
-      setAvatarImage(blobUrl)
-
-      try {
-        const uploadedAvatarUrl = await updateAvatar(file)
-
-        setAvatarImage(uploadedAvatarUrl)
-        onAvatarChange(uploadedAvatarUrl)
-      } catch (error) {
-        console.error('Error uploading avatar:', error)
-        onAvatarChange(null)
-      }
-    }
-  }
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {
@@ -54,7 +35,7 @@ export const AvatarEditor = ({ avatar, onAvatarChange, updateAvatar }: Props) =>
         </Button>
       </div>
       <input
-        onChange={handleFileChange}
+        onChange={event => handleFileChange(event, updateAvatar, setAvatarImage, onAvatarChange)}
         ref={fileInputRef}
         style={{ display: 'none' }}
         type={'file'}

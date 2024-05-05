@@ -21,6 +21,10 @@ export type Props = {
 export const ProfileInfo = ({ data, updateAvatar, updateNickname }: Props) => {
   const [editMode, setEditMode] = useState(false)
 
+  const updateAvatarUrl = async (url: string): Promise<string> => {
+    return url
+  }
+
   return (
     <Card>
       <Typography as={'h1'} variant={'h1'}>
@@ -29,6 +33,7 @@ export const ProfileInfo = ({ data, updateAvatar, updateNickname }: Props) => {
       <AvatarEditor
         avatar={data.avatar}
         onAvatarChange={() => updateAvatar({ avatar: data.avatar })}
+        updateAvatar={updateAvatarUrl}
       />
       {editMode ? (
         <EditProfileWithInput

@@ -29,19 +29,15 @@ export const EditProfileWithInput = ({ setEditMode, updateNickname }: Props) => 
 
   const onSubmit = (data: UpdateUserFormValues) => {
     updateNickname(data)
-  }
-
-  const onSaveHandler = () => {
     setEditMode(false)
-    handleSubmit(onSubmit)()
   }
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.footerContainer}>
           <ControlledTextField control={control} label={'Nickname'} name={'name'} />
-          <Button fullWidth onClick={onSaveHandler} type={'submit'}>
+          <Button fullWidth type={'submit'}>
             <Typography variant={'sub2'}>Save Changes</Typography>
           </Button>
         </div>

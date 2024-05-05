@@ -1,6 +1,6 @@
-import { ProfileInfo } from '@/pages/auth/editProfile/ProfileInfo'
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
 import { UpdateAvatarFormValues } from '@/pages/auth/editProfile/editProfileWithoutInput/utils/editWithoutInputSchema'
+import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
 import { useMeQuery, useUpdateUserMutation } from '@/services/auth'
 
 export const Profile = ({}) => {
