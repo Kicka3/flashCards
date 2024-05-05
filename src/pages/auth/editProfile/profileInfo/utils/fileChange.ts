@@ -34,7 +34,6 @@ export const handleFileChange = async (
         }
       }
     }
-
     reader.readAsDataURL(file)
   }
 }

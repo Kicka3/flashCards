@@ -13,11 +13,12 @@ export type DataProps = {
 
 type Props = {
   email: string
+  logout: () => void
   name: string
   setEditMode: (editMode: boolean) => void
 }
 
-export const EditProfileWithoutInput = ({ email, name, setEditMode }: Props) => {
+export const EditProfileWithoutInput = ({ email, logout, name, setEditMode }: Props) => {
   return (
     <div className={s.container}>
       <div className={s.nameContainer}>
@@ -31,7 +32,7 @@ export const EditProfileWithoutInput = ({ email, name, setEditMode }: Props) => 
       </Typography>
       <Button variant={'secondary'}>
         <div className={s.btnContainer}>
-          <LogOutOutline height={16} width={16} />
+          <LogOutOutline height={16} onClick={logout} width={16} />
           Logout
         </div>
       </Button>

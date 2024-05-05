@@ -14,11 +14,12 @@ import { UpdateAvatarFormValues } from '@/pages/auth/editProfile/editProfileWith
 export type Props = {
   className?: string
   data: DataProps
+  logout: () => void
   updateAvatar: (avatar: UpdateAvatarFormValues) => Promise<void>
   updateNickname: (name: UpdateUserFormValues) => void
 }
 
-export const ProfileInfo = ({ data, updateAvatar, updateNickname }: Props) => {
+export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Props) => {
   const [editMode, setEditMode] = useState(false)
 
   const updateAvatarUrl = async (url: string): Promise<string> => {
@@ -41,7 +42,12 @@ export const ProfileInfo = ({ data, updateAvatar, updateNickname }: Props) => {
           updateNickname={() => updateNickname({ name: data.name })}
         />
       ) : (
-        <EditProfileWithoutInput email={data.email} name={data.name} setEditMode={setEditMode} />
+        <EditProfileWithoutInput
+          email={data.email}
+          logout={logout}
+          name={data.name}
+          setEditMode={setEditMode}
+        />
       )}
     </Card>
   )

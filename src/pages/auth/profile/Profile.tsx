@@ -1,11 +1,15 @@
+import { useNavigate } from 'react-router-dom'
+
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
 import { UpdateAvatarFormValues } from '@/pages/auth/editProfile/editProfileWithoutInput/utils/editWithoutInputSchema'
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
-import { useMeQuery, useUpdateUserMutation } from '@/services/auth'
+import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services/auth'
 
 export const Profile = ({}) => {
   const { data } = useMeQuery()
   const [updateProfile] = useUpdateUserMutation()
+  const [logout] = useLogoutMutation()
+  const navigate = useNavigate()
 
   const updateAvatar = async (avatar: UpdateAvatarFormValues) => {
     if (!data) {
@@ -39,9 +43,23 @@ export const Profile = ({}) => {
     return null
   }
 
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap()
+      navigate('/signIn')
+    } catch (error) {
+      console.error('Error during logout:', error)
+    }
+  }
+
   return (
     <>
-      <ProfileInfo data={data} updateAvatar={updateAvatar} updateNickname={updateNickname} />
+      <ProfileInfo
+        data={data}
+        logout={handleLogout}
+        updateAvatar={updateAvatar}
+        updateNickname={updateNickname}
+      />
     </>
   )
 }

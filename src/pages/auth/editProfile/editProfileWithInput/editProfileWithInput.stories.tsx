@@ -5,21 +5,20 @@ const meta = {
   component: EditProfileWithInput,
   tags: ['autodocs'],
   title: 'Auth/EditProfile/EditProfileWithInput',
-} satisfies Meta<typeof EditProfileWithInput>
+} as Meta<typeof EditProfileWithInput>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const EditWithInput: Story = {
   args: {
-    avatar: 'TEST',
+    setEditMode: () => {},
+    updateNickname: () => {},
   },
-  render: () => {
-    const avatar = 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg'
-
+  render: args => {
     return (
       <>
-        <EditProfileWithInput avatar={avatar} />
+        <EditProfileWithInput {...args} />
       </>
     )
   },
