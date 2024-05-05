@@ -12,7 +12,9 @@ import { Pagination } from '@/common/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
-import { Card, useGetCardsQuery } from '@/services/cards'
+import { CreateCard } from '@/pages/сards/createCard'
+import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
+import clsx from 'clsx'
 
 import s from './cards.module.scss'
 
@@ -26,15 +28,19 @@ export const Cards = ({}: Props) => {
   const [orderBy, setOrderBy] = useState('')
   const debouncedSearch = useDebounce(search)
   const paginationOptions = ['10', '20', '30', '50', '100']
+  const [deleteCard, {}] = useDeleteCardMutation()
   const { data: cards, isLoading } = useGetCardsQuery({
     id: id || '',
     params: {
       answer: debouncedSearch,
       currentPage,
       itemsPerPage: Number(itemsPerPage),
+      orderBy: orderBy,
       question: debouncedSearch,
     },
   })
+  const [isOpenCreate, setIsOpenCreate] = useState<boolean>(false)
+  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
   const totalItems = cards?.pagination.totalItems
 
   /* удалить когда появиться картика DeckImg */
@@ -44,31 +50,97 @@ export const Cards = ({}: Props) => {
     return <div>...Loading</div>
   }
 
+  const onChangeOrderBy = (columnName: string) => {
+    let newOrder = 'asc'
+
+    if (orderBy === `${columnName}-${newOrder}`) {
+      newOrder = 'desc'
+    }
+
+    // нужна ли доп проверка
+    //if (orderBy && orderBy.startsWith(columnName)) {
+    //   newOrder = orderBy.endsWith('asc') ? 'desc' : 'asc';
+    // }
+
+    setOrderBy(`${columnName}-${newOrder}`)
+
+    if (currentPage !== 1) {
+      setCurrentPage(1) // при сортировке сбрасывать на 1 страницу
+    }
+  }
+
+  const classNames = {
+    tableHeadCell: {
+      answer: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'answer-asc',
+        [s.desc]: orderBy === 'answer-desc',
+      }),
+      grade: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'grade-asc',
+        [s.desc]: orderBy === 'grade-desc',
+      }),
+      question: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'question-asc',
+        [s.desc]: orderBy === 'question-desc',
+      }),
+      updated: clsx(s.tableHeadCell, {
+        [s.asc]: orderBy === 'updated-asc',
+        [s.desc]: orderBy === 'updated-desc',
+      }),
+    },
+  }
+
   return (
     <section className={s.wrapper}>
+      <CreateCard
+        id={id}
+        isOpen={isOpenCreate}
+        onOpenChange={setIsOpenCreate}
+        title={'Add New Deck'}
+      />
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
         <Typography variant={'body2'}>Back to Decks List</Typography>
       </Link>
-      <div className={s.deckIntro}>
-        <div className={s.deckTitle}>
+      <div className={s.packIntro}>
+        <div className={s.packTitle}>
           <Typography variant={'h1'}>Deck Name</Typography>
           <IconDropDown />
           {imgDeckSrc ?? <img src={imgDeckSrc} />}
         </div>
-        <Button>Add New Card</Button>
+        <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
       </div>
       <div className={s.searchField}>
         <TextField onChange={setSearch} value={search} variant={'search'} />
       </div>
 
-      <Table className={s.deckTable}>
+      <Table className={s.cardsTable}>
         <TableHead>
           <TableRow>
-            <TableHeadCell>Question</TableHeadCell>
-            <TableHeadCell>Answer</TableHeadCell>
-            <TableHeadCell>Last Updated</TableHeadCell>
-            <TableHeadCell>Grade</TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.question}
+              onClick={() => onChangeOrderBy('question')}
+            >
+              Question
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.answer}
+              onClick={() => onChangeOrderBy('answer')}
+            >
+              Answer
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.updated}
+              onClick={() => onChangeOrderBy('updated')}
+            >
+              Last Updated
+            </TableHeadCell>
+            <TableHeadCell
+              className={classNames.tableHeadCell.grade}
+              onClick={() => onChangeOrderBy('grade')}
+            >
+              Grade
+            </TableHeadCell>
             <TableHeadCell></TableHeadCell>
           </TableRow>
         </TableHead>
@@ -106,7 +178,7 @@ export const Cards = ({}: Props) => {
                   <Button variant={'icon'}>
                     <Edit2Outline height={16} width={16} />
                   </Button>
-                  <Button variant={'icon'}>
+                  <Button onClick={() => deleteCard(card.id)} variant={'icon'}>
                     <TrashOutline height={16} width={16} />
                   </Button>
                 </div>
