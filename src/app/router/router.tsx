@@ -11,11 +11,11 @@ import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
-import { Decks } from '@/pages/decks/decksContainer'
 import { MockPack } from '@/pages/mockPack'
 import { Cards } from '@/pages/mockPack/Cards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 
+import { Decks } from '../../pages/decks/deckContainer'
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [

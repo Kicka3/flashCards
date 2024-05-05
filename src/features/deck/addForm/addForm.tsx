@@ -91,13 +91,13 @@ export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, ti
           <Button
             className={s.UploadImgBtn}
             fullWidth
-            icon={<Image height={'12px'} width={'12px'} />}
             onClick={e => {
               e.preventDefault()
               openFiles()
             }}
             variant={'secondary'}
           >
+            <Image height={'12px'} width={'12px'} />
             Upload Image
           </Button>
           <ControlledCheckbox

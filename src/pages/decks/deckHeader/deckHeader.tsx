@@ -7,9 +7,10 @@ import { Slider } from '@/common/ui/slider'
 import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
-import { TabsType } from '@/pages/decks/decksContainer'
 
 import s from './deckHeader.module.scss'
+
+import { TabsType } from '../deckContainer'
 
 /** UI компонента */
 
