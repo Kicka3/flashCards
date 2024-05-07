@@ -1,24 +1,23 @@
 import { useNavigate } from 'react-router-dom'
 
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
-import { UpdateAvatarFormValues } from '@/pages/auth/editProfile/editProfileWithoutInput/utils/editWithoutInputSchema'
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
 import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services/auth'
 
-export const Profile = ({}) => {
+export const ProfilePage = ({}) => {
   const { data } = useMeQuery()
   const [updateProfile] = useUpdateUserMutation()
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
 
-  const updateAvatar = async (avatar: UpdateAvatarFormValues) => {
+  const updateAvatar = async (avatar: File) => {
     if (!data) {
       return
     }
 
     const formData = new FormData()
 
-    formData.append('avatar', avatar.avatar)
+    formData.append('avatar', avatar)
 
     const updateProfilePromise = updateProfile(formData).unwrap()
 
@@ -33,7 +32,6 @@ export const Profile = ({}) => {
     const formData = new FormData()
 
     formData.append('name', formValues.name)
-
     const updateProfilePromise = updateProfile(formData).unwrap()
 
     await updateProfilePromise

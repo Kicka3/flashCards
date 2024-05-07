@@ -9,39 +9,26 @@ import {
   DataProps,
   EditProfileWithoutInput,
 } from '@/pages/auth/editProfile/editProfileWithoutInput'
-import { UpdateAvatarFormValues } from '@/pages/auth/editProfile/editProfileWithoutInput/utils/editWithoutInputSchema'
 
 export type Props = {
   className?: string
   data: DataProps
   logout: () => void
-  updateAvatar: (avatar: UpdateAvatarFormValues) => Promise<void>
+  updateAvatar: (avatar: File) => void
   updateNickname: (name: UpdateUserFormValues) => void
 }
 
 export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Props) => {
   const [editMode, setEditMode] = useState(false)
 
-  const updateAvatarUrl = async (url: string): Promise<string> => {
-    return url
-  }
-
   return (
     <Card>
       <Typography as={'h1'} variant={'h1'}>
         Personal Information
       </Typography>
-      <AvatarEditor
-        avatar={data.avatar}
-        editMode={editMode}
-        onAvatarChange={() => updateAvatar({ avatar: data.avatar })}
-        updateAvatar={updateAvatarUrl}
-      />
+      <AvatarEditor avatar={data.avatar} editMode={editMode} updateAvatar={updateAvatar} />
       {editMode ? (
-        <EditProfileWithInput
-          setEditMode={setEditMode}
-          updateNickname={() => updateNickname({ name: data.name })}
-        />
+        <EditProfileWithInput setEditMode={setEditMode} updateNickname={updateNickname} />
       ) : (
         <EditProfileWithoutInput
           email={data.email}

@@ -2,9 +2,8 @@ import { ChangeEvent } from 'react'
 
 export const handleFileChange = async (
   event: ChangeEvent<HTMLInputElement>,
-  updateAvatar: (base64String: string) => Promise<string>,
-  setAvatarImage: (url: string) => void,
-  onAvatarChange: (url: null | string) => void
+  updateAvatar: (avatarFile: File) => void,
+  setAvatarImage: React.Dispatch<React.SetStateAction<string>>
 ) => {
   const file = event.target.files ? event.target.files[0] : null
 
@@ -17,23 +16,10 @@ export const handleFileChange = async (
       return
     }
 
-    const reader = new FileReader()
+    const avatarUrl = URL.createObjectURL(file)
 
-    reader.onloadend = async () => {
-      if (reader.result) {
-        const base64String = reader.result as string
+    setAvatarImage(avatarUrl)
 
-        try {
-          const uploadedAvatarUrl = await updateAvatar(base64String)
-
-          setAvatarImage(uploadedAvatarUrl)
-          onAvatarChange(uploadedAvatarUrl)
-        } catch (error) {
-          console.error('Error uploading avatar:', error)
-          onAvatarChange(null)
-        }
-      }
-    }
-    reader.readAsDataURL(file)
+    await updateAvatar(file)
   }
 }

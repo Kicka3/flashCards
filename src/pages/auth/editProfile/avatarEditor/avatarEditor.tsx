@@ -9,16 +9,10 @@ import s from './avatarEditor.module.scss'
 interface AvatarEditorProps {
   avatar: string
   editMode: boolean
-  onAvatarChange: (url: null | string) => void
-  updateAvatar: (file: string) => Promise<string>
+  updateAvatar: (avatar: File) => void
 }
 
-export const AvatarEditor = ({
-  avatar,
-  editMode,
-  onAvatarChange,
-  updateAvatar,
-}: AvatarEditorProps) => {
+export const AvatarEditor = ({ avatar, editMode, updateAvatar }: AvatarEditorProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [avatarImage, setAvatarImage] = useState<string>('')
 
@@ -45,7 +39,7 @@ export const AvatarEditor = ({
         )}
       </div>
       <input
-        onChange={event => handleFileChange(event, updateAvatar, setAvatarImage, onAvatarChange)}
+        onChange={event => handleFileChange(event, updateAvatar, setAvatarImage)}
         ref={fileInputRef}
         style={{ display: 'none' }}
         type={'file'}

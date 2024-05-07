@@ -70,7 +70,7 @@ const authService = baseApi.injectEndpoints({
         invalidatesTags: ['Me'],
         query: args => ({
           body: args,
-          method: 'POST',
+          method: 'PATCH',
           url: '/v1/auth/me',
         }),
       }),
