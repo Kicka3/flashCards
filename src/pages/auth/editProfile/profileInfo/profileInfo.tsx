@@ -33,6 +33,7 @@ export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Prop
       </Typography>
       <AvatarEditor
         avatar={data.avatar}
+        editMode={editMode}
         onAvatarChange={() => updateAvatar({ avatar: data.avatar })}
         updateAvatar={updateAvatarUrl}
       />

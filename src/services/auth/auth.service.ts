@@ -3,7 +3,6 @@ import {
   RecoverPassword,
   ResendVerificationEmailArgs,
   SingUpArgs,
-  UpdateUserDataArgs,
   UserData,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
