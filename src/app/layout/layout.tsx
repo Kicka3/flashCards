@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import Header from '@/layout/header/ui/header'
 
 import s from './layout.module.scss'
@@ -15,7 +16,7 @@ const Layout = ({ children }: Props) => {
       <Header isAuth />
 
       <main className={s.wrapper}>
-        <Outlet />
+        <Outlet context={useAppOutletContext} />
         {children}
       </main>
     </>

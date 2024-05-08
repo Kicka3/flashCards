@@ -6,11 +6,10 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Routes } from '@/common/enums/enums'
+import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
-import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
@@ -83,12 +82,16 @@ export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-const isAuth = true
+// const isAuth = false
 
 function PrivateRoutes() {
-  return isAuth ? <Outlet /> : <Navigate replace to={Routes.SIGN_IN} />
+  const { isAuth } = useAppOutletContext()
+
+  return isAuth ? <Outlet /> : <Navigate to={'/signIn'} />
 }
 
 function PublicRoutes() {
-  return isAuth ? <Navigate replace to={Routes.DECKS} /> : <Outlet />
+  const { isAuth } = useAppOutletContext()
+
+  return isAuth ? <Navigate to={'/decks'} /> : <Outlet />
 }
