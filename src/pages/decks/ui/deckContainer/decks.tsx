@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
-import { DeckHeader } from '@/pages/decks/deckHeader'
-import { DecksTable } from '@/pages/decks/deckTable/decksTable'
-import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.service'
+import { Typography } from '@/common/ui'
+import { useDeckFilter } from '@/pages/decks/deckHooks'
+import { DeckHeader } from '@/pages/decks/ui/deckHeader'
+import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
+import { useDeleteDeckMutation } from '@/services/decks/decks.service'
+
+import s from './decks.module.scss'
 
 /** Контейнерная компонента для логики DECKS */
 
-export type TabsType = {
-  title: string
-  value: string
-}
 type SliderType = number[]
 
 type Props = {
@@ -19,6 +19,8 @@ type Props = {
 }
 
 export const Decks = ({}: Props) => {
+  const { deckIsLoading, mappedDecks, orderBy, setSortedBy } = useDeckFilter()
+
   /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'My Cards' },
@@ -26,53 +28,40 @@ export const Decks = ({}: Props) => {
   ]
 
   /** Стейт для поиска */
-  const [search, setSearch] = useState<string>('')
+  // const [search, setSearch] = useState<string>('')
 
   /** Value-state для Slider */
   const [value, setValue] = useState<SliderType>([1, 20])
 
-  const { data, isFetching, isLoading } = useGetDecksQuery({
-    name: search,
-  })
-
   /** DELETE */
-  const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
+  const [deleteDeck] = useDeleteDeckMutation()
 
-  if (isLoading) {
+  if (deckIsLoading) {
     return (
       <h1 style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
         LOADING...
       </h1>
     )
   }
-
-  const mappedData = data?.items.map(deck => ({
-    cards: deck.cardsCount,
-    createdBy: deck.author.name,
-    id: deck.id,
-    lastUpdated: deck.updated,
-    name: deck.name,
-  }))
-
-  // const isOwner = () => {
-  //Являюсь ли я создателем колоды?
-  // return true
-  // }
   const onDeleteDeck = (id: string) => {
     deleteDeck({ id })
   }
 
   return (
-    <>
-      <DeckHeader
-        search={search}
-        setSearch={setSearch}
-        setValue={setValue}
-        tabs={tabs}
-        value={value}
-      />
-      <DecksTable decks={mappedData} isOwner onDeleteClick={onDeleteDeck} />
-      {/*<Pagination*/}
+    <div className={s.deckContainer}>
+      <DeckHeader setValue={setValue} tabs={tabs} value={value} />
+      {mappedDecks?.length ? (
+        <DecksTable
+          decks={mappedDecks}
+          isOwner
+          onDeleteClick={onDeleteDeck}
+          onSort={setSortedBy}
+          sort={orderBy}
+        />
+      ) : (
+        <Typography variant={'sub1'}>Content is not found...</Typography>
+      )}
+      {/*     <Pagination*/}
       {/*//From server*/}
       {/*  currentPage={}*/}
       {/*  itemsPerPage={}*/}
@@ -81,6 +70,6 @@ export const Decks = ({}: Props) => {
       {/*//From server*/}
       {/*  totalCount={}*/}
       {/*/>*/}
-    </>
+    </div>
   )
 }

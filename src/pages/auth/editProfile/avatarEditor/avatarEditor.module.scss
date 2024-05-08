@@ -1,0 +1,35 @@
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.avatarButtonIcon {
+  background-color: var(--color-dark-300);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+
+.avatarIconContainer{
+  margin-top: 27px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+.avatar {
+  display: flex;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  justify-content: center;
+  align-self: center;
+}
+

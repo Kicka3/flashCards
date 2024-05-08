@@ -5,6 +5,7 @@ import * as TabsRadix from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
 
+/** Это развен не надо с большйо буквы назвать и вынести отсюда??! */
 export type tabsType = {
   className?: string
   content?: ReactNode

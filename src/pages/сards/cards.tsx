@@ -40,7 +40,7 @@ export const Cards = ({}: Props) => {
     },
   })
   const [isOpenCreate, setIsOpenCreate] = useState<boolean>(false)
-  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
+  // const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
   const totalItems = cards?.pagination.totalItems
 
   /* удалить когда появиться картика DeckImg */
