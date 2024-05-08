@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { Routes } from '@/common/enums/enums'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
@@ -32,7 +33,7 @@ export const SignIn = () => {
 
   const onSubmit = (data: FormValues) => {
     login(data).unwrap()
-    navigate('/')
+    navigate(Routes.DECKS)
   }
 
   return (

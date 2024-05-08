@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Routes } from '@/common/enums/enums'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
@@ -21,25 +22,24 @@ import Layout from '../layout/layout'
 const publicRoutes: RouteObject[] = [
   {
     element: <ForgotPassword />,
-    path: '/forgotPassword',
+    path: Routes.FORGOT_PASSWORD,
   },
   {
     element: <SignIn />,
-    path: '/signIn',
+    path: Routes.SIGN_IN,
   },
   {
     element: <SignUp />,
-    path: '/signUp',
+    path: Routes.SIGN_UP,
   },
   /* поправить email */
   {
     element: <CheckEmail email={'mail@mail.com'} />,
-    path: '/checkEmail',
+    path: Routes.CHECK_EMAIL,
   },
-  { element: <ProfilePage />, path: '/profile' },
   {
     element: <CreateNewPassword />,
-    path: '/createNewPassword',
+    path: Routes.CREATE_NEW_PASSWORD,
   },
 ]
 
@@ -47,17 +47,18 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
-        element: <Navigate to={'/decks'} />,
+        element: <Navigate to={Routes.DECKS} />,
         path: '/',
       },
       {
         element: <Cards />,
-        path: '/decks/:id',
+        path: Routes.CARDS,
       },
       {
         element: <Decks />,
-        path: '/decks',
+        path: Routes.DECKS,
       },
+      { element: <ProfilePage />, path: Routes.PROFILE },
     ],
   },
 ]
@@ -85,9 +86,9 @@ export const Router = () => {
 const isAuth = true
 
 function PrivateRoutes() {
-  return isAuth ? <Outlet /> : <Navigate replace to={'/signIn'} />
+  return isAuth ? <Outlet /> : <Navigate replace to={Routes.SIGN_IN} />
 }
 
 function PublicRoutes() {
-  return isAuth ? <Navigate replace to={'/decks'} /> : <Outlet />
+  return isAuth ? <Navigate replace to={Routes.DECKS} /> : <Outlet />
 }
