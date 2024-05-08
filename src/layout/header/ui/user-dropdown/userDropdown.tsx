@@ -12,10 +12,10 @@ import { useLogoutMutation } from '@/services/auth'
 import s from './userDropdown.module.scss'
 
 type Props = {
-  description: string
-  email: string
-  img: string
-  name: string
+  description?: string
+  email?: string
+  img?: string
+  name?: string
 }
 
 export const UserDropDown = ({ description, email, img, name }: Props) => {
@@ -42,18 +42,14 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
           </div>
         </DropdownItem>
         <DropdownSeparator />
-        <DropdownItem className={s.item}>
+        <DropdownItem className={s.item} onClick={() => navigate(Routes.PROFILE)}>
           <PersonOutline height={'16px'} width={'16px'} />
-          <Typography onClick={() => navigate(Routes.PROFILE)} variant={'caption'}>
-            My Profile
-          </Typography>
+          <Typography variant={'caption'}>My Profile</Typography>
         </DropdownItem>
         <DropdownSeparator />
-        <DropdownItem className={s.item}>
+        <DropdownItem className={s.item} onClick={handleLogout}>
           <LogOutOutline height={'16px'} width={'16px'} />
-          <Typography onClick={handleLogout} variant={'caption'}>
-            Sign Out
-          </Typography>
+          <Typography variant={'caption'}>Sign Out</Typography>
         </DropdownItem>
       </DropDownMenu>
     </>

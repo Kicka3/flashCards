@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-import { Routes } from '@/common/enums/enums'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
@@ -27,13 +26,11 @@ export const SignIn = () => {
     },
     resolver: zodResolver(loginSchema),
   })
-  const navigate = useNavigate()
 
   const [login] = useLoginMutation()
 
-  const onSubmit = (data: FormValues) => {
-    login(data).unwrap()
-    navigate(Routes.DECKS)
+  const onSubmit = async (data: FormValues) => {
+    await login(data).unwrap()
   }
 
   return (

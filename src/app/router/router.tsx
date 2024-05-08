@@ -6,10 +6,12 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { Routes } from '@/common/enums/enums'
 import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
+import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
@@ -62,36 +64,46 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
+function PrivateRoutes() {
+  const { isAuth, isLoading } = useAppOutletContext()
+
+  if (isLoading) {
+    return (
+      <h1 style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
+        LOADER...
+      </h1>
+    )
+  }
+
+  return isAuth ? <Outlet /> : <Navigate to={Routes.SIGN_IN} />
+}
+
+// const isAuth = false
+
+function PublicRoutes() {
+  const { isAuth, isLoading } = useAppOutletContext()
+
+  if (isLoading) {
+    return (
+      <h1 style={{ alignSelf: 'center', display: 'flex', justifyContent: 'center' }}>LOADER...</h1>
+    )
+  }
+
+  return isAuth ? <Navigate to={Routes.DECKS} /> : <Outlet />
+}
+
 const router = createBrowserRouter([
   {
     children: [
-      { children: privateRoutes, element: <PrivateRoutes /> },
       { children: publicRoutes, element: <PublicRoutes /> },
+      { children: privateRoutes, element: <PrivateRoutes /> },
     ],
     element: <Layout />,
-    errorElement: (
-      <Layout>
-        <PageNotFound />
-      </Layout>
-    ),
+    errorElement: <PageNotFound />,
     path: '/',
   },
 ])
 
 export const Router = () => {
   return <RouterProvider router={router} />
-}
-
-// const isAuth = false
-
-function PrivateRoutes() {
-  const { isAuth } = useAppOutletContext()
-
-  return isAuth ? <Outlet /> : <Navigate to={'/signIn'} />
-}
-
-function PublicRoutes() {
-  const { isAuth } = useAppOutletContext()
-
-  return isAuth ? <Navigate to={'/decks'} /> : <Outlet />
 }
