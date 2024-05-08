@@ -5,9 +5,9 @@ import * as TabsRadix from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
 
-export type tabType = {
+export type tabsType = {
   className?: string
-  content: ReactNode
+  content?: ReactNode
   title?: string
   value?: string
 }
@@ -15,7 +15,7 @@ export type tabType = {
 export type Props = {
   disabled?: boolean
   label?: string
-  tabs: tabType[]
+  tabs: tabsType[]
 } & ComponentPropsWithoutRef<typeof TabsRadix.Root>
 
 export const Tabs = ({ disabled, label, tabs, ...rest }: Props) => {

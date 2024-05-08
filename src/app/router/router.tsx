@@ -12,10 +12,10 @@ import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
-import { MockPack } from '@/pages/mockPack'
-import { Cards } from '@/pages/mockPack/Cards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
+import { Cards } from '@/pages/сards'
 
+import { Decks } from '../../pages/decks/deckContainer'
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
@@ -31,6 +31,7 @@ const publicRoutes: RouteObject[] = [
     element: <SignUp />,
     path: '/signUp',
   },
+  /* поправить email */
   {
     element: <CheckEmail email={'mail@mail.com'} />,
     path: '/checkEmail',
@@ -46,12 +47,16 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
-        element: <MockPack />,
-        path: '/packs',
+        element: <Navigate to={'/decks'} />,
+        path: '/',
       },
       {
         element: <Cards />,
-        path: '/packs/:id',
+        path: '/decks/:id',
+      },
+      {
+        element: <Decks />,
+        path: '/decks',
       },
     ],
   },
@@ -59,7 +64,10 @@ const privateRoutes: RouteObject[] = [
 
 const router = createBrowserRouter([
   {
-    children: [{ children: privateRoutes, element: <PrivateRoutes /> }, { children: publicRoutes }],
+    children: [
+      { children: privateRoutes, element: <PrivateRoutes /> },
+      { children: publicRoutes, element: <PublicRoutes /> },
+    ],
     element: <Layout />,
     errorElement: (
       <Layout>
@@ -74,8 +82,12 @@ export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-const isAuthenticated = true
+const isAuth = true
 
 function PrivateRoutes() {
-  return isAuthenticated ? <Outlet /> : <Navigate to={'/signIn'} />
+  return isAuth ? <Outlet /> : <Navigate replace to={'/signIn'} />
+}
+
+function PublicRoutes() {
+  return isAuth ? <Navigate replace to={'/decks'} /> : <Outlet />
 }

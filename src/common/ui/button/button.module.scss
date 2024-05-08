@@ -7,6 +7,7 @@
   padding: 6px 28px;
 
   font-family: inherit;
+  font-size: 14px;
   font-weight: 700;
   color: inherit;
 
@@ -45,6 +46,7 @@
 
 .secondary {
   background-color: var(--color-dark-300);
+  box-shadow: 0 4px 18px 0 rgba(109, 109, 109, 0.22);
 
   &:active {
     background-color: var(--color-dark-500);
@@ -105,6 +107,21 @@
   box-sizing: border-box;
   width: 100%;
   text-align: center;
+}
+
+.fullWidthIconWrapper {
+  pointer-events: none;
+
+  position: absolute;
+  top: 58%;
+  left: 0;
+  transform: translate(-50%, -50%);
+
+  align-content: center;
+
+  padding-left: 54px;
+
+  fill: currentcolor;
 }
 
 .btnWrapper {

@@ -18,10 +18,9 @@
   justify-content: space-between;
 
   box-sizing: border-box;
-  margin-bottom: 18px;
   padding: 18px 24px;
 
-  border-bottom: 1px solid var(--color-dark-100);
+  border-bottom: 1px solid var(--color-dark-500);
 }
 
 .contentWrapper {
@@ -34,7 +33,7 @@
 
   box-sizing: border-box;
   width: 80%;
-  max-width: 542px;
+  max-width: 532px;
   max-height: calc(100% - 32px);
 
   background-color: var(--color-dark-700);
@@ -46,7 +45,11 @@
 
 .contentBox {
   display: flex;
-  padding: 18px 24px 36px 18px;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+  padding: 24px;
 }
 
 .closeIcon {

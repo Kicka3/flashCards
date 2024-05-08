@@ -77,6 +77,7 @@ export const ModalFullExample: Story = {
           display: 'flex',
           flexDirection: 'column',
           gap: '34px',
+          marginTop: '18px',
           width: '100%',
         }}
       >
@@ -94,6 +95,7 @@ export const ModalFullExample: Story = {
             display: 'flex',
             flexDirection: 'row-reverse',
             justifyContent: 'space-between',
+            margin: '12px 0 20px',
           }}
         >
           <Button onClick={() => console.log('Primary')} variant={'primary'}>

@@ -52,9 +52,11 @@ export const CreateNewPassword = () => {
           placeholder={'Qwerty123'}
           variant={'password'}
         />
+
         <Typography className={s.description} variant={'body2'}>
           Create a new password, and we will send you further instructions via email.
         </Typography>
+
         <Button fullWidth type={'submit'}>
           Create New Password
         </Button>
