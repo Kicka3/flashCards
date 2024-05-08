@@ -9,6 +9,7 @@ import {
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
+import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
@@ -35,6 +36,7 @@ const publicRoutes: RouteObject[] = [
     element: <CheckEmail email={'mail@mail.com'} />,
     path: '/checkEmail',
   },
+  { element: <ProfilePage />, path: '/profile' },
   {
     element: <CreateNewPassword />,
     path: '/createNewPassword',

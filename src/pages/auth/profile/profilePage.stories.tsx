@@ -1,31 +1,35 @@
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { EditProfileForm } from '@/pages/auth/editProfile/editProfileForm/editProfileForm'
+import { ProfilePage } from '@/pages/auth/profile/profilePage'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: EditProfileForm,
+  component: ProfilePage,
   decorators: [
     Story => (
       <BrowserRouter>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </BrowserRouter>
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/EditProfile/EditProfileForm',
-} satisfies Meta<typeof EditProfileForm>
+  title: 'Auth/Profile',
+} satisfies Meta<typeof ProfilePage>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const EditProfileFormExample: Story = {
+export const ProfileDefault: Story = {
   args: {},
   render: () => {
     return (
       <>
-        <EditProfileForm />
+        <ProfilePage />
       </>
     )
   },

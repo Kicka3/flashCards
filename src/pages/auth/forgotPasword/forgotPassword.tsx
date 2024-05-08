@@ -6,6 +6,7 @@ import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { FormValues, forgotPasswordSchema } from '@/pages/auth/forgotPasword/utils'
+import { RecoverPassword, useRecoverPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './forgotPassword.module.scss'
@@ -25,10 +26,17 @@ export const ForgotPassword = ({}: Props) => {
   })
 
   const navigate = useNavigate()
+  const [forgotPassword] = useRecoverPasswordMutation()
 
-  const onSubmit = (data: FormValues) => {
-    /* запрос на сервер */
-    console.log(data)
+  const onSubmit = ({ email }: FormValues) => {
+    const recoverPassword: RecoverPassword = {
+      email,
+      html: '', // Provide a default value or actual value if required
+      subject: '', // Provide a default value or actual value if required
+    }
+
+    forgotPassword(recoverPassword).unwrap()
+    console.log(email)
 
     navigate('/checkEmail')
   }

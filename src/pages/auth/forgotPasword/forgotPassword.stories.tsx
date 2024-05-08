@@ -1,6 +1,8 @@
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { ForgotPassword } from '@/pages/auth/forgotPasword/forgotPassword'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
@@ -9,7 +11,9 @@ const meta = {
   decorators: [
     Story => (
       <BrowserRouter>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </BrowserRouter>
     ),
   ],
