@@ -7,7 +7,7 @@ import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services
 
 export const ProfilePage = ({}) => {
   const { data } = useMeQuery()
-  const [updateProfile, { isSuccess }] = useUpdateUserMutation()
+  const [updateProfile, isSuccess] = useUpdateUserMutation()
   const { refetch } = useMeQuery()
 
   const [logout] = useLogoutMutation()

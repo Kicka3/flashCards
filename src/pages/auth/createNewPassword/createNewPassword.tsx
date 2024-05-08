@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -8,7 +9,9 @@ import {
   NewPasswordFormValues,
   createNewPasswordSchema,
 } from '@/pages/auth/createNewPassword/utils'
+import { useResetPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { navigate } from '@storybook/addon-links'
 
 import s from './createNewPassword.module.scss'
 
@@ -24,9 +27,15 @@ export const CreateNewPassword = () => {
     resolver: zodResolver(createNewPasswordSchema),
   })
 
-  const onSubmit = (data: NewPasswordFormValues) => {
-    // Handle form submission (e.g., send data to the server)
-    console.log(data)
+  const [resetPassword] = useResetPasswordMutation()
+  const { token } = useParams()
+
+  const onSubmit = async ({ password }: NewPasswordFormValues) => {
+    if (token) {
+      const resetPasswordResult = resetPassword({ password, token }).unwrap()
+
+      await resetPasswordResult
+    }
   }
 
   return (
