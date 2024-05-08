@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
@@ -6,9 +7,17 @@ import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services
 
 export const ProfilePage = ({}) => {
   const { data } = useMeQuery()
-  const [updateProfile] = useUpdateUserMutation()
+  const [updateProfile, { isSuccess }] = useUpdateUserMutation()
+  const { refetch } = useMeQuery()
+
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isSuccess) {
+      refetch()
+    }
+  }, [isSuccess, refetch])
 
   const updateAvatar = async (avatar: File) => {
     if (!data) {
@@ -42,6 +51,7 @@ export const ProfilePage = ({}) => {
   }
 
   const handleLogout = async () => {
+    console.log('123')
     try {
       await logout().unwrap()
       navigate('/signIn')
