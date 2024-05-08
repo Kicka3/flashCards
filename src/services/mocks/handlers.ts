@@ -167,38 +167,51 @@ const moDecks = {
 }
 
 /** Перехват запросов на сервер для всего приложения!!!*/
+const baseUrl = 'https://api.flashcards.andrii.es'
+const token = new Date().toISOString()
+
+/** Auth */
 export const handlers = [
-  /** Auth */
-  http.post('https://api.flashcards.andrii.es/v1/auth/me', () => {
+  http.post(`${baseUrl}/v1/auth/me`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.patch('https://api.flashcards.andrii.es/v1/auth/me', () => {
+  http.patch(`${baseUrl}/v1/auth/me`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.post('https://api.flashcards.andrii.es/v1/auth/login', () => {
+  http.post(`${baseUrl}/v1/auth/login`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.post(`https://api.flashcards.andrii.es/v1/auth/sign-up`, () => {
+  http.post(`${baseUrl}/v1/auth/sign-up`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.post(`https://api.flashcards.andrii.es/v1/auth/verify-email`, () => {
+  http.post(`${baseUrl}/v1/auth/verify-email`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.post(`https://api.flashcards.andrii.es/v1/auth/logout`, () => {
+  http.post(`${baseUrl}/v1/auth/logout`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
+  http.post(`${baseUrl}/v1/auth/recover-password`, () => {
+    return HttpResponse.json(mokDataLogin, { status: 200 })
+  }),
+  http.post(`${baseUrl}/v1/auth/reset-password/${token}`, () => {
+    return HttpResponse.json(mokDataLogin, { status: 200 })
+  }),
+  http.post(`${baseUrl}/v1/auth/resend-verification-email`, () => {
+    return HttpResponse.json(mokDataLogin, { status: 200 })
+  }),
+
   /** Cards */
-  http.get(`https://api.flashcards.andrii.es/v1/cards/{id}`, () => {
+  http.get(`${baseUrl}/v1/cards/{id}`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.patch(`https://api.flashcards.andrii.es/v1/cards/{id}`, () => {
+  http.patch(`${baseUrl}/v1/cards/{id}`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  http.delete(`https://api.flashcards.andrii.es/v1/cards/{id}`, () => {
+  http.delete(`${baseUrl}/v1/cards/{id}`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
   /** Decks */
-  http.get('https://api.flashcards.andrii.es/v2/decks', () => {
+  http.get(`${baseUrl}/v2/decks`, () => {
     return HttpResponse.json(moDecks, { status: 200 })
   }),
 ]
