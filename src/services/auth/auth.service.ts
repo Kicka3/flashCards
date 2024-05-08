@@ -89,6 +89,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useRecoverPasswordMutation,
   useResendVerificationEmailMutation,
   useResetPasswordMutation,
   useSignUpMutation,

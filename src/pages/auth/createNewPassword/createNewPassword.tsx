@@ -11,7 +11,6 @@ import {
 } from '@/pages/auth/createNewPassword/utils'
 import { useResetPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { navigate } from '@storybook/addon-links'
 
 import s from './createNewPassword.module.scss'
 
