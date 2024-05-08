@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
+import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
@@ -80,12 +81,16 @@ export const Router = () => {
   return <RouterProvider router={router} />
 }
 
-const isAuth = true
+// const isAuth = false
 
 function PrivateRoutes() {
-  return isAuth ? <Outlet /> : <Navigate replace to={'/signIn'} />
+  const { isAuth } = useAppOutletContext()
+
+  return isAuth ? <Outlet /> : <Navigate to={'/signIn'} />
 }
 
 function PublicRoutes() {
-  return isAuth ? <Navigate replace to={'/decks'} /> : <Outlet />
+  const { isAuth } = useAppOutletContext()
+
+  return isAuth ? <Navigate to={'/decks'} /> : <Outlet />
 }
