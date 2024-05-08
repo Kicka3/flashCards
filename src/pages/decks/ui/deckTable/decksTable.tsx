@@ -99,6 +99,14 @@ export const DecksTable = ({ decks, onDeleteClick, onEditClick, onSort, sort }: 
     <span className={classNames.arrow}>{sort.direction === 'asc' ? '▲' : '▼'}</span>
   )
 
+  const renderSortArrow = (key: string) => {
+    if (sort?.key === key) {
+      return <span className={classNames.arrow}>{sort.direction === 'asc' ? '▲' : '▼'}</span>
+    }
+
+    return null
+  }
+
   return (
     <>
       <Table className={s.tableContainer}>
@@ -118,25 +126,16 @@ export const DecksTable = ({ decks, onDeleteClick, onEditClick, onSort, sort }: 
             />
             <TableHeadCell className={classNames.arrow} onClick={() => handleSort('name')}>
               Name
-              {sortDirection}
+              {renderSortArrow('name')}
             </TableHeadCell>
-            <TableHeadCell onClick={() => handleSort('cards')}>
-              Cards{' '}
-              {sort?.key === 'cards' && (
-                <span className={classNames.arrow}>{sort.direction === 'asc' ? '▲' : '▼'}</span>
-              )}
+            <TableHeadCell onClick={() => handleSort('cardsCount')}>
+              Cards {renderSortArrow('cardsCount')}
             </TableHeadCell>
             <TableHeadCell onClick={() => handleSort('updated')}>
-              Last updated{' '}
-              {sort?.key === 'lastUpdated' && (
-                <span className={classNames.arrow}>{sort.direction === 'asc' ? '▲' : '▼'}</span>
-              )}
+              Last updated {renderSortArrow('updated')}
             </TableHeadCell>
-            <TableHeadCell onClick={() => handleSort('createdBy')}>
-              Author{' '}
-              {sort?.key === 'createdBy' && (
-                <span className={classNames.arrow}>{sort.direction === 'asc' ? '▲' : '▼'}</span>
-              )}
+            <TableHeadCell onClick={() => handleSort('author.name')}>
+              Author {renderSortArrow('author.name')}
             </TableHeadCell>
             <TableHeadCell>Actions {sortDirection}</TableHeadCell>
           </TableRow>
