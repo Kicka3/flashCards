@@ -30,9 +30,9 @@ export const EditProfileWithoutInput = ({ email, logout, name, setEditMode }: Pr
       <Typography className={s.email} variant={'body2'}>
         {email}
       </Typography>
-      <Button variant={'secondary'}>
+      <Button onClick={logout} variant={'secondary'}>
         <div className={s.btnContainer}>
-          <LogOutOutline height={16} onClick={logout} width={16} />
+          <LogOutOutline height={16} width={16} />
           Logout
         </div>
       </Button>

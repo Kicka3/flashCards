@@ -51,7 +51,6 @@ export const ProfilePage = ({}) => {
   }
 
   const handleLogout = async () => {
-    console.log('123')
     try {
       await logout().unwrap()
       navigate('/signIn')
