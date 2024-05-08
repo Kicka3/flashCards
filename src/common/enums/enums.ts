@@ -1,4 +1,4 @@
-export enum Routes {
+export enum ROUTES {
   CARDS = '/decks/:id',
   CHECK_EMAIL = '/checkEmail',
   CREATE_NEW_PASSWORD = '/createNewPassword',

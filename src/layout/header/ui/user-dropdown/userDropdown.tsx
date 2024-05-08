@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import LogOutOutline from '@/assets/icons/components/LogOutOutline'
 import PersonOutline from '@/assets/icons/components/PersonOutline'
-import { Routes } from '@/common/enums/enums'
+import { ROUTES } from '@/common/enums/enums'
 import { Typography } from '@/common/ui'
 import { DropdownItem } from '@/common/ui/dropdownMenu/dropdownItem'
 import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
@@ -42,7 +42,7 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
           </div>
         </DropdownItem>
         <DropdownSeparator />
-        <DropdownItem className={s.item} onClick={() => navigate(Routes.PROFILE)}>
+        <DropdownItem className={s.item} onClick={() => navigate(ROUTES.PROFILE)}>
           <PersonOutline height={'16px'} width={'16px'} />
           <Typography variant={'caption'}>My Profile</Typography>
         </DropdownItem>

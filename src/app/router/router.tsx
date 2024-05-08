@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom'
 
-import { Routes } from '@/common/enums/enums'
+import { ROUTES } from '@/common/enums/enums'
 import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPassword } from '@/pages/auth/createNewPassword'
@@ -23,24 +23,24 @@ import Layout from '../layout/layout'
 const publicRoutes: RouteObject[] = [
   {
     element: <ForgotPassword />,
-    path: Routes.FORGOT_PASSWORD,
+    path: ROUTES.FORGOT_PASSWORD,
   },
   {
     element: <SignIn />,
-    path: Routes.SIGN_IN,
+    path: ROUTES.SIGN_IN,
   },
   {
     element: <SignUp />,
-    path: Routes.SIGN_UP,
+    path: ROUTES.SIGN_UP,
   },
   /* поправить email */
   {
     element: <CheckEmail email={'mail@mail.com'} />,
-    path: Routes.CHECK_EMAIL,
+    path: ROUTES.CHECK_EMAIL,
   },
   {
     element: <CreateNewPassword />,
-    path: Routes.CREATE_NEW_PASSWORD,
+    path: ROUTES.CREATE_NEW_PASSWORD,
   },
 ]
 
@@ -48,18 +48,18 @@ const privateRoutes: RouteObject[] = [
   {
     children: [
       {
-        element: <Navigate to={Routes.DECKS} />,
+        element: <Navigate to={ROUTES.DECKS} />,
         path: '/',
       },
       {
         element: <Cards />,
-        path: Routes.CARDS,
+        path: ROUTES.CARDS,
       },
       {
         element: <Decks />,
-        path: Routes.DECKS,
+        path: ROUTES.DECKS,
       },
-      { element: <ProfilePage />, path: Routes.PROFILE },
+      { element: <ProfilePage />, path: ROUTES.PROFILE },
     ],
   },
 ]
@@ -75,7 +75,7 @@ function PrivateRoutes() {
     )
   }
 
-  return isAuth ? <Outlet /> : <Navigate to={Routes.SIGN_IN} />
+  return isAuth ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
 }
 
 // const isAuth = false
@@ -89,7 +89,7 @@ function PublicRoutes() {
     )
   }
 
-  return isAuth ? <Navigate to={Routes.DECKS} /> : <Outlet />
+  return isAuth ? <Navigate to={ROUTES.DECKS} /> : <Outlet />
 }
 
 const router = createBrowserRouter([
