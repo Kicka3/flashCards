@@ -4,23 +4,21 @@ import { TrashOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Slider } from '@/common/ui/slider'
-import { Tabs } from '@/common/ui/tabs'
+import { Tabs, tabsType } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
 
 import s from './deckHeader.module.scss'
-
-import { TabsType } from '../deckContainer'
 
 /** UI компонента */
 
 type Props = {
   isLoading?: boolean
   onClick?: () => void
-  search: string
-  setSearch: (value: string) => void
+  search?: string
+  setSearch?: (value: string) => void
   setValue: (newValue: number[]) => void
-  tabs: TabsType[]
+  tabs: tabsType[]
   value: number[]
 }
 

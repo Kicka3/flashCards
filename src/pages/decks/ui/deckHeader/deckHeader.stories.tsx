@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
-import { DeckHeader } from '@/pages/decks/deckHeader/deckHeader'
+import { DeckHeader } from '@/pages/decks/ui/deckHeader/deckHeader'
 import { store } from '@/services/store'
 import { fn } from '@storybook/test'
 

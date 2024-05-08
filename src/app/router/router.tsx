@@ -14,7 +14,7 @@ import { SignUp } from '@/pages/auth/singUp'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 
-import { Decks } from '../../pages/decks/deckContainer'
+import { Decks } from '../../pages/decks/ui/deckContainer'
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [

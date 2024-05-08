@@ -1,0 +1,22 @@
+.tableContainer {
+  width: 100%;
+}
+
+.iconsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.arrow {
+  //position: absolute;
+
+  //top: 10px;
+  transform-origin: center;
+  margin-left: 5px;
+  fill: var(--color-light-100);
+}
+
+//.arrowUp {
+//  transform: rotate(90deg);
+//  transition: all 0.3s ease-in-out;
+//}
