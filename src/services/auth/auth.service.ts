@@ -33,6 +33,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<UserData, void>({
+        providesTags: ['Me'],
         query: () => ({
           method: 'GET',
           url: '/v1/auth/me',

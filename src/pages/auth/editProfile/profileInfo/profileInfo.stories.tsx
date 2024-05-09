@@ -18,11 +18,14 @@ export const EditProfileTest: Story = {
       email: 'example123@gmail.com',
       name: 'Nick',
     },
-    updateAvatar: async ({ avatar }: { avatar: string }): Promise<void> => {
+    logout: () => {
+      console.log('Logging out')
+    },
+    updateAvatar: (avatar: File): void => {
       console.log('Updating avatar:', avatar)
     },
-    updateNickname: async ({ name }: { name: string }): Promise<void> => {
-      console.log('Updating nickname:', name)
+    updateNickname: (name: { name: string }): void => {
+      console.log('Updating nickname:', name.name)
     },
   },
   render: args => {
