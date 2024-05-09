@@ -14,10 +14,10 @@ import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
+import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 
-import { DecksContainer } from '../../pages/decks/ui/deckContainer'
 import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
