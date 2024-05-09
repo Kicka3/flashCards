@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 
-import Header from '@/layout/header/ui/header'
 import { useMeQuery } from '@/services/auth'
+import { Header } from '@/widgets/header/ui'
 
 import s from './layout.module.scss'
 
