@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import Layout from '@/app/layout/layout'
+import Layout from '@/layout/header/layout'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 

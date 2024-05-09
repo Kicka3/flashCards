@@ -1,0 +1,25 @@
+.noCardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 70px;
+
+  .noCardInfo {
+    color: var(--color-dark-100);
+  }
+}
+
+.packIntro {
+  display: flex;
+  justify-content: space-between;
+}
+
+.packTitle {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 15 px;
+}
