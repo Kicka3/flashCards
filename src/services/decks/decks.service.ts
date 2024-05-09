@@ -1,5 +1,6 @@
 import { baseApi } from '@/services/base-api'
 import {
+  Deck,
   DeckBodyRequest,
   DeleteDeckReq,
   GetDecksArgs,
@@ -26,6 +27,13 @@ export const decksApiService = baseApi.injectEndpoints({
           url: `v1/decks/${args.id}`,
         }),
       }),
+      getDeckById: builder.query<Deck, string>({
+        /** Делаем инвалидацию кеша для обновления состояния */
+        providesTags: ['Decks'],
+        query: id => ({
+          url: `v1/decks/${id}`,
+        }),
+      }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
         /** Делаем инвалидацию кеша для обновления состояния */
         providesTags: ['Decks'],
@@ -34,9 +42,9 @@ export const decksApiService = baseApi.injectEndpoints({
           url: 'v2/decks',
         }),
       }),
-      updateDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
+      updateDecks: builder.mutation<GetDecksResponse, GetDecksArgs | void>({
         /** Делаем инвалидацию кеша для обновления состояния */
-        providesTags: ['Decks'],
+        invalidatesTags: ['Decks'],
         query: args => ({
           params: args ?? undefined,
           url: `v1/decks/{id}`,
@@ -46,4 +54,9 @@ export const decksApiService = baseApi.injectEndpoints({
   },
 })
 
-export const { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery } = decksApiService
+export const {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDeckByIdQuery,
+  useGetDecksQuery,
+} = decksApiService
