@@ -7,7 +7,7 @@ import {
   PlayCircleOutline,
   TrashOutline,
 } from '@/assets/icons/components'
-import noCoverImg from '@/assets/img/no-photo.png'
+import noCoverImg from '@/assets/img/noImage.png'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
@@ -98,8 +98,6 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
             <TableHeadCell onClick={() => handleSort('name')}>
               <Typography variant={'sub2'}>Name {renderSortArrow('name')}</Typography>
             </TableHeadCell>
-            {/*<TableHeadCell onClick={() => handleSort('cardsCount')}>*/}
-            {/*<TableHeadCell onClick={() => handleSort('cardsCount')}>*/}
             <TableHeadCell onClick={() => handleSort('cardsCount')}>
               <Typography variant={'sub2'}>Cards {renderSortArrow('cardsCount')}</Typography>
             </TableHeadCell>
