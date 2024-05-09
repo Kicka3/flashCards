@@ -23,8 +23,8 @@ export type SingUpArgs = {
 }
 
 export type UpdateUserDataArgs = {
-  avatar: string
-  name: string
+  avatar: FormData
+  name: FormData
 }
 
 export type ResendVerificationEmailArgs = {

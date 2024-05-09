@@ -3,7 +3,6 @@ import {
   RecoverPassword,
   ResendVerificationEmailArgs,
   SingUpArgs,
-  UpdateUserDataArgs,
   UserData,
 } from '@/services/auth/auth.types'
 import { baseApi } from '@/services/base-api'
@@ -34,6 +33,7 @@ const authService = baseApi.injectEndpoints({
         }),
       }),
       me: builder.query<UserData, void>({
+        providesTags: ['Me'],
         query: () => ({
           method: 'GET',
           url: '/v1/auth/me',
@@ -67,11 +67,11 @@ const authService = baseApi.injectEndpoints({
           url: '/v1/auth/sign-up',
         }),
       }),
-      updateUser: builder.mutation<UserData, UpdateUserDataArgs>({
+      updateUser: builder.mutation<UserData, FormData>({
         invalidatesTags: ['Me'],
         query: args => ({
           body: args,
-          method: 'POST',
+          method: 'PATCH',
           url: '/v1/auth/me',
         }),
       }),
@@ -90,6 +90,7 @@ export const {
   useLoginMutation,
   useLogoutMutation,
   useMeQuery,
+  useRecoverPasswordMutation,
   useResendVerificationEmailMutation,
   useResetPasswordMutation,
   useSignUpMutation,
