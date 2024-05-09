@@ -6,6 +6,8 @@
   &Content {
     will-change: transform, opacity;
 
+    z-index: 2;
+
     display: flex;
     flex-direction: column;
 
