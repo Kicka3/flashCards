@@ -1,1 +1,1 @@
-export * from './decks'
+export * from './decksContainer'

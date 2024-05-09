@@ -7,16 +7,29 @@
   gap: 10px;
 }
 
-.arrow {
-  //position: absolute;
+.tableImTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
 
-  //top: 10px;
-  transform-origin: center;
-  margin-left: 5px;
+.deckCoverImg {
+  min-width: 118px;
+  max-width: 118px;
+  height: 48px;
+
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  margin-left: 2px;
   fill: var(--color-light-100);
 }
 
-//.arrowUp {
-//  transform: rotate(90deg);
-//  transition: all 0.3s ease-in-out;
-//}
+.arrowWrapper {
+  position: relative;
+}

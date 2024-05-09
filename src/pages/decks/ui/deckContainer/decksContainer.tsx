@@ -18,17 +18,14 @@ type Props = {
   onClick?: () => void
 }
 
-export const Decks = ({}: Props) => {
-  const { deckIsLoading, mappedDecks, orderBy, setSortedBy } = useDeckFilter()
+export const DecksContainer = ({}: Props) => {
+  const { deckIsLoading, isOwner, mappedDecks, orderBy, setSortedBy } = useDeckFilter()
 
   /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'My Cards' },
     { title: 'All Cards', value: 'All Cards' },
   ]
-
-  /** Стейт для поиска */
-  // const [search, setSearch] = useState<string>('')
 
   /** Value-state для Slider */
   const [value, setValue] = useState<SliderType>([1, 20])
@@ -53,7 +50,7 @@ export const Decks = ({}: Props) => {
       {mappedDecks?.length ? (
         <DecksTable
           decks={mappedDecks}
-          isOwner
+          isOwner={isOwner}
           onDeleteClick={onDeleteDeck}
           onSort={setSortedBy}
           sort={orderBy}

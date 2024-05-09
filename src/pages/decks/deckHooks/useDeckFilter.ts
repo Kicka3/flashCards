@@ -3,6 +3,7 @@ import { useGetMinMaxCardsQuery } from '@/services/cards'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 
 export const useDeckFilter = () => {
+  /** Используем хук usePageFilter для управления фильтрацией и пагинацией. */
   const {
     changeSearchHandler,
     currentPage,
@@ -20,30 +21,33 @@ export const useDeckFilter = () => {
     sortedString,
   } = usePageFilter()
 
-  /** Запрос для слайдера?? */
+  /** Запрашиваем минимальное и максимальное количество карт для слайдера. */
   const { data: minMaxValues } = useGetMinMaxCardsQuery()
 
-  /** Листаем контент табами */
+  // Обработчик изменения текущей вкладки.
   const onTabValueChange = (value: string) => {
     changeSearchHandler('currentTab', value)
   }
 
-  /** Получаем корректный Tab */
+  /** Получаем текущую вкладку из поискового запроса. */
   const getCurrentTab = search.get('currentTab') || 'allCards'
 
-  /** Для слайдера в deck/header */
+  /** Обработчик применения значений слайдера для фильтрации колод по количеству карт. */
   const onCommitSliderValues = (value: number[]) => {
     changeSearchHandler('minCardsCount', value[0].toString())
     changeSearchHandler('maxCardsCount', value[1].toString())
   }
+
+  /** Получаем минимальное и максимальное значения для фильтрации колод. */
   const minCards = Number(search.get('minCardsCount') || 0)
   const maxCards = Number(search.get('maxCardsCount') || 15)
 
-  /** Чистим search */
+  /** Очищаем фильтры. */
   const clearFilter = () => {
     setSearch({})
   }
 
+  /** Запрашиваем колоды с использованием параметров фильтрации. */
   const {
     data: deckData,
     isFetching: deckIsFetching,
@@ -57,16 +61,26 @@ export const useDeckFilter = () => {
     name: debounceName,
     orderBy: sortedString,
   })
-  /** Приводим разные типы к одному ВЫНЕС В ХУК
-   * Мапиться тут или лучше в DECKS???!**/
+
+  /** Преобразуем полученные данные в удобный формат. */
   const mappedDecks = deckData?.items.map(deck => ({
     cards: deck.cardsCount,
+    cover: deck.cover,
+    created: deck.created,
     createdBy: deck.author.name,
     id: deck.id,
     lastUpdated: deck.updated,
     name: deck.name,
+    private: deck.isPrivate,
+    userId: deck.userId,
   }))
 
+  /** Проверяем, является ли текущий пользователь владельцем колоды. */
+  const isOwner = (userId: string) => {
+    return userId === me?.id
+  }
+
+  /** Возвращаем объект с данными и функциями для управления фильтрацией колод. */
   return {
     clearFilter,
     currentPage,
@@ -74,6 +88,7 @@ export const useDeckFilter = () => {
     deckIsFetching,
     deckIsLoading,
     getCurrentTab,
+    isOwner,
     itemsPerPage,
     mappedDecks,
     maxCards,

@@ -24,3 +24,5 @@ export type Column = {
   sortable?: boolean
   title: string
 }
+// В файле common.types.ts
+export type SortDirection = 'asc' | 'desc'

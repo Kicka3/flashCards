@@ -27,7 +27,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'Pages/Decks',
+  title: 'Pages/DecksContainer',
 } satisfies Meta<typeof DeckHeader>
 
 export default meta
