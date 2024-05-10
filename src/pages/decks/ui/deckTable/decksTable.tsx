@@ -55,11 +55,6 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
   /** !!!! Ищу нужную колоду чтобы достать name и id !!!! */
   const deckWillDelete = decks?.find(d => d.id === IdDeletedDeck)
 
-  /** Создаем итоговый класс */
-  // const classNames = {
-  //   arrowDirection: clsx(s.arrow, sort?.direction === 'asc' && s.arrowUp),
-  // }
-
   /** Функция для отрисовки стрелки сортировки */
   const renderSortArrow = (key: string) => {
     if (sort?.key === key) {

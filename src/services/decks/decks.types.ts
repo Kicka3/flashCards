@@ -108,6 +108,8 @@ export type DeleteDeck = {
   updated: string
   userId: string
 }
+
+//Володя сказал удалить и сделать на {id: string}
 export type DeleteDeckReq = {
   id: string
 }

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { AddForm } from '@/features/deck/addForm/addForm'
+import { DeckForm } from '@/features/deck/addForm/deckForm'
 import { fn } from '@storybook/test'
 
 const meta = {
@@ -8,10 +8,10 @@ const meta = {
   args: {
     onOpenChange: fn(),
   },
-  component: AddForm,
+  component: DeckForm,
 
   title: 'Feature/AddNewDeck',
-} satisfies Meta<typeof AddForm>
+} satisfies Meta<typeof DeckForm>
 
 export default meta
 type Story = StoryObj<typeof meta>

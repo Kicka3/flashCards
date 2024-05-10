@@ -1,4 +1,4 @@
-// import { AddForm } from '@/pages/сards/createCard/addForm2'
+// import { DeckForm } from '@/pages/сards/createCard/addForm2'
 
 import { AddForm } from './addForm/addForm2'
 

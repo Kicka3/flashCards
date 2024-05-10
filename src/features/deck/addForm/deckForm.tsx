@@ -1,7 +1,8 @@
 import { RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Image } from '@/assets/icons/components'
+import { Image, TrashOutline } from '@/assets/icons/components'
+import { ImageLoader } from '@/common/hooks/imageLoader'
 import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
@@ -10,7 +11,7 @@ import { AddDeckFormValues, addDeckSchema } from '@/features/deck/utils/addDeckS
 import { DeckBodyRequest } from '@/services/decks/decks.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from './addForm.module.scss'
+import s from './deckForm.module.scss'
 
 /** form Компонента */
 
@@ -30,10 +31,11 @@ type Props = {
   title: string
 }
 
-export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, title }: Props) => {
+export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, title }: Props) => {
+  /** Стейт для фото */
   const [photo, setPhoto] = useState<File | null | string>(null)
 
-  const fileinputRef: RefObject<HTMLInputElement> = useRef(null)
+  const fileInputRef: RefObject<HTMLInputElement> = useRef(null)
 
   const {
     control,
@@ -55,7 +57,8 @@ export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, ti
     }
   }, [deck, setValue])
 
-  const onSubmit = (data: AddDeckFormValues) => {
+  /** Отправляем на сервер */
+  const onSubmit = async (data: AddDeckFormValues) => {
     onOpenChange(false)
 
     const deckBodyReq: DeckBodyRequest = { ...data, cover: photo }
@@ -65,14 +68,18 @@ export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, ti
     reset()
   }
 
-  /** Добавить загрузку изображений */
+  /** Загрузку изображений */
   const openFiles = () => {
-    if (fileinputRef.current) {
-      fileinputRef.current.click()
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
     }
   }
+  const removeCoverImg = () => {
+    setPhoto(null)
+  }
+  const uploadedImg = photo instanceof File ? URL.createObjectURL(photo) : photo
 
-  const HandlerClose = () => {
+  const handlerClose = () => {
     onOpenChange(false)
   }
 
@@ -88,6 +95,17 @@ export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, ti
             name={'name'}
             variant={'default'}
           />
+          <div>
+            {uploadedImg && (
+              <div className={s.deckImgWrapper}>
+                <img alt={'Image not found'} className={s.deckImg} src={uploadedImg} />
+                <Button onClick={removeCoverImg} variant={'icon'}>
+                  <TrashOutline className={s.deleteDeckIcon} height={24} width={24} />
+                </Button>
+              </div>
+            )}
+            <ImageLoader className={s.openFilesInput} ref={fileInputRef} setPhoto={setPhoto} />
+          </div>
           <Button
             className={s.UploadImgBtn}
             fullWidth
@@ -110,7 +128,7 @@ export const AddForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, ti
             <Button disabled={disabled} type={'submit'} variant={'primary'}>
               Add new Pack
             </Button>
-            <Button disabled={disabled} onClick={HandlerClose} type={'reset'} variant={'secondary'}>
+            <Button disabled={disabled} onClick={handlerClose} type={'reset'} variant={'secondary'}>
               Cancel
             </Button>
           </div>

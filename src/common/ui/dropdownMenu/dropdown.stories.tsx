@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
-import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
-import { UserDropDown } from '@/layout/header/ui/user-dropdown/userDropdown'
+import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
+import { UserDropDown } from '@/widgets/header/ui/user-dropdown/userDropdown'
 
 const meta = {
   argTypes: {
