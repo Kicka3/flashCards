@@ -1,7 +1,7 @@
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
 
-import { DeckForm } from '../addForm'
+import { DeckForm } from '../DeckForm'
 
 /** Контейнерная компонента createDeck для логики запросов */
 

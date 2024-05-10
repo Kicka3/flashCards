@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { DeckForm } from '@/features/deck/addForm/deckForm'
+import { DeckForm } from '@/features/deck/DeckForm/deckForm'
 import { fn } from '@storybook/test'
 
 const meta = {
