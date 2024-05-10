@@ -46,7 +46,7 @@ export const Cards = ({}: Props) => {
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
   const [isOpenCreate, setIsOpenCreate] = useState<boolean>(false)
-  const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
+  // const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
 
   const totalItems = cards?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1

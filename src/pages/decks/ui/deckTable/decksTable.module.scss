@@ -1,0 +1,33 @@
+.tableContainer {
+  width: 100%;
+}
+
+.iconsContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.tableImTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.deckCoverImg {
+  min-width: 70px;
+  max-width: 70px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  margin-left: 2px;
+  fill: var(--color-light-100);
+}
+
+.arrowWrapper {
+  position: relative;
+}

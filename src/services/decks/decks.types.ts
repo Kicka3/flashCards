@@ -8,11 +8,24 @@ export type DeckAuthor = {
   name: string
 }
 
-/** Deck */
+/** Мои форматированные типы */
+export type MyDeck = {
+  cards: number
+  cover: string
+  created: string
+  createdBy: string
+  id: string
+  lastUpdated: string
+  name: string
+  private: boolean
+  userId: string
+}
+
+/** Deck From server*/
 export type Deck = {
   author: DeckAuthor
   cardsCount: number
-  cover: null | string
+  cover: string
   created: string
   id: string
   isPrivate: boolean
