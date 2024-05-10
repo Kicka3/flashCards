@@ -2,7 +2,6 @@ import { RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image, TrashOutline } from '@/assets/icons/components'
-import { ImageLoader } from '@/common/hooks/imageLoader'
 import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
@@ -12,6 +11,8 @@ import { DeckBodyRequest } from '@/services/decks/decks.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './deckForm.module.scss'
+
+import { ImageLoader } from '../../../common/ui/imageLoader'
 
 /** form Компонента */
 

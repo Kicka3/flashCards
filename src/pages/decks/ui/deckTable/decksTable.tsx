@@ -55,6 +55,15 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
   /** !!!! Ищу нужную колоду чтобы достать name и id !!!! */
   const deckWillDelete = decks?.find(d => d.id === IdDeletedDeck)
 
+  const onOpenDeck = (deckId: string) => {
+    console.log(deckId)
+    // onOpenDeck(decks.)
+  }
+
+  const onLearnDeck = () => {
+    console.log('learn')
+  }
+
   /** Функция для отрисовки стрелки сортировки */
   const renderSortArrow = (key: string) => {
     if (sort?.key === key) {
@@ -111,13 +120,13 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
           {sortedDecks?.map(deck => (
             <TableRow key={deck.id}>
               <TableCell>
-                <span className={s.tableImTitleWrapper}>
+                <span className={s.tableImTitleWrapper} onClick={() => onOpenDeck(deck.id)}>
                   {deck.cover ? (
                     <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />
                   ) : (
                     <img alt={'noCover'} className={s.deckCoverImg} src={noCoverImg} />
                   )}
-
+                  {/*//УБРАТЬ HREF*/}
                   <Typography as={'a'} href={`/decks/${deck.id}`} variant={'body2'}>
                     {deck.name}
                   </Typography>
@@ -132,7 +141,7 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
                     <Button onClick={handleEditeClick(deck.id)} variant={'icon'}>
                       <Edit2Outline height={'16px'} width={'16px'} />
                     </Button>
-                    <Button as={'a'} href={`/decks/${deck.id}/learn`} variant={'icon'}>
+                    <Button as={'a'} onClick={onLearnDeck} variant={'icon'}>
                       <PlayCircleOutline height={'16px'} width={'16px'} />
                     </Button>
                     <Button onClick={clickDeleteHandler(deck.id)} variant={'icon'}>
