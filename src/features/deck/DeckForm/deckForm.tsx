@@ -5,6 +5,7 @@ import { Image, TrashOutline } from '@/assets/icons/components'
 import { Button } from '@/common/ui/button'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { ImageLoader } from '@/common/ui/imageLoader'
 import { Modal } from '@/common/ui/modal'
 import { AddDeckFormValues, addDeckSchema } from '@/features/deck/utils/addDeckSchema'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
@@ -12,13 +13,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './deckForm.module.scss'
 
-import { ImageLoader } from '../../../common/ui/imageLoader'
-
 /** form Компонента */
 
 export type EditDeckType = {
   cover: null | string | undefined
-  id?: string
+  id: string
   isPrivate: boolean
   name: string
 }

@@ -69,9 +69,9 @@ export const useDeckFilter = () => {
     created: deck.created,
     createdBy: deck.author.name,
     id: deck.id,
+    isPrivate: deck.isPrivate,
     lastUpdated: deck.updated,
     name: deck.name,
-    private: deck.isPrivate,
     userId: deck.userId,
   }))
 

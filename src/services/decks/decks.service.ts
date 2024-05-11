@@ -1,5 +1,6 @@
 import { baseApi } from '@/services/base-api'
 import {
+  Deck,
   DeckBodyRequest,
   DeleteDeckReq,
   GetDecksArgs,
@@ -26,18 +27,6 @@ export const decksApiService = baseApi.injectEndpoints({
     return {
       createDeck: builder.mutation<void, DeckBodyRequest>({
         invalidatesTags: ['Decks'],
-        // async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
-        //   const res = await queryFulfilled
-        //
-        //   const args = decksService.util.selectCachedArgsForQuery(getState(), 'getDecks')
-        //
-        //   dispatch(
-        //     decksService.util.updateQueryData('getDecks', args[0], draft => {
-        //       draft.items.pop()
-        //       draft.items.unshift(res.data)
-        //     })
-        //   )
-        // },
         query: args => ({
           //Конверитрую датаформ и отправляю
           body: deckFormDataHandler(args),
@@ -53,21 +42,28 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
+        //Надо ли инвалидировать карты?
         providesTags: ['Decks'],
         query: args => ({
           params: args ?? undefined,
           url: 'v2/decks',
         }),
       }),
-      updateDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        providesTags: ['Decks'],
+      updateDecks: builder.mutation<Deck, { data: DeckBodyRequest; id: string }>({
+        invalidatesTags: ['Decks', 'Card'],
         query: args => ({
-          params: args ?? undefined,
-          url: `v1/decks/{id}`,
+          body: deckFormDataHandler(args.data),
+          method: 'PATCH',
+          url: `v1/decks/${args.id}`,
         }),
       }),
     }
   },
 })
 
-export const { useCreateDeckMutation, useDeleteDeckMutation, useGetDecksQuery } = decksApiService
+export const {
+  useCreateDeckMutation,
+  useDeleteDeckMutation,
+  useGetDecksQuery,
+  useUpdateDecksMutation,
+} = decksApiService

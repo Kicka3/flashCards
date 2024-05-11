@@ -15,9 +15,9 @@ export type MyDeck = {
   created: string
   createdBy: string
   id: string
+  isPrivate: boolean
   lastUpdated: string
   name: string
-  private: boolean
   userId: string
 }
 
@@ -34,34 +34,8 @@ export type Deck = {
   userId: string
 }
 
-/** Create Deck */
-export type CreateDeckRequest = {
-  author: DeckAuthor
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
-/** Paginated Deck */
-export type Items = {
-  author: DeckAuthor
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
 export type PaginatedDeckList = {
-  items: Items[]
+  items: Deck[]
   pagination: Pagination
 }
 
@@ -71,43 +45,8 @@ export type MinMaxCardsOfDeck = {
   min: number
 }
 
-/** Get (Retrieve) deck by id */
-export type GetDeckById = {
-  author: DeckAuthor
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
-/** Update deck */
-export type UpdateDeck = {
-  author: DeckAuthor
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
-
 /** Delete deck */
-export type DeleteDeck = {
-  cardsCount: number
-  cover: string
-  created: string
-  id: string
-  isPrivate: boolean
-  name: string
-  updated: string
-  userId: string
-}
+export type DeleteDeck = Omit<Deck, 'author'>
 
 //Володя сказал удалить и сделать на {id: string}
 export type DeleteDeckReq = {
@@ -116,7 +55,7 @@ export type DeleteDeckReq = {
 
 /** Get (Retrieve) cards in a deck */
 export type GetCardsInDeck = {
-  items: Items[]
+  items: Deck[]
   pagination: Pagination
 }
 
@@ -127,40 +66,6 @@ export type CreateCardInDeck = {
   answerVideo: string
   created: string
   deckId: string
-  id: string
-  question: string
-  questionImg: string
-  questionVideo: string
-  shots: number
-  updated: string
-  userId: string
-}
-
-/** Get (Retrieve) A Random Card */
-export type GetRandomCard = {
-  answer: string
-  answerImg: string
-  answerVideo: string
-  created: string
-  deckId: string
-  grade: number
-  id: string
-  question: string
-  questionImg: string
-  questionVideo: string
-  shots: number
-  updated: string
-  userId: string
-}
-
-/** Save The Grade (Rating) Of A Card */
-export type SaveRatingCard = {
-  answer: string
-  answerImg: string
-  answerVideo: string
-  created: string
-  deckId: string
-  grade: number
   id: string
   question: string
   questionImg: string
@@ -187,3 +92,37 @@ export type DeckBodyRequest = {
   isPrivate: boolean
   name: string
 }
+
+// /** Get (Retrieve) A Random Card */
+// export type GetRandomCard = {
+//   answer: string
+//   answerImg: string
+//   answerVideo: string
+//   created: string
+//   deckId: string
+//   grade: number
+//   id: string
+//   question: string
+//   questionImg: string
+//   questionVideo: string
+//   shots: number
+//   updated: string
+//   userId: string
+// }
+//
+// /** Save The Grade (Rating) Of A Card */
+// export type SaveRatingCard = {
+//   answer: string
+//   answerImg: string
+//   answerVideo: string
+//   created: string
+//   deckId: string
+//   grade: number
+//   id: string
+//   question: string
+//   questionImg: string
+//   questionVideo: string
+//   shots: number
+//   updated: string
+//   userId: string
+// }

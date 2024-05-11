@@ -1,6 +1,6 @@
 {
   "name": "flashcards",
-  "private": true,
+  "isPrivate": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {

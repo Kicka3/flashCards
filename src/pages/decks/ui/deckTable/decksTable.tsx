@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import {
   ArrowIosDownOutline,
@@ -12,6 +12,7 @@ import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { DeleteForm } from '@/features/deck/deleteForm'
+import { UpdateDeck } from '@/features/deck/updateDeck'
 import { useSortDecks } from '@/pages/decks/deckHooks'
 import { Sort } from '@/services/common.types'
 import { MyDeck } from '@/services/decks'
@@ -27,62 +28,98 @@ type Props = {
   sort?: Sort
 }
 
-export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort, sort }: Props) => {
+export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Props) => {
   const [deleteForm, setDeleteForm] = useState(false)
+  const [openEditMode, setOpenEditMode] = useState(false)
   const { handleSort, sortedDecks } = useSortDecks(decks, sort, onSort)
 
   /** Сохраняю ID колоды */
-  const [IdDeletedDeck, setIdDeletedDeck] = useState<string | undefined>('')
+  const [getDeckId, setGetDeckId] = useState<string | undefined>('')
 
-  const handleEditeClick = (id: string) => () => onEditClick?.(id)
-
-  const closeDeleteFormHandler = () => {
+  const closeDeleteFormHandler = useCallback(() => {
     setDeleteForm(false)
-  }
+  }, [])
+
+  /** !!!! Ищу нужную колоду чтобы достать name и id и саму колоду !!!! */
+  const findDeck = useCallback(
+    (id: string) => {
+      return decks.find(d => d.id === id)
+    },
+    [decks]
+  )
 
   /** Удаляю по id из form*/
-  const onDeleteDeck = (id: string) => {
-    if (id) {
-      onDeleteClick?.(id)
-    }
-  }
-  /** Нажатие на иконку */
-  const clickDeleteHandler = (id: string) => () => {
-    setIdDeletedDeck(id)
-    setDeleteForm(true)
-  }
+  const onDeleteDeck = useCallback(
+    (id: string) => {
+      if (id) {
+        onDeleteClick?.(id)
+      }
+    },
+    [onDeleteClick]
+  )
 
-  /** !!!! Ищу нужную колоду чтобы достать name и id !!!! */
-  const deckWillDelete = decks?.find(d => d.id === IdDeletedDeck)
+  /** Удаляю Deck */
+  const deleteDeckHandler = useCallback(
+    (id: string) => () => {
+      setGetDeckId(id)
+      setDeleteForm(true)
+    },
+    []
+  )
 
-  const onOpenDeck = (deckId: string) => {
+  /** Редактирую Deck */
+  const editDeckHandler = useCallback(
+    (id: string) => () => {
+      const deckToEdit = findDeck(id)
+
+      setGetDeckId(id)
+      setOpenEditMode(true)
+
+      return deckToEdit
+    },
+    [findDeck]
+  )
+
+  const onOpenDeck = useCallback((deckId: string) => {
     console.log(deckId)
     // onOpenDeck(decks.)
-  }
+  }, [])
 
-  const onLearnDeck = () => {
+  const onLearnDeck = useCallback(() => {
     console.log('learn')
-  }
+  }, [])
 
   /** Функция для отрисовки стрелки сортировки */
-  const renderSortArrow = (key: string) => {
-    if (sort?.key === key) {
-      return (
-        <span className={s.arrowWrapper}>
-          {sort.direction === 'asc' ? (
-            <ArrowIosUp className={s.arrow} height={16} width={16} />
-          ) : (
-            <ArrowIosDownOutline className={s.arrow} height={16} width={16} />
-          )}
-        </span>
-      )
-    }
+  const renderSortArrow = useCallback(
+    (key: string) => {
+      if (sort?.key === key) {
+        return (
+          <span className={s.arrowWrapper}>
+            {sort.direction === 'asc' ? (
+              <ArrowIosUp className={s.arrow} height={16} width={16} />
+            ) : (
+              <ArrowIosDownOutline className={s.arrow} height={16} width={16} />
+            )}
+          </span>
+        )
+      }
 
-    return null
-  }
+      return null
+    },
+    [sort]
+  )
 
   return (
     <>
+      {getDeckId && (
+        <UpdateDeck
+          deck={findDeck(getDeckId)}
+          isOpen={openEditMode}
+          onOpenChange={setOpenEditMode}
+          title={'Update Deck'}
+        />
+      )}
+
       <Table className={s.tableContainer}>
         <TableHead>
           <TableRow>
@@ -91,25 +128,22 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
               deleteAction={id => {
                 onDeleteDeck(id)
               }}
-              id={IdDeletedDeck}
+              id={getDeckId}
               isDeck
               isOpen={deleteForm}
-              name={deckWillDelete?.name}
+              name={findDeck?.name}
               onOpenChange={setDeleteForm}
               title={'Delete Pack'}
             />
-            {/*<TableHeadCell className={s.classNames} onClick={() => handleSort('name')}>*/}
             <TableHeadCell onClick={() => handleSort('name')}>
               <Typography variant={'sub2'}>Name {renderSortArrow('name')}</Typography>
             </TableHeadCell>
             <TableHeadCell onClick={() => handleSort('cardsCount')}>
               <Typography variant={'sub2'}>Cards {renderSortArrow('cardsCount')}</Typography>
             </TableHeadCell>
-            {/*<TableHeadCell onClick={() => handleSort('updated')}>*/}
             <TableHeadCell onClick={() => handleSort('updated')}>
               <Typography variant={'sub2'}>Last updated {renderSortArrow('updated')}</Typography>
             </TableHeadCell>
-            {/*<TableHeadCell onClick={() => handleSort('author.name')}>*/}
             <TableHeadCell onClick={() => handleSort('author.name')}>
               <Typography variant={'sub2'}>Author {renderSortArrow('author.name')}</Typography>
             </TableHeadCell>
@@ -138,13 +172,13 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onEditClick, onSort,
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
-                    <Button onClick={handleEditeClick(deck.id)} variant={'icon'}>
-                      <Edit2Outline height={'16px'} width={'16px'} />
-                    </Button>
                     <Button as={'a'} onClick={onLearnDeck} variant={'icon'}>
                       <PlayCircleOutline height={'16px'} width={'16px'} />
                     </Button>
-                    <Button onClick={clickDeleteHandler(deck.id)} variant={'icon'}>
+                    <Button onClick={editDeckHandler(deck.id)} variant={'icon'}>
+                      <Edit2Outline height={'16px'} width={'16px'} />
+                    </Button>
+                    <Button onClick={deleteDeckHandler(deck.id)} variant={'icon'}>
                       <TrashOutline height={'16px'} width={'16px'} />
                     </Button>
                   </div>
