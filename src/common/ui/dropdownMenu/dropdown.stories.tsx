@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
+
 import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
 import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
 import { UserDropDown } from '@/layout/header/ui/user-dropdown/userDropdown'
+import { store } from '@/services/store'
 
 const meta = {
   argTypes: {
@@ -16,6 +20,15 @@ const meta = {
     },
   },
   component: DropDownMenu,
+  decorators: [
+    Story => (
+      <MemoryRouter>
+        <Provider store={store}>
+          <Story />
+        </Provider>
+      </MemoryRouter>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },

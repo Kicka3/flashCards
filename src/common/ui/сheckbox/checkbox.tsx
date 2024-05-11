@@ -7,7 +7,7 @@ import clsx from 'clsx'
 
 import s from './checkbox.module.scss'
 
-export type CheckboxProps = {
+type CheckboxProps = {
   backgroundColor?: string
   color?: string
   onChangeValue?: (value: boolean) => void
