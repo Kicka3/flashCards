@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef } from 'react'
+import { Control } from 'react-hook-form'
 
 import { Image } from '@/assets/icons/components'
 import { ImageFile } from '@/common/types/types'
@@ -8,14 +9,19 @@ import { openFiles } from '@/common/utils'
 
 import s from './addItemForm.module.scss'
 
+import { AddCardFormValues } from '../addCardSchema'
+
 type Props = {
-  control: any
+  control: Control<AddCardFormValues, any>
   image: ImageFile
+  label: string
+  name: 'answer' | 'question'
   setImage: (image: ImageFile) => void
 }
 
-export const AddItemForm = ({ control, image, setImage }: Props) => {
+export const AddItemForm = ({ control, image, label, name, setImage }: Props) => {
   const ref = useRef<HTMLInputElement>(null)
+
   const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
 
@@ -24,12 +30,7 @@ export const AddItemForm = ({ control, image, setImage }: Props) => {
 
   return (
     <div className={s.itemWrapper}>
-      <ControlledTextField
-        control={control}
-        label={'Question'}
-        name={'question'}
-        variant={'default'}
-      />
+      <ControlledTextField control={control} label={label} name={name} variant={'default'} />
 
       <div className={s.imageWrapper}>
         {image === null ? (

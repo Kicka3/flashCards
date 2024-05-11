@@ -173,7 +173,7 @@ export const Cards = () => {
                       <img
                         className={s.cardImg}
                         height={50}
-                        src={card.questionImg ? card.questionImg : noImg}
+                        src={card.answerImg ? card.answerImg : noImg}
                         width={70}
                       />
                       {card.answer}

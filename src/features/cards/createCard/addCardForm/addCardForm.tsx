@@ -39,12 +39,25 @@ export const AddCardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
     formData.append('answerImg', sentAnswerImg)
 
     onCreateCard(formData)
+    onOpenChange(false)
   }
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onFormSubmit)}>
-      <AddItemForm control={control} image={questionImg} setImage={setQuestionImg} />
-      <AddItemForm control={control} image={answerImg} setImage={setAnswerImg} />
+      <AddItemForm
+        control={control}
+        image={questionImg}
+        label={'Question'}
+        name={'question'}
+        setImage={setQuestionImg}
+      />
+      <AddItemForm
+        control={control}
+        image={answerImg}
+        label={'Answer'}
+        name={'answer'}
+        setImage={setAnswerImg}
+      />
 
       <div className={s.actionsBtnWrapper}>
         <Button type={'submit'} variant={'primary'}>
