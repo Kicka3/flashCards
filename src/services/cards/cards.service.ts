@@ -33,6 +33,14 @@ const cardsService = baseApi.injectEndpoints({
           url: `/v2/decks/min-max-cards`,
         }),
       }),
+      updateCard: builder.mutation<void, { args: FormData; id: string }>({
+        invalidatesTags: ['Cards'],
+        query: ({ args, id }) => ({
+          body: args,
+          method: 'POST',
+          url: `/v1/cards/${id}`,
+        }),
+      }),
     }
   },
 })
@@ -42,4 +50,5 @@ export const {
   useDeleteCardMutation,
   useGetCardsQuery,
   useGetMinMaxCardsQuery,
+  useUpdateCardMutation,
 } = cardsService
