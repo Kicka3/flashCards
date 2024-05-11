@@ -210,7 +210,7 @@ export const handlers = [
   http.delete(`${baseUrl}/v1/cards/{id}`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  /** Decks */
+  /** DecksContainer */
   http.get(`${baseUrl}/v2/decks`, () => {
     return HttpResponse.json(moDecks, { status: 200 })
   }),

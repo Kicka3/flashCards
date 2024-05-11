@@ -42,3 +42,8 @@ export type CreateCardArgs = {
   questionImg?: string
   questionVideo?: string
 }
+
+export type MinMaxResponse = {
+  max: number
+  min: number
+}

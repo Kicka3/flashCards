@@ -14,11 +14,11 @@ import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
-import { Decks } from '@/pages/decks/deckContainer'
+import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 
-import Layout from '../../layout/header/layout'
+import Layout from '../layout/layout'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -56,7 +56,7 @@ const privateRoutes: RouteObject[] = [
         path: ROUTES.CARDS,
       },
       {
-        element: <Decks />,
+        element: <DecksContainer />,
         path: ROUTES.DECKS,
       },
       { element: <ProfilePage />, path: ROUTES.PROFILE },

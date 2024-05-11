@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
-import { Decks } from '@/pages/decks/deckContainer/decks'
+import { DecksContainer } from '@/pages/decks/ui/deckContainer/decksContainer'
 import { store } from '@/services/store'
 import { fn } from '@storybook/test'
 
@@ -13,7 +13,7 @@ const meta = {
   args: {
     onClick: fn(),
   },
-  component: Decks,
+  component: DecksContainer,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -27,8 +27,8 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'Pages/Decks',
-} satisfies Meta<typeof Decks>
+  title: 'Pages/DecksContainer',
+} satisfies Meta<typeof DecksContainer>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -42,6 +42,6 @@ export const DecksStoryDemo: Story = {
       return <Typography variant={'h1'}>LOADING...</Typography>
     }
 
-    return <Decks {...DecksStoryDemo.args} />
+    return <DecksContainer {...DecksStoryDemo.args} />
   },
 }

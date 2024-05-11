@@ -10,7 +10,7 @@ import Profile from './profile/profile'
 
 type Props = { isAuth: boolean; profile: UserData | undefined } & ComponentPropsWithoutRef<'header'>
 
-const Header = ({ children, className, isAuth, profile, ...rest }: Props) => {
+export const Header = ({ children, className, isAuth, profile, ...rest }: Props) => {
   return (
     <header className={s.headerWrapper}>
       <div className={clsx(s.header, className)} {...rest}>
@@ -21,5 +21,3 @@ const Header = ({ children, className, isAuth, profile, ...rest }: Props) => {
     </header>
   )
 }
-
-export default Header

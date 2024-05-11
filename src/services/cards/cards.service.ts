@@ -1,6 +1,6 @@
 import { baseApi } from '@/services/base-api'
 
-import { CardsResponse, CreateCardArgs, GetCardsArgs } from './cards.types'
+import { CardsResponse, CreateCardArgs, GetCardsArgs, MinMaxResponse } from './cards.types'
 
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -27,8 +27,19 @@ const cardsService = baseApi.injectEndpoints({
           url: `/v1/decks/${id}/cards`,
         }),
       }),
+      getMinMaxCards: builder.query<MinMaxResponse, void>({
+        query: () => ({
+          providesTags: ['Card'],
+          url: `/v2/decks/min-max-cards`,
+        }),
+      }),
     }
   },
 })
 
-export const { useCreateCardMutation, useDeleteCardMutation, useGetCardsQuery } = cardsService
+export const {
+  useCreateCardMutation,
+  useDeleteCardMutation,
+  useGetCardsQuery,
+  useGetMinMaxCardsQuery,
+} = cardsService

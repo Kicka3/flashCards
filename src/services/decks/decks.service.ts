@@ -11,7 +11,6 @@ export const decksApiService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<void, DeckBodyRequest>({
-        /** Делаем инвалидацию кеша для обновления состояния */
         invalidatesTags: ['Decks'],
         query: args => ({
           body: args,
@@ -20,7 +19,6 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       deleteDeck: builder.mutation<void, DeleteDeckReq>({
-        /** Делаем инвалидацию кеша для обновления состояния */
         invalidatesTags: ['Decks'],
         query: args => ({
           method: 'DELETE',
@@ -35,7 +33,6 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        /** Делаем инвалидацию кеша для обновления состояния */
         providesTags: ['Decks'],
         query: args => ({
           params: args ?? undefined,
