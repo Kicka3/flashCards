@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
@@ -7,8 +8,6 @@ import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
 import { useDeleteDeckMutation } from '@/services/decks/decks.service'
 
 import s from './decks.module.scss'
-
-/** Контейнерная компонента для логики DECKS */
 
 type SliderType = number[]
 
@@ -21,6 +20,8 @@ type Props = {
 export const DecksContainer = ({}: Props) => {
   const { deckIsLoading, isOwner, mappedDecks, orderBy, setSortedBy } = useDeckFilter()
 
+  const navigate = useNavigate()
+
   /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'My Cards' },
@@ -31,7 +32,7 @@ export const DecksContainer = ({}: Props) => {
   const [value, setValue] = useState<SliderType>([1, 20])
 
   /** DELETE */
-  const [deleteDeck] = useDeleteDeckMutation()
+  const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
 
   if (deckIsLoading) {
     return (
@@ -40,8 +41,15 @@ export const DecksContainer = ({}: Props) => {
       </h1>
     )
   }
+
+  /** Удаляю Deck */
   const onDeleteDeck = (id: string) => {
     deleteDeck({ id })
+  }
+
+  /** Открываю Deck */
+  const openDeck = (deckId: string) => {
+    navigate(`/decks/${deckId}`)
   }
 
   return (
@@ -50,9 +58,11 @@ export const DecksContainer = ({}: Props) => {
       {mappedDecks?.length ? (
         <DecksTable
           decks={mappedDecks}
+          isDeckBeingDeleted={isDeckBeingDeleted}
           isOwner={isOwner}
           onDeleteClick={onDeleteDeck}
           onSort={setSortedBy}
+          openDeck={openDeck}
           sort={orderBy}
         />
       ) : (

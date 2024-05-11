@@ -51,6 +51,7 @@ export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, t
   /** Когда компонента монитурется, проверяем deck и устанавливаем занчения для полей */
   useEffect(() => {
     if (deck) {
+      console.log(deck.name)
       setValue('name', deck.name || '')
       setValue('isPrivate', deck.isPrivate || false)
       setPhoto(deck.cover ?? null)
@@ -68,7 +69,7 @@ export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, t
     reset()
   }
 
-  /** Загрузку изображений */
+  /** Загрузка изображений */
   const openFiles = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
@@ -126,7 +127,7 @@ export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, t
           />
           <div className={s.ActionsBtnWrapper}>
             <Button disabled={disabled} type={'submit'} variant={'primary'}>
-              Add new Pack
+              {title}
             </Button>
             <Button disabled={disabled} onClick={handlerClose} type={'reset'} variant={'secondary'}>
               Cancel

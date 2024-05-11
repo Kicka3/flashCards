@@ -42,8 +42,7 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        //Надо ли инвалидировать карты?
-        providesTags: ['Decks'],
+        providesTags: ['Decks', 'Card'],
         query: args => ({
           params: args ?? undefined,
           url: 'v2/decks',

@@ -16,21 +16,33 @@ import { UpdateDeck } from '@/features/deck/updateDeck'
 import { useSortDecks } from '@/pages/decks/deckHooks'
 import { Sort } from '@/services/common.types'
 import { MyDeck } from '@/services/decks'
+import clsx from 'clsx'
 
 import s from './decksTable.module.scss'
 
 type Props = {
   decks: MyDeck[]
+  isDeckBeingDeleted: boolean
   isOwner: (userId: string) => boolean
   onDeleteClick?: (id: string) => void
   onEditClick?: (id: string) => void
   onSort?: (sort: Sort) => void
+  openDeck: (deckId: string) => void
   sort?: Sort
 }
 
-export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Props) => {
+export const DecksTable = ({
+  decks,
+  isDeckBeingDeleted,
+  isOwner,
+  onDeleteClick,
+  onSort,
+  openDeck,
+  sort,
+}: Props) => {
   const [deleteForm, setDeleteForm] = useState(false)
   const [openEditMode, setOpenEditMode] = useState(false)
+  /**  */
   const { handleSort, sortedDecks } = useSortDecks(decks, sort, onSort)
 
   /** Сохраняю ID колоды */
@@ -40,7 +52,7 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Prop
     setDeleteForm(false)
   }, [])
 
-  /** !!!! Ищу нужную колоду чтобы достать name и id и саму колоду !!!! */
+  /** Ищу нужную колоду */
   const findDeck = useCallback(
     (id: string) => {
       return decks.find(d => d.id === id)
@@ -80,9 +92,8 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Prop
     [findDeck]
   )
 
-  const onOpenDeck = useCallback((deckId: string) => {
-    console.log(deckId)
-    // onOpenDeck(decks.)
+  const openDeckHandler = useCallback((deckId: string) => {
+    openDeck(deckId)
   }, [])
 
   const onLearnDeck = useCallback(() => {
@@ -108,6 +119,10 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Prop
     },
     [sort]
   )
+
+  const classNames = {
+    disabledIcon: clsx(isDeckBeingDeleted && s.disableIcon),
+  }
 
   return (
     <>
@@ -154,16 +169,13 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Prop
           {sortedDecks?.map(deck => (
             <TableRow key={deck.id}>
               <TableCell>
-                <span className={s.tableImTitleWrapper} onClick={() => onOpenDeck(deck.id)}>
+                <span className={s.tableImTitleWrapper} onClick={() => openDeckHandler(deck.id)}>
                   {deck.cover ? (
                     <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />
                   ) : (
                     <img alt={'noCover'} className={s.deckCoverImg} src={noCoverImg} />
                   )}
-                  {/*//УБРАТЬ HREF*/}
-                  <Typography as={'a'} href={`/decks/${deck.id}`} variant={'body2'}>
-                    {deck.name}
-                  </Typography>
+                  <Typography variant={'body2'}>{deck.name}</Typography>
                 </span>
               </TableCell>
               <TableCell>{deck.cards}</TableCell>
@@ -172,19 +184,48 @@ export const DecksTable = ({ decks, isOwner, onDeleteClick, onSort, sort }: Prop
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
-                    <Button as={'a'} onClick={onLearnDeck} variant={'icon'}>
-                      <PlayCircleOutline height={'16px'} width={'16px'} />
+                    <Button
+                      className={deck.cards === 0 ? s.disableIcon : ''}
+                      disabled={!deck.cards}
+                      onClick={onLearnDeck}
+                      variant={'icon'}
+                    >
+                      <PlayCircleOutline
+                        className={clsx(deck.cards === 0 && s.disableIcon)}
+                        height={'16px'}
+                        width={'16px'}
+                      />
                     </Button>
-                    <Button onClick={editDeckHandler(deck.id)} variant={'icon'}>
-                      <Edit2Outline height={'16px'} width={'16px'} />
+                    <Button
+                      disabled={isDeckBeingDeleted}
+                      onClick={editDeckHandler(deck.id)}
+                      variant={'icon'}
+                    >
+                      <Edit2Outline
+                        className={classNames.disabledIcon}
+                        height={'16px'}
+                        width={'16px'}
+                      />
                     </Button>
-                    <Button onClick={deleteDeckHandler(deck.id)} variant={'icon'}>
-                      <TrashOutline height={'16px'} width={'16px'} />
+                    <Button
+                      disabled={isDeckBeingDeleted}
+                      onClick={deleteDeckHandler(deck.id)}
+                      variant={'icon'}
+                    >
+                      <TrashOutline
+                        className={classNames.disabledIcon}
+                        height={'16px'}
+                        width={'16px'}
+                      />
                     </Button>
                   </div>
                 ) : (
-                  <Button as={'a'} href={`/decks/${deck.id}/learn`} variant={'icon'}>
-                    <PlayCircleOutline height={'16px'} width={'16px'} />
+                  <Button onClick={onLearnDeck} variant={'icon'}>
+                    <PlayCircleOutline
+                      className={clsx(deck.cards && s.disableIcon)}
+                      height={'16px'}
+                      width={'16px'}
+                    />
                   </Button>
                 )}
               </TableCell>
