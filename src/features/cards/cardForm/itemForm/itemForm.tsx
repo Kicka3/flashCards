@@ -7,9 +7,9 @@ import { Button } from '@/common/ui/button'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { openFiles } from '@/common/utils'
 
-import s from './addItemForm.module.scss'
+import s from './ItemForm.module.scss'
 
-import { AddCardFormValues } from '../addCardSchema'
+import { AddCardFormValues } from '../CardFormSchema'
 
 type Props = {
   control: Control<AddCardFormValues, any>
@@ -19,7 +19,7 @@ type Props = {
   setImage: (image: ImageFile) => void
 }
 
-export const AddItemForm = ({ control, image, label, name, setImage }: Props) => {
+export const ItemForm = ({ control, image, label, name, setImage }: Props) => {
   const ref = useRef<HTMLInputElement>(null)
 
   const onChangeImage = (e: ChangeEvent<HTMLInputElement>) => {

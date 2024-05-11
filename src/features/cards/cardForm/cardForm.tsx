@@ -6,10 +6,10 @@ import { Button } from '@/common/ui'
 import { Card } from '@/services/cards'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import s from './addCardForm.module.scss'
+import s from './cardForm.module.scss'
 
-import { AddCardFormValues, addCardSchema } from './addCardSchema'
-import { AddItemForm } from './addItemForm'
+import { AddCardFormValues, addCardSchema } from './CardFormSchema'
+import { ItemForm } from './itemForm'
 
 type Props = {
   card?: Card
@@ -17,7 +17,7 @@ type Props = {
   onOpenChange: (isOpen: boolean) => void
 }
 
-export const AddCardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
+export const CardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
   const [questionImg, setQuestionImg] = useState<ImageFile>(card?.questionImg || null)
   const [answerImg, setAnswerImg] = useState<ImageFile>(card?.answerImg || null)
   const { control, handleSubmit } = useForm<AddCardFormValues>({
@@ -44,14 +44,14 @@ export const AddCardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onFormSubmit)}>
-      <AddItemForm
+      <ItemForm
         control={control}
         image={questionImg}
         label={'Question'}
         name={'question'}
         setImage={setQuestionImg}
       />
-      <AddItemForm
+      <ItemForm
         control={control}
         image={answerImg}
         label={'Answer'}
