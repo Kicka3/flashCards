@@ -1,8 +1,8 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { ImageFile } from '@/common/types/types'
-import { Button } from '@/common/ui/button'
+import { Button } from '@/common/ui'
 import { Card } from '@/services/cards'
 import { zodResolver } from '@hookform/resolvers/zod'
 

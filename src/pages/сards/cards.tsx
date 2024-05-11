@@ -21,9 +21,7 @@ import s from './cards.module.scss'
 
 import { PackIntro } from './packIntro/packIntro'
 
-type Props = {}
-
-export const Cards = ({}: Props) => {
+export const Cards = () => {
   const { id: deckId } = useParams()
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)

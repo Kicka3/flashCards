@@ -1,7 +1,7 @@
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
-import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
 import { Deck } from '@/services/decks'
+import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
 
 import s from './packIntro.module.scss'
 
