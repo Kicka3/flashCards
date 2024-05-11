@@ -1,6 +1,7 @@
-import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { MemoryRouter } from 'react-router-dom'
 
-import Layout from '@/layout/header/layout'
+import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 import PageNotFound from './pageNotFound'
@@ -10,9 +11,11 @@ const meta = {
   component: PageNotFound,
   decorators: [
     Story => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
+      <MemoryRouter>
+        <Provider store={store}>
+          <Story />
+        </Provider>
+      </MemoryRouter>
     ),
   ],
   tags: ['autodocs'],
@@ -25,10 +28,6 @@ type Story = StoryObj<typeof meta>
 export const PageNotFoundDefault: Story = {
   args: {},
   render: () => {
-    return (
-      <Layout>
-        <PageNotFound />
-      </Layout>
-    )
+    return <PageNotFound />
   },
 }

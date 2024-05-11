@@ -47,12 +47,15 @@ export const PackIntro = ({ deck, isEmpty, isOwner, setIsOpenCreate }: Props) =>
       <div className={s.packTitleWrapper}>
         <div className={s.packTitle}>
           <Typography variant={'h1'}>{deck?.name}</Typography>
-          <IconDropDown />
+          {isOwner && <IconDropDown />}
         </div>
         {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
       </div>
-
-      <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
+      {isOwner ? (
+        <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
+      ) : (
+        <Button onClick={() => {}}>Start to Learn</Button>
+      )}
     </div>
   )
 }

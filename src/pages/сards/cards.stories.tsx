@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 
-import Layout from '@/layout/header/layout'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -12,11 +11,11 @@ const meta = {
   component: Cards,
   decorators: [
     Story => (
-      <BrowserRouter>
+      <MemoryRouter>
         <Provider store={store}>
           <Story />
         </Provider>
-      </BrowserRouter>
+      </MemoryRouter>
     ),
   ],
   tags: ['autodocs'],
@@ -29,10 +28,6 @@ type Story = StoryObj<typeof meta>
 export const CardsDefault: Story = {
   args: {},
   render: () => {
-    return (
-      <Layout>
-        <Cards />
-      </Layout>
-    )
+    return <Cards />
   },
 }

@@ -24,7 +24,7 @@ import { PackIntro } from './packIntro/packIntro'
 type Props = {}
 
 export const Cards = ({}: Props) => {
-  const { id } = useParams()
+  const { id: deckId } = useParams()
   const [search, setSearch] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState('10')
@@ -32,7 +32,7 @@ export const Cards = ({}: Props) => {
   const debouncedSearch = useDebounce(search)
   const paginationOptions = ['10', '20', '30', '50', '100']
   const { data: cards, isLoading } = useGetCardsQuery({
-    id: id || '',
+    id: deckId || '',
     params: {
       answer: debouncedSearch,
       currentPage,
@@ -41,7 +41,7 @@ export const Cards = ({}: Props) => {
       question: debouncedSearch,
     },
   })
-  const { data: deck } = useGetDeckByIdQuery(id!)
+  const { data: deck } = useGetDeckByIdQuery(deckId!)
   const { data: me } = useMeQuery()
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
@@ -98,19 +98,11 @@ export const Cards = ({}: Props) => {
   return (
     <section className={s.wrapper}>
       <CreateCard
-        id={id}
+        deckId={deckId!}
         isOpen={isOpenCreate}
         onOpenChange={setIsOpenCreate}
         title={'Add New Card'}
       />
-      {/* удалить целиком колоду
-      <DeletePack
-        id={id}
-        isOpen={isOpenDelete}
-        onOpenChange={setIsOpenDelete}
-        title={'Delete Card'}
-      /> 
-      */}
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
         <Typography variant={'body2'}>Back to Decks List</Typography>
@@ -126,7 +118,12 @@ export const Cards = ({}: Props) => {
       {Boolean(isEmpty) && (
         <>
           <div className={s.searchField}>
-            <TextField onChange={setSearch} value={search} variant={'search'} />
+            <TextField
+              onChange={setSearch}
+              placeholder={'Write something to search...'}
+              value={search}
+              variant={'search'}
+            />
           </div>
 
           <Table className={s.cardsTable}>

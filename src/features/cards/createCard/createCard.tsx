@@ -1,30 +1,28 @@
 import { Modal } from '@/common/ui/modal'
-import { CreateCardArgs, useCreateCardMutation } from '@/services/cards'
+import { Card, useCreateCardMutation } from '@/services/cards'
 
-import { AddForm } from './addForm/addForm'
+import { AddCardForm } from './addCardForm/addCardForm'
 
 /** Контейнерная компонента createCard для логики запросов */
-
 type Props = {
+  card?: Card
+  deckId: string
   disabled?: boolean
-  id?: string
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
   title: string
 }
 
-export const CreateCard = ({ id, isOpen, onOpenChange, title }: Props) => {
-  const [createCard, { isLoading: isCardBeingCreated }] = useCreateCardMutation()
-  // дописать типы data и в addForm
-  const onSubmit = (data: any) => {
-    if (id) {
-      createCard({ args: data, id })
-    }
+export const CreateCard = ({ card, deckId, isOpen, onOpenChange, title }: Props) => {
+  const [createCard] = useCreateCardMutation()
+
+  const onCreateCard = (data: FormData) => {
+    createCard({ args: data, id: deckId })
   }
 
   return (
     <Modal onOpenChange={onOpenChange} open={isOpen} title={title}>
-      <AddForm onOpenChange={onOpenChange} onSubmit={onSubmit} />
+      <AddCardForm card={card} onCreateCard={onCreateCard} onOpenChange={onOpenChange} />
     </Modal>
   )
 }
