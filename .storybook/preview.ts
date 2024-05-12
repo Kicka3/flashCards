@@ -4,25 +4,21 @@ import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 import { initialize } from 'msw-storybook-addon'
 import { handlers } from '../src/services/mocks/handlers'
+import { themes } from '@storybook/theming'
 
 initialize({}, handlers)
 
 const preview: Preview = {
   parameters: {
+    docs: {
+      theme: themes.dark,
+    },
     backgrounds: {
-      default: 'black', // Set default background color to black
+      default: 'dark',
       values: [
         {
-          name: 'black',
-          value: '#000',
-        },
-        {
           name: 'dark',
-          value: '#333',
-        },
-        {
-          name: 'white',
-          value: '#fff',
+          value: '#000000',
         },
       ],
     },

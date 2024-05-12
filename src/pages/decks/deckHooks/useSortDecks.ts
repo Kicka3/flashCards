@@ -66,7 +66,7 @@ export const useSortDecks = (
     //   'id',
     //   'lastUpdated',
     //   'name',
-    //   'private',
+    //   'isPrivate',
     //   'userId',
     // ]
     //

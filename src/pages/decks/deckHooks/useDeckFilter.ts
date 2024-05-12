@@ -1,3 +1,5 @@
+import { useCallback } from 'react'
+
 import { usePageFilter } from '@/common/hooks/usePageFilter'
 import { useGetMinMaxCardsQuery } from '@/services/cards'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
@@ -69,9 +71,9 @@ export const useDeckFilter = () => {
     created: deck.created,
     createdBy: deck.author.name,
     id: deck.id,
+    isPrivate: deck.isPrivate,
     lastUpdated: deck.updated,
     name: deck.name,
-    private: deck.isPrivate,
     userId: deck.userId,
   }))
 
@@ -80,6 +82,14 @@ export const useDeckFilter = () => {
     return userId === me?.id
   }
 
+  /** Ищу нужную колоду */
+  const findDeck = useCallback(
+    (id: string) => {
+      return mappedDecks?.find(d => d.id === id)
+    },
+    [mappedDecks]
+  )
+
   /** Возвращаем объект с данными и функциями для управления фильтрацией колод. */
   return {
     clearFilter,
@@ -87,6 +97,7 @@ export const useDeckFilter = () => {
     deckData,
     deckIsFetching,
     deckIsLoading,
+    findDeck,
     getCurrentTab,
     isOwner,
     itemsPerPage,

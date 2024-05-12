@@ -7,13 +7,28 @@ import {
   GetDecksResponse,
 } from '@/services/decks/decks.types'
 
+/** конвертирую в FormData */
+const deckFormDataHandler = (data: DeckBodyRequest) => {
+  const formData = new FormData()
+
+  if (data.cover instanceof File) {
+    formData.append('cover', data.cover)
+  } else if (data.cover === null) {
+    formData.append('cover', '')
+  }
+  formData.append('name', data.name)
+  formData.append('isPrivate', String(data.isPrivate))
+
+  return formData
+}
+
 export const decksApiService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
       createDeck: builder.mutation<void, DeckBodyRequest>({
         invalidatesTags: ['Decks'],
         query: args => ({
-          body: args,
+          body: deckFormDataHandler(args),
           method: 'POST',
           url: 'v1/decks',
         }),
@@ -26,25 +41,24 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       getDeckById: builder.query<Deck, string>({
-        /** Делаем инвалидацию кеша для обновления состояния */
         providesTags: ['Decks'],
         query: id => ({
           url: `v1/decks/${id}`,
         }),
       }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        providesTags: ['Decks'],
+        providesTags: ['Decks', 'Cards'],
         query: args => ({
           params: args ?? undefined,
           url: 'v2/decks',
         }),
       }),
-      updateDecks: builder.mutation<GetDecksResponse, GetDecksArgs | void>({
-        /** Делаем инвалидацию кеша для обновления состояния */
-        invalidatesTags: ['Decks'],
+      updateDecks: builder.mutation<Deck, { data: DeckBodyRequest; id: string }>({
+        invalidatesTags: ['Decks', 'Cards'],
         query: args => ({
-          params: args ?? undefined,
-          url: `v1/decks/{id}`,
+          body: deckFormDataHandler(args.data),
+          method: 'PATCH',
+          url: `v1/decks/${args.id}`,
         }),
       }),
     }
@@ -56,4 +70,5 @@ export const {
   useDeleteDeckMutation,
   useGetDeckByIdQuery,
   useGetDecksQuery,
+  useUpdateDecksMutation,
 } = decksApiService

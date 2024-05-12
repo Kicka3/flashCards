@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 
 import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
-import { IconDropDown } from '@/layout/header/ui/icon-dropdown/iconDropdown'
-import { UserDropDown } from '@/layout/header/ui/user-dropdown/userDropdown'
 import { store } from '@/services/store'
+import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
+import { UserDropDown } from '@/widgets/header/ui/user-dropdown/userDropdown'
 
 const meta = {
   argTypes: {

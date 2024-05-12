@@ -7,6 +7,11 @@
   gap: 10px;
 }
 
+.disableIcon {
+  pointer-events: none;
+  color: var(--color-dark-100);
+}
+
 .tableImTitleWrapper {
   display: flex;
   flex-direction: row;
@@ -15,9 +20,12 @@
 }
 
 .deckCoverImg {
+  cursor: pointer;
+
   min-width: 70px;
   max-width: 70px;
   height: 50px;
+
   object-fit: cover;
 }
 
