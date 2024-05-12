@@ -9,6 +9,7 @@ import { useDebounce } from '@/common/hooks/useDebounce'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Pagination } from '@/common/ui/pagination'
+import { Rating } from '@/common/ui/rating'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { UpdateCard } from '@/features/cards/updateCard'
@@ -169,7 +170,9 @@ export const Cards = () => {
                   <TableCell>
                     {new Intl.DateTimeFormat('ru-RU').format(new Date(card.updated))}
                   </TableCell>
-                  <TableCell>{card.grade}</TableCell>
+                  <TableCell>
+                    <Rating rating={card.grade} />
+                  </TableCell>
                   {isOwner && (
                     <TableCell>
                       <div className={s.btnWrapper}>
