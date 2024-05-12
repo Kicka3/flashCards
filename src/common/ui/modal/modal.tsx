@@ -1,11 +1,12 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { Close } from '@/assets/icons/components'
-import { Typography } from '@/common/ui'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import clsx from 'clsx'
 
 import s from './modal.module.scss'
+
+import { ModalContent } from './content/content'
+
+const { Dialog, Root, Trigger } = DialogPrimitive
 
 type Props = {
   children?: ReactNode
@@ -13,39 +14,16 @@ type Props = {
   onOpenChange: (open: boolean) => void
   open: boolean
   title?: string
-} & Omit<ComponentPropsWithoutRef<typeof DialogPrimitive.Dialog>, 'onOpenChange' | 'open'>
+  trigger?: ReactNode
+} & Omit<ComponentPropsWithoutRef<typeof Dialog>, 'onOpenChange' | 'open'>
 
-export const Modal = ({ children, className, title, ...rest }: Props) => {
-  const handleCloseModal = () => {
-    rest.onOpenChange(false)
-  }
-
-  const classNames = {
-    closeIcon: s.closeIcon,
-    contentBox: clsx(className, s.contentBox),
-    contentWrapper: s.contentWrapper,
-    header: s.header,
-    overlay: s.overlay,
-  }
-
+export const Modal = ({ children, onOpenChange, open, trigger, ...rest }: Props) => {
   return (
-    <DialogPrimitive.Root {...rest}>
-      <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className={classNames.overlay} />
-        <DialogPrimitive.Content className={classNames.contentWrapper}>
-          {title && (
-            <div className={classNames.header}>
-              <DialogPrimitive.Title asChild>
-                <Typography variant={'h2'}>{title}</Typography>
-              </DialogPrimitive.Title>
-              <DialogPrimitive.Close aria-label={'Close'} asChild onClick={handleCloseModal}>
-                <Close className={classNames.closeIcon} height={'24px'} width={'24px'} />
-              </DialogPrimitive.Close>
-            </div>
-          )}
-          <div className={classNames.contentBox}>{children}</div>
-        </DialogPrimitive.Content>
-      </DialogPrimitive.Portal>
-    </DialogPrimitive.Root>
+    <Root onOpenChange={onOpenChange} open={open}>
+      <Trigger className={s.modalTrigger}>{trigger}</Trigger>
+      <ModalContent setIsOpen={onOpenChange} {...rest}>
+        {children}
+      </ModalContent>
+    </Root>
   )
 }
