@@ -1,6 +1,6 @@
 import { baseApi } from '@/services/base-api'
 
-import { CardsResponse, CreateCardArgs, GetCardsArgs, MinMaxResponse } from './cards.types'
+import { Card, CardsResponse, GetCardsArgs, MinMaxResponse } from './cards.types'
 
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
@@ -20,6 +20,12 @@ const cardsService = baseApi.injectEndpoints({
           url: `/v1/cards/${id}`,
         }),
       }),
+      getCard: builder.query<Card, string>({
+        providesTags: ['Cards'],
+        query: id => ({
+          url: `/v1/cards/${id}`,
+        }),
+      }),
       getCards: builder.query<CardsResponse, { id: string; params: GetCardsArgs | void }>({
         providesTags: ['Cards'],
         query: ({ id, params }) => ({
@@ -28,8 +34,8 @@ const cardsService = baseApi.injectEndpoints({
         }),
       }),
       getMinMaxCards: builder.query<MinMaxResponse, void>({
+        providesTags: ['Cards'],
         query: () => ({
-          providesTags: ['Card'],
           url: `/v2/decks/min-max-cards`,
         }),
       }),
@@ -37,7 +43,7 @@ const cardsService = baseApi.injectEndpoints({
         invalidatesTags: ['Cards'],
         query: ({ args, id }) => ({
           body: args,
-          method: 'POST',
+          method: 'PATCH',
           url: `/v1/cards/${id}`,
         }),
       }),
@@ -48,6 +54,7 @@ const cardsService = baseApi.injectEndpoints({
 export const {
   useCreateCardMutation,
   useDeleteCardMutation,
+  useGetCardQuery,
   useGetCardsQuery,
   useGetMinMaxCardsQuery,
   useUpdateCardMutation,
