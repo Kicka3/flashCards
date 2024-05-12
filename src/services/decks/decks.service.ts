@@ -28,7 +28,6 @@ export const decksApiService = baseApi.injectEndpoints({
       createDeck: builder.mutation<void, DeckBodyRequest>({
         invalidatesTags: ['Decks'],
         query: args => ({
-          //Конверитрую датаформ и отправляю
           body: deckFormDataHandler(args),
           method: 'POST',
           url: 'v1/decks',
@@ -41,15 +40,21 @@ export const decksApiService = baseApi.injectEndpoints({
           url: `v1/decks/${args.id}`,
         }),
       }),
+      getDeckById: builder.query<Deck, string>({
+        providesTags: ['Decks'],
+        query: id => ({
+          url: `v1/decks/${id}`,
+        }),
+      }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
-        providesTags: ['Decks', 'Card'],
+        providesTags: ['Decks', 'Cards'],
         query: args => ({
           params: args ?? undefined,
           url: 'v2/decks',
         }),
       }),
       updateDecks: builder.mutation<Deck, { data: DeckBodyRequest; id: string }>({
-        invalidatesTags: ['Decks', 'Card'],
+        invalidatesTags: ['Decks', 'Cards'],
         query: args => ({
           body: deckFormDataHandler(args.data),
           method: 'PATCH',
@@ -63,6 +68,7 @@ export const decksApiService = baseApi.injectEndpoints({
 export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
+  useGetDeckByIdQuery,
   useGetDecksQuery,
   useUpdateDecksMutation,
 } = decksApiService

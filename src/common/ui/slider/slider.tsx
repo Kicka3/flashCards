@@ -7,7 +7,7 @@ import s from './slider.module.scss'
 
 import { Typography } from '..'
 
-export type Props = {
+type Props = {
   minStepsBetweenThumbs?: number
   value: number[]
 } & ComponentPropsWithoutRef<typeof SliderRadix.Root>

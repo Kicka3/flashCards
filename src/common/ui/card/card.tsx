@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import s from './card.module.scss'
 
-export type Props<T extends ElementType = 'div'> = {
+type Props<T extends ElementType = 'div'> = {
   as?: T
   children?: ReactNode
   className?: string

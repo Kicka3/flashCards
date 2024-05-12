@@ -17,8 +17,7 @@ import { SignUp } from '@/pages/auth/singUp'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
-
-import Layout from '../layout/layout'
+import Layout from '@/widgets/header/layout'
 
 const publicRoutes: RouteObject[] = [
   {

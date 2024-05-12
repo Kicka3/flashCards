@@ -8,7 +8,7 @@ import s from './pagination.module.scss'
 import { Typography } from '..'
 import { Select, SelectProps } from '../select'
 
-export type Props = {
+type Props = {
   currentPage: number
   itemsPerPage: number
   onChangeItemsPerPage: (count: string) => void

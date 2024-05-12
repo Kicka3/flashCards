@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 import s from './button.module.scss'
 
-export type Props<T extends ElementType = 'button'> = {
+type Props<T extends ElementType = 'button'> = {
   as?: T
   className?: string
   fullWidth?: boolean

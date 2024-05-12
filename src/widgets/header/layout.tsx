@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom'
 
 import { useMeQuery } from '@/services/auth'
-import { Header } from '@/widgets/header/ui'
 
 import s from './layout.module.scss'
+
+import { Header } from './ui'
 
 const Layout = () => {
   const { data, isError, isLoading } = useMeQuery()

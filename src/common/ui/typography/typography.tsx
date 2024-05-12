@@ -20,7 +20,7 @@ type Variant =
 
 type Theme = 'dark' | 'light'
 
-export type Props<T extends ElementType = 'div'> = {
+type Props<T extends ElementType = 'div'> = {
   as?: T
   className?: string
   theme?: Theme
