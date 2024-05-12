@@ -14,10 +14,10 @@ import { ItemForm } from './itemForm'
 type Props = {
   card?: Card
   onCreateCard: (data: FormData) => void
-  onOpenChange: (isOpen: boolean) => void
+  setIsOpen: (isOpen: boolean) => void
 }
 
-export const CardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
+export const CardForm = ({ card, onCreateCard, setIsOpen }: Props) => {
   const [questionImg, setQuestionImg] = useState<ImageFile>(card?.questionImg || null)
   const [answerImg, setAnswerImg] = useState<ImageFile>(card?.answerImg || null)
   const { control, handleSubmit } = useForm<AddCardFormValues>({
@@ -37,9 +37,9 @@ export const CardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
     formData.append('answer', data.answer)
     formData.append('questionImg', sentQuestionImg)
     formData.append('answerImg', sentAnswerImg)
+    setIsOpen(false)
 
     onCreateCard(formData)
-    onOpenChange(false)
   }
 
   return (
@@ -63,7 +63,7 @@ export const CardForm = ({ card, onCreateCard, onOpenChange }: Props) => {
         <Button type={'submit'} variant={'primary'}>
           Add new Card
         </Button>
-        <Button onClick={() => onOpenChange(false)} type={'reset'} variant={'secondary'}>
+        <Button onClick={() => setIsOpen(false)} type={'reset'} variant={'secondary'}>
           Cancel
         </Button>
       </div>

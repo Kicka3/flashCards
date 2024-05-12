@@ -1,5 +1,6 @@
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
+import { CreateCard } from '@/features/cards/createCard'
 import { Deck } from '@/services/decks'
 import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
 
@@ -9,10 +10,17 @@ type Props = {
   deck: Deck | undefined
   isEmpty: boolean
   isOwner: boolean
-  setIsOpenCreate: (isOpen: boolean) => void
 }
 
-export const PackIntro = ({ deck, isEmpty, isOwner, setIsOpenCreate }: Props) => {
+const CardCreator = (deckId: string) => (
+  <CreateCard
+    deckId={deckId}
+    title={'Add New Card'}
+    trigger={<Button as={'div'}>Add New Card</Button>}
+  />
+)
+
+export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   if (!isEmpty) {
     return (
       <>
@@ -30,7 +38,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner, setIsOpenCreate }: Props) =>
               <Typography className={s.noCardInfo} variant={'body2'}>
                 This pack is empty. Click add new card to fill this pack
               </Typography>
-              <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
+              {deck && CardCreator(deck?.id)}
             </>
           ) : (
             <Typography className={s.noCardInfo} variant={'body2'}>
@@ -51,11 +59,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner, setIsOpenCreate }: Props) =>
         </div>
         {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
       </div>
-      {isOwner ? (
-        <Button onClick={() => setIsOpenCreate(true)}>Add New Card</Button>
-      ) : (
-        <Button onClick={() => {}}>Start to Learn</Button>
-      )}
+      {isOwner ? deck && CardCreator(deck?.id) : <Button onClick={() => {}}>Start to Learn</Button>}
     </div>
   )
 }

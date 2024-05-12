@@ -1,26 +1,28 @@
+import { ReactNode, useState } from 'react'
+
 import { Modal } from '@/common/ui/modal'
-import { Card, useCreateCardMutation } from '@/services/cards'
+import { useCreateCardMutation } from '@/services/cards'
 
 import { CardForm } from '../cardForm'
 
 type Props = {
-  card?: Card
   deckId: string
-  isOpen: boolean
-  onOpenChange: (isOpen: boolean) => void
   title: string
+  trigger: ReactNode
 }
 
-export const CreateCard = ({ card, deckId, isOpen, onOpenChange, title }: Props) => {
+export const CreateCard = ({ deckId, title, trigger }: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
   const [createCard] = useCreateCardMutation()
 
-  const onCreateCard = (data: FormData) => {
-    createCard({ args: data, id: deckId })
+  const onCreateCard = async (data: FormData) => {
+    await createCard({ args: data, id: deckId })
   }
 
   return (
-    <Modal onOpenChange={onOpenChange} open={isOpen} title={title}>
-      <CardForm card={card} onCreateCard={onCreateCard} onOpenChange={onOpenChange} />
+    <Modal onOpenChange={setIsOpen} open={isOpen} title={title} trigger={trigger}>
+      <CardForm onCreateCard={onCreateCard} setIsOpen={setIsOpen} />
     </Modal>
   )
 }
