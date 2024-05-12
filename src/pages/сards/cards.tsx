@@ -32,7 +32,6 @@ export const Cards = () => {
   const { data: cards, isLoading } = useGetCardsQuery({
     id: deckId || '',
     params: {
-      answer: debouncedSearch,
       currentPage,
       itemsPerPage: Number(itemsPerPage),
       orderBy: orderBy,
@@ -43,7 +42,6 @@ export const Cards = () => {
   const { data: me } = useMeQuery()
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
-  // const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
 
   const totalItems = cards?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
@@ -106,7 +104,7 @@ export const Cards = () => {
           <div className={s.searchField}>
             <TextField
               onChange={setSearch}
-              placeholder={'Write something to search...'}
+              placeholder={'Search by question...'}
               value={search}
               variant={'search'}
             />
