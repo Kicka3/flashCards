@@ -40,12 +40,13 @@ export const Cards = () => {
   })
   const { data: deck } = useGetDeckByIdQuery(deckId!)
   const { data: me } = useMeQuery()
+  const [deleteCard] = useDeleteCardMutation()
+
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
 
   const totalItems = cards?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
-  const [deleteCard] = useDeleteCardMutation()
 
   if (isLoading) {
     return <div>...Loading</div>

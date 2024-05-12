@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './cardForm.module.scss'
 
-import { AddCardFormValues, addCardSchema } from './CardFormSchema'
+import { CardFormValues, CardSchema } from './CardFormSchema'
 import { ItemForm } from './itemForm'
 
 type Props = {
@@ -21,15 +21,15 @@ type Props = {
 export const CardForm = ({ card, onSendData, setIsOpen, title }: Props) => {
   const [questionImg, setQuestionImg] = useState<ImageFile>(card?.questionImg || null)
   const [answerImg, setAnswerImg] = useState<ImageFile>(card?.answerImg || null)
-  const { control, handleSubmit } = useForm<AddCardFormValues>({
+  const { control, handleSubmit } = useForm<CardFormValues>({
     defaultValues: {
       answer: card?.answer || '',
       question: card?.question || '',
     },
-    resolver: zodResolver(addCardSchema),
+    resolver: zodResolver(CardSchema),
   })
 
-  const onFormSubmit = (data: AddCardFormValues) => {
+  const onFormSubmit = (data: CardFormValues) => {
     const formData = new FormData()
     const sentQuestionImg = questionImg === null ? '' : questionImg
     const sentAnswerImg = answerImg === null ? '' : answerImg
