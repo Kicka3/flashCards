@@ -46,7 +46,7 @@
 
 .secondary {
   background-color: var(--color-dark-300);
-  box-shadow: 0 4px 18px 0 rgba(109, 109, 109, 0.22);
+  box-shadow: 0 4px 18px 0 rgb(109 109 109 / 22%);
 
   &:active {
     background-color: var(--color-dark-500);
@@ -70,11 +70,40 @@
 
 .icon {
   cursor: pointer;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 0;
+
   color: var(--color-light-100);
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    transition: 0.2s ease-in-out;
+  }
 
   &:hover {
     color: var(--color-accent-500);
+  }
+
+  &:hover::after {
+    background-color: var(--color-dark-500);
   }
 }
 
