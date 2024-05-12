@@ -22,7 +22,7 @@ export const CreateCard = ({ deckId, title, trigger }: Props) => {
 
   return (
     <Modal onOpenChange={setIsOpen} open={isOpen} title={title} trigger={trigger}>
-      <CardForm onCreateCard={onCreateCard} setIsOpen={setIsOpen} />
+      <CardForm onSendData={onCreateCard} setIsOpen={setIsOpen} title={'Add New Card'} />
     </Modal>
   )
 }

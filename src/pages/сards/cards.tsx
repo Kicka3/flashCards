@@ -178,9 +178,9 @@ export const Cards = () => {
                           card={card}
                           title={'Update Card'}
                           trigger={
-                            <div>
+                            <Button as={'div'} variant={'icon'}>
                               <Edit2Outline height={16} width={16} />
-                            </div>
+                            </Button>
                           }
                         />
 
