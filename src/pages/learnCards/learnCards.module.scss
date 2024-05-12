@@ -1,0 +1,48 @@
+.wrapper {
+  width: 100%;
+}
+
+.backLink {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+
+  margin-bottom: 15px;
+
+  text-decoration: none;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.question,
+.answer {
+  margin-bottom: 15px;
+
+  span {
+    font-weight: var(--font-weight-regular);
+  }
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+  .image {
+    height: auto;
+    max-height: 100px;
+  }
+}
+
+.tryCountText {
+  margin-bottom: 20px;
+  color: var(--color-dark-100);
+}
+
+.submitBtn {
+  margin-top: 20px;
+}

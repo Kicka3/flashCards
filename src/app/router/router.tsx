@@ -15,6 +15,7 @@ import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
+import { LearnCards } from '@/pages/learnCards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 import Layout from '@/widgets/header/layout'
@@ -59,6 +60,7 @@ const privateRoutes: RouteObject[] = [
         path: ROUTES.DECKS,
       },
       { element: <ProfilePage />, path: ROUTES.PROFILE },
+      { element: <LearnCards />, path: ROUTES.LEARN_CARDS },
     ],
   },
 ]

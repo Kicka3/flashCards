@@ -7,6 +7,8 @@ import {
   GetDecksResponse,
 } from '@/services/decks/decks.types'
 
+import { Card } from '../cards'
+
 /** конвертирую в FormData */
 const deckFormDataHandler = (data: DeckBodyRequest) => {
   const formData = new FormData()
@@ -46,11 +48,26 @@ export const decksApiService = baseApi.injectEndpoints({
           url: `v1/decks/${id}`,
         }),
       }),
+      getDeckToLearn: builder.query<Card, { id: string; params: { previousId: string } | void }>({
+        providesTags: ['Decks', 'Cards'],
+        query: ({ id, params }) => ({
+          params: params ?? undefined,
+          url: `v1/decks/${id}/learn`,
+        }),
+      }),
       getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
         providesTags: ['Decks', 'Cards'],
         query: args => ({
           params: args ?? undefined,
           url: 'v2/decks',
+        }),
+      }),
+      saveGrade: builder.mutation<void, { args: { cardId: string; grade: number }; id: string }>({
+        invalidatesTags: ['Decks', 'Cards'],
+        query: ({ args, id }) => ({
+          body: args,
+          method: 'POST',
+          url: `v1/decks/${id}/learn`,
         }),
       }),
       updateDecks: builder.mutation<Deck, { data: DeckBodyRequest; id: string }>({
@@ -69,6 +86,8 @@ export const {
   useCreateDeckMutation,
   useDeleteDeckMutation,
   useGetDeckByIdQuery,
+  useGetDeckToLearnQuery,
   useGetDecksQuery,
+  useSaveGradeMutation,
   useUpdateDecksMutation,
 } = decksApiService
