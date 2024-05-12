@@ -11,7 +11,7 @@ import { Button } from '@/common/ui/button'
 import { Pagination } from '@/common/ui/pagination'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
-import { CreateCard } from '@/features/cards/createCard'
+import { UpdateCard } from '@/features/cards/updateCard'
 import { useMeQuery } from '@/services/auth'
 import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import { useGetDeckByIdQuery } from '@/services/decks'
@@ -43,7 +43,6 @@ export const Cards = () => {
   const { data: me } = useMeQuery()
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
-  const [isOpenCreate, setIsOpenCreate] = useState<boolean>(false)
   // const [isOpenDelete, setIsOpenDelete] = useState<boolean>(false)
 
   const totalItems = cards?.pagination.totalItems || 0
@@ -95,23 +94,12 @@ export const Cards = () => {
 
   return (
     <section className={s.wrapper}>
-      <CreateCard
-        deckId={deckId!}
-        isOpen={isOpenCreate}
-        onOpenChange={setIsOpenCreate}
-        title={'Add New Card'}
-      />
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
         <Typography variant={'body2'}>Back to Decks List</Typography>
       </Link>
 
-      <PackIntro
-        deck={deck}
-        isEmpty={isEmpty}
-        isOwner={isOwner}
-        setIsOpenCreate={setIsOpenCreate}
-      />
+      <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} />
 
       {Boolean(isEmpty) && (
         <>
@@ -186,9 +174,16 @@ export const Cards = () => {
                   {isOwner && (
                     <TableCell>
                       <div className={s.btnWrapper}>
-                        <Button variant={'icon'}>
-                          <Edit2Outline height={16} width={16} />
-                        </Button>
+                        <UpdateCard
+                          card={card}
+                          title={'Update Card'}
+                          trigger={
+                            <div>
+                              <Edit2Outline height={16} width={16} />
+                            </div>
+                          }
+                        />
+
                         <Button onClick={() => deleteCard(card.id)} variant={'icon'}>
                           <TrashOutline height={16} width={16} />
                         </Button>

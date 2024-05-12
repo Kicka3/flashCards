@@ -1,3 +1,5 @@
+import { ReactNode, useState } from 'react'
+
 import { Modal } from '@/common/ui/modal'
 import { Card, useUpdateCardMutation } from '@/services/cards'
 
@@ -6,12 +8,12 @@ import { CardForm } from '../cardForm'
 /** Контейнерная компонента createCard для логики запросов */
 type Props = {
   card: Card
-  isOpen: boolean
-  onOpenChange: (isOpen: boolean) => void
   title: string
+  trigger: ReactNode
 }
 
-export const UpdateCard = ({ card, isOpen, onOpenChange, title }: Props) => {
+export const UpdateCard = ({ card, title, trigger }: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [updateCard] = useUpdateCardMutation()
 
   const onUpdateCard = (data: FormData) => {
@@ -19,8 +21,8 @@ export const UpdateCard = ({ card, isOpen, onOpenChange, title }: Props) => {
   }
 
   return (
-    <Modal onOpenChange={onOpenChange} open={isOpen} title={title}>
-      <CardForm card={card} onCreateCard={onUpdateCard} onOpenChange={onOpenChange} />
+    <Modal onOpenChange={setIsOpen} open={isOpen} title={title} trigger={trigger}>
+      <CardForm card={card} onCreateCard={onUpdateCard} setIsOpen={setIsOpen} />
     </Modal>
   )
 }
