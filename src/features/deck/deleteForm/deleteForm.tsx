@@ -11,9 +11,15 @@ type Props = {
   isDeck: boolean
   isOpen: boolean
   name: string | undefined
-  onOpenChange: (value: boolean) => void
+  onOpenChange: (value: [boolean, string | undefined]) => void
   title: string
 }
+
+/** Функция-адаптер, которая принимает onOpenChange и возвращает функцию, соответствующую типу (open: boolean) => void */
+const adaptOnOpenChange =
+  (onOpenChange: (value: [boolean, string | undefined]) => void) => (open: boolean) => {
+    onOpenChange([open, undefined])
+  }
 
 export const DeleteForm = ({
   close,
@@ -29,12 +35,12 @@ export const DeleteForm = ({
   const DeleteDeckHandler = () => {
     if (id) {
       deleteAction(id)
-      onOpenChange(false)
+      onOpenChange([false, undefined])
     }
   }
 
   return (
-    <Modal onOpenChange={onOpenChange} open={isOpen} title={title}>
+    <Modal onOpenChange={adaptOnOpenChange(onOpenChange)} open={isOpen} title={title}>
       <div className={s.deleteForm}>
         <div className={s.bodyText}>
           <Typography variant={'body2'}>{`Do you really want to remove ${name} ?`}</Typography>

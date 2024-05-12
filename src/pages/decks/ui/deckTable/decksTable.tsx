@@ -13,7 +13,7 @@ import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
-import { useSortDecks } from '@/pages/decks/deckHooks'
+import { useDeckFilter, useSortDecks } from '@/pages/decks/deckHooks'
 import { Sort } from '@/services/common.types'
 import { MyDeck } from '@/services/decks'
 import clsx from 'clsx'
@@ -40,25 +40,19 @@ export const DecksTable = ({
   openDeck,
   sort,
 }: Props) => {
-  const [deleteForm, setDeleteForm] = useState(false)
+  // const [deleteForm, setDeleteForm] = useState(false)
+  const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
   const [openEditMode, setOpenEditMode] = useState(false)
-  /**  */
+  /** Пользовател. хуки */
   const { handleSort, sortedDecks } = useSortDecks(decks, sort, onSort)
+  const { findDeck } = useDeckFilter()
 
   /** Сохраняю ID колоды */
   const [getDeckId, setGetDeckId] = useState<string | undefined>('')
 
   const closeDeleteFormHandler = useCallback(() => {
-    setDeleteForm(false)
+    setDeleteForm([false, undefined])
   }, [])
-
-  /** Ищу нужную колоду */
-  const findDeck = useCallback(
-    (id: string) => {
-      return decks.find(d => d.id === id)
-    },
-    [decks]
-  )
 
   /** Удаляю по id из form*/
   const onDeleteDeck = useCallback(
@@ -71,13 +65,14 @@ export const DecksTable = ({
   )
 
   /** Удаляю Deck */
-  const deleteDeckHandler = useCallback(
-    (id: string) => () => {
-      setGetDeckId(id)
-      setDeleteForm(true)
-    },
-    []
-  )
+  const deleteDeckHandler = (id: string) => () => {
+    setGetDeckId(id)
+    const deckName = findDeck(id)
+
+    setDeleteForm([true, deckName?.name])
+
+    return deckName?.name
+  }
 
   /** Редактирую Deck */
   const editDeckHandler = useCallback(
@@ -145,8 +140,8 @@ export const DecksTable = ({
               }}
               id={getDeckId}
               isDeck
-              isOpen={deleteForm}
-              name={findDeck?.name}
+              isOpen={deleteForm[0]}
+              name={deleteForm[1]}
               onOpenChange={setDeleteForm}
               title={'Delete Pack'}
             />
@@ -220,12 +215,13 @@ export const DecksTable = ({
                     </Button>
                   </div>
                 ) : (
-                  <Button onClick={onLearnDeck} variant={'icon'}>
-                    <PlayCircleOutline
-                      className={clsx(deck.cards && s.disableIcon)}
-                      height={'16px'}
-                      width={'16px'}
-                    />
+                  <Button
+                    className={clsx(deck.cards === 0 && s.disableIcon)}
+                    disabled={!deck.cards}
+                    onClick={onLearnDeck}
+                    variant={'icon'}
+                  >
+                    <PlayCircleOutline height={'16px'} width={'16px'} />
                   </Button>
                 )}
               </TableCell>

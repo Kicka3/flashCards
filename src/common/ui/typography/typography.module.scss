@@ -1,5 +1,3 @@
-
-
 .className {
   color: white;
 }
@@ -17,14 +15,18 @@
   font-weight: var(--font-weight-bold);
 }
 
-.h1,.h2{
+.h1,
+.h2 {
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-l);
 }
 
-.h3,.h4,.overline,.sub1,.sub2{
+.h3,
+.h4,
+.overline,
+.sub1,
+.sub2 {
   font-weight: var(--font-weight-bold);
-
 }
 
 .h3 {
@@ -32,32 +34,42 @@
   font-weight: var(--font-weight-bold);
 }
 
-.h3,.body1,.body2,.sub1,.sub2,.link1,.h4{
+.h3,
+.body1,
+.body2,
+.sub1,
+.sub2,
+.link1,
+.h4 {
   line-height: var(--line-height-m);
 }
 
 .body1,
-.sub1,.error,.h4{
+.sub1,
+.error,
+.h4 {
   font-size: var(--font-size-m);
 }
 
 .body2,
-.sub2,.link1{
+.sub2,
+.link1 {
   font-size: var(--font-size-s);
 }
 
-.caption, .overline, .link2{
+.caption,
+.overline,
+.link2 {
   font-size: var(--font-size-xs);
 }
 
-
 .link1,
-.link2{
+.link2 {
   cursor: pointer;
   color: var(--color-info-500);
   text-decoration: underline;
 
-  &:hover{
+  &:hover {
     text-decoration: none;
   }
 }
@@ -65,4 +77,3 @@
 .overline {
   text-transform: uppercase;
 }
-

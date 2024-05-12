@@ -15,9 +15,9 @@ type Props = {
   title?: string
 } & Omit<ComponentPropsWithoutRef<typeof DialogPrimitive.Dialog>, 'onOpenChange' | 'open'>
 
-export const Modal = ({ children, className, title, ...rest }: Props) => {
+export const Modal = ({ children, className, onOpenChange, title, ...rest }: Props) => {
   const handleCloseModal = () => {
-    rest.onOpenChange(false)
+    onOpenChange(false)
   }
 
   const classNames = {
