@@ -26,7 +26,11 @@ export const DecksContainer = ({}: Props) => {
     isOwner,
     itemsPerPage,
     mappedDecks,
+    maxCards,
+    minCards,
+    minMaxValues,
     onChangeName,
+    onCommitSliderValues,
     onTabValueChange,
     orderBy,
     searchBy,
@@ -74,6 +78,10 @@ export const DecksContainer = ({}: Props) => {
   return (
     <>
       <DeckHeader
+        maxCards={maxCards}
+        minCards={minCards}
+        minMaxValues={minMaxValues}
+        onCommitSliderValues={onCommitSliderValues}
         onTabValueChange={onTabValueChange}
         search={searchBy}
         setSearch={onChangeName}

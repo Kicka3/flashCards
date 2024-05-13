@@ -22,17 +22,8 @@ export const useDeckFilter = () => {
     sortedString,
   } = useFilter()
 
-  /** Запрашиваем минимальное и максимальное количество карт для слайдера. */
+  /** Slider Запрашиваем минимальное и максимальное количество карт для слайдера. */
   const { data: minMaxValues } = useGetMinMaxCardsQuery()
-
-  /** Tabs-слайдер */
-  // Обработчик изменения текущей вкладки.
-  const onTabValueChange = (value: string) => {
-    changeSearchHandler('currentTab', value)
-  }
-
-  /** Получаем текущую вкладку из поискового запроса. */
-  const getCurrentTab = search.get('currentTab') || 'allCards'
 
   /** Обработчик применения значений слайдера для фильтрации колод по количеству карт. */
   const onCommitSliderValues = (value: number[]) => {
@@ -43,6 +34,15 @@ export const useDeckFilter = () => {
   /** Получаем минимальное и максимальное значения для фильтрации колод. */
   const minCards = Number(search.get('minCardsCount') || 0)
   const maxCards = Number(search.get('maxCardsCount') || 15)
+
+  /** Tabs-слайдер */
+  // Обработчик изменения текущей вкладки.
+  const onTabValueChange = (value: string) => {
+    changeSearchHandler('currentTab', value)
+  }
+
+  /** Получаем текущую вкладку из поискового запроса. */
+  const getCurrentTab = search.get('currentTab') || 'allCards'
 
   /** Очищаем фильтры. */
   const clearFilter = () => {

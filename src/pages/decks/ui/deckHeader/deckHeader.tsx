@@ -5,13 +5,18 @@ import { Slider } from '@/common/ui/slider'
 import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
+import { MinMaxResponse } from '@/services/cards'
 import { TabsType } from '@/services/common.types'
 
 import s from './deckHeader.module.scss'
 
 type Props = {
   isLoading?: boolean
+  maxCards: number
+  minCards: number
+  minMaxValues: MinMaxResponse | undefined
   onClick?: () => void
+  onCommitSliderValues: (value: number[]) => void
   onTabValueChange: (value: string) => void
   search?: string
   setSearch?: (value: string) => void
@@ -21,12 +26,14 @@ type Props = {
 }
 
 export const DeckHeader = ({
+  maxCards,
+  minCards,
+  minMaxValues,
+  onCommitSliderValues,
   onTabValueChange,
   search,
   setSearch,
-  setValue,
   tabs,
-  value,
 }: Props) => {
   return (
     <>
@@ -61,14 +68,10 @@ export const DeckHeader = ({
             />
           </div>
           <Slider
-            max={32}
-            min={0}
-            minStepsBetweenThumbs={1}
-            onValueChange={newValue => {
-              setValue(newValue)
-            }}
-            step={1}
-            value={value}
+            defaultValue={[minCards, maxCards]}
+            max={minMaxValues?.max}
+            min={minMaxValues?.min}
+            onValueCommit={onCommitSliderValues}
           />
           <Button icon={<TrashOutline height={'14px'} width={'14px'} />} variant={'secondary'}>
             Clear Filter
