@@ -14,7 +14,7 @@ export const Table = forwardRef<ElementRef<'table'>, Props>(({ className, ...res
 
 export const TableHead = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRef<'thead'>>(
   ({ className, ...rest }, ref) => {
-    const computedClass = clsx(className)
+    const computedClass = clsx(s.thead, className)
 
     return <thead className={computedClass} ref={ref} {...rest} />
   }
@@ -22,7 +22,7 @@ export const TableHead = forwardRef<ElementRef<'thead'>, ComponentPropsWithoutRe
 
 export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRef<'tbody'>>(
   ({ className, ...rest }, ref) => {
-    const computedClass = clsx(className)
+    const computedClass = clsx(s.tbody, className)
 
     return <tbody className={computedClass} ref={ref} {...rest} />
   }
@@ -30,7 +30,7 @@ export const TableBody = forwardRef<ElementRef<'tbody'>, ComponentPropsWithoutRe
 
 export const TableRow = forwardRef<ElementRef<'tr'>, ComponentPropsWithoutRef<'tr'>>(
   ({ className, ...rest }, ref) => {
-    const computedClass = clsx(className)
+    const computedClass = clsx(s.tr, className)
 
     return <tr className={computedClass} ref={ref} {...rest} />
   }
