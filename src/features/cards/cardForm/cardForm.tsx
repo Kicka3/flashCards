@@ -21,11 +21,16 @@ type Props = {
 export const CardForm = ({ card, onSendData, setIsOpen, title }: Props) => {
   const [questionImg, setQuestionImg] = useState<ImageFile>(card?.questionImg || null)
   const [answerImg, setAnswerImg] = useState<ImageFile>(card?.answerImg || null)
-  const { control, handleSubmit } = useForm<CardFormValues>({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<CardFormValues>({
     defaultValues: {
       answer: card?.answer || '',
       question: card?.question || '',
     },
+
     resolver: zodResolver(CardSchema),
   })
 
@@ -47,6 +52,7 @@ export const CardForm = ({ card, onSendData, setIsOpen, title }: Props) => {
     <form className={s.form} onSubmit={handleSubmit(onFormSubmit)}>
       <ItemForm
         control={control}
+        errorMessage={errors.question?.message}
         image={questionImg}
         label={'Question'}
         name={'question'}
@@ -54,6 +60,7 @@ export const CardForm = ({ card, onSendData, setIsOpen, title }: Props) => {
       />
       <ItemForm
         control={control}
+        errorMessage={errors.answer?.message}
         image={answerImg}
         label={'Answer'}
         name={'answer'}
