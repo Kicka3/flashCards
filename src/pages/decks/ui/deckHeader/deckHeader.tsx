@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { TrashOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -9,8 +7,6 @@ import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
 
 import s from './deckHeader.module.scss'
-
-/** UI компонента */
 
 type Props = {
   isLoading?: boolean
@@ -23,15 +19,11 @@ type Props = {
 }
 
 export const DeckHeader = ({ search, setSearch, setValue, tabs, value }: Props) => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
-
   return (
     <>
       <div className={s.deckHead}>
         <Typography variant={'h1'}>Decks list</Typography>
         <CreateDeck
-          isOpen={isOpenModal}
-          onOpenChange={setIsOpenModal}
           title={'Add New Deck'}
           trigger={
             <Button as={'div'} variant={'primary'}>

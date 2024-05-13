@@ -13,8 +13,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './deckForm.module.scss'
 
-/** form Компонента */
-
 export type EditDeckType = {
   cover: null | string | undefined
   id: string

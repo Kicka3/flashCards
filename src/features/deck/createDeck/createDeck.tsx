@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
@@ -8,14 +8,14 @@ import { DeckBodyRequest } from '@/services/decks/decks.types'
 
 type Props = {
   disabled?: boolean
-  isOpen: boolean
-  onOpenChange: (isOpen: boolean) => void
   title: string
   trigger?: ReactNode
 }
 
-export const CreateDeck = ({ isOpen, onOpenChange, title, trigger }: Props) => {
+export const CreateDeck = ({ title, trigger }: Props) => {
   const [createDeck] = useCreateDeckMutation()
+
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
   const handlerSubmitDeck = (data: DeckBodyRequest) => {
     //Сюда засунуть notifications
@@ -24,8 +24,8 @@ export const CreateDeck = ({ isOpen, onOpenChange, title, trigger }: Props) => {
 
   return (
     <DeckForm
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
+      isOpen={isOpenModal}
+      onOpenChange={setIsOpenModal}
       onSubmitDeck={handlerSubmitDeck}
       title={title}
       trigger={trigger}
