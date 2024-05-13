@@ -5,6 +5,7 @@ import { Slider } from '@/common/ui/slider'
 import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
+import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { MinMaxResponse } from '@/services/cards'
 import { TabsType } from '@/services/common.types'
 
@@ -35,6 +36,12 @@ export const DeckHeader = ({
   setSearch,
   tabs,
 }: Props) => {
+  const { clearFilter } = useDeckFilter()
+
+  const onClearFilters = () => {
+    clearFilter()
+  }
+
   return (
     <>
       <div className={s.deckHead}>
@@ -73,7 +80,11 @@ export const DeckHeader = ({
             min={minMaxValues?.min}
             onValueCommit={onCommitSliderValues}
           />
-          <Button icon={<TrashOutline height={'14px'} width={'14px'} />} variant={'secondary'}>
+          <Button
+            icon={<TrashOutline height={'14px'} width={'14px'} />}
+            onClick={onClearFilters}
+            variant={'secondary'}
+          >
             Clear Filter
           </Button>
         </div>
