@@ -6,37 +6,26 @@ import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
-import { MinMaxResponse } from '@/services/cards'
 import { TabsType } from '@/services/common.types'
 
 import s from './deckHeader.module.scss'
 
 type Props = {
   isLoading?: boolean
-  maxCards: number
-  minCards: number
-  minMaxValues: MinMaxResponse | undefined
-  onClick?: () => void
-  onCommitSliderValues: (value: number[]) => void
-  onTabValueChange: (value: string) => void
-  search?: string
-  setSearch?: (value: string) => void
-  setValue: (newValue: number[]) => void
   tabs: TabsType[]
-  value: number[]
 }
 
-export const DeckHeader = ({
-  maxCards,
-  minCards,
-  minMaxValues,
-  onCommitSliderValues,
-  onTabValueChange,
-  search,
-  setSearch,
-  tabs,
-}: Props) => {
-  const { clearFilter } = useDeckFilter()
+export const DeckHeader = ({ tabs }: Props) => {
+  const {
+    clearFilter,
+    maxCards,
+    minCards,
+    minMaxValues,
+    onChangeName,
+    onCommitSliderValues,
+    onTabValueChange,
+    search,
+  } = useDeckFilter()
 
   const onClearFilters = () => {
     clearFilter()
@@ -58,9 +47,9 @@ export const DeckHeader = ({
       <div className={s.deckFilterWrapper}>
         <div>
           <TextField
-            onChange={setSearch}
+            onChange={onChangeName}
             placeholder={'Search deck'}
-            value={search}
+            value={search.toString()}
             variant={'search'}
           />
         </div>

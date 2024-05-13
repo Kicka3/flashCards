@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useFilter } from '@/common/hooks/useFilter'
@@ -9,8 +8,6 @@ import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
 import { useDeleteDeckMutation } from '@/services/decks/decks.service'
 
 import s from './decks.module.scss'
-
-type SliderType = number[]
 
 type Props = {
   /** Для storybook */
@@ -26,14 +23,7 @@ export const DecksContainer = ({}: Props) => {
     isOwner,
     itemsPerPage,
     mappedDecks,
-    maxCards,
-    minCards,
-    minMaxValues,
-    onChangeName,
-    onCommitSliderValues,
-    onTabValueChange,
     orderBy,
-    searchBy,
     setCurrentPage,
     setSortedBy,
   } = useDeckFilter()
@@ -46,9 +36,6 @@ export const DecksContainer = ({}: Props) => {
     { title: 'My Cards', value: 'userCards' },
     { title: 'All Cards', value: 'allCards' },
   ]
-
-  /** Value-state для Slider */
-  const [value, setValue] = useState<SliderType>([1, 20])
 
   /** DELETE */
   const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
@@ -77,18 +64,7 @@ export const DecksContainer = ({}: Props) => {
 
   return (
     <>
-      <DeckHeader
-        maxCards={maxCards}
-        minCards={minCards}
-        minMaxValues={minMaxValues}
-        onCommitSliderValues={onCommitSliderValues}
-        onTabValueChange={onTabValueChange}
-        search={searchBy}
-        setSearch={onChangeName}
-        setValue={setValue}
-        tabs={tabs}
-        value={value}
-      />
+      <DeckHeader tabs={tabs} />
       {mappedDecks?.length ? (
         <DecksTable
           decks={mappedDecks}
