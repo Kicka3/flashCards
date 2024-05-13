@@ -6,6 +6,7 @@ import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import noImg from '@/assets/img/noImage.png'
 import { useDebounce } from '@/common/hooks/useDebounce'
+import { useFilter } from '@/common/hooks/useFilter'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Pagination } from '@/common/ui/pagination'
@@ -13,7 +14,6 @@ import { Rating } from '@/common/ui/rating'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { UpdateCard } from '@/features/cards/updateCard'
-import { useMeQuery } from '@/services/auth'
 import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import { useGetDeckByIdQuery } from '@/services/decks'
 import clsx from 'clsx'
@@ -40,7 +40,7 @@ export const Cards = () => {
     },
   })
   const { data: deck } = useGetDeckByIdQuery(deckId!)
-  const { data: me } = useMeQuery()
+  const { me } = useFilter()
   const [deleteCard] = useDeleteCardMutation()
 
   const isOwner = deck?.userId === me?.id

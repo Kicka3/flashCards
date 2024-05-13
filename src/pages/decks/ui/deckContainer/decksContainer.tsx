@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Typography } from '@/common/ui'
+import { useFilter } from '@/common/hooks/useFilter'
+import { Pagination, Typography } from '@/common/ui'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
@@ -18,7 +19,18 @@ type Props = {
 }
 
 export const DecksContainer = ({}: Props) => {
-  const { deckIsLoading, isOwner, mappedDecks, orderBy, setSortedBy } = useDeckFilter()
+  const {
+    currentPage,
+    deckData,
+    deckIsLoading,
+    isOwner,
+    itemsPerPage,
+    mappedDecks,
+    orderBy,
+    setCurrentPage,
+    setSortedBy,
+  } = useDeckFilter()
+  const { paginationOptions, setItemsPerPage } = useFilter()
 
   const navigate = useNavigate()
 
@@ -52,8 +64,12 @@ export const DecksContainer = ({}: Props) => {
     navigate(`/decks/${deckId}`)
   }
 
+  /** Пагинация */
+  const totalItems = deckData?.pagination.totalItems || 0
+  const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
+
   return (
-    <div className={s.deckContainer}>
+    <>
       <DeckHeader setValue={setValue} tabs={tabs} value={value} />
       {mappedDecks?.length ? (
         <DecksTable
@@ -68,15 +84,18 @@ export const DecksContainer = ({}: Props) => {
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>
       )}
-      {/*     <Pagination*/}
-      {/*//From server*/}
-      {/*  currentPage={}*/}
-      {/*  itemsPerPage={}*/}
-      {/*  onChangeItemsPerPage={}*/}
-      {/*  onChangePage={}*/}
-      {/*//From server*/}
-      {/*  totalCount={}*/}
-      {/*/>*/}
-    </div>
+      {moreThanOnePage && (
+        <Pagination
+          className={s.pagination}
+          currentPage={currentPage}
+          defaultValue={paginationOptions[0]}
+          itemsPerPage={Number(itemsPerPage)}
+          onChangeItemsPerPage={setItemsPerPage}
+          onChangePage={setCurrentPage}
+          options={paginationOptions}
+          totalCount={totalItems || 0}
+        />
+      )}
+    </>
   )
 }

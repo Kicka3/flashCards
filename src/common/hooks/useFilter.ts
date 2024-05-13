@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
 import { useDebounce } from '@/common/hooks/useDebounce'
@@ -50,17 +50,10 @@ export const useFilter = () => {
     changeSearchHandler('name', value)
   }
 
-  /** Пагинация */
-  const setItemsPerPage = (value: number) => {
-    changeSearchHandler('itemsPerPage', value.toString())
-  }
-
-  const itemsPerPage = Number(search.get('itemsPerPage') || '10')
-
-  const onChangeCurrentPage = (value: number) => {
-    changeSearchHandler('currentPage', value.toString())
-  }
-  const currentPage = Number(search.get('currentPage') || 1)
+  /** Пагинация (общее) */
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState('10')
+  const paginationOptions = ['10', '20', '30', '50', '100']
 
   return {
     changeSearchHandler,
@@ -68,11 +61,12 @@ export const useFilter = () => {
     debounceName,
     itemsPerPage,
     me,
-    onChangeCurrentPage,
     onChangeName,
     orderBy,
+    paginationOptions,
     search,
     searchBy,
+    setCurrentPage,
     setItemsPerPage,
     setSearch,
     setSortedBy,
