@@ -26,7 +26,9 @@ export const DecksContainer = ({}: Props) => {
     isOwner,
     itemsPerPage,
     mappedDecks,
+    onChangeName,
     orderBy,
+    searchBy,
     setCurrentPage,
     setSortedBy,
   } = useDeckFilter()
@@ -70,7 +72,13 @@ export const DecksContainer = ({}: Props) => {
 
   return (
     <>
-      <DeckHeader setValue={setValue} tabs={tabs} value={value} />
+      <DeckHeader
+        search={searchBy}
+        setSearch={onChangeName}
+        setValue={setValue}
+        tabs={tabs}
+        value={value}
+      />
       {mappedDecks?.length ? (
         <DecksTable
           decks={mappedDecks}

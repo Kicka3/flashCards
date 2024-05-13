@@ -109,6 +109,7 @@ export const useDeckFilter = () => {
     onCommitSliderValues,
     onTabValueChange,
     orderBy,
+    search,
     searchBy,
     setCurrentPage,
     setSortedBy,
