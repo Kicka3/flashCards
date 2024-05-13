@@ -79,8 +79,6 @@ function PrivateRoutes() {
   return isAuth ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
 }
 
-// const isAuth = false
-
 function PublicRoutes() {
   const { isAuth, isLoading } = useAppOutletContext()
 
