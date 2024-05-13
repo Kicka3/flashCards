@@ -5,10 +5,6 @@
   align-items: center;
 }
 
-.arrowBack {
-  transform: rotate(180deg);
-}
-
 .page,
 .arrowForward,
 .arrowBack {
@@ -35,6 +31,10 @@
   &:focus {
     background-color: var(--color-accent-500);
   }
+}
+
+.arrowBack {
+  transform: rotate(180deg);
 }
 
 .selectWrapper {
