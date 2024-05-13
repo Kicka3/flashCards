@@ -6,6 +6,7 @@ import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import noImg from '@/assets/img/noImage.png'
 import { useDebounce } from '@/common/hooks/useDebounce'
+import { useFilter } from '@/common/hooks/useFilter'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Pagination } from '@/common/ui/pagination'
@@ -13,7 +14,6 @@ import { Rating } from '@/common/ui/rating'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
 import { UpdateCard } from '@/features/cards/updateCard'
-import { useMeQuery } from '@/services/auth'
 import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import { useGetDeckByIdQuery } from '@/services/decks'
 import clsx from 'clsx'
@@ -24,12 +24,12 @@ import { PackIntro } from './packIntro/packIntro'
 
 export const Cards = () => {
   const { id: deckId } = useParams()
+  const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
+    useFilter()
+
   const [search, setSearch] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState('10')
   const [orderBy, setOrderBy] = useState('')
   const debouncedSearch = useDebounce(search)
-  const paginationOptions = ['10', '20', '30', '50', '100']
   const { data: cards, isLoading } = useGetCardsQuery({
     id: deckId || '',
     params: {
@@ -40,7 +40,6 @@ export const Cards = () => {
     },
   })
   const { data: deck } = useGetDeckByIdQuery(deckId!)
-  const { data: me } = useMeQuery()
   const [deleteCard] = useDeleteCardMutation()
 
   const isOwner = deck?.userId === me?.id

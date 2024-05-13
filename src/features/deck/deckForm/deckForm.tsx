@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image, TrashOutline } from '@/assets/icons/components'
@@ -12,8 +12,6 @@ import { DeckBodyRequest } from '@/services/decks/decks.types'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './deckForm.module.scss'
-
-/** form Компонента */
 
 export type EditDeckType = {
   cover: null | string | undefined
@@ -29,9 +27,18 @@ type Props = {
   onOpenChange: (open: boolean) => void
   onSubmitDeck: (data: DeckBodyRequest) => void
   title: string
+  trigger?: ReactNode
 }
 
-export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, title }: Props) => {
+export const DeckForm = ({
+  deck,
+  disabled,
+  isOpen,
+  onOpenChange,
+  onSubmitDeck,
+  title,
+  trigger,
+}: Props) => {
   /** Стейт для фото */
   const [photo, setPhoto] = useState<File | null | string>(null)
 
@@ -86,7 +93,13 @@ export const DeckForm = ({ deck, disabled, isOpen, onOpenChange, onSubmitDeck, t
 
   return (
     <>
-      <Modal className={s.addNewDeckModal} onOpenChange={onOpenChange} open={isOpen} title={title}>
+      <Modal
+        className={s.addNewDeckModal}
+        onOpenChange={onOpenChange}
+        open={isOpen}
+        title={title}
+        trigger={trigger}
+      >
         <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
           <ControlledTextField
             control={control}

@@ -1,4 +1,5 @@
 /** Общие типы */
+import { ReactNode } from 'react'
 
 export type Pagination = {
   currentPage: number
@@ -17,12 +18,9 @@ export type Sort = {
   key: string
 } | null
 
-/** Не работает */
-export type Column = {
-  key: string
-  ownerValidate: boolean
-  sortable?: boolean
-  title: string
+export type TabsType = {
+  className?: string
+  content?: ReactNode
+  title?: string
+  value?: string
 }
-// В файле common.types.ts
-export type SortDirection = 'asc' | 'desc'

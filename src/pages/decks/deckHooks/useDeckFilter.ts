@@ -1,38 +1,29 @@
 import { useCallback } from 'react'
 
-import { usePageFilter } from '@/common/hooks/usePageFilter'
+import { useFilter } from '@/common/hooks/useFilter'
 import { useGetMinMaxCardsQuery } from '@/services/cards'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 
 export const useDeckFilter = () => {
-  /** Используем хук usePageFilter для управления фильтрацией и пагинацией. */
+  /** Используем хук useFilter для управления фильтрацией и пагинацией. */
   const {
     changeSearchHandler,
     currentPage,
     debounceName,
     itemsPerPage,
     me,
-    onChangeCurrentPage,
     onChangeName,
     orderBy,
     search,
     searchBy,
-    setItemsPerPage,
+    setCurrentPage,
     setSearch,
     setSortedBy,
     sortedString,
-  } = usePageFilter()
+  } = useFilter()
 
-  /** Запрашиваем минимальное и максимальное количество карт для слайдера. */
+  /** Slider Запрашиваем минимальное и максимальное количество карт для слайдера. */
   const { data: minMaxValues } = useGetMinMaxCardsQuery()
-
-  // Обработчик изменения текущей вкладки.
-  const onTabValueChange = (value: string) => {
-    changeSearchHandler('currentTab', value)
-  }
-
-  /** Получаем текущую вкладку из поискового запроса. */
-  const getCurrentTab = search.get('currentTab') || 'allCards'
 
   /** Обработчик применения значений слайдера для фильтрации колод по количеству карт. */
   const onCommitSliderValues = (value: number[]) => {
@@ -43,6 +34,15 @@ export const useDeckFilter = () => {
   /** Получаем минимальное и максимальное значения для фильтрации колод. */
   const minCards = Number(search.get('minCardsCount') || 0)
   const maxCards = Number(search.get('maxCardsCount') || 15)
+
+  /** Tabs-слайдер */
+  // Обработчик изменения текущей вкладки.
+  const onTabValueChange = (value: string) => {
+    changeSearchHandler('currentTab', value)
+  }
+
+  /** Получаем текущую вкладку из поискового запроса. */
+  const getCurrentTab = search.get('currentTab') || 'allCards'
 
   /** Очищаем фильтры. */
   const clearFilter = () => {
@@ -57,7 +57,7 @@ export const useDeckFilter = () => {
   } = useGetDecksQuery({
     authorId: getCurrentTab === 'userCards' ? me?.id : undefined,
     currentPage: currentPage,
-    itemsPerPage: itemsPerPage,
+    itemsPerPage: Number(itemsPerPage),
     maxCardsCount: maxCards,
     minCardsCount: minCards,
     name: debounceName,
@@ -106,13 +106,13 @@ export const useDeckFilter = () => {
     me,
     minCards,
     minMaxValues,
-    onChangeCurrentPage,
     onChangeName,
     onCommitSliderValues,
     onTabValueChange,
     orderBy,
+    search,
     searchBy,
-    setItemsPerPage,
+    setCurrentPage,
     setSortedBy,
   }
 }
