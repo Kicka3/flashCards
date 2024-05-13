@@ -16,6 +16,13 @@ const meta = {
     },
   },
   component: TextField,
+  decorators: [
+    Story => (
+      <div style={{ margin: '30px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
   title: 'Components/TextField',
 } satisfies Meta<typeof TextField>

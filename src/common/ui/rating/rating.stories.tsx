@@ -5,6 +5,13 @@ import { Rating } from '.'
 const meta = {
   argTypes: {},
   component: Rating,
+  decorators: [
+    Story => (
+      <div style={{ margin: '30px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
   title: 'Components/Rating',
 } satisfies Meta<typeof Rating>
@@ -12,7 +19,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     rating: 3,
   },

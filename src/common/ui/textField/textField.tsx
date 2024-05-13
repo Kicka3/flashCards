@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Close, EyeOffOutline, EyeOutline, Search } from '@/assets/icons/components'
-import { Typography } from '@/common/ui'
+import { Button, Typography } from '@/common/ui'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
@@ -109,23 +109,18 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           />
 
           {passwordVariant && (
-            <div className={classNames.eyeIcon}>
+            <Button
+              className={classNames.buttonIcon}
+              onClick={onShowPassword}
+              type={'button'}
+              variant={'icon'}
+            >
               {passVisibility ? (
-                <EyeOutline
-                  className={classNames.buttonIcon}
-                  height={'20px'}
-                  onClick={onShowPassword}
-                  width={'20px'}
-                />
+                <EyeOutline className={classNames.eyeIcon} height={'20px'} width={'20px'} />
               ) : (
-                <EyeOffOutline
-                  className={classNames.buttonIcon}
-                  height={'20px'}
-                  onClick={onShowPassword}
-                  width={'20px'}
-                />
+                <EyeOffOutline className={classNames.eyeIcon} height={'20px'} width={'20px'} />
               )}
-            </div>
+            </Button>
           )}
 
           {isShowClearButton && (

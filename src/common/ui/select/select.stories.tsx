@@ -5,6 +5,13 @@ import { Select } from '.'
 const meta = {
   argTypes: {},
   component: Select,
+  decorators: [
+    Story => (
+      <div style={{ margin: '30px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
   title: 'Components/Select',
 } satisfies Meta<typeof Select>
@@ -14,7 +21,7 @@ type Story = StoryObj<typeof meta>
 
 const options = ['1', '2', '3', '4']
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     options: options,
     placeholder: 'placeholder',
