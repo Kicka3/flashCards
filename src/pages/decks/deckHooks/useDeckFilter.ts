@@ -25,6 +25,7 @@ export const useDeckFilter = () => {
   /** Запрашиваем минимальное и максимальное количество карт для слайдера. */
   const { data: minMaxValues } = useGetMinMaxCardsQuery()
 
+  /** Tabs-слайдер */
   // Обработчик изменения текущей вкладки.
   const onTabValueChange = (value: string) => {
     changeSearchHandler('currentTab', value)

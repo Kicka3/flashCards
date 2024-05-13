@@ -27,6 +27,7 @@ export const DecksContainer = ({}: Props) => {
     itemsPerPage,
     mappedDecks,
     onChangeName,
+    onTabValueChange,
     orderBy,
     searchBy,
     setCurrentPage,
@@ -38,8 +39,8 @@ export const DecksContainer = ({}: Props) => {
 
   /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
-    { title: 'My Cards', value: 'My Cards' },
-    { title: 'All Cards', value: 'All Cards' },
+    { title: 'My Cards', value: 'userCards' },
+    { title: 'All Cards', value: 'allCards' },
   ]
 
   /** Value-state для Slider */
@@ -73,6 +74,7 @@ export const DecksContainer = ({}: Props) => {
   return (
     <>
       <DeckHeader
+        onTabValueChange={onTabValueChange}
         search={searchBy}
         setSearch={onChangeName}
         setValue={setValue}

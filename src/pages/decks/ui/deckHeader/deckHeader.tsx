@@ -11,6 +11,7 @@ import s from './deckHeader.module.scss'
 type Props = {
   isLoading?: boolean
   onClick?: () => void
+  onTabValueChange: (value: string) => void
   search?: string
   setSearch?: (value: string) => void
   setValue: (newValue: number[]) => void
@@ -18,7 +19,14 @@ type Props = {
   value: number[]
 }
 
-export const DeckHeader = ({ search, setSearch, setValue, tabs, value }: Props) => {
+export const DeckHeader = ({
+  onTabValueChange,
+  search,
+  setSearch,
+  setValue,
+  tabs,
+  value,
+}: Props) => {
   return (
     <>
       <div className={s.deckHead}>
@@ -44,7 +52,12 @@ export const DeckHeader = ({ search, setSearch, setValue, tabs, value }: Props) 
 
         <div className={s.deckFilterGroup}>
           <div>
-            <Tabs defaultValue={tabs[1].value} label={'Show decks cards'} tabs={tabs} />
+            <Tabs
+              defaultValue={tabs[1].value}
+              label={'Show decks cards'}
+              onTabValueChange={onTabValueChange}
+              tabs={tabs}
+            />
           </div>
           <Slider
             max={32}
