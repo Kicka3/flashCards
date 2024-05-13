@@ -41,6 +41,35 @@ const cardsService = baseApi.injectEndpoints({
       }),
       updateCard: builder.mutation<void, { args: FormData; id: string }>({
         invalidatesTags: ['Cards'],
+        async onQueryStarted({ id, ...patch }, { dispatch, getState, queryFulfilled }) {
+          const state = getState()
+          /* any так как не типизируется */
+          const patchResults: any = []
+
+          cardsService.util
+            .selectInvalidatedBy(state, [{ type: 'Cards' }])
+            .forEach(({ endpointName, originalArgs }) => {
+              if (endpointName !== 'getCards') {
+                return
+              }
+              dispatch(
+                cardsService.util.updateQueryData(endpointName, originalArgs, draft => {
+                  const itemToUpdate = draft.items.find(card => card.id === id)
+
+                  if (!itemToUpdate) {
+                    return
+                  }
+                  Object.assign(itemToUpdate, patch)
+                })
+              )
+            })
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResults.forEach((patch: any) => patch.undo())
+          }
+        },
         query: ({ args, id }) => ({
           body: args,
           method: 'PATCH',
