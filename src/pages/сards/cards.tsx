@@ -24,12 +24,12 @@ import { PackIntro } from './packIntro/packIntro'
 
 export const Cards = () => {
   const { id: deckId } = useParams()
+  const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
+    useFilter()
+
   const [search, setSearch] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const [itemsPerPage, setItemsPerPage] = useState('10')
   const [orderBy, setOrderBy] = useState('')
   const debouncedSearch = useDebounce(search)
-  const paginationOptions = ['10', '20', '30', '50', '100']
   const { data: cards, isLoading } = useGetCardsQuery({
     id: deckId || '',
     params: {
@@ -40,7 +40,6 @@ export const Cards = () => {
     },
   })
   const { data: deck } = useGetDeckByIdQuery(deckId!)
-  const { me } = useFilter()
   const [deleteCard] = useDeleteCardMutation()
 
   const isOwner = deck?.userId === me?.id
