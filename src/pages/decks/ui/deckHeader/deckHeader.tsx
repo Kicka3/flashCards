@@ -25,18 +25,20 @@ type Props = {
 export const DeckHeader = ({ search, setSearch, setValue, tabs, value }: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
-  const HandlerCreateDeck = () => {
-    setIsOpenModal(true)
-  }
-
   return (
     <>
-      <CreateDeck isOpen={isOpenModal} onOpenChange={setIsOpenModal} title={'Add New Deck'} />
       <div className={s.deckHead}>
         <Typography variant={'h1'}>Decks list</Typography>
-        <Button onClick={HandlerCreateDeck} type={'button'}>
-          Add new deck
-        </Button>
+        <CreateDeck
+          isOpen={isOpenModal}
+          onOpenChange={setIsOpenModal}
+          title={'Add New Deck'}
+          trigger={
+            <Button as={'div'} variant={'primary'}>
+              Add new deck
+            </Button>
+          }
+        />
       </div>
       <div className={s.deckFilterWrapper}>
         <div>

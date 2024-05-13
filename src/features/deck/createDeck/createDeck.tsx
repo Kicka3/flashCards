@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
@@ -9,9 +11,10 @@ type Props = {
   isOpen: boolean
   onOpenChange: (isOpen: boolean) => void
   title: string
+  trigger?: ReactNode
 }
 
-export const CreateDeck = ({ isOpen, onOpenChange, title }: Props) => {
+export const CreateDeck = ({ isOpen, onOpenChange, title, trigger }: Props) => {
   const [createDeck] = useCreateDeckMutation()
 
   const handlerSubmitDeck = (data: DeckBodyRequest) => {
@@ -25,6 +28,7 @@ export const CreateDeck = ({ isOpen, onOpenChange, title }: Props) => {
       onOpenChange={onOpenChange}
       onSubmitDeck={handlerSubmitDeck}
       title={title}
+      trigger={trigger}
     />
   )
 }
