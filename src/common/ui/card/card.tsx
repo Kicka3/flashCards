@@ -19,10 +19,10 @@ export const Card = (props: Props) => {
   }
 
   return (
-    <div className={classNames.cardWrapper}>
+    <Component className={classNames.cardWrapper}>
       <div className={classNames.cardChildren} {...rest}>
         {children}
       </div>
-    </div>
+    </Component>
   )
 }
