@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
 
-import { usePageFilter } from '@/common/hooks/usePageFilter'
+import { useFilter } from '@/common/hooks/useFilter'
 import { useGetMinMaxCardsQuery } from '@/services/cards'
 import { useGetDecksQuery } from '@/services/decks/decks.service'
 
 export const useDeckFilter = () => {
-  /** Используем хук usePageFilter для управления фильтрацией и пагинацией. */
+  /** Используем хук useFilter для управления фильтрацией и пагинацией. */
   const {
     changeSearchHandler,
     currentPage,
@@ -21,7 +21,7 @@ export const useDeckFilter = () => {
     setSearch,
     setSortedBy,
     sortedString,
-  } = usePageFilter()
+  } = useFilter()
 
   /** Запрашиваем минимальное и максимальное количество карт для слайдера. */
   const { data: minMaxValues } = useGetMinMaxCardsQuery()

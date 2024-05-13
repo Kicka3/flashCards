@@ -1,6 +1,6 @@
 import { ErrorResponse } from 'react-router-dom'
 
-import { DeckForm, EditDeckType } from '@/features/deck/DeckForm'
+import { DeckForm, EditDeckType } from '@/features/deck/deckForm'
 import { DeckBodyRequest, useUpdateDecksMutation } from '@/services/decks'
 
 type Props = {

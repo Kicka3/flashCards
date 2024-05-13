@@ -20,7 +20,7 @@ type Props = {
 export const Modal = ({ children, onOpenChange, open, trigger, ...rest }: Props) => {
   return (
     <Root onOpenChange={onOpenChange} open={open}>
-      <Trigger className={s.modalTrigger}>{trigger}</Trigger>
+      {trigger && <Trigger className={s.modalTrigger}>{trigger}</Trigger>}
       <ModalContent setIsOpen={onOpenChange} {...rest}>
         {children}
       </ModalContent>

@@ -5,7 +5,7 @@ import { useDebounce } from '@/common/hooks/useDebounce'
 import { useMeQuery } from '@/services/auth'
 import { Sort } from '@/services/common.types'
 
-export const usePageFilter = () => {
+export const useFilter = () => {
   const [search, setSearch] = useSearchParams({})
 
   const { data: me } = useMeQuery()
@@ -16,30 +16,10 @@ export const usePageFilter = () => {
   /** Для поиска */
   const searchBy = search.get('name') || ''
 
-  /** Сортировка по строкам */
-  const sortedString = useMemo(() => {
-    if (!orderBy) {
-      return null
-    }
+  /** Задержка для поиска */
+  const debounceName = useDebounce(searchBy, 700)
 
-    return `${orderBy.key}-${orderBy.direction}`
-  }, [orderBy])
-  //Тут вылетает ошибка с сервера
-
-  const setSortedBy = (value: Sort) => {
-    if (!value || value.key) {
-      changeSearchHandler('orderBy', JSON.stringify(value))
-    }
-  }
-  // const setSortedBy = (value: Sort | null) => {
-  //   if (!value) {
-  //     changeSearchHandler('orderBy', 'null') // Если сортировка сбрасывается
-  //   } else {
-  //     changeSearchHandler('orderBy', `${value.key}-${value.direction}`) // Если сортируется по определенному полю
-  //   }
-  // }
-
-  /** Функция для поисков */
+  /** Функция для поиска */
   const changeSearchHandler = (field: string, params: string) => {
     if (!params) {
       search.delete(field)
@@ -50,7 +30,27 @@ export const usePageFilter = () => {
     setSearch(search, { replace: true })
   }
 
-  /** Для пагинации */
+  /** Сортировка по строкам */
+  const sortedString = useMemo(() => {
+    if (!orderBy) {
+      return null
+    }
+
+    return `${orderBy.key}-${orderBy.direction}`
+  }, [orderBy])
+
+  const setSortedBy = (value: Sort) => {
+    if (!value || value.key) {
+      changeSearchHandler('orderBy', JSON.stringify(value))
+    }
+  }
+
+  /** Изменение имени */
+  const onChangeName = (value: string) => {
+    changeSearchHandler('name', value)
+  }
+
+  /** Пагинация */
   const setItemsPerPage = (value: number) => {
     changeSearchHandler('itemsPerPage', value.toString())
   }
@@ -61,13 +61,6 @@ export const usePageFilter = () => {
     changeSearchHandler('currentPage', value.toString())
   }
   const currentPage = Number(search.get('currentPage') || 1)
-
-  /** Задержка для поиска */
-  const debounceName = useDebounce(searchBy, 700)
-
-  const onChangeName = (value: string) => {
-    changeSearchHandler('name', value)
-  }
 
   return {
     changeSearchHandler,
