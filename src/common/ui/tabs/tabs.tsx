@@ -1,23 +1,16 @@
-import { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 import { Typography } from '@/common/ui'
+import { TabsType } from '@/services/common.types'
 import * as TabsRadix from '@radix-ui/react-tabs'
 
 import s from './tabs.module.scss'
-
-/** Это развен не надо с большйо буквы назвать и вынести отсюда??! */
-export type tabsType = {
-  className?: string
-  content?: ReactNode
-  title?: string
-  value?: string
-}
 
 export type Props = {
   disabled?: boolean
   label?: string
   onTabValueChange: (value: string) => void
-  tabs: tabsType[]
+  tabs: TabsType[]
 } & ComponentPropsWithoutRef<typeof TabsRadix.Root>
 
 export const Tabs = ({ disabled, label, onTabValueChange, tabs, ...rest }: Props) => {

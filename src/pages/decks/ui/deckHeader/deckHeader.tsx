@@ -2,9 +2,10 @@ import { TrashOutline } from '@/assets/icons/components'
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Slider } from '@/common/ui/slider'
-import { Tabs, tabsType } from '@/common/ui/tabs'
+import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
+import { TabsType } from '@/services/common.types'
 
 import s from './deckHeader.module.scss'
 
@@ -15,7 +16,7 @@ type Props = {
   search?: string
   setSearch?: (value: string) => void
   setValue: (newValue: number[]) => void
-  tabs: tabsType[]
+  tabs: TabsType[]
   value: number[]
 }
 
