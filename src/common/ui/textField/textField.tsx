@@ -25,6 +25,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       onChange,
       placeholder,
+      value,
       variant = 'default',
       ...rest
     } = props
@@ -105,7 +106,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             placeholder={placeholder}
             ref={forwardedRef}
             type={inputType}
-            value={inputValue}
+            value={value}
           />
 
           {passwordVariant && (

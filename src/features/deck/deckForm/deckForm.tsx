@@ -129,7 +129,7 @@ export const DeckForm = ({
             }}
             variant={'secondary'}
           >
-            <Image height={'12px'} width={'12px'} />
+            <Image height={'16px'} width={'16px'} />
             Upload Image
           </Button>
           <ControlledCheckbox

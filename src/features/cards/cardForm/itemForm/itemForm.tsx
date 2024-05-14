@@ -3,7 +3,6 @@ import { Control } from 'react-hook-form'
 
 import { Image } from '@/assets/icons/components'
 import { ImageFile } from '@/common/types/types'
-import { TextFieldProps } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { openFiles } from '@/common/utils'

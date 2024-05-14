@@ -26,7 +26,7 @@ export const DeckHeader = ({ tabs }: Props) => {
     onChangeName,
     onCommitSliderValues,
     onTabValueChange,
-    search,
+    searchBy,
   } = useDeckFilter()
 
   const onClearFilters = () => {
@@ -51,7 +51,7 @@ export const DeckHeader = ({ tabs }: Props) => {
           <TextField
             onChange={onChangeName}
             placeholder={'Search deck'}
-            value={search.toString()}
+            value={searchBy}
             variant={'search'}
           />
         </div>
@@ -73,7 +73,7 @@ export const DeckHeader = ({ tabs }: Props) => {
             onValueCommit={onCommitSliderValues}
           />
           <Button
-            icon={<TrashOutline height={'14px'} width={'14px'} />}
+            icon={<TrashOutline height={'16px'} width={'16px'} />}
             onClick={onClearFilters}
             variant={'secondary'}
           >
