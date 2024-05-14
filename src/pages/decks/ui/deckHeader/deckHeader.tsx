@@ -38,7 +38,7 @@ export const DeckHeader = ({ tabs }: Props) => {
         <CreateDeck
           title={'Add New Deck'}
           trigger={
-            <Button as={'div'} variant={'primary'}>
+            <Button as={'div'} style={{ padding: '12px 30px' }} variant={'primary'}>
               Add new deck
             </Button>
           }
