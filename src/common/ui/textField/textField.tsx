@@ -36,6 +36,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const [inputType, setInputType] = useState(passwordVariant ? 'password' : 'text')
     const [passVisibility, setPassVisibility] = useState(false)
     const [inputValue, setInputValue] = useState('')
+    const [isFocused, setIsFocused] = useState(false)
     const isShowClearButton = searchVariant && inputValue && !errorMessage
 
     const onShowPassword = () => {
@@ -65,7 +66,8 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       iconSearch: clsx(
         s.iconSearch,
         disabled && s.iconSearchDisabled,
-        errorMessage && s.iconSearchError
+        errorMessage && s.iconSearchError,
+        isFocused && s.iconFocused
       ),
       input: clsx(
         s.input,
@@ -102,7 +104,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             {...rest}
             disabled={disabled}
             name={'controlledTextField'}
+            onBlur={() => setIsFocused(false)}
             onChange={onChangeValue}
+            onFocus={() => setIsFocused(true)}
             placeholder={placeholder}
             ref={forwardedRef}
             type={inputType}
