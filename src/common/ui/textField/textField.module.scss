@@ -105,6 +105,8 @@
 }
 
 .search {
+  color: var(--color-light-300);
+
   input {
     padding: 6px 36px;
   }
@@ -155,10 +157,16 @@
   display: grid;
   place-items: center;
 
+  color: var(--color-dark-300);
+
   & span {
     width: 20px;
     height: 20px;
   }
+}
+
+.input:focus + .iconSearch {
+  color: var(--color-light-300);
 }
 
 .iconSearchDisabled {
