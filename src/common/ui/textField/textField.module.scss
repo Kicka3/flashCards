@@ -150,6 +150,7 @@
 .iconSearchDisabled,
 .iconSearchError {
   position: absolute;
+  z-index: 9999;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
@@ -165,7 +166,7 @@
   }
 }
 
-.input:focus + .iconSearch {
+.iconFocused {
   color: var(--color-light-300);
 }
 
