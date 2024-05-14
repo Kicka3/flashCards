@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Typography } from '@/common/ui'
+import { Button, Typography } from '@/common/ui'
 import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'
@@ -19,10 +19,9 @@ const Profile = ({ className, profile, ...rest }: Props) => {
 
   return (
     <div className={clsx(s.profile, className)} {...rest}>
-      <button className={s.userName} onClick={onOpenProfile}>
+      <Button className={s.userName} onClick={onOpenProfile} variant={'link'}>
         <Typography variant={'sub1'}>{profile?.name}</Typography>
-      </button>
-
+      </Button>
       <div className={s.avatar}>
         <UserDropDown email={profile?.email} img={avatar} name={profile?.name} />
       </div>
