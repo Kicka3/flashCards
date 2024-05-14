@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
@@ -71,9 +72,11 @@ export const SignUp = ({}: Props) => {
           <Typography className={s.questionMark} variant={'body2'}>
             Already have an account?
           </Typography>
-          <Typography as={'a'} className={s.signLink} variant={'link1'}>
-            Sign In
-          </Typography>
+          <Link to={'signIn'}>
+            <Typography as={'a'} className={s.signLink} variant={'link1'}>
+              Sign In
+            </Typography>
+          </Link>
         </div>
       </form>
     </Card>
