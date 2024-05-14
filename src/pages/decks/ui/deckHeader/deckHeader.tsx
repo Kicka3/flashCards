@@ -18,6 +18,8 @@ type Props = {
 export const DeckHeader = ({ tabs }: Props) => {
   const {
     clearFilter,
+    deckIsFetching,
+    getCurrentTab,
     maxCards,
     minCards,
     minMaxValues,
@@ -57,10 +59,11 @@ export const DeckHeader = ({ tabs }: Props) => {
         <div className={s.deckFilterGroup}>
           <div>
             <Tabs
-              defaultValue={tabs[1].value}
+              disabled={deckIsFetching}
               label={'Show decks cards'}
               onTabValueChange={onTabValueChange}
               tabs={tabs}
+              value={getCurrentTab || tabs[0].value}
             />
           </div>
           <Slider
