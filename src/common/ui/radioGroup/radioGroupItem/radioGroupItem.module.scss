@@ -6,20 +6,21 @@
 .item {
   all: unset;
 
+  cursor: pointer;
+
   position: relative;
 
   width: 16px;
   height: 16px;
 
   background-color: transparent;
-  border: 2px solid var(--color-accent-500);
   border-radius: 50%;
 
   &::before {
     content: '';
 
     position: absolute;
-    z-index: -1;
+    z-index: 1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -29,15 +30,28 @@
     padding: 0;
 
     border-radius: 50%;
+
+    transition: 0.2s;
+  }
+
+  .indicatorBorder {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+
+    border: 2px solid var(--color-accent-500);
+    border-radius: 50%;
   }
 
   &:hover::before,
   &:active::before,
+  &:focus::before,
   &:focus-visible::before {
     width: 36px;
     height: 36px;
   }
 
+  &:focus-visible::before,
   &:hover::before {
     background-color: var(--color-dark-500);
   }
@@ -46,12 +60,9 @@
     background-color: var(--color-accent-900);
   }
 
-  &:focus-visible::before {
-    background-color: var(--color-dark-700);
-  }
-
   .indicator {
     position: relative;
+    z-index: 2;
 
     display: flex;
     align-items: center;
@@ -70,8 +81,8 @@
 
       display: block;
 
-      width: 11px;
-      height: 11px;
+      width: 9px;
+      height: 9px;
 
       background-color: var(--color-accent-500);
       border-radius: 50%;
@@ -93,5 +104,6 @@
 }
 
 .label {
+  cursor: pointer;
   margin-left: 12px;
 }
