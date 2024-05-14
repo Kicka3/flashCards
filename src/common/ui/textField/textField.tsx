@@ -129,9 +129,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           )}
 
           {isShowClearButton && (
-            <button className={classNames.buttonIcon} onClick={clearValue}>
+            <Button className={classNames.buttonIcon} onClick={clearValue}>
               <Close height={'18px'} width={'18px'} />
-            </button>
+            </Button>
           )}
         </div>
         {errorMessage && (
