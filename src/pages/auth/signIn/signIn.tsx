@@ -67,9 +67,11 @@ export const SignIn = () => {
             text={'Remember me'}
           />
         </div>
-        <Link className={s.forgotPasswordField} to={'/forgotPassword'}>
-          <div className={s.forgotPasswordText}>Forgot Password ?</div>
-        </Link>
+        <div className={s.forgotPasswordField}>
+          <Link className={s.forgotPasswordText} to={'/forgotPassword'}>
+            Forgot Password ?
+          </Link>
+        </div>
         <Button fullWidth>Sign In</Button>
       </form>
       <div className={s.footerForm}>
