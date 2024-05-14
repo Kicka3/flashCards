@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import { Button } from '@/common/ui/button'
+import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
 import { handleFileChange } from '@/pages/auth/editProfile/profileInfo/utils/fileChange'
 
 import s from './avatarEditor.module.scss'
@@ -9,16 +10,18 @@ import s from './avatarEditor.module.scss'
 interface AvatarEditorProps {
   avatar: string
   editMode: boolean
+  name: string
   updateAvatar: (avatar: File) => void
 }
 
-export const AvatarEditor = ({ avatar, editMode, updateAvatar }: AvatarEditorProps) => {
+export const AvatarEditor = ({ avatar, editMode, name, updateAvatar }: AvatarEditorProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [avatarImage, setAvatarImage] = useState<string>('')
+  const avatarUrl = getAvatarUrl({ avatar, name })
 
   useEffect(() => {
-    setAvatarImage(avatar)
-  }, [avatar])
+    setAvatarImage(avatarUrl)
+  }, [avatarUrl])
 
   const handleButtonClick = () => {
     if (fileInputRef.current) {

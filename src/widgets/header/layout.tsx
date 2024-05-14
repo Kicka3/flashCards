@@ -13,9 +13,8 @@ const Layout = () => {
   return (
     <>
       <Header isAuth={isAuth} profile={data} />
-
       <main className={s.wrapper}>
-        <Outlet context={{ isAuth, isLoading }} />
+        <Outlet context={{ data, isAuth, isLoading }} />
       </main>
     </>
   )
