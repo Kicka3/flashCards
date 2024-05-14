@@ -61,7 +61,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
           onChange={e => handleChangeValidator(+e.currentTarget.value, 'left')}
           pattern={'[0-100]'}
           type={'number'}
-          value={sliderValue[0]}
+          value={sliderValue[0].toString()}
         />
         <SliderRadix.Root
           className={classNames}
@@ -88,7 +88,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
           onChange={e => handleChangeValidator(+e.currentTarget.value, 'right')}
           pattern={'[0-100]'}
           type={'number'}
-          value={sliderValue[1]}
+          value={sliderValue[1].toString()}
         />
       </div>
     )
