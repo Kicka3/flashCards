@@ -15,5 +15,10 @@
 
 .userName {
   all: unset;
+
   cursor: pointer;
+
+  display: flex;
+  gap: 14px;
+  align-items: center;
 }
