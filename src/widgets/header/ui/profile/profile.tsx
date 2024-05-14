@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Typography } from '@/common/ui'
+import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'
 
@@ -14,6 +15,7 @@ const Profile = ({ className, profile, ...rest }: Props) => {
   const onOpenProfile = () => {
     /** логика открытия профиля модалка или другая страница отрисовываться будет с editProfileWithoutInput*/
   }
+  const avatar = getAvatarUrl({ avatar: profile?.avatar, name: profile?.name })
 
   return (
     <div className={clsx(s.profile, className)} {...rest}>
@@ -22,12 +24,7 @@ const Profile = ({ className, profile, ...rest }: Props) => {
       </button>
 
       <div className={s.avatar}>
-        <UserDropDown
-          description={'avatar'}
-          email={profile?.email}
-          img={profile?.avatar}
-          name={profile?.name}
-        />
+        <UserDropDown email={profile?.email} img={avatar} name={profile?.name} />
       </div>
     </div>
   )
