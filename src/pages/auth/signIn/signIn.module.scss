@@ -72,3 +72,14 @@
 .signUpLink {
   text-decoration: underline;
 }
+
+.signLink {
+  margin-top: 11px;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+
+  &:visited {
+    color: var(--color-accent-500);
+  }
+}
