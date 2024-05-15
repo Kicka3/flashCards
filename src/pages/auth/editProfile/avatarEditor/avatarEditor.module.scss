@@ -1,10 +1,11 @@
 .avatarContainer {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatarButtonIcon {
-  background-color: var(--color-dark-300);
   position: absolute;
   right: 0;
   bottom: 0;
@@ -16,19 +17,33 @@
   width: 24px;
   height: 24px;
   padding: 0;
+
+  background-color: var(--color-dark-300);
+
+  transition: transform var(--animation-time) var(--animation-timing-function);
+
+  &:hover {
+    transform: scale(var(--animation-scale));
+    border-radius: 50%;
+  }
 }
 
-.avatarIconContainer {
-  margin-top: 27px;
+.avatarWrapper {
   display: flex;
-  position: relative;
-  justify-content: center;
+  flex-direction: column;
+  justify-items: center;
+  max-width: 96px;
 }
+
 .avatar {
+  position: relative;
+
   display: flex;
+  align-self: center;
+  justify-content: center;
+
   width: 96px;
   height: 96px;
+
   border-radius: 50%;
-  justify-content: center;
-  align-self: center;
 }
