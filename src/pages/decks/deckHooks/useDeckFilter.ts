@@ -36,13 +36,14 @@ export const useDeckFilter = () => {
   const maxCards = Number(search.get('maxCardsCount') || 15)
 
   /** Tabs-слайдер */
+
+  /** Получаем текущую вкладку из поискового запроса. */
+  const getCurrentTab = search.get('currentTab') || 'allCards'
+
   // Обработчик изменения текущей вкладки.
   const onTabValueChange = (value: string) => {
     changeSearchHandler('currentTab', value)
   }
-
-  /** Получаем текущую вкладку из поискового запроса. */
-  const getCurrentTab = search.get('currentTab') || 'allCards'
 
   /** Очищаем фильтры. */
   const clearFilter = () => {

@@ -22,6 +22,8 @@
 }
 
 .tr {
+  cursor: default;
+
   &:hover {
     background-color: var(--color-dark-700);
   }

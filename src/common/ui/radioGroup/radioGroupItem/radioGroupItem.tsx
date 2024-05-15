@@ -20,6 +20,7 @@ export const RadioItem = forwardRef<ElementRef<typeof RadioGroupRadix.Item>, Ite
     return (
       <div className={classNames} key={generatedId}>
         <RadioGroupRadix.Item className={s.item} id={finalId} {...rest} ref={ref}>
+          <div className={s.indicatorBorder}></div>
           <RadioGroupRadix.Indicator className={s.indicator} />
         </RadioGroupRadix.Item>
         <Typography as={'label'} className={s.label} htmlFor={finalId} variant={'body2'}>

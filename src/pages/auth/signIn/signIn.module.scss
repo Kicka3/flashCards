@@ -22,17 +22,27 @@
 
 .forgotPasswordField {
   all: unset;
+
   display: flex;
   justify-content: flex-end;
+
   margin-bottom: 66px;
+
+  border-radius: 2px;
 }
 
 .forgotPasswordText {
   cursor: pointer;
+  padding: 0 5px;
   color: var(--color-light-100);
 
   &:visited {
     color: var(--color-light-100);
+  }
+
+  &:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--color-accent-500);
   }
 
   @media (hover: hover) {
@@ -61,4 +71,15 @@
 
 .signUpLink {
   text-decoration: underline;
+}
+
+.signLink {
+  margin-top: 11px;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-500);
+
+  &:visited {
+    color: var(--color-accent-500);
+  }
 }
