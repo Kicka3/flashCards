@@ -85,3 +85,5 @@ export type DeckBodyRequest = {
   isPrivate: boolean
   name: string
 }
+
+export type OptimisticDeck = Pick<Deck, 'cover' | 'isPrivate' | 'name'>
