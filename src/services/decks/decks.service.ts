@@ -27,14 +27,6 @@ const deckFormDataHandler = (data: DeckBodyRequest) => {
 export const decksApiService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      // createDeck: builder.mutation<void, DeckBodyRequest>({
-      //   invalidatesTags: ['Decks'],
-      //   query: args => ({
-      //     body: deckFormDataHandler(args),
-      //     method: 'POST',
-      //     url: 'v1/decks',
-      //   }),
-      // }),
       createDeck: builder.mutation<Deck, DeckBodyRequest>({
         invalidatesTags: ['Decks'],
         async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
@@ -69,6 +61,32 @@ export const decksApiService = baseApi.injectEndpoints({
       }),
       deleteDeck: builder.mutation<void, DeleteDeckReq>({
         invalidatesTags: ['Decks'],
+        async onQueryStarted({ id }, { dispatch, getState, queryFulfilled }) {
+          let patchResult: any
+
+          for (const { endpointName, originalArgs } of decksApiService.util.selectInvalidatedBy(
+            getState(),
+            [{ type: 'Decks' }]
+          )) {
+            if (endpointName !== 'getDecks') {
+              continue
+            }
+            patchResult = dispatch(
+              decksApiService.util.updateQueryData(endpointName, originalArgs, draft => {
+                const index = draft.items.findIndex(deck => deck.id === id)
+
+                if (index > -1) {
+                  draft.items.splice(index, 1)
+                }
+              })
+            )
+          }
+          try {
+            await queryFulfilled
+          } catch {
+            patchResult.undo()
+          }
+        },
         query: args => ({
           method: 'DELETE',
           url: `v1/decks/${args.id}`,
