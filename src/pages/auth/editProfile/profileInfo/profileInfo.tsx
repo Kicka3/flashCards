@@ -30,6 +30,7 @@ export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Prop
     <Card>
       <Button
         as={'button'}
+        className={s.buttonIcon}
         onClick={() => navigate(-1)}
         style={{ justifyContent: 'start' }}
         variant={'link'}

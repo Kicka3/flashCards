@@ -12,9 +12,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 0 10px;
+
   color: var(--color-light-100);
 
   &:hover {
     color: var(--color-accent-500);
+    border-radius: 5px;
+  }
+}
+
+.buttonIcon {
+  padding: 0;
+
+  &:hover {
+    background-color: var(--color-dark-500);
   }
 }
