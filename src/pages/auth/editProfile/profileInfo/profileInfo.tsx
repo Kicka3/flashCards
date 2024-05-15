@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { Typography } from '@/common/ui'
+import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
+import { Button, Typography } from '@/common/ui'
 import { Card } from '@/common/ui/card'
 import { AvatarEditor } from '@/pages/auth/editProfile/avatarEditor'
 import { EditProfileWithInput } from '@/pages/auth/editProfile/editProfileWithInput'
@@ -22,9 +24,21 @@ export type Props = {
 
 export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Props) => {
   const [editMode, setEditMode] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <Card>
+      <Button
+        as={'button'}
+        onClick={() => navigate(-1)}
+        style={{ justifyContent: 'start' }}
+        variant={'icon'}
+      >
+        <ArrowBackOutline height={15} width={15} />
+        <Typography as={'p'} className={s.iconTitle} variant={'body2'}>
+          Go Back
+        </Typography>
+      </Button>
       <Typography as={'h1'} className={s.header} variant={'h1'}>
         Personal Information
       </Typography>
