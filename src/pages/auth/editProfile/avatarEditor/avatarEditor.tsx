@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
+import { FileUploader } from '@/common/hooks/useFileUploader'
 import { Button } from '@/common/ui/button'
 import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
-import { handleFileChange } from '@/pages/auth/editProfile/profileInfo/utils/fileChange'
 
 import s from './avatarEditor.module.scss'
 
@@ -16,37 +16,40 @@ interface AvatarEditorProps {
 
 export const AvatarEditor = ({ avatar, editMode, name, updateAvatar }: AvatarEditorProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const [avatarImage, setAvatarImage] = useState<string>('')
-  const avatarUrl = getAvatarUrl({ avatar, name })
+  const [avatarImage, setAvatarImage] = useState<string>(getAvatarUrl({ avatar, name }))
 
   useEffect(() => {
-    setAvatarImage(avatarUrl)
-  }, [avatarUrl])
+    setAvatarImage(getAvatarUrl({ avatar, name }))
+  }, [avatar, name])
 
-  const handleButtonClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click()
+  const updateAvatarHandler = async (avatar: File | null) => {
+    if (avatar) {
+      await updateAvatar(avatar)
     }
+  }
+
+  const onClickTrigger = () => {
+    fileInputRef.current?.click()
   }
 
   return (
     <div className={s.avatarContainer}>
-      <div className={s.avatarIconContainer}>
+      <div className={s.avatarWrapper}>
         <img alt={'avatar'} className={s.avatar} src={avatarImage} />
-        {!editMode ? (
-          <Button className={s.avatarButtonIcon} onClick={handleButtonClick} variant={'icon'}>
-            <Edit2Outline height={16} width={16} />
-          </Button>
-        ) : (
-          ''
+        {!editMode && (
+          <FileUploader
+            ref={fileInputRef}
+            setFile={updateAvatarHandler}
+            style={{ display: 'none' }}
+            trigger={
+              <Button className={s.avatarButtonIcon} onClick={onClickTrigger} variant={'icon'}>
+                <Edit2Outline height={16} width={16} />
+              </Button>
+            }
+            type={'file'}
+          />
         )}
       </div>
-      <input
-        onChange={event => handleFileChange(event, updateAvatar, setAvatarImage)}
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        type={'file'}
-      />
     </div>
   )
 }
