@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
 import { useFilter } from '@/common/hooks/useFilter'
-import { Pagination, Typography } from '@/common/ui'
+import { Pagination } from '@/common/ui/pagination'
+import { Typography } from '@/common/ui/typography'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'

@@ -8,9 +8,9 @@ import {
   TrashOutline,
 } from '@/assets/icons/components'
 import noCoverImg from '@/assets/img/noImage.png'
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
+import { Typography } from '@/common/ui/typography'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { useDeckFilter, useSortDecks } from '@/pages/decks/deckHooks'
@@ -40,7 +40,6 @@ export const DecksTable = ({
   openDeck,
   sort,
 }: Props) => {
-  // const [deleteForm, setDeleteForm] = useState(false)
   const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
   const [openEditMode, setOpenEditMode] = useState(false)
   /** Пользовател. хуки */

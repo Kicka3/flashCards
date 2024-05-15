@@ -1,6 +1,6 @@
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Modal } from '@/common/ui/modal'
+import { Typography } from '@/common/ui/typography'
 
 import s from './deleteForm.module.scss'
 

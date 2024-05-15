@@ -1,9 +1,12 @@
 import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
-import { Checkbox, CheckboxProps } from '@/common/ui/сheckbox'
+import { Checkbox } from '@/common/ui/сheckbox'
+import { CheckboxProps } from '@radix-ui/react-checkbox'
 
 type CheckboxControlledProps<T extends FieldValues> = UseControllerProps<T> &
-  Omit<CheckboxProps, 'checked' | 'onValueChange'>
+  Omit<CheckboxProps, 'checked' | 'onValueChange'> & {
+    text: string
+  }
 
 export const ControlledCheckbox = <T extends FieldValues>({
   control,

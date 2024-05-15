@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Button, Typography } from '@/common/ui'
+import { Button } from '@/common/ui/button'
+import { Typography } from '@/common/ui/typography'
 import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'

@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Button } from '@/common/ui'
+import { Button } from '@/common/ui/button'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'
 

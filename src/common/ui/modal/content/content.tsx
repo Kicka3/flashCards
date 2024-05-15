@@ -1,13 +1,13 @@
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { Close as CloseIcon } from '@/assets/icons/components'
-import { Typography } from '@/common/ui'
+import { Typography } from '@/common/ui/typography'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import clsx from 'clsx'
 
-const { Close, Content, Dialog, Overlay, Portal, Title } = DialogPrimitive
-
 import s from './content.module.scss'
+
+const { Close, Content, Dialog, Overlay, Portal, Title } = DialogPrimitive
 
 type Props = {
   children?: ReactNode

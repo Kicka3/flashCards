@@ -1,7 +1,8 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Close, EyeOffOutline, EyeOutline, Search } from '@/assets/icons/components'
-import { Button, Typography } from '@/common/ui'
+import { Button } from '@/common/ui/button'
+import { Typography } from '@/common/ui/typography'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 
 import image from '@/assets/img/error404.png'
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
+import { Typography } from '@/common/ui/typography'
 
 import s from './pageNotFound.module.scss'
 
