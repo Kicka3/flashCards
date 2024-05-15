@@ -5,7 +5,6 @@ import { Card, useUpdateCardMutation } from '@/services/cards'
 
 import { CardForm } from '../cardForm'
 
-/** Контейнерная компонента createCard для логики запросов */
 type Props = {
   card: Card
   title: string

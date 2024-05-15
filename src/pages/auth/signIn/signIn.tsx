@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/controlledCheckbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { Typography } from '@/common/ui/typography'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
 import { useLoginMutation } from '@/services/auth'
 import { DevTool } from '@hookform/devtools'

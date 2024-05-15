@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { Typography } from '@/common/ui/typography'
 import {
   NewPasswordFormValues,
   createNewPasswordSchema,

@@ -4,8 +4,6 @@ import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
 
-/** Контейнерная компонента createDeck для логики запросов */
-
 type Props = {
   disabled?: boolean
   title: string
