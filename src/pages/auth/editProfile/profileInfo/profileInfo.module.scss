@@ -4,6 +4,7 @@
 }
 
 .backIcon:hover {
+  pointer-events: auto;
   color: var(--color-accent-500);
   border-radius: 5px;
 }
@@ -15,18 +16,14 @@
 }
 
 .iconContainer {
-  pointer-events: none;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   color: var(--color-light-100);
 
   &:hover {
     cursor: pointer;
     color: var(--color-accent-500);
-    border-radius: 5px;
   }
 }
 

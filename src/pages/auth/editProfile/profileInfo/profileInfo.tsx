@@ -38,7 +38,7 @@ export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Prop
       >
         <div className={s.iconContainer}>
           <ArrowBackOutline className={s.backIcon} height={15} width={15} />
-          <Typography as={'p'} className={s.iconTitle} variant={'body2'}>
+          <Typography as={'span'} className={s.iconTitle} variant={'body2'}>
             Go Back
           </Typography>
         </div>
