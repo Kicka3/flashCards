@@ -32,12 +32,14 @@ export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Prop
         as={'button'}
         onClick={() => navigate(-1)}
         style={{ justifyContent: 'start' }}
-        variant={'icon'}
+        variant={'link'}
       >
-        <ArrowBackOutline height={15} width={15} />
-        <Typography as={'p'} className={s.iconTitle} variant={'body2'}>
-          Go Back
-        </Typography>
+        <div className={s.iconContainer}>
+          <ArrowBackOutline height={15} width={15} />
+          <Typography as={'p'} className={s.iconTitle} variant={'body2'}>
+            Go Back
+          </Typography>
+        </div>
       </Button>
       <Typography as={'h1'} className={s.header} variant={'h1'}>
         Personal Information

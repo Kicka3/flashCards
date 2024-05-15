@@ -7,3 +7,14 @@
   margin-left: 5px;
   color: inherit;
 }
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-light-100);
+
+  &:hover {
+    color: var(--color-accent-500);
+  }
+}
