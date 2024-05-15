@@ -169,12 +169,16 @@ export const DecksTable = ({
                   ) : (
                     <img alt={'noCover'} className={s.deckCoverImg} src={noCoverImg} />
                   )}
-                  <Typography variant={'body2'}>{deck.name}</Typography>
+                  <Typography className={s.deckTitle} variant={'sub2'}>
+                    {deck.name}
+                  </Typography>
                 </span>
               </TableCell>
-              <TableCell>{deck.cards}</TableCell>
-              <TableCell>{new Date(deck.lastUpdated).toLocaleString('ru-ru')}</TableCell>
-              <TableCell>{deck.createdBy}</TableCell>
+              <TableCell className={s.deckPointer}>{deck.cards}</TableCell>
+              <TableCell className={s.deckPointer}>
+                {new Date(deck.lastUpdated).toLocaleDateString('ru-ru')}
+              </TableCell>
+              <TableCell className={s.deckPointer}>{deck.createdBy}</TableCell>
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
