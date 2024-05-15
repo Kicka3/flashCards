@@ -76,7 +76,7 @@ export const DeckForm = ({
     reset()
   }
 
-  /** Загрузка изображений */
+  /** Загрузка изображений Взять у Володи*/
   const openFiles = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()

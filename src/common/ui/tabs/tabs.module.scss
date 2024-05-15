@@ -28,56 +28,76 @@
   }
 }
 
-.tabsTrigger {
-  all: unset;
-
-  cursor: pointer;
-  user-select: none;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 6px 24px;
-
-  border: 1px solid var(--color-dark-300);
-
-  &:first-child {
-    border-right: none;
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
-  }
-
-  &:last-child {
-    border-left: none;
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
-  }
-
-  &:hover {
-    background-color: var(--color-dark-300);
-    border-color: var(--color-dark-100);
-  }
-
-  &[data-state='active'] {
-    background-color: var(--color-accent-500);
-    border-color: var(--color-accent-500);
-  }
-
-  &[data-disabled] {
-    pointer-events: none;
-    background-color: var(--color-dark-700);
-    border-color: var(--color-dark-300);
-
-    & > .title {
-      color: var(--color-dark-300);
-    }
-  }
-}
-
 .tabsContent {
   padding: 20px;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   outline: none;
+}
+
+.tabsTrigger {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 24px;
+
+  font-family: inherit;
+  color: var(--color-light-100);
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-500);
+  border-right: none;
+  border-radius: 2px 0 0 2px;
+
+  &:not(:first-child) {
+    border: 1px solid var(--color-dark-500);
+    border-radius: 0;
+  }
+
+  &:last-child {
+    border-radius: 0 2px 2px 0;
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+    border: 1px solid var(--color-dark-100);
+
+    .title {
+      cursor: pointer;
+      color: var(--color-light-900);
+    }
+
+    & + :nth-child(2) {
+      border-left: none;
+    }
+  }
+
+  &.tabsTrigger[data-state='active'] {
+    background-color: var(--color-accent-500);
+    border-color: var(--color-accent-500);
+  }
+
+  &:focus-visible {
+    &.tabsTrigger[data-state='active'] {
+      background-color: var(--color-dark-700);
+      border: transparent;
+      outline: 2px solid var(--color-info-900);
+    }
+
+    & + :nth-child(2) {
+      border-left: none;
+    }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    background-color: var(--color-dark-700);
+
+    .title {
+      color: var(--color-dark-300);
+    }
+  }
 }
