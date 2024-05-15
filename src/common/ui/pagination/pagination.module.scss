@@ -33,6 +33,15 @@
   }
 }
 
+.disable {
+  cursor: default;
+  color: var(--color-dark-300);
+
+  &:hover {
+    background-color: initial;
+  }
+}
+
 .arrowBack {
   transform: rotate(180deg);
 }

@@ -36,7 +36,11 @@ export const Pagination = ({
     }
   }
 
-  const classNames = { pagination: clsx(s.pagination, className) }
+  const classNames = {
+    btnNextPage: clsx(s.arrowForward, { [s.disable]: currentPage === totalPages }),
+    btnPrevPage: clsx(s.arrowBack, { [s.disable]: currentPage === 1 }),
+    pagination: clsx(s.pagination, className),
+  }
 
   const renderPageNumbers = () => {
     /** страницы выводятся путем добавления в массив */
@@ -108,11 +112,19 @@ export const Pagination = ({
 
   return (
     <div className={classNames.pagination}>
-      <button className={s.arrowBack} onClick={() => onChangePageCallback(currentPage - 1)}>
+      <button
+        className={classNames.btnPrevPage}
+        disabled={currentPage === 1}
+        onClick={() => onChangePageCallback(currentPage - 1)}
+      >
         <ArrowForwardOutline />
       </button>
       {renderPageNumbers()}
-      <button className={s.arrowForward} onClick={() => onChangePageCallback(currentPage + 1)}>
+      <button
+        className={classNames.btnNextPage}
+        disabled={currentPage === totalPages}
+        onClick={() => onChangePageCallback(currentPage + 1)}
+      >
         <ArrowForwardOutline />
       </button>
 
