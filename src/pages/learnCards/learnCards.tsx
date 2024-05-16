@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons/components'
 import { Button } from '@/common/ui/button'
@@ -36,6 +36,7 @@ const findKeyByValue = (obj: { [key: string]: string }, value: string) => {
 
 export const LearnCards = () => {
   const { id: deckId } = useParams()
+  const navigate = useNavigate()
 
   const { data: cardData } = useGetDeckToLearnQuery({ id: deckId || '', params: undefined })
   const { data: deckData } = useGetDeckByIdQuery(deckId!)
@@ -59,12 +60,16 @@ export const LearnCards = () => {
     }
   }
 
+  const prevPage = () => {
+    navigate(-1)
+  }
+
   return (
     <section className={s.wrapper}>
-      <Link className={s.backLink} to={'/'}>
+      <div className={s.backLink} onClick={prevPage}>
         <ArrowBackOutline height={16} width={16} />
-        <Typography variant={'body2'}>Back to Decks List</Typography>
-      </Link>
+        <Typography variant={'body2'}>Back</Typography>
+      </div>
 
       <Card>
         <div className={s.title}>
