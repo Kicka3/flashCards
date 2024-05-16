@@ -45,7 +45,7 @@ export const LearnCards = () => {
     defaultValues: { grade: 'Did not Know' },
   })
 
-  const onSumbit = async (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     try {
       if (cardData?.id && deckId) {
         await saveGrade({
@@ -108,7 +108,7 @@ export const LearnCards = () => {
                 </div>
               )}
             </div>
-            <form className={s.rateSection} onSubmit={handleSubmit(onSumbit)}>
+            <form className={s.rateSection} onSubmit={handleSubmit(onSubmit)}>
               <ControlledRadioGroup control={control} name={'grade'}>
                 {Object.values(grade).map(i => (
                   <RadioItem key={i} label={i} value={i} />

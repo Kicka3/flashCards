@@ -11,7 +11,7 @@ import { useDeleteDeckMutation } from '@/services/decks/decks.service'
 import s from './decks.module.scss'
 
 type Props = {
-  /** Для storybook */
+  /** Types for storybook */
   isLoading?: boolean
   onClick?: () => void
 }
@@ -50,7 +50,7 @@ export const DecksContainer = ({}: Props) => {
     )
   }
 
-  /** Удаляю Deck */
+  /** Delete Deck */
   const onDeleteDeck = async (id: string) => {
     try {
       await toast.promise(deleteDeck({ id }).unwrap(), {
@@ -64,12 +64,17 @@ export const DecksContainer = ({}: Props) => {
     }
   }
 
-  /** Открываю Deck */
+  /** Open Deck */
   const openDeck = (deckId: string) => {
     navigate(`/decks/${deckId}`)
   }
 
-  /** Пагинация */
+  /** learn Deck */
+  const learnDeckHandler = (deckId: string) => {
+    navigate(`/v1/decks/${deckId}/learn`)
+  }
+
+  /** Pagination */
   const totalItems = deckData?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
 
@@ -80,11 +85,9 @@ export const DecksContainer = ({}: Props) => {
         <DecksTable
           decks={mappedDecks}
           isDeckBeingDeleted={isDeckBeingDeleted}
-          isOwner={isOwner}
+          learnDeck={learnDeckHandler}
           onDeleteClick={onDeleteDeck}
-          onSort={setSortedBy}
           openDeck={openDeck}
-          sort={orderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>

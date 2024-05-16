@@ -58,7 +58,7 @@ export const useDeckFilter = () => {
     isLoading: deckIsLoading,
   } = useGetDecksQuery({
     authorId: getCurrentTab === 'userCards' ? me?.id : undefined,
-    currentPage: currentPage,
+    currentPage,
     itemsPerPage: Number(itemsPerPage),
     maxCardsCount: maxCards,
     minCardsCount: minCards,
