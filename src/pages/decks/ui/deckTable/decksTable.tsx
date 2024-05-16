@@ -54,14 +54,11 @@ export const DecksTable = ({
   }, [])
 
   /** Удаляю по id из form*/
-  const onDeleteDeck = useCallback(
-    (id: string) => {
-      if (id) {
-        onDeleteClick?.(id)
-      }
-    },
-    [onDeleteClick]
-  )
+  const onDeleteDeck = async (id: string) => {
+    if (id) {
+      onDeleteClick?.(id)
+    }
+  }
 
   /** Удаляю Deck */
   const deleteDeckHandler = (id: string) => () => {
