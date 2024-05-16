@@ -12,28 +12,18 @@ import { useDeleteDeckMutation } from '@/services/decks/decks.service'
 import s from './decks.module.scss'
 
 type Props = {
-  /** Для storybook */
+  /** Type for storybook */
   isLoading?: boolean
   onClick?: () => void
 }
 
 export const DecksContainer = ({}: Props) => {
-  const {
-    currentPage,
-    deckData,
-    deckIsLoading,
-    isOwner,
-    itemsPerPage,
-    mappedDecks,
-    orderBy,
-    setCurrentPage,
-    setSortedBy,
-  } = useDeckFilter()
+  const { currentPage, deckData, deckIsLoading, itemsPerPage, mappedDecks, setCurrentPage } =
+    useDeckFilter()
   const { paginationOptions, setItemsPerPage } = useFilter()
 
   const navigate = useNavigate()
 
-  /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'userCards' },
     { title: 'All Cards', value: 'allCards' },
@@ -50,7 +40,7 @@ export const DecksContainer = ({}: Props) => {
     )
   }
 
-  /** Удаляю Deck */
+  /** Delete Deck */
   const onDeleteDeck = async (id: string) => {
     try {
       await toast.promise(deleteDeck({ id }).unwrap(), {
@@ -64,12 +54,16 @@ export const DecksContainer = ({}: Props) => {
     }
   }
 
-  /** Открываю Deck */
+  /** Open Deck */
   const openDeck = (deckId: string) => {
     navigate(`/decks/${deckId}`)
   }
+  /** learn Deck */
+  const learnDeckhandler = (deckId: string) => {
+    navigate(`/v1/decks/${deckId}/learn`)
+  }
 
-  /** Пагинация */
+  /** Pagination */
   const totalItems = deckData?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
 
@@ -80,11 +74,9 @@ export const DecksContainer = ({}: Props) => {
         <DecksTable
           decks={mappedDecks}
           isDeckBeingDeleted={isDeckBeingDeleted}
-          isOwner={isOwner}
+          learnDeck={learnDeckhandler}
           onDeleteClick={onDeleteDeck}
-          onSort={setSortedBy}
           openDeck={openDeck}
-          sort={orderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>
