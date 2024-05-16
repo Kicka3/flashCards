@@ -34,7 +34,7 @@ export const SignIn = () => {
     try {
       await login(data).unwrap()
     } catch (error: any) {
-      toast.error(error?.data?.message ?? 'Some errors occupied while sign in')
+      toast.error(error?.data?.message ?? 'Some errors occurred while sign in')
     }
   }
 
