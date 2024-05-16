@@ -12,7 +12,7 @@ import { useDeleteDeckMutation } from '@/services/decks/decks.service'
 import s from './decks.module.scss'
 
 type Props = {
-  /** Type for storybook */
+  /** Types for storybook */
   isLoading?: boolean
   onClick?: () => void
 }
@@ -59,7 +59,7 @@ export const DecksContainer = ({}: Props) => {
     navigate(`/decks/${deckId}`)
   }
   /** learn Deck */
-  const learnDeckhandler = (deckId: string) => {
+  const learnDeckHandler = (deckId: string) => {
     navigate(`/v1/decks/${deckId}/learn`)
   }
 
@@ -74,7 +74,7 @@ export const DecksContainer = ({}: Props) => {
         <DecksTable
           decks={mappedDecks}
           isDeckBeingDeleted={isDeckBeingDeleted}
-          learnDeck={learnDeckhandler}
+          learnDeck={learnDeckHandler}
           onDeleteClick={onDeleteDeck}
           openDeck={openDeck}
         />
