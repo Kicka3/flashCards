@@ -9,7 +9,6 @@ import { ControlledTextField } from '@/common/ui/controlled/controlled-textField
 import { Typography } from '@/common/ui/typography'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
 import { useLoginMutation } from '@/services/auth'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './signIn.module.scss'
