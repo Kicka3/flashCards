@@ -150,8 +150,7 @@
 .iconSearchDisabled,
 .iconSearchError {
   position: absolute;
-  z-index: 9999;
-
+  z-index: 2;
   top: 50%;
   left: 12px;
   transform: translateY(-50%);
