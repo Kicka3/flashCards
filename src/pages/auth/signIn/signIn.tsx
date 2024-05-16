@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/controlledCheckbox'
@@ -81,7 +82,7 @@ export const SignIn = () => {
         <Typography className={s.dontHaveAcc} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Typography as={Link} className={s.signLink} to={'/signUp'} variant={'link1'}>
+        <Typography as={Link} className={s.signLink} to={ROUTES.SIGN_UP} variant={'link1'}>
           Sign Up
         </Typography>
       </div>

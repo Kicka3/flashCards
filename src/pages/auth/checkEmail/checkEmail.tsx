@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import elvelope from '@/assets/img/envelope.png'
+import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { Typography } from '@/common/ui/typography'
@@ -22,7 +23,7 @@ export const CheckEmail = ({ email }: Props) => {
       <Typography className={s.description} variant={'body2'}>
         We&apos;ve sent an Email with instructions to {email}
       </Typography>
-      <Button as={Link} className={s.button} fullWidth to={'/signIn'} type={'submit'}>
+      <Button as={Link} className={s.button} fullWidth to={ROUTES.SIGN_IN} type={'submit'}>
         Back to Sign In
       </Button>
     </Card>
