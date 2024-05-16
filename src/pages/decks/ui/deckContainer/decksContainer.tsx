@@ -24,6 +24,7 @@ export const DecksContainer = ({}: Props) => {
 
   const navigate = useNavigate()
 
+  /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
     { title: 'My Cards', value: 'userCards' },
     { title: 'All Cards', value: 'allCards' },
@@ -58,6 +59,7 @@ export const DecksContainer = ({}: Props) => {
   const openDeck = (deckId: string) => {
     navigate(`/decks/${deckId}`)
   }
+
   /** learn Deck */
   const learnDeckHandler = (deckId: string) => {
     navigate(`/v1/decks/${deckId}/learn`)
