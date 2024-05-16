@@ -3,13 +3,23 @@
 }
 
 .backLink {
-  display: flex;
+  display: inline-flex;
   gap: 6px;
   align-items: center;
 
   margin-bottom: 15px;
+  padding-right: 3px;
 
   text-decoration: none;
+
+  border-radius: 3px;
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: var(--color-accent-500);
+    box-shadow: 0 0 5px var(--color-accent-500);
+  }
 }
 
 .searchField {
