@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { ErrorResponse } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { DeckForm } from '@/features/deck/deckForm'
@@ -22,7 +23,9 @@ export const CreateDeck = ({ title, trigger }: Props) => {
         pending: 'In progress',
         success: 'Added',
       })
-    } catch (err: any) {
+    } catch (e: any) {
+      const err = e as ErrorResponse
+
       toast.error(err?.data?.errorMessages[0]?.message ?? 'An unknown error occurred')
     }
   }
