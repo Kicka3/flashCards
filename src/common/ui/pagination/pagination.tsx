@@ -36,6 +36,13 @@ export const Pagination = ({
     }
   }
 
+  const changeItemsPerPageHandler = (value: string) => {
+    onChangeItemsPerPage(value)
+    if (currentPage !== 1) {
+      onChangePage(1)
+    }
+  }
+
   const classNames = {
     btnNextPage: clsx(s.arrowForward, { [s.disable]: currentPage === totalPages }),
     btnPrevPage: clsx(s.arrowBack, { [s.disable]: currentPage === 1 }),
@@ -136,7 +143,7 @@ export const Pagination = ({
 
           <Select
             defaultValue={options[0]}
-            onValueChange={onChangeItemsPerPage}
+            onValueChange={changeItemsPerPageHandler}
             options={options}
             {...restProps}
           />

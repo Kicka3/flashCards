@@ -46,7 +46,7 @@ export const Cards = () => {
   const isEmpty = Boolean(deck?.cardsCount)
 
   const totalItems = cards?.pagination.totalItems || 0
-  const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
+  const moreThanOnePage = totalItems / 10 > 1
 
   if (isLoading) {
     return <div>...Loading</div>
