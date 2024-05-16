@@ -5,7 +5,6 @@ import '@fontsource/roboto/700.css'
 import { initialize } from 'msw-storybook-addon'
 import { handlers } from '../src/services/mocks/handlers'
 import { themes } from '@storybook/theming'
-
 initialize({}, handlers)
 
 const preview: Preview = {
