@@ -31,16 +31,12 @@
 
 .nameButtonIcon {
   all: unset;
-
-  position: absolute;
-  top: 50%;
-  left: 9px;
-  transform: translateY(-50%);
-
   display: flex;
+  margin-left: 10px;
+  transition: transform var(--animation-time) var(--animation-timing-function);
 
   &:hover {
     cursor: pointer;
-    background: none;
+    transform: scale(var(--animation-scale));
   }
 }

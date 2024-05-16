@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/controlledCheckbox'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { Typography } from '@/common/ui/typography'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
 import { useLoginMutation } from '@/services/auth'
-import { DevTool } from '@hookform/devtools'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './signIn.module.scss'
@@ -30,13 +30,16 @@ export const SignIn = () => {
   const [login] = useLoginMutation()
 
   const onSubmit = async (data: FormValues) => {
-    await login(data).unwrap()
+    try {
+      await login(data).unwrap()
+    } catch (error: any) {
+      toast.error(error?.data?.message ?? 'Some errors occurred while sign in')
+    }
   }
 
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DevTool control={control} />
         <div className={s.signInContainer}>
           <div className={s.headerForm}>
             <Typography className={s.signInTitle} variant={'h1'}>
@@ -67,18 +70,20 @@ export const SignIn = () => {
             text={'Remember me'}
           />
         </div>
-        <Link className={s.forgotPasswordField} to={'/forgotPassword'}>
-          <div className={s.forgotPasswordText}>Forgot Password ?</div>
-        </Link>
+        <div className={s.forgotPasswordField}>
+          <Link className={s.forgotPasswordText} to={'/forgotPassword'}>
+            Forgot Password ?
+          </Link>
+        </div>
         <Button fullWidth>Sign In</Button>
       </form>
       <div className={s.footerForm}>
         <Typography className={s.dontHaveAcc} variant={'body2'}>
           Don&apos;t have an account?
         </Typography>
-        <Button as={Link} className={s.signUpLink} to={'/signUp'} variant={'link'}>
+        <Typography as={Link} className={s.signLink} to={'/signUp'} variant={'link1'}>
           Sign Up
-        </Button>
+        </Typography>
       </div>
     </Card>
   )

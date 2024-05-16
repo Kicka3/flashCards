@@ -1,10 +1,10 @@
 import { ReactNode, useState } from 'react'
+import { ErrorResponse } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
-
-/** Контейнерная компонента createDeck для логики запросов */
 
 type Props = {
   disabled?: boolean
@@ -17,9 +17,17 @@ export const CreateDeck = ({ title, trigger }: Props) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
-  const handlerSubmitDeck = (data: DeckBodyRequest) => {
-    //Сюда засунуть notifications
-    createDeck(data).unwrap()
+  const handlerSubmitDeck = async (data: DeckBodyRequest) => {
+    try {
+      await toast.promise(createDeck(data).unwrap(), {
+        pending: 'In progress',
+        success: 'Added',
+      })
+    } catch (e: any) {
+      const err = e as ErrorResponse
+
+      toast.error(err?.data?.errorMessages[0]?.message ?? 'An unknown error occurred')
+    }
   }
 
   return (

@@ -76,7 +76,7 @@ export const DeckForm = ({
     reset()
   }
 
-  /** Загрузка изображений */
+  /** Загрузка изображений Взять у Володи*/
   const openFiles = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
@@ -129,7 +129,7 @@ export const DeckForm = ({
             }}
             variant={'secondary'}
           >
-            <Image height={'12px'} width={'12px'} />
+            <Image height={'16px'} width={'16px'} />
             Upload Image
           </Button>
           <ControlledCheckbox

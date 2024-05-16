@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 
 import { ArrowIosDownOutline } from '@/assets/icons/components'
-import { Typography } from '@/common/ui'
+import { Typography } from '@/common/ui/typography'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import clsx from 'clsx'
 

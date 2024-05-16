@@ -1,7 +1,9 @@
-import { useNavigate } from 'react-router-dom'
+import { ErrorResponse, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useFilter } from '@/common/hooks/useFilter'
-import { Pagination, Typography } from '@/common/ui'
+import { Pagination } from '@/common/ui/pagination'
+import { Typography } from '@/common/ui/typography'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
@@ -50,8 +52,17 @@ export const DecksContainer = ({}: Props) => {
   }
 
   /** Удаляю Deck */
-  const onDeleteDeck = (id: string) => {
-    deleteDeck({ id })
+  const onDeleteDeck = async (id: string) => {
+    try {
+      await toast.promise(deleteDeck({ id }).unwrap(), {
+        pending: 'In progress',
+        success: 'Deck was deleted',
+      })
+    } catch (e: unknown) {
+      const err = e as ErrorResponse
+
+      toast.error(err?.data?.errorMessages[0]?.message ?? "Couldn't Delete")
+    }
   }
 
   /** Открываю Deck */

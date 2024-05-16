@@ -1,7 +1,7 @@
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import LogOutOutline from '@/assets/icons/components/LogOutOutline'
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
+import { Typography } from '@/common/ui/typography'
 
 import s from './editProfileWithoutInput.module.scss'
 
@@ -12,6 +12,7 @@ export type DataProps = {
 }
 
 type Props = {
+  avatar?: string
   email: string
   logout: () => void
   name: string

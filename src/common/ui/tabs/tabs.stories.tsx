@@ -29,6 +29,7 @@ type Story = StoryObj<typeof meta>
 
 export const TabSwitcherDemo: Story = {
   args: {
+    onTabValueChange: (value: string) => console.log(`Tab value changed to ${value}`),
     tabs: [
       { title: 'Hello', value: 'Hello' },
       { title: 'I am a', value: 'I am a' },

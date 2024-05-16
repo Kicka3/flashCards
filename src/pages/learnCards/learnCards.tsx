@@ -3,7 +3,11 @@ import { useForm } from 'react-hook-form'
 import { Link, useParams } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons/components'
-import { Button, Card, ControlledRadioGroup, RadioItem, Typography } from '@/common/ui'
+import { Button } from '@/common/ui/button'
+import { Card } from '@/common/ui/card'
+import { ControlledRadioGroup } from '@/common/ui/controlled'
+import { RadioItem } from '@/common/ui/radioGroup'
+import { Typography } from '@/common/ui/typography'
 import { useGetDeckByIdQuery, useGetDeckToLearnQuery, useSaveGradeMutation } from '@/services/decks'
 
 import s from './learnCards.module.scss'
