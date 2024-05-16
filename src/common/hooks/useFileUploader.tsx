@@ -1,4 +1,5 @@
-import { ChangeEvent, ElementRef, forwardRef, useState } from 'react'
+import { ChangeEvent, ElementRef, forwardRef, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { FileUploaderProps } from '@/common/types/types'
 import { Typography } from '@/common/ui/typography'
@@ -16,9 +17,9 @@ export const FileUploader = forwardRef<ElementRef<'input'>, FileUploaderProps>(
   ({ className, name, setFile, trigger, validationSchema = IMAGE_SCHEMA, ...rest }, ref) => {
     const [errorMessage, setErrorMessage] = useState<null | string>(null)
 
-    // useEffect(() => {
-    //   toast.error(errorMessage)
-    // }, [errorMessage])
+    useEffect(() => {
+      toast.error(errorMessage)
+    }, [errorMessage])
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0]
