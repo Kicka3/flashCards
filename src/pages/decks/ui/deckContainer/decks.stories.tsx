@@ -3,9 +3,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { Typography } from '@/common/ui/typography'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer/decksContainer'
 import { store } from '@/services/store'
+import { Loader } from '@/widgets/loader'
 import { fn } from '@storybook/test'
 
 const meta = {
@@ -39,7 +39,7 @@ export const DecksStoryDemo: Story = {
   },
   render: ({ isLoading }) => {
     if (isLoading) {
-      return <Typography variant={'h1'}>LOADING...</Typography>
+      return <Loader />
     }
 
     return <DecksContainer {...DecksStoryDemo.args} />

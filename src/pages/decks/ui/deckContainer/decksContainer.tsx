@@ -7,6 +7,7 @@ import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
 import { useDeleteDeckMutation } from '@/services/decks/decks.service'
+import { Loader } from '@/widgets/loader'
 
 import s from './decks.module.scss'
 
@@ -44,7 +45,7 @@ export const DecksContainer = ({}: Props) => {
   if (deckIsLoading) {
     return (
       <h1 style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
-        LOADING...
+        <Loader />
       </h1>
     )
   }

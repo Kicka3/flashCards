@@ -19,6 +19,7 @@ import { LearnCards } from '@/pages/learnCards'
 import PageNotFound from '@/pages/pageNotFound/pageNotFound'
 import { Cards } from '@/pages/сards'
 import Layout from '@/widgets/header/layout'
+import { Loader } from '@/widgets/loader'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -69,11 +70,7 @@ function PrivateRoutes() {
   const { isAuth, isLoading } = useAppOutletContext()
 
   if (isLoading) {
-    return (
-      <h1 style={{ alignContent: 'center', display: 'flex', justifyContent: 'center' }}>
-        LOADER...
-      </h1>
-    )
+    return <Loader />
   }
 
   return isAuth ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
@@ -83,9 +80,7 @@ function PublicRoutes() {
   const { isAuth, isLoading } = useAppOutletContext()
 
   if (isLoading) {
-    return (
-      <h1 style={{ alignSelf: 'center', display: 'flex', justifyContent: 'center' }}>LOADER...</h1>
-    )
+    return <Loader />
   }
 
   return isAuth ? <Navigate to={ROUTES.DECKS} /> : <Outlet />
