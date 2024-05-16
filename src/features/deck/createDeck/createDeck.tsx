@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
@@ -15,9 +16,15 @@ export const CreateDeck = ({ title, trigger }: Props) => {
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
-  const handlerSubmitDeck = (data: DeckBodyRequest) => {
-    //Сюда засунуть notifications
-    createDeck(data).unwrap()
+  const handlerSubmitDeck = async (data: DeckBodyRequest) => {
+    try {
+      await toast.promise(createDeck(data).unwrap(), {
+        pending: 'In progress',
+        success: 'Added',
+      })
+    } catch (err: any) {
+      toast.error(err?.data?.errorMessages[0]?.message ?? 'An unknown error occurred')
+    }
   }
 
   return (
