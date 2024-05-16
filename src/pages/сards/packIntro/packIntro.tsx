@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+
+import { PlayCircleOutline } from '@/assets/icons/components'
 import { Button } from '@/common/ui/button'
 import { Typography } from '@/common/ui/typography'
 import { CreateCard } from '@/features/cards/createCard'
@@ -55,7 +58,13 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       <div className={s.packTitleWrapper}>
         <div className={s.packTitle}>
           <Typography variant={'h1'}>{deck?.name}</Typography>
-          {isOwner && <IconDropDown />}
+          {isOwner ? (
+            <IconDropDown />
+          ) : (
+            <Button as={Link} to={'learn'} variant={'icon'}>
+              <PlayCircleOutline height={'16px'} width={'16px'} />
+            </Button>
+          )}
         </div>
         {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
       </div>
