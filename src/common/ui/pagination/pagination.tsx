@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { ArrowForwardOutline } from '@/assets/icons/components'
+import { Typography } from '@/common/ui/typography'
 import clsx from 'clsx'
 
 import s from './pagination.module.scss'
 
-import { Typography } from '..'
 import { Select, SelectProps } from '../select'
 
 type Props = {

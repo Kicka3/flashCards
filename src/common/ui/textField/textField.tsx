@@ -1,7 +1,8 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, ElementType, useState } from 'react'
 
 import { Close, EyeOffOutline, EyeOutline, Search } from '@/assets/icons/components'
-import { Button, Typography } from '@/common/ui'
+import { Button } from '@/common/ui/button'
+import { Typography } from '@/common/ui/typography'
 import clsx from 'clsx'
 
 import s from './textField.module.scss'
@@ -25,6 +26,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       label,
       onChange,
       placeholder,
+      value,
       variant = 'default',
       ...rest
     } = props
@@ -35,6 +37,7 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
     const [inputType, setInputType] = useState(passwordVariant ? 'password' : 'text')
     const [passVisibility, setPassVisibility] = useState(false)
     const [inputValue, setInputValue] = useState('')
+    const [isFocused, setIsFocused] = useState(false)
     const isShowClearButton = searchVariant && inputValue && !errorMessage
 
     const onShowPassword = () => {
@@ -64,7 +67,8 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
       iconSearch: clsx(
         s.iconSearch,
         disabled && s.iconSearchDisabled,
-        errorMessage && s.iconSearchError
+        errorMessage && s.iconSearchError,
+        isFocused && s.iconFocused
       ),
       input: clsx(
         s.input,
@@ -101,11 +105,13 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
             {...rest}
             disabled={disabled}
             name={'controlledTextField'}
+            onBlur={() => setIsFocused(false)}
             onChange={onChangeValue}
+            onFocus={() => setIsFocused(true)}
             placeholder={placeholder}
             ref={forwardedRef}
             type={inputType}
-            value={inputValue}
+            value={value}
           />
 
           {passwordVariant && (
@@ -124,9 +130,9 @@ export const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           )}
 
           {isShowClearButton && (
-            <button className={classNames.buttonIcon} onClick={clearValue}>
+            <Button className={classNames.buttonIcon} onClick={clearValue}>
               <Close height={'18px'} width={'18px'} />
-            </button>
+            </Button>
           )}
         </div>
         {errorMessage && (

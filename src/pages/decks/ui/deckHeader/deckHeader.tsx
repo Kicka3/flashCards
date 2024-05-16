@@ -1,9 +1,9 @@
 import { TrashOutline } from '@/assets/icons/components'
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Slider } from '@/common/ui/slider'
 import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
+import { Typography } from '@/common/ui/typography'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { TabsType } from '@/services/common.types'
@@ -18,13 +18,15 @@ type Props = {
 export const DeckHeader = ({ tabs }: Props) => {
   const {
     clearFilter,
+    deckIsFetching,
+    getCurrentTab,
     maxCards,
     minCards,
     minMaxValues,
     onChangeName,
     onCommitSliderValues,
     onTabValueChange,
-    search,
+    searchBy,
   } = useDeckFilter()
 
   const onClearFilters = () => {
@@ -38,7 +40,7 @@ export const DeckHeader = ({ tabs }: Props) => {
         <CreateDeck
           title={'Add New Deck'}
           trigger={
-            <Button as={'div'} variant={'primary'}>
+            <Button as={'div'} style={{ padding: '10px 32px' }} variant={'primary'}>
               Add new deck
             </Button>
           }
@@ -49,7 +51,7 @@ export const DeckHeader = ({ tabs }: Props) => {
           <TextField
             onChange={onChangeName}
             placeholder={'Search deck'}
-            value={search.toString()}
+            value={searchBy}
             variant={'search'}
           />
         </div>
@@ -57,10 +59,11 @@ export const DeckHeader = ({ tabs }: Props) => {
         <div className={s.deckFilterGroup}>
           <div>
             <Tabs
-              defaultValue={tabs[1].value}
+              disabled={deckIsFetching}
               label={'Show decks cards'}
               onTabValueChange={onTabValueChange}
               tabs={tabs}
+              value={getCurrentTab || tabs[0].value}
             />
           </div>
           <Slider
@@ -70,7 +73,7 @@ export const DeckHeader = ({ tabs }: Props) => {
             onValueCommit={onCommitSliderValues}
           />
           <Button
-            icon={<TrashOutline height={'14px'} width={'14px'} />}
+            icon={<TrashOutline height={'16px'} width={'16px'} />}
             onClick={onClearFilters}
             variant={'secondary'}
           >

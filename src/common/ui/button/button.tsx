@@ -32,6 +32,7 @@ export const Button = <T extends ElementType = 'button'>(
       icon && s.withIcon,
       className
     ),
+    forLink: clsx(variant === 'link' ? 'btnForLink' : 'primary'),
     fullWidthIcon: clsx(fullWidth ? s.fullWidthIconWrapper : s.iconWrapper),
   }
 

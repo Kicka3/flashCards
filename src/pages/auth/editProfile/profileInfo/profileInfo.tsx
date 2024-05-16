@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { Typography } from '@/common/ui'
+import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
+import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
+import { Typography } from '@/common/ui/typography'
 import { AvatarEditor } from '@/pages/auth/editProfile/avatarEditor'
 import { EditProfileWithInput } from '@/pages/auth/editProfile/editProfileWithInput'
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
@@ -9,6 +12,8 @@ import {
   DataProps,
   EditProfileWithoutInput,
 } from '@/pages/auth/editProfile/editProfileWithoutInput'
+
+import s from './profileInfo.module.scss'
 
 export type Props = {
   className?: string
@@ -20,13 +25,33 @@ export type Props = {
 
 export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Props) => {
   const [editMode, setEditMode] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <Card>
-      <Typography as={'h1'} variant={'h1'}>
+      <Button
+        as={'button'}
+        className={s.buttonIcon}
+        onClick={() => navigate(-1)}
+        style={{ justifyContent: 'start' }}
+        variant={'link'}
+      >
+        <div className={s.iconContainer}>
+          <ArrowBackOutline className={s.backIcon} height={15} width={15} />
+          <Typography as={'p'} className={s.iconTitle} variant={'body2'}>
+            Go Back
+          </Typography>
+        </div>
+      </Button>
+      <Typography as={'h1'} className={s.header} variant={'h1'}>
         Personal Information
       </Typography>
-      <AvatarEditor avatar={data.avatar} editMode={editMode} updateAvatar={updateAvatar} />
+      <AvatarEditor
+        avatar={data.avatar}
+        editMode={editMode}
+        name={data.name}
+        updateAvatar={updateAvatar}
+      />
       {editMode ? (
         <EditProfileWithInput setEditMode={setEditMode} updateNickname={updateNickname} />
       ) : (

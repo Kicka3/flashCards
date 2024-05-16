@@ -29,11 +29,22 @@
   object-fit: cover;
 }
 
+.deckTitle {
+  cursor: pointer;
+  user-select: none;
+  box-sizing: border-box;
+  width: fit-content;
+}
+
 .arrow {
   position: absolute;
   top: 0;
   margin-left: 2px;
   fill: var(--color-light-100);
+}
+
+.deckPointer {
+  cursor: text;
 }
 
 .arrowWrapper {

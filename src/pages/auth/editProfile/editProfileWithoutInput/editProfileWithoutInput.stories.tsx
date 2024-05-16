@@ -15,15 +15,23 @@ export const EditProfileTest: Story = {
   args: {
     avatar: 'https://dz2cdn1.dzone.com/storage/user-avatar/534373-thumb.jpg',
     email: 'example123@gmail.com',
+    logout: () => console.log('Logout'),
     name: 'Nick',
+    setEditMode: (editMode: boolean) => console.log(`Set edit mode to ${editMode}`),
   },
   render: args => {
     /** fake user data */
-    const { avatar, email, name } = args
+    const { avatar, email, logout, name, setEditMode } = args
 
     return (
       <>
-        <EditProfileWithoutInput avatar={avatar} email={email} name={name} />
+        <EditProfileWithoutInput
+          avatar={avatar}
+          email={email}
+          logout={logout}
+          name={name}
+          setEditMode={setEditMode}
+        />
       </>
     )
   },

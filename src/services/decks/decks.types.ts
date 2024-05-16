@@ -39,16 +39,9 @@ export type PaginatedDeckList = {
   pagination: Pagination
 }
 
-/** Get Min-Max cards of deck */
-export type MinMaxCardsOfDeck = {
-  max: number
-  min: number
-}
-
 /** Delete deck */
 export type DeleteDeck = Omit<Deck, 'author'>
 
-//Володя сказал удалить и сделать на {id: string}
 export type DeleteDeckReq = {
   id: string
 }
@@ -93,36 +86,4 @@ export type DeckBodyRequest = {
   name: string
 }
 
-// /** Get (Retrieve) A Random Card */
-// export type GetRandomCard = {
-//   answer: string
-//   answerImg: string
-//   answerVideo: string
-//   created: string
-//   deckId: string
-//   grade: number
-//   id: string
-//   question: string
-//   questionImg: string
-//   questionVideo: string
-//   shots: number
-//   updated: string
-//   userId: string
-// }
-//
-// /** Save The Grade (Rating) Of A Card */
-// export type SaveRatingCard = {
-//   answer: string
-//   answerImg: string
-//   answerVideo: string
-//   created: string
-//   deckId: string
-//   grade: number
-//   id: string
-//   question: string
-//   questionImg: string
-//   questionVideo: string
-//   shots: number
-//   updated: string
-//   userId: string
-// }
+export type OptimisticDeck = Pick<Deck, 'cover' | 'isPrivate' | 'name'>

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
+import { Typography } from '@/common/ui/typography'
 import {
   UpdateUserFormValues,
   updateUserNameSchema,

@@ -14,6 +14,7 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
       defaultValue = [0, 5],
       disabled,
       max,
+      min,
       minStepsBetweenThumbs = 1,
       onValueCommit,
       value,
@@ -27,13 +28,14 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
     useEffect(() => {
       setSliderValue(defaultValue)
     }, [defaultValue])
+
     const onChangeValueHandler = (data: number[]) => {
       setSliderValue(data)
     }
 
-    const handleChangeValidator = (newValue: number, side?: 'left' | 'right') => {
+    const handleChangeValidator = (newValue: string, side?: 'left' | 'right') => {
       const temp = [...defaultValue]
-      const clampedValue = Math.min(newValue, max ? max : defaultValue[1])
+      const clampedValue = Math.min(Number(newValue), max ? max : defaultValue[1])
 
       if (side === 'left') {
         temp[0] = clampedValue
@@ -58,10 +60,10 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
           className={s.inputValue}
           disabled={disabled}
           onBlur={onBlurHandler}
-          onChange={e => handleChangeValidator(+e.currentTarget.value, 'left')}
+          onChange={e => handleChangeValidator(e.target.value, 'left')}
           pattern={'[0-100]'}
           type={'number'}
-          value={sliderValue[0]}
+          value={sliderValue[0].toString()}
         />
         <SliderRadix.Root
           className={classNames}
@@ -85,10 +87,10 @@ export const Slider = forwardRef<ElementRef<typeof SliderRadix.Root>, Props>(
           className={s.inputValue}
           disabled={disabled}
           onBlur={onBlurHandler}
-          onChange={e => handleChangeValidator(+e.currentTarget.value, 'right')}
+          onChange={e => handleChangeValidator(e.target.value, 'right')}
           pattern={'[0-100]'}
           type={'number'}
-          value={sliderValue[1]}
+          value={sliderValue[1].toString()}
         />
       </div>
     )

@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Typography } from '@/common/ui'
+import { Typography } from '@/common/ui/typography'
 import { TabsType } from '@/services/common.types'
 import * as TabsRadix from '@radix-ui/react-tabs'
 

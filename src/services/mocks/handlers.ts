@@ -165,6 +165,7 @@ const moDecks = {
     totalPages: 38,
   },
 }
+const mockDeckId = 'f2be95b9-4d07-4751-a775-bd612fc9553a'
 
 /** Перехват запросов на сервер для всего приложения!!!*/
 const baseUrl = 'https://api.flashcards.andrii.es'
@@ -210,8 +211,20 @@ export const handlers = [
   http.delete(`${baseUrl}/v1/cards/{id}`, () => {
     return HttpResponse.json(mokDataLogin, { status: 200 })
   }),
-  /** DecksContainer */
+  /** Decks */
   http.get(`${baseUrl}/v2/decks`, () => {
+    return HttpResponse.json(moDecks, { status: 200 })
+  }),
+  http.post(`${baseUrl}/v1/decks`, () => {
+    return HttpResponse.json(moDecks, { status: 200 })
+  }),
+  http.delete(`${baseUrl}/v1/decks/${mockDeckId}`, () => {
+    return HttpResponse.json(moDecks, { status: 200 })
+  }),
+  http.get(`${baseUrl}/v1/decks/${mockDeckId}/learn`, () => {
+    return HttpResponse.json(moDecks, { status: 200 })
+  }),
+  http.get(`${baseUrl}/v1/decks/${mockDeckId}`, () => {
     return HttpResponse.json(moDecks, { status: 200 })
   }),
 ]

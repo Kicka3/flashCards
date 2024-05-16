@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
 import elvelope from '@/assets/img/envelope.png'
-import { Typography } from '@/common/ui'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
+import { Typography } from '@/common/ui/typography'
 
 import s from './checkEmail.module.scss'
 

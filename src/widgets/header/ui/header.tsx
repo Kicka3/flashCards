@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
+import { Button } from '@/common/ui/button'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'
 
@@ -16,7 +17,13 @@ export const Header = ({ children, className, isAuth, profile, ...rest }: Props)
       <div className={clsx(s.header, className)} {...rest}>
         <Link to={'/'}>HEADERlogo</Link>
 
-        {isAuth ? <Profile profile={profile} /> : <div>login</div>}
+        {isAuth ? (
+          <Profile profile={profile} />
+        ) : (
+          <Button as={Link} to={'/signIn'} variant={'secondary'}>
+            Sign In
+          </Button>
+        )}
       </div>
     </header>
   )
