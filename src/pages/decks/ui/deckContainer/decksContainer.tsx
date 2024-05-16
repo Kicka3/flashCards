@@ -1,7 +1,6 @@
 import { ErrorResponse, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { useFilter } from '@/common/hooks/useFilter'
 import { Pagination } from '@/common/ui/pagination'
 import { Typography } from '@/common/ui/typography'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
