@@ -17,6 +17,7 @@ export const useDeckFilter = () => {
     search,
     searchBy,
     setCurrentPage,
+    setItemsPerPage,
     setSearch,
     setSortedBy,
     sortedString,
@@ -90,6 +91,8 @@ export const useDeckFilter = () => {
     [mappedDecks]
   )
 
+  const paginationOptions = ['10', '20', '30', '50', '100']
+
   /** Возвращаем объект с данными и функциями для управления фильтрацией колод. */
   return {
     clearFilter,
@@ -110,9 +113,11 @@ export const useDeckFilter = () => {
     onCommitSliderValues,
     onTabValueChange,
     orderBy,
+    paginationOptions,
     search,
     searchBy,
     setCurrentPage,
+    setItemsPerPage,
     setSortedBy,
   }
 }

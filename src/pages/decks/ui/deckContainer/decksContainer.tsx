@@ -24,10 +24,11 @@ export const DecksContainer = ({}: Props) => {
     itemsPerPage,
     mappedDecks,
     orderBy,
+    paginationOptions,
     setCurrentPage,
+    setItemsPerPage,
     setSortedBy,
   } = useDeckFilter()
-  const { paginationOptions, setItemsPerPage } = useFilter()
 
   const navigate = useNavigate()
 
