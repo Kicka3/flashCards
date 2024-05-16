@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
@@ -30,13 +31,16 @@ export const SignIn = () => {
   const [login] = useLoginMutation()
 
   const onSubmit = async (data: FormValues) => {
-    await login(data).unwrap()
+    try {
+      await login(data).unwrap()
+    } catch (error: any) {
+      toast.error(error?.data?.message ?? 'Some errors occupied while sign in')
+    }
   }
 
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DevTool control={control} />
         <div className={s.signInContainer}>
           <div className={s.headerForm}>
             <Typography className={s.signInTitle} variant={'h1'}>
