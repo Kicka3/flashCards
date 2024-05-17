@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { ROUTES } from '@/common/enums/enums'
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
 import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services/auth'
@@ -53,7 +54,7 @@ export const ProfilePage = ({}) => {
   const handleLogout = async () => {
     try {
       await logout().unwrap()
-      navigate('/signIn')
+      navigate(ROUTES.SIGN_IN)
     } catch (error) {
       console.error('Error during logout:', error)
     }

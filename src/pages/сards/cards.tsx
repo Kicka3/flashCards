@@ -30,7 +30,7 @@ export const Cards = () => {
   const [search, setSearch] = useState('')
   const [orderBy, setOrderBy] = useState('')
   const debouncedSearch = useDebounce(search)
-  const { data: cards, isLoading } = useGetCardsQuery({
+  const { data: cards } = useGetCardsQuery({
     id: deckId || '',
     params: {
       currentPage,
@@ -47,10 +47,6 @@ export const Cards = () => {
 
   const totalItems = cards?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / 10 > 1
-
-  if (isLoading) {
-    return <div>...Loading</div>
-  }
 
   const onChangeOrderBy = (columnName: string) => {
     let newOrder = 'asc'

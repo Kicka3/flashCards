@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
@@ -28,10 +29,18 @@ export const SignUp = ({}: Props) => {
   })
 
   const [signUp] = useSignUpMutation()
-  const onSubmit = (data: FormValues) => {
-    const { email, password } = data
+  const onSubmit = async (data: FormValues) => {
+    try {
+      const result = await signUp(data).unwrap()
+      const promiseResult = Promise.resolve(result)
 
-    signUp({ email, password }).unwrap()
+      await toast.promise(promiseResult, {
+        pending: 'Creating account...',
+        success: 'Account created successfully!',
+      })
+    } catch (error: any) {
+      toast.error(error?.data?.message ?? 'Some errors occurred while sign up')
+    }
   }
 
   return (
