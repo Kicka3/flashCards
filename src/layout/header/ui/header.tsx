@@ -15,24 +15,32 @@ type Props = {
 } & ComponentPropsWithoutRef<'header'>
 
 export const Header = ({ children, className, isAuth, isLoading, profile, ...rest }: Props) => {
-  let content = null
-
-  if (isAuth && !isLoading) {
-    content = <HeaderProfile profile={profile} />
-  } else if (!isLoading) {
-    content = (
-      <Button as={Link} to={'/signIn'} variant={'secondary'}>
-        Sign In
-      </Button>
-    )
-  }
-
   return (
     <header className={s.headerWrapper}>
       <div className={clsx(s.header, className)} {...rest}>
         <Link to={'/'}>HEADERlogo</Link>
-        {content}
+        <HeaderContent isAuth={isAuth} isLoading={isLoading} profile={profile} />
       </div>
     </header>
+  )
+}
+
+function HeaderContent({
+  isAuth,
+  isLoading,
+  profile,
+}: Pick<Props, 'isAuth' | 'isLoading' | 'profile'>) {
+  if (isLoading) {
+    return null
+  }
+
+  if (isAuth) {
+    return <HeaderProfile profile={profile} />
+  }
+
+  return (
+    <Button as={Link} to={'/signIn'} variant={'secondary'}>
+      Sign In
+    </Button>
   )
 }
