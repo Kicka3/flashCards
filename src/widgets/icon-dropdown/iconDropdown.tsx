@@ -8,9 +8,7 @@ import { Typography } from '@/common/ui/typography'
 
 import s from './iconDropdown.module.scss'
 
-type Props = {}
-
-export const IconDropDown = ({}: Props) => {
+export const IconDropDown = () => {
   return (
     <>
       <DropDownMenu trigger={<MoreVerticalOutline height={25} width={25} />}>

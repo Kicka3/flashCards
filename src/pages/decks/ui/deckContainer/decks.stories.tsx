@@ -5,8 +5,9 @@ import { BrowserRouter } from 'react-router-dom'
 
 import { DecksContainer } from '@/pages/decks/ui/deckContainer/decksContainer'
 import { store } from '@/services/store'
-import { Loader } from '@/widgets/loader'
 import { fn } from '@storybook/test'
+
+import { Loader } from '../../../../common/ui/loader'
 
 const meta = {
   argTypes: {},

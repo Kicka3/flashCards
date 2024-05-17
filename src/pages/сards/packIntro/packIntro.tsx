@@ -5,7 +5,7 @@ import { Button } from '@/common/ui/button'
 import { Typography } from '@/common/ui/typography'
 import { CreateCard } from '@/features/cards/createCard'
 import { Deck } from '@/services/decks'
-import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
+import { IconDropDown } from '@/widgets/icon-dropdown/iconDropdown'
 
 import s from './packIntro.module.scss'
 

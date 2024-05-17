@@ -3,13 +3,13 @@ import { toast } from 'react-toastify'
 
 import { ROUTES } from '@/common/enums/enums'
 import { useFilter } from '@/common/hooks/useFilter'
+import { Loader } from '@/common/ui/loader/loader'
 import { Pagination } from '@/common/ui/pagination'
 import { Typography } from '@/common/ui/typography'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
 import { useDeleteDeckMutation } from '@/services/decks/decks.service'
-import { Loader } from '@/widgets/loader'
 
 import s from './decks.module.scss'
 

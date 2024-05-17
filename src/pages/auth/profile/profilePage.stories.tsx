@@ -18,7 +18,7 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-  title: 'Auth/Profile',
+  title: 'Auth/HeaderProfile',
 } satisfies Meta<typeof ProfilePage>
 
 export default meta

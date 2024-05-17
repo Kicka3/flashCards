@@ -2,8 +2,8 @@ import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/common/ui/button'
+import { HeaderProfile } from '@/layout/header/ui/header-profile'
 import { UserData } from '@/services/auth'
-import Profile from '@/widgets/header/ui/profile/profile'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
@@ -18,7 +18,7 @@ export const Header = ({ children, className, isAuth, isLoading, profile, ...res
   let content = null
 
   if (isAuth && !isLoading) {
-    content = <Profile profile={profile} />
+    content = <HeaderProfile profile={profile} />
   } else if (!isLoading) {
     content = (
       <Button as={Link} to={'/signIn'} variant={'secondary'}>
