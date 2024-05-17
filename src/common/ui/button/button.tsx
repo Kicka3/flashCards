@@ -17,6 +17,7 @@ export const Button = <T extends ElementType = 'button'>(
 ) => {
   const {
     as: Component = 'button',
+    children,
     className,
     fullWidth = false,
     icon,
@@ -37,9 +38,9 @@ export const Button = <T extends ElementType = 'button'>(
   }
 
   return (
-    <div className={s.btnWrapper}>
-      {icon && <div className={classNames.fullWidthIcon}>{icon ?? icon}</div>}
-      <Component className={classNames.buttonStyles} {...rest} />
-    </div>
+    <Component className={classNames.buttonStyles} {...rest}>
+      {icon && <div className={classNames.fullWidthIcon}>{icon}</div>}
+      {children}
+    </Component>
   )
 }
