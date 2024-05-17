@@ -11,7 +11,7 @@ import { Typography } from '@/common/ui/typography'
 import s from './iconDropdown.module.scss'
 
 type Props = {
-  isEmpty: boolean
+  isEmpty?: boolean
   onEditClick?: () => void
   onOpenDeleteForm?: (open: boolean) => void
 }
