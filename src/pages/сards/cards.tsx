@@ -91,7 +91,7 @@ export const Cards = () => {
     <section className={s.wrapper}>
       <Link className={s.backLink} to={'/'}>
         <ArrowBackOutline height={16} width={16} />
-        <Typography variant={'body2'}>Back to Decks List</Typography>
+        <Typography variant={'sub1'}>Back to Decks List</Typography>
       </Link>
 
       <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} />

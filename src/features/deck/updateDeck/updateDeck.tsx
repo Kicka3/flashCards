@@ -1,4 +1,5 @@
 import { ErrorResponse } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { DeckForm, EditDeckType } from '@/features/deck/deckForm'
 import { DeckBodyRequest, useUpdateDecksMutation } from '@/services/decks'
@@ -16,16 +17,15 @@ export const UpdateDeck = ({ deck, isOpen, onOpenChange, title }: Props) => {
   const updateEditDeck = async (data: DeckBodyRequest) => {
     try {
       if (deck?.id) {
-        //Закидываю notifications TOAST
-        // await toast.promise(updateDeck({ data, id: deck?.id }).unwrap(), {
-        updateDeck({ data, id: deck?.id }).unwrap()
+        await toast.promise(updateDeck({ data, id: deck?.id }).unwrap(), {
+          pending: 'In progress',
+          success: 'Success',
+        })
       }
     } catch (e) {
       const err = e as ErrorResponse
 
-      console.log('Could not update', err)
-      //Закидываю notifications TOAST
-      // toast.error(err.data.message ?? 'Could not update')
+      toast.error(err?.data?.errorMessages[0]?.message ?? 'Could not update')
     }
   }
 

@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom'
+import { ErrorResponse, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useFilter } from '@/common/hooks/useFilter'
 import { Pagination } from '@/common/ui/pagination'
@@ -12,23 +13,14 @@ import { Loader } from '@/widgets/loader'
 import s from './decks.module.scss'
 
 type Props = {
-  /** Для storybook */
+  /** Types for storybook */
   isLoading?: boolean
   onClick?: () => void
 }
 
 export const DecksContainer = ({}: Props) => {
-  const {
-    currentPage,
-    deckData,
-    deckIsLoading,
-    isOwner,
-    itemsPerPage,
-    mappedDecks,
-    orderBy,
-    setCurrentPage,
-    setSortedBy,
-  } = useDeckFilter()
+  const { currentPage, deckData, deckIsLoading, itemsPerPage, mappedDecks, setCurrentPage } =
+    useDeckFilter()
   const { paginationOptions, setItemsPerPage } = useFilter()
 
   const navigate = useNavigate()
@@ -50,17 +42,31 @@ export const DecksContainer = ({}: Props) => {
     )
   }
 
-  /** Удаляю Deck */
-  const onDeleteDeck = (id: string) => {
-    deleteDeck({ id })
+  /** Delete Deck */
+  const onDeleteDeck = async (id: string) => {
+    try {
+      await toast.promise(deleteDeck({ id }).unwrap(), {
+        pending: 'In progress',
+        success: 'Deck was deleted',
+      })
+    } catch (e: unknown) {
+      const err = e as ErrorResponse
+
+      toast.error(err?.data?.errorMessages[0]?.message ?? "Couldn't Delete")
+    }
   }
 
-  /** Открываю Deck */
+  /** Open Deck */
   const openDeck = (deckId: string) => {
     navigate(`/decks/${deckId}`)
   }
 
-  /** Пагинация */
+  /** learn Deck */
+  const learnDeckHandler = (deckId: string) => {
+    navigate(`/v1/decks/${deckId}/learn`)
+  }
+
+  /** Pagination */
   const totalItems = deckData?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
 
@@ -71,11 +77,9 @@ export const DecksContainer = ({}: Props) => {
         <DecksTable
           decks={mappedDecks}
           isDeckBeingDeleted={isDeckBeingDeleted}
-          isOwner={isOwner}
+          learnDeck={learnDeckHandler}
           onDeleteClick={onDeleteDeck}
-          onSort={setSortedBy}
           openDeck={openDeck}
-          sort={orderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>

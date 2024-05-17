@@ -14,7 +14,6 @@ import { Typography } from '@/common/ui/typography'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { useDeckFilter, useSortDecks } from '@/pages/decks/deckHooks'
-import { Sort } from '@/services/common.types'
 import { MyDeck } from '@/services/decks'
 import clsx from 'clsx'
 
@@ -23,28 +22,24 @@ import s from './decksTable.module.scss'
 type Props = {
   decks: MyDeck[]
   isDeckBeingDeleted: boolean
-  isOwner: (userId: string) => boolean
-  onDeleteClick?: (id: string) => void
-  onEditClick?: (id: string) => void
-  onSort?: (sort: Sort) => void
+  learnDeck: (deckId: string) => void
+  onDeleteClick?: (deckId: string) => void
+  onEditClick?: (deckId: string) => void
   openDeck: (deckId: string) => void
-  sort?: Sort
 }
 
 export const DecksTable = ({
   decks,
   isDeckBeingDeleted,
-  isOwner,
+  learnDeck,
   onDeleteClick,
-  onSort,
   openDeck,
-  sort,
 }: Props) => {
   const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
   const [openEditMode, setOpenEditMode] = useState(false)
   /** Пользовател. хуки */
-  const { handleSort, sortedDecks } = useSortDecks(decks, sort, onSort)
-  const { findDeck } = useDeckFilter()
+  const { findDeck, isOwner, orderBy, setSortedBy } = useDeckFilter()
+  const { handleSort, sortedDecks } = useSortDecks(decks, orderBy, setSortedBy)
 
   /** Сохраняю ID колоды */
   const [getDeckId, setGetDeckId] = useState<string | undefined>('')
@@ -54,16 +49,13 @@ export const DecksTable = ({
   }, [])
 
   /** Удаляю по id из form*/
-  const onDeleteDeck = useCallback(
-    (id: string) => {
-      if (id) {
-        onDeleteClick?.(id)
-      }
-    },
-    [onDeleteClick]
-  )
+  const onDeleteDeck = async (id: string) => {
+    if (id) {
+      onDeleteClick?.(id)
+    }
+  }
 
-  /** Удаляю Deck */
+  /** Delete Deck */
   const deleteDeckHandler = (id: string) => () => {
     setGetDeckId(id)
     const deckName = findDeck(id)
@@ -73,7 +65,7 @@ export const DecksTable = ({
     return deckName?.name
   }
 
-  /** Редактирую Deck */
+  /** Update Deck */
   const editDeckHandler = useCallback(
     (id: string) => () => {
       const deckToEdit = findDeck(id)
@@ -86,21 +78,21 @@ export const DecksTable = ({
     [findDeck]
   )
 
-  const openDeckHandler = useCallback((deckId: string) => {
+  const openDeckHandler = (deckId: string) => {
     openDeck(deckId)
-  }, [])
+  }
 
-  const onLearnDeck = useCallback(() => {
-    console.log('learn')
-  }, [])
+  const onLearnDeck = (deckId: string) => {
+    learnDeck(deckId)
+  }
 
   /** Функция для отрисовки стрелки сортировки */
   const renderSortArrow = useCallback(
     (key: string) => {
-      if (sort?.key === key) {
+      if (orderBy?.key === key) {
         return (
           <span className={s.arrowWrapper}>
-            {sort.direction === 'asc' ? (
+            {orderBy.direction === 'asc' ? (
               <ArrowIosUp className={s.arrow} height={16} width={16} />
             ) : (
               <ArrowIosDownOutline className={s.arrow} height={16} width={16} />
@@ -111,7 +103,7 @@ export const DecksTable = ({
 
       return null
     },
-    [sort]
+    [orderBy]
   )
 
   const classNames = {
@@ -169,19 +161,23 @@ export const DecksTable = ({
                   ) : (
                     <img alt={'noCover'} className={s.deckCoverImg} src={noCoverImg} />
                   )}
-                  <Typography variant={'body2'}>{deck.name}</Typography>
+                  <Typography className={s.deckTitle} variant={'sub2'}>
+                    {deck.name}
+                  </Typography>
                 </span>
               </TableCell>
-              <TableCell>{deck.cards}</TableCell>
-              <TableCell>{new Date(deck.lastUpdated).toLocaleString('ru-ru')}</TableCell>
-              <TableCell>{deck.createdBy}</TableCell>
+              <TableCell className={s.deckPointer}>{deck.cards}</TableCell>
+              <TableCell className={s.deckPointer}>
+                {new Date(deck.lastUpdated).toLocaleDateString('ru-ru')}
+              </TableCell>
+              <TableCell className={s.deckPointer}>{deck.createdBy}</TableCell>
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
                     <Button
                       className={deck.cards === 0 ? s.disableIcon : ''}
                       disabled={!deck.cards}
-                      onClick={onLearnDeck}
+                      onClick={() => onLearnDeck(deck.id)}
                       variant={'icon'}
                     >
                       <PlayCircleOutline
@@ -217,7 +213,7 @@ export const DecksTable = ({
                   <Button
                     className={clsx(deck.cards === 0 && s.disableIcon)}
                     disabled={!deck.cards}
-                    onClick={onLearnDeck}
+                    onClick={() => onLearnDeck(deck.id)}
                     variant={'icon'}
                   >
                     <PlayCircleOutline height={'16px'} width={'16px'} />

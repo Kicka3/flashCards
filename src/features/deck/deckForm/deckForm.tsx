@@ -58,7 +58,6 @@ export const DeckForm = ({
   /** Когда компонента монитурется, проверяем deck и устанавливаем занчения для полей */
   useEffect(() => {
     if (deck) {
-      // console.log('deckName:', deck.name)
       setValue('name', deck.name || '')
       setValue('isPrivate', deck.isPrivate || false)
       setPhoto(deck.cover ?? null)
@@ -76,7 +75,7 @@ export const DeckForm = ({
     reset()
   }
 
-  /** Загрузка изображений */
+  /** Загрузка изображений Взять у Володи*/
   const openFiles = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
