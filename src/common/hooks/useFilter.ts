@@ -8,7 +8,7 @@ import { Sort } from '@/services/common.types'
 export const useFilter = () => {
   const [search, setSearch] = useSearchParams({})
 
-  const { data: me } = useMeQuery()
+  const { data: me, refetch } = useMeQuery()
 
   /** Настройки для фильтрации */
   const orderBy = JSON.parse(search.get('orderBy') || '""')
@@ -64,6 +64,7 @@ export const useFilter = () => {
     onChangeName,
     orderBy,
     paginationOptions,
+    refetch,
     search,
     searchBy,
     setCurrentPage,
