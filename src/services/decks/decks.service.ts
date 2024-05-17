@@ -101,8 +101,7 @@ export const decksApiService = baseApi.injectEndpoints({
       }),
       getDeckToLearn: builder.query<Card, { id: string }>({
         providesTags: ['Decks', 'Cards'],
-        query: ({ id, params }) => ({
-          params: params ?? undefined,
+        query: ({ id }) => ({
           url: `v1/decks/${id}/learn`,
         }),
       }),
