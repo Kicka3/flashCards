@@ -1,6 +1,8 @@
 import { ErrorResponse, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { ROUTES } from '@/common/enums/enums'
+import { useFilter } from '@/common/hooks/useFilter'
 import { Pagination } from '@/common/ui/pagination'
 import { Typography } from '@/common/ui/typography'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
@@ -18,16 +20,9 @@ type Props = {
 }
 
 export const DecksContainer = ({}: Props) => {
-  const {
-    currentPage,
-    deckData,
-    deckIsLoading,
-    itemsPerPage,
-    mappedDecks,
-    paginationOptions,
-    setCurrentPage,
-    setItemsPerPage,
-  } = useDeckFilter()
+  const { currentPage, deckData, deckIsLoading, itemsPerPage, mappedDecks, setCurrentPage } =
+    useDeckFilter()
+  const { paginationOptions, setItemsPerPage } = useFilter()
 
   const navigate = useNavigate()
 
@@ -69,7 +64,7 @@ export const DecksContainer = ({}: Props) => {
 
   /** learn Deck */
   const learnDeckHandler = (deckId: string) => {
-    navigate(`/v1/decks/${deckId}/learn`)
+    navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
   }
 
   /** Pagination */
