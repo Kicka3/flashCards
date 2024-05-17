@@ -113,7 +113,7 @@ export const decksApiService = baseApi.injectEndpoints({
         }),
       }),
       saveGrade: builder.mutation<Card, { args: { cardId: string; grade: number }; id: string }>({
-        async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
           const card = await queryFulfilled
 
           dispatch(
