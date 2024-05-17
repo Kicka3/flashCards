@@ -30,7 +30,7 @@ const CardCreator = (deckId: string) => (
 
 export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   const [openEditMode, setOpenEditMode] = useState(false)
-  //ИЗ КОМПОНЕНТЫ DECKTABLE
+  //ИЗ КОМПОНЕНТЫ DECKTABLE кортеж для формы удаления.
   const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
 
   /**DELETE DECK */
@@ -134,7 +134,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
         isDeck
         //Тут в deleteDeck кортеж
         isOpen={deleteForm[0]}
-        //Передать имя?!?
+        //Найти имя!!!
         name={deleteForm[1]}
         onOpenChange={setDeleteForm}
         title={'Delete Pack'}
