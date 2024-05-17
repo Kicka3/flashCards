@@ -92,6 +92,7 @@ export const useDeckFilter = () => {
     [mappedDecks]
   )
 
+  //!!!!!!!!!!!Уже есть в USEFILTER
   const paginationOptions = ['10', '20', '30', '50', '100']
 
   /** Возвращаем объект с данными и функциями для управления фильтрацией колод. */
@@ -107,7 +108,6 @@ export const useDeckFilter = () => {
     itemsPerPage,
     mappedDecks,
     maxCards,
-    me,
     minCards,
     minMaxValues,
     onChangeName,

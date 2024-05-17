@@ -6,7 +6,7 @@ import s from './deleteForm.module.scss'
 
 type Props = {
   close: () => void
-  deleteAction: (id: string) => void
+  deleteAction?: (id: string) => void
   id: string | undefined
   isDeck: boolean
   isOpen: boolean
