@@ -7,6 +7,10 @@
   gap: 10px;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
 .disableIcon {
   pointer-events: none;
   color: var(--color-dark-100);

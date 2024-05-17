@@ -16,11 +16,23 @@
   background: var(--color-dark-500);
 
   &:first-child {
-    width: 400px;
+    width: 210px;
   }
 
   &:nth-child(2) {
-    width: 150px;
+    width: 62px;
+  }
+
+  &:nth-child(3) {
+    width: 90px;
+  }
+
+  &:nth-child(4) {
+    width: 126px;
+  }
+
+  &:nth-child(5) {
+    width: 72px;
   }
 }
 
@@ -36,7 +48,6 @@
 
   &:not(:last-child) {
     overflow: hidden;
-
     max-width: 1000px;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -2,21 +2,27 @@ import { useNavigate } from 'react-router-dom'
 
 import { ArrowBackOutline } from '@/assets/icons/components'
 import { Button } from '@/common/ui/button'
+import clsx from 'clsx'
 
 import s from './backButton.module.scss'
 
 type Props = {
-  title: string
+  className?: string
+  title?: string
 }
 
-export const GoBackButton = ({ title = 'Return to Previous Page' }: Props) => {
+export const GoBackButton = ({ className, title = 'Return to Previous Page' }: Props) => {
   const navigate = useNavigate()
   const goBackHandler = () => navigate(-1)
 
+  const classNames = {
+    btnStyles: clsx(className, s.backTo),
+  }
+
   return (
     <div className={s.backButtonWrapper}>
-      <Button className={s.backTo} onClick={goBackHandler} variant={'link'}>
-        <ArrowBackOutline className={s.arrowBack} />
+      <Button className={classNames.btnStyles} onClick={goBackHandler} variant={'link'}>
+        <ArrowBackOutline className={s.arrowBack} height={'18px'} width={'18px'} />
         {title}
       </Button>
     </div>

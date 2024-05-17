@@ -15,11 +15,17 @@
 .packIntro {
   display: flex;
   justify-content: space-between;
+  margin: 33px 0 25px;
 }
 
 .packTitle {
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-bottom: 15 px;
+  margin-bottom: 16px;
+}
+
+.deckCover {
+  min-width: 150px;
+  max-height: 150px;
 }

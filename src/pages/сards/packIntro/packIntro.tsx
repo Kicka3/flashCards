@@ -32,7 +32,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
             <div className={s.packTitle}>
               <Typography variant={'h1'}>{deck?.name}</Typography>
             </div>
-            {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
+            {deck?.cover && <img alt={'Deck`s cover'} className={s.deckCover} src={deck.cover} />}
           </div>
         </div>
         <div className={s.noCardWrapper}>

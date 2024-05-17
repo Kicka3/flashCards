@@ -1,18 +1,17 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import ArrowBackOutline from '@/assets/icons/components/ArrowBackOutline'
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import noImg from '@/assets/img/noImage.png'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useFilter } from '@/common/hooks/useFilter'
+import { GoBackButton } from '@/common/ui/backButton'
 import { Button } from '@/common/ui/button'
 import { Pagination } from '@/common/ui/pagination'
 import { Rating } from '@/common/ui/rating'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { TextField } from '@/common/ui/textField'
-import { Typography } from '@/common/ui/typography'
 import { UpdateCard } from '@/features/cards/updateCard'
 import { Card, useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
 import { useGetDeckByIdQuery } from '@/services/decks'
@@ -89,11 +88,7 @@ export const Cards = () => {
 
   return (
     <section className={s.wrapper}>
-      <Link className={s.backLink} to={'/'}>
-        <ArrowBackOutline height={16} width={16} />
-        <Typography variant={'sub1'}>Back to Decks List</Typography>
-      </Link>
-
+      <GoBackButton className={s.backBtn} />
       <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} />
 
       {Boolean(isEmpty) && (
@@ -143,6 +138,7 @@ export const Cards = () => {
                   <TableCell>
                     <div className={s.contentWrapper}>
                       <img
+                        alt={'deck image'}
                         className={s.cardImg}
                         height={50}
                         src={card.questionImg ? card.questionImg : noImg}
@@ -154,6 +150,7 @@ export const Cards = () => {
                   <TableCell>
                     <div className={s.contentWrapper}>
                       <img
+                        alt={'card image'}
                         className={s.cardImg}
                         height={50}
                         src={card.answerImg ? card.answerImg : noImg}
