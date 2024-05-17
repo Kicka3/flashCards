@@ -33,7 +33,7 @@ export const DeleteForm = ({
 }: Props) => {
   /** Кнопка Delete в модалке */
   const DeleteDeckHandler = () => {
-    if (id) {
+    if (deleteAction && id) {
       deleteAction(id)
       onOpenChange([false, undefined])
     }

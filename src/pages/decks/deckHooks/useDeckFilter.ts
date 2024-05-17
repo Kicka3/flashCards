@@ -86,7 +86,7 @@ export const useDeckFilter = () => {
 
   /** Ищу нужную колоду */
   const findDeck = useCallback(
-    (id: string) => {
+    (id: string | undefined) => {
       return mappedDecks?.find(d => d.id === id)
     },
     [mappedDecks]

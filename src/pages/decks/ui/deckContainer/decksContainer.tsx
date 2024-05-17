@@ -62,7 +62,7 @@ export const DecksContainer = ({}: Props) => {
     navigate(`/decks/${deckId}`)
   }
 
-  /** learn Deck */
+  /** learn Deck забавная реализация */
   const learnDeckHandler = (deckId: string) => {
     navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
   }

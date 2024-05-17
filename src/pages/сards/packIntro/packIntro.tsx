@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ErrorResponse, Link, useNavigate, useParams } from 'react-router-dom'
+import { ErrorResponse, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { PlayCircleOutline } from '@/assets/icons/components'
@@ -9,7 +9,7 @@ import { CreateCard } from '@/features/cards/createCard'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
 import { useDeckFilter } from '@/pages/decks/deckHooks'
-import { Deck, useDeleteDeckMutation, useGetDeckByIdQuery } from '@/services/decks'
+import { Deck, useDeleteDeckMutation } from '@/services/decks'
 import { IconDropDown } from '@/widgets/icon-dropdown/iconDropdown'
 
 import s from './packIntro.module.scss'
@@ -18,6 +18,7 @@ type Props = {
   deck: Deck | undefined
   isEmpty: boolean
   isOwner: boolean
+  learnDeck: (deckId: string) => void
 }
 
 const CardCreator = (deckId: string) => (
@@ -30,24 +31,16 @@ const CardCreator = (deckId: string) => (
 
 export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   const [openEditMode, setOpenEditMode] = useState(false)
-  //ИЗ КОМПОНЕНТЫ DECKTABLE кортеж для формы удаления.
+
+  /** ИЗ КОМПОНЕНТЫ DECKTABLE кортеж для формы удаления. */
   const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
 
   /**DELETE DECK */
   const [deleteDeck] = useDeleteDeckMutation()
 
-  const { id } = useParams<{ id: string }>()
-
   const navigate = useNavigate()
 
   const { findDeck } = useDeckFilter()
-
-  const { data: deckId } = useGetDeckByIdQuery(id!)
-
-  // const { me } = useFilter()
-  // const { isEmpty } = useCardFilter(id)
-  // const isOwner = me?.id === deckId?.userId
-  // const isEmpty = deckId?.cardsCount === 0
 
   if (!isEmpty) {
     return (
@@ -79,27 +72,28 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   }
 
   const onEditClickHandler = () => {
-    console.log('set is open true')
     setOpenEditMode(true)
   }
 
   const onOpenDeleteFormHandler = () => {
-    console.log('set is open delete form true')
-    setDeleteForm([true, 'Тут должно быть имя Deck'])
-  }
-
-  const learnDeckHandler = () => {
-    navigate(`/cards/${id}/learn`)
+    setDeleteForm([true, deck?.name])
   }
 
   const goBackHandler = () => {
     navigate(-1)
   }
 
+  /** Вынести выше в Cards? */
   const onDeleteDeck = async (id: string) => {
+    if (!deck || !deck.id) {
+      toast.error('Deck is not defined or its id is missing')
+
+      return
+    }
+
     try {
       if (id) {
-        await toast.promise(deleteDeck(deckId).unwrap(), {
+        await toast.promise(deleteDeck({ id: deck.id }).unwrap(), {
           pending: 'In progress',
           success: 'Success',
         })
@@ -112,7 +106,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
     }
   }
 
-  //Закрываю DELETE FORM из комопненты DECKSTABLE
+  /** Закрываю DELETE FORM из комопненты DECKSTABLE */
   const closeDeleteFormHandler = () => {
     setDeleteForm([false, undefined])
   }
@@ -120,7 +114,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   return (
     <div className={s.packIntro}>
       <UpdateDeck
-        deck={findDeck(deckId)}
+        deck={findDeck(deck?.id)}
         isOpen={openEditMode}
         onOpenChange={setOpenEditMode}
         title={'Update Deck'}
@@ -130,12 +124,10 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
         deleteAction={deckId => {
           onDeleteDeck(deckId)
         }}
-        id={id}
+        id={deck?.id}
         isDeck
-        //Тут в deleteDeck кортеж
         isOpen={deleteForm[0]}
-        //Найти имя!!!
-        name={deleteForm[1]}
+        name={deck?.name}
         onOpenChange={setDeleteForm}
         title={'Delete Pack'}
       />
@@ -145,7 +137,6 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
           {isOwner ? (
             <IconDropDown
               isEmpty
-              learn={learnDeckHandler}
               onEditClick={onEditClickHandler}
               onOpenDeleteForm={onOpenDeleteFormHandler}
             />
@@ -160,11 +151,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       {isOwner ? (
         deck && CardCreator(deck?.id)
       ) : (
-        <Button
-          onClick={() => {
-            console.log('ДЩЧ')
-          }}
-        >
+        <Button as={Link} to={'learn'}>
           Start to Learn
         </Button>
       )}

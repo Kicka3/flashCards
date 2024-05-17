@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
 import noImg from '@/assets/img/noImage.png'
+import { ROUTES } from '@/common/enums/enums'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useFilter } from '@/common/hooks/useFilter'
 import { GoBackButton } from '@/common/ui/backButton'
@@ -23,6 +24,7 @@ import { PackIntro } from './packIntro/packIntro'
 
 export const Cards = () => {
   const { id: deckId } = useParams()
+  const navigate = useNavigate()
   const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
     useFilter()
 
@@ -40,6 +42,10 @@ export const Cards = () => {
   })
   const { data: deck } = useGetDeckByIdQuery(deckId!)
   const [deleteCard] = useDeleteCardMutation()
+
+  const learnDeckHandler = (deckId: string) => {
+    navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
+  }
 
   const isOwner = deck?.userId === me?.id
   const isEmpty = Boolean(deck?.cardsCount)
@@ -67,19 +73,19 @@ export const Cards = () => {
 
   const classNames = {
     tableHeadCell: {
-      answer: clsx(s.tableHeadCell, {
+      answer: clsx(s.answer, s.tableHeadCell, {
         [s.asc]: orderBy === 'answer-asc',
         [s.desc]: orderBy === 'answer-desc',
       }),
-      grade: clsx(s.tableHeadCell, {
+      grade: clsx(s.grade, s.tableHeadCell, {
         [s.asc]: orderBy === 'grade-asc',
         [s.desc]: orderBy === 'grade-desc',
       }),
-      question: clsx(s.tableHeadCell, {
+      question: clsx(s.question, s.tableHeadCell, {
         [s.asc]: orderBy === 'question-asc',
         [s.desc]: orderBy === 'question-desc',
       }),
-      updated: clsx(s.tableHeadCell, {
+      updated: clsx(s.updated, s.tableHeadCell, {
         [s.asc]: orderBy === 'updated-asc',
         [s.desc]: orderBy === 'updated-desc',
       }),
@@ -89,7 +95,7 @@ export const Cards = () => {
   return (
     <section className={s.wrapper}>
       <GoBackButton className={s.backBtn} />
-      <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} />
+      <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} learnDeck={learnDeckHandler} />
 
       {Boolean(isEmpty) && (
         <>
