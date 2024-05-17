@@ -8,6 +8,7 @@ import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
 import { DropdownSeparator } from '@/common/ui/dropdownMenu/dropdownSeparator'
 import { Typography } from '@/common/ui/typography'
 import { useLogoutMutation } from '@/services/auth'
+import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
 
 import s from './userDropdown.module.scss'
 
@@ -34,13 +35,13 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
   return (
     <>
       <DropDownMenu trigger={<img alt={description} src={img} width={36} />}>
-        <DropdownItem className={s.userItem}>
+        <DropdownMenuLabel className={s.userItem}>
           <img alt={''} className={s.avatar} src={img} />
           <div className={s.userInfo}>
             <Typography variant={'sub2'}>{name}</Typography>
             <Typography variant={'caption'}>{email}</Typography>
           </div>
-        </DropdownItem>
+        </DropdownMenuLabel>
         <DropdownSeparator />
         <DropdownItem className={s.item} onClick={() => navigate(ROUTES.PROFILE)}>
           <PersonOutline height={'16px'} width={'16px'} />
