@@ -13,11 +13,6 @@ export const DropdownItem = ({ className, ...rest }: Props) => {
   }
 
   return (
-    <>
-      <DropdownMenuRadix.Item
-        {...rest}
-        className={classNames.dropdownItem}
-      ></DropdownMenuRadix.Item>
-    </>
+    <DropdownMenuRadix.Item {...rest} className={classNames.dropdownItem}></DropdownMenuRadix.Item>
   )
 }
