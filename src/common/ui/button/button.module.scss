@@ -23,48 +23,48 @@
 
 .primary {
   background-color: var(--color-accent-500);
-  box-shadow: 0 4px 18px 0 #8c61ff59;
+  box-shadow: 0 4px 18px 0 rgba(var(--color-accent-500) 35%);
 
   &:active {
     background-color: var(--color-accent-700);
-    box-shadow: 0 4px 18px 0 var(--color-accent-700/35%);
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-700) 35%);
   }
 
   &:disabled {
     pointer-events: none;
     color: var(--color-light-900);
     background-color: var(--color-accent-900);
-    box-shadow: 0 4px 18px 0 var(--color-accent-900/35%);
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-900) 35%);
   }
 
   @media (hover: hover) {
     &:hover {
       background-color: var(--color-accent-300);
-      box-shadow: 0 4px 18px 0 var(--color-accent-300/35%);
+      box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300) 35%);
     }
   }
 }
 
 .secondary {
   background-color: var(--color-dark-300);
-  box-shadow: 0 4px 18px 0 rgb(109 109 109 / 22%);
+  box-shadow: 0 4px 18px 0 rgba(109 109 109 / 22%);
 
   &:active {
     background-color: var(--color-dark-500);
-    box-shadow: 0 4px 18px 0 var(--color-accent-700/25%);
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-700) 25%);
   }
 
   &:disabled {
     pointer-events: none;
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
-    box-shadow: 0 4px 18px 0 var(--color-accent-900/25%);
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-900) 35%);
   }
 
   @media (hover: hover) {
     &:hover {
       background-color: var(--color-dark-100);
-      box-shadow: 0 4px 18px 0 var(--color-accent-300/25%);
+      box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300) 35%);
     }
   }
 }
