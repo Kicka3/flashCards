@@ -134,16 +134,12 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       <div className={s.packTitleWrapper}>
         <div className={s.packTitle}>
           <Typography variant={'h1'}>{deck?.name}</Typography>
-          {isOwner ? (
+          {isOwner && (
             <IconDropDown
               isEmpty
               onEditClick={onEditClickHandler}
               onOpenDeleteForm={onOpenDeleteFormHandler}
             />
-          ) : (
-            <Button as={Link} to={'learn'} variant={'icon'}>
-              <PlayCircleOutline height={'16px'} width={'16px'} />
-            </Button>
           )}
         </div>
         {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
@@ -151,9 +147,11 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       {isOwner ? (
         deck && CardCreator(deck?.id)
       ) : (
-        <Button as={Link} to={'learn'}>
-          Start to Learn
-        </Button>
+        <div>
+          <Button as={Link} to={'learn'}>
+            Start to Learn
+          </Button>
+        </div>
       )}
     </div>
   )
