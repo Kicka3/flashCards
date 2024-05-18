@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef } from 'react'
 import { Link } from 'react-router-dom'
 
+import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
 import { UserData } from '@/services/auth'
 import Profile from '@/widgets/header/ui/profile/profile'
@@ -21,7 +22,7 @@ export const Header = ({ children, className, isAuth, isLoading, profile, ...res
     content = <Profile profile={profile} />
   } else if (!isLoading) {
     content = (
-      <Button as={Link} to={'/signIn'} variant={'secondary'}>
+      <Button as={Link} to={ROUTES.SIGN_IN} variant={'secondary'}>
         Sign In
       </Button>
     )
