@@ -1,10 +1,17 @@
 :root {
+  // accent with out rgb
+  --color-accent-100-s: 190, 166, 255;
+  --color-accent-300-s: 162, 128, 255;
+  --color-accent-500-s: 140, 97, 255;
+  --color-accent-700-s: 112, 78, 204;
+  --color-accent-900-s: 56, 39, 102;
+
   // accent
-  --color-accent-100: #bea6ff;
-  --color-accent-300: #a280ff;
-  --color-accent-500: #8c61ff;
-  --color-accent-700: #704ecc;
-  --color-accent-900: #382766;
+  --color-accent-100: rgb(var(--color-accent-100-s));
+  --color-accent-300: rgb(var(--color-accent-300-s));
+  --color-accent-500: rgb(var(--color-accent-500-s));
+  --color-accent-700: rgb(var(--color-accent-700-s));
+  --color-accent-900: rgb(var(--color-accent-900-s));
 
   // success
   --color-success-100: #80ffbf;
