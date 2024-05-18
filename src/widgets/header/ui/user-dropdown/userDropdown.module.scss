@@ -4,24 +4,22 @@
   gap: 6px;
   align-items: center;
 
-  @media (hover: hover) {
-    &:hover {
-      width: 94%;
-      background-color: var(--color-dark-500);
-    }
-  }
-
-  @media (hover: none) {
-    &:active {
-      width: 94%;
-      background-color: var(--color-dark-500);
-    }
+  &:hover,
+  &:focus {
+    background-color: var(--color-dark-500);
   }
 }
 
 .userItem {
   all: unset;
   display: flex;
+  padding: 5px;
+  border-radius: 5px;
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-dark-500);
+  }
 }
 
 .userInfo {
