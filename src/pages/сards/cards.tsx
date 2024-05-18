@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
-import noImg from '@/assets/img/noImage.png'
 import { ROUTES } from '@/common/enums/enums'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useFilter } from '@/common/hooks/useFilter'
@@ -143,25 +142,31 @@ export const Cards = () => {
                 <TableRow key={card.id}>
                   <TableCell>
                     <div className={s.contentWrapper}>
-                      <img
-                        alt={'deck image'}
-                        className={s.cardImg}
-                        height={50}
-                        src={card.questionImg ? card.questionImg : noImg}
-                        width={50}
-                      />
+                      {card.questionImg && (
+                        <img
+                          alt={'deck image'}
+                          className={s.cardImg}
+                          height={50}
+                          src={card.questionImg}
+                          width={50}
+                        />
+                      )}
+
                       {card.question}
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className={s.contentWrapper}>
-                      <img
-                        alt={'card image'}
-                        className={s.cardImg}
-                        height={50}
-                        src={card.answerImg ? card.answerImg : noImg}
-                        width={70}
-                      />
+                      {card.answerImg && (
+                        <img
+                          alt={'card image'}
+                          className={s.cardImg}
+                          height={50}
+                          src={card.answerImg}
+                          width={70}
+                        />
+                      )}
+
                       {card.answer}
                     </div>
                   </TableCell>
