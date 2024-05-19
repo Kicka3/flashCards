@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
@@ -9,12 +8,15 @@ import {
   NewPasswordFormValues,
   createNewPasswordSchema,
 } from '@/pages/auth/createNewPassword/utils'
-import { useResetPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './createNewPassword.module.scss'
 
-export const CreateNewPassword = () => {
+type Props = {
+  onSubmit: ({ password }: NewPasswordFormValues) => void
+}
+
+export const CreateNewPassword = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -25,17 +27,6 @@ export const CreateNewPassword = () => {
     },
     resolver: zodResolver(createNewPasswordSchema),
   })
-
-  const [resetPassword] = useResetPasswordMutation()
-  const { token } = useParams()
-
-  const onSubmit = async ({ password }: NewPasswordFormValues) => {
-    if (token) {
-      const resetPasswordResult = resetPassword({ password, token }).unwrap()
-
-      await resetPasswordResult
-    }
-  }
 
   return (
     <Card className={s.container}>

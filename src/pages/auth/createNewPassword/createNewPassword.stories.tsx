@@ -1,13 +1,13 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { CreateNewPassword } from '@/pages/auth/createNewPassword/createNewPassword'
+import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: CreateNewPassword,
+  component: CreateNewPasswordContainer,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -19,7 +19,7 @@ const meta = {
   ],
   tags: ['autodocs'],
   title: 'Auth/CreateNewPassword',
-} satisfies Meta<typeof CreateNewPassword>
+} satisfies Meta<typeof CreateNewPasswordContainer>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -29,7 +29,7 @@ export const CreateNewPasswordDefault: Story = {
   render: () => {
     return (
       <>
-        <CreateNewPassword />
+        <CreateNewPasswordContainer />
       </>
     )
   },
