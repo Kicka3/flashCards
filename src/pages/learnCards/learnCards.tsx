@@ -65,7 +65,7 @@ export const LearnCards = () => {
 
       <Card>
         <div className={s.title}>
-          <Typography variant={'h1'}>Learn {deckData?.name}</Typography>
+          <Typography variant={'h1'}>Learn ”{deckData?.name}”</Typography>
         </div>
         <div className={s.questionSection}>
           <Typography className={s.question} variant={'sub1'}>
@@ -83,7 +83,7 @@ export const LearnCards = () => {
             </div>
           )}
           <Typography className={s.tryCountText} variant={'body2'}>
-            Количество попыток ответов на вопрос: {cardData?.shots}
+            Количество попыток: {cardData?.shots}
           </Typography>
         </div>
 
