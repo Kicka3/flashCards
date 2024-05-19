@@ -182,6 +182,7 @@ export const DecksTable = ({
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
+                    {/*//Это сделать как Link...//*/}
                     <Button
                       className={deck.cards === 0 ? s.disableIcon : ''}
                       disabled={!deck.cards}
@@ -205,7 +206,6 @@ export const DecksTable = ({
                         width={'16px'}
                       />
                     </Button>
-                    {/*//As Link*/}
                     <Button
                       disabled={isDeckBeingDeleted}
                       onClick={deleteDeckHandler(deck.id)}
@@ -219,6 +219,7 @@ export const DecksTable = ({
                     </Button>
                   </div>
                 ) : (
+                  // Это сделать как Link...
                   <Button
                     className={clsx(deck.cards === 0 && s.disableIcon)}
                     disabled={!deck.cards}
