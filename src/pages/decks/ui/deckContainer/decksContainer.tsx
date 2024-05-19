@@ -2,7 +2,6 @@ import { ErrorResponse, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { ROUTES } from '@/common/enums/enums'
-import { useFilter } from '@/common/hooks/useFilter'
 import { Loader } from '@/common/ui/loader/loader'
 import { Pagination } from '@/common/ui/pagination'
 import { Typography } from '@/common/ui/typography'
@@ -20,9 +19,16 @@ type Props = {
 }
 
 export const DecksContainer = ({}: Props) => {
-  const { currentPage, deckData, deckIsLoading, itemsPerPage, mappedDecks, setCurrentPage } =
-    useDeckFilter()
-  const { paginationOptions, setItemsPerPage } = useFilter()
+  const {
+    currentPage,
+    deckData,
+    deckIsLoading,
+    itemsPerPage,
+    mappedDecks,
+    paginationOptions,
+    setCurrentPage,
+    setItemsPerPage,
+  } = useDeckFilter()
 
   const navigate = useNavigate()
 
