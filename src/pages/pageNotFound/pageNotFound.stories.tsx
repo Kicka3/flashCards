@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
-import PageNotFound from './pageNotFound'
+import { PageNotFound } from '.'
 
 const meta = {
   argTypes: {},
