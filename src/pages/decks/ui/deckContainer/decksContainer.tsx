@@ -37,7 +37,7 @@ export const DecksContainer = ({}: Props) => {
 
   if (deckIsLoading) {
     return (
-      <h1 style={{ alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
+      <h1 className={s.loaderWrapper}>
         <Loader />
       </h1>
     )

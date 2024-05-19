@@ -8,7 +8,7 @@ import s from './pageNotFound.module.scss'
 
 type Props = {}
 
-const PageNotFound = ({}: Props) => {
+export const PageNotFound = ({}: Props) => {
   return (
     <section className={s.wrapper}>
       <img alt={'image'} src={image} />
@@ -19,5 +19,3 @@ const PageNotFound = ({}: Props) => {
     </section>
   )
 }
-
-export default PageNotFound

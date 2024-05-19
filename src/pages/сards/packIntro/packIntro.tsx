@@ -2,13 +2,11 @@ import { useState } from 'react'
 import { ErrorResponse, Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { PlayCircleOutline } from '@/assets/icons/components'
 import { Button } from '@/common/ui/button'
 import { Typography } from '@/common/ui/typography'
 import { CreateCard } from '@/features/cards/createCard'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
-import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { Deck, useDeleteDeckMutation } from '@/services/decks'
 import { IconDropDown } from '@/widgets/icon-dropdown/iconDropdown'
 
@@ -30,7 +28,7 @@ const CardCreator = (deckId: string) => (
 )
 
 export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
-  const [openEditMode, setOpenEditMode] = useState(false)
+  const [isOpenUpdModal, setIsOpenUpdModal] = useState(false)
 
   /** ИЗ КОМПОНЕНТЫ DECKTABLE кортеж для формы удаления. */
   const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
@@ -39,8 +37,6 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   const [deleteDeck] = useDeleteDeckMutation()
 
   const navigate = useNavigate()
-
-  const { findDeck } = useDeckFilter()
 
   if (!isEmpty) {
     return (
@@ -72,7 +68,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   }
 
   const onEditClickHandler = () => {
-    setOpenEditMode(true)
+    setIsOpenUpdModal(true)
   }
 
   const onOpenDeleteFormHandler = () => {
@@ -114,9 +110,9 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
   return (
     <div className={s.packIntro}>
       <UpdateDeck
-        deck={findDeck(deck?.id)}
-        isOpen={openEditMode}
-        onOpenChange={setOpenEditMode}
+        deck={deck}
+        isOpen={isOpenUpdModal}
+        onOpenChange={setIsOpenUpdModal}
         title={'Update Deck'}
       />
       <DeleteForm
@@ -134,26 +130,24 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       <div className={s.packTitleWrapper}>
         <div className={s.packTitle}>
           <Typography variant={'h1'}>{deck?.name}</Typography>
-          {isOwner ? (
+          {isOwner && (
             <IconDropDown
               isEmpty
               onEditClick={onEditClickHandler}
               onOpenDeleteForm={onOpenDeleteFormHandler}
             />
-          ) : (
-            <Button as={Link} to={'learn'} variant={'icon'}>
-              <PlayCircleOutline height={'16px'} width={'16px'} />
-            </Button>
           )}
         </div>
         {deck?.cover && <img alt={'Deck`s cover'} height={100} src={deck.cover} width={150} />}
       </div>
       {isOwner ? (
-        deck && CardCreator(deck?.id)
+        <div>{deck && CardCreator(deck?.id)}</div>
       ) : (
-        <Button as={Link} to={'learn'}>
-          Start to Learn
-        </Button>
+        <div>
+          <Button as={Link} to={'learn'}>
+            Start to Learn
+          </Button>
+        </div>
       )}
     </div>
   )

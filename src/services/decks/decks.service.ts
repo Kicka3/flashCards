@@ -99,10 +99,9 @@ export const decksApiService = baseApi.injectEndpoints({
           url: `v1/decks/${id}`,
         }),
       }),
-      getDeckToLearn: builder.query<Card, { id: string; params: { previousId: string } | void }>({
+      getDeckToLearn: builder.query<Card, { id: string }>({
         providesTags: ['Decks', 'Cards'],
-        query: ({ id, params }) => ({
-          params: params ?? undefined,
+        query: ({ id }) => ({
           url: `v1/decks/${id}/learn`,
         }),
       }),
@@ -113,14 +112,27 @@ export const decksApiService = baseApi.injectEndpoints({
           url: 'v2/decks',
         }),
       }),
-      saveGrade: builder.mutation<void, { args: { cardId: string; grade: number }; id: string }>({
-        invalidatesTags: ['Decks', 'Cards'],
+      saveGrade: builder.mutation<Card, { args: { cardId: string; grade: number }; id: string }>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          const card = await queryFulfilled
+
+          dispatch(
+            decksApiService.util.updateQueryData(
+              'getDeckToLearn',
+              { id: card.data.deckId },
+              draft => {
+                Object.assign(draft, card.data)
+              }
+            )
+          )
+        },
         query: ({ args, id }) => ({
           body: args,
           method: 'POST',
           url: `v1/decks/${id}/learn`,
         }),
       }),
+
       updateDecks: builder.mutation<Deck, { data: DeckBodyRequest; id: string }>({
         invalidatesTags: ['Decks', 'Cards'],
         async onQueryStarted(args, { dispatch, getState, queryFulfilled }) {

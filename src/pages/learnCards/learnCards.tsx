@@ -38,7 +38,7 @@ export const LearnCards = () => {
   const { id: deckId } = useParams()
   const navigate = useNavigate()
 
-  const { data: cardData } = useGetDeckToLearnQuery({ id: deckId || '', params: undefined })
+  const { data: cardData } = useGetDeckToLearnQuery({ id: deckId || '' })
   const { data: deckData } = useGetDeckByIdQuery(deckId!)
   const [saveGrade] = useSaveGradeMutation()
   const [showAnswer, setShowAnswer] = useState<boolean>(false)

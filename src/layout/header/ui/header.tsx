@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Button } from '@/common/ui/button'
 import { HeaderProfile } from '@/layout/header/ui/header-profile'
@@ -15,24 +15,37 @@ type Props = {
 } & ComponentPropsWithoutRef<'header'>
 
 export const Header = ({ children, className, isAuth, isLoading, profile, ...rest }: Props) => {
-  let content = null
-
-  if (isAuth && !isLoading) {
-    content = <HeaderProfile profile={profile} />
-  } else if (!isLoading) {
-    content = (
-      <Button as={Link} to={'/signIn'} variant={'secondary'}>
-        Sign In
-      </Button>
-    )
-  }
+  const { pathname } = useLocation()
 
   return (
     <header className={s.headerWrapper}>
       <div className={clsx(s.header, className)} {...rest}>
         <Link to={'/'}>HEADERlogo</Link>
-        {content}
+        <HeaderContent isAuth={isAuth} isLoading={isLoading} path={pathname} profile={profile} />
       </div>
     </header>
+  )
+}
+
+function HeaderContent({
+  isAuth,
+  isLoading,
+  path,
+  profile,
+}: Pick<Props, 'isAuth' | 'isLoading' | 'profile'> & { path: string }) {
+  if (isLoading) {
+    return null
+  }
+
+  if (isAuth) {
+    return <HeaderProfile profile={profile} />
+  }
+
+  const isSignIn = path === '/signIn'
+
+  return (
+    <Button as={Link} to={isSignIn ? '/signUp' : '/signIn'} variant={'secondary'}>
+      {isSignIn ? 'Sign Up' : 'Sign In'}
+    </Button>
   )
 }

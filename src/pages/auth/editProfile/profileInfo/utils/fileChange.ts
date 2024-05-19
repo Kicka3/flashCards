@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import React, { ChangeEvent } from 'react'
 
 export const handleFileChange = async (
   event: ChangeEvent<HTMLInputElement>,

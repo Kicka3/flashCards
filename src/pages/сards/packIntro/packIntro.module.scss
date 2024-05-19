@@ -1,5 +1,5 @@
 .noCardWrapper {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: 30px;
   align-items: center;
@@ -12,6 +12,12 @@
   }
 }
 
+.packTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
 .packIntro {
   display: flex;
   justify-content: space-between;
@@ -22,7 +28,6 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-bottom: 16px;
 }
 
 .deckCover {
