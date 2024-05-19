@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import { Button } from '@/common/ui/button'
 import { HeaderProfile } from '@/layout/header/ui/header-profile'
