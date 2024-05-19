@@ -40,7 +40,7 @@ export const DeckHeader = ({ tabs }: Props) => {
         <CreateDeck
           title={'Add New Deck'}
           trigger={
-            <Button as={'div'} style={{ padding: '10px 32px' }} variant={'primary'}>
+            <Button as={'div'} variant={'primary'}>
               Add new deck
             </Button>
           }
@@ -72,11 +72,8 @@ export const DeckHeader = ({ tabs }: Props) => {
             min={minMaxValues?.min}
             onValueCommit={onCommitSliderValues}
           />
-          <Button
-            icon={<TrashOutline height={'16px'} width={'16px'} />}
-            onClick={onClearFilters}
-            variant={'secondary'}
-          >
+          <Button onClick={onClearFilters} variant={'secondary'}>
+            <TrashOutline height={'16px'} width={'16px'} />
             Clear Filter
           </Button>
         </div>

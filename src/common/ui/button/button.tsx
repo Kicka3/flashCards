@@ -33,13 +33,12 @@ export const Button = <T extends ElementType = 'button'>(
       icon && s.withIcon,
       className
     ),
-    forLink: clsx(variant === 'link' ? 'btnForLink' : 'primary'),
-    fullWidthIcon: clsx(fullWidth ? s.fullWidthIconWrapper : s.iconWrapper),
+    iconWrapper: s.iconWrapper,
   }
 
   return (
     <Component className={classNames.buttonStyles} {...rest}>
-      {icon && <div className={classNames.fullWidthIcon}>{icon}</div>}
+      {icon && <div className={classNames.iconWrapper}>{icon}</div>}
       {children}
     </Component>
   )

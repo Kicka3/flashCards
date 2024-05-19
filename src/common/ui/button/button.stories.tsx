@@ -50,7 +50,7 @@ export const PrimaryWithIcon: Story = {
 
 export const ButtonLikeIcon: Story = {
   args: {
-    children: <TrashOutline height={'24px'} width={'24px'} />,
+    children: <TrashOutline height={'18px'} width={'18px'} />,
     disabled: false,
     variant: 'icon',
   },
