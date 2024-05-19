@@ -15,11 +15,6 @@
   display: flex;
   padding: 5px;
   border-radius: 5px;
-
-  &:hover,
-  &:focus {
-    background-color: var(--color-dark-500);
-  }
 }
 
 .userInfo {

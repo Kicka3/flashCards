@@ -43,13 +43,13 @@ export const UserDropDown = ({ description, email, img, isOpen, name, toggleDrop
       onToggle={toggleDropdown}
       trigger={<img alt={description} src={img} width={36} />}
     >
-      <DropdownItem className={s.userItem}>
+      <div className={s.userItem}>
         <img alt={'avatar'} className={s.avatar} src={img} />
         <div className={s.userInfo}>
           <Typography variant={'sub2'}>{name}</Typography>
           <Typography variant={'caption'}>{email}</Typography>
         </div>
-      </DropdownItem>
+      </div>
       <DropdownSeparator />
       <DropdownItem className={s.item} onClick={onNavigateProfile}>
         <PersonOutline height={'16px'} width={'16px'} />
