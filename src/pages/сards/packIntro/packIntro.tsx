@@ -143,7 +143,7 @@ export const PackIntro = ({ deck, isEmpty, isOwner }: Props) => {
       {isOwner ? (
         <div>{deck && CardCreator(deck?.id)}</div>
       ) : (
-        <div style={{ height: '35px' }}>
+        <div>
           <Button as={Link} to={'learn'}>
             Start to Learn
           </Button>
