@@ -205,6 +205,7 @@ export const DecksTable = ({
                         width={'16px'}
                       />
                     </Button>
+                    {/*//As Link*/}
                     <Button
                       disabled={isDeckBeingDeleted}
                       onClick={deleteDeckHandler(deck.id)}
