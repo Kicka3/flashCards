@@ -16,7 +16,6 @@ type Props = {
   deck: Deck | undefined
   isEmpty: boolean
   isOwner: boolean
-  learnDeck: (deckId: string) => void
 }
 
 const CardCreator = (deckId: string) => (
