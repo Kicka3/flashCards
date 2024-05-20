@@ -8,6 +8,8 @@ import {
 
 import { ROUTES } from '@/common/enums/enums'
 import { useAppOutletContext } from '@/common/hooks/useOutletContext'
+import { Loader } from '@/common/ui/loader'
+import Layout from '@/layout/layout'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
@@ -16,10 +18,8 @@ import { SignIn } from '@/pages/auth/signIn'
 import { SignUp } from '@/pages/auth/singUp'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import { LearnCards } from '@/pages/learnCards'
-import PageNotFound from '@/pages/pageNotFound/pageNotFound'
+import { PageNotFound } from '@/pages/pageNotFound'
 import { Cards } from '@/pages/сards'
-import Layout from '@/widgets/header/layout'
-import { Loader } from '@/widgets/loader'
 
 const publicRoutes: RouteObject[] = [
   {

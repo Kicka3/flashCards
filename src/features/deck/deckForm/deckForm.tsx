@@ -91,62 +91,60 @@ export const DeckForm = ({
   }
 
   return (
-    <>
-      <Modal
-        className={s.addNewDeckModal}
-        onOpenChange={onOpenChange}
-        open={isOpen}
-        title={title}
-        trigger={trigger}
-      >
-        <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-          <ControlledTextField
-            control={control}
-            disabled={disabled}
-            errorMessage={errors.name?.message}
-            label={'Name pack'}
-            name={'name'}
-            variant={'default'}
-          />
-          <div>
-            {uploadedImg && (
-              <div className={s.deckImgWrapper}>
-                <img alt={'Image not found'} className={s.deckImg} src={uploadedImg} />
-                <Button onClick={removeCoverImg} variant={'icon'}>
-                  <TrashOutline className={s.deleteDeckIcon} height={24} width={24} />
-                </Button>
-              </div>
-            )}
-            <ImageLoader className={s.openFilesInput} ref={fileInputRef} setPhoto={setPhoto} />
-          </div>
-          <Button
-            className={s.UploadImgBtn}
-            fullWidth
-            onClick={e => {
-              e.preventDefault()
-              openFiles()
-            }}
-            variant={'secondary'}
-          >
-            <Image height={'16px'} width={'16px'} />
-            Upload Image
+    <Modal
+      className={s.addNewDeckModal}
+      onOpenChange={onOpenChange}
+      open={isOpen}
+      title={title}
+      trigger={trigger}
+    >
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
+        <ControlledTextField
+          control={control}
+          disabled={disabled}
+          errorMessage={errors.name?.message}
+          label={'Name pack'}
+          name={'name'}
+          variant={'default'}
+        />
+        <div>
+          {uploadedImg && (
+            <div className={s.deckImgWrapper}>
+              <img alt={'Image not found'} className={s.deckImg} src={uploadedImg} />
+              <Button onClick={removeCoverImg} variant={'icon'}>
+                <TrashOutline className={s.deleteDeckIcon} height={24} width={24} />
+              </Button>
+            </div>
+          )}
+          <ImageLoader className={s.openFilesInput} ref={fileInputRef} setPhoto={setPhoto} />
+        </div>
+        <Button
+          className={s.UploadImgBtn}
+          fullWidth
+          onClick={e => {
+            e.preventDefault()
+            openFiles()
+          }}
+          variant={'secondary'}
+        >
+          <Image height={'16px'} width={'16px'} />
+          Upload Image
+        </Button>
+        <ControlledCheckbox
+          control={control}
+          disabled={disabled}
+          name={'isPrivate'}
+          text={'Private pack'}
+        />
+        <div className={s.ActionsBtnWrapper}>
+          <Button disabled={disabled} type={'submit'} variant={'primary'}>
+            {title}
           </Button>
-          <ControlledCheckbox
-            control={control}
-            disabled={disabled}
-            name={'isPrivate'}
-            text={'Private pack'}
-          />
-          <div className={s.ActionsBtnWrapper}>
-            <Button disabled={disabled} type={'submit'} variant={'primary'}>
-              {title}
-            </Button>
-            <Button disabled={disabled} onClick={handlerClose} type={'reset'} variant={'secondary'}>
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </Modal>
-    </>
+          <Button disabled={disabled} onClick={handlerClose} type={'reset'} variant={'secondary'}>
+            Cancel
+          </Button>
+        </div>
+      </form>
+    </Modal>
   )
 }

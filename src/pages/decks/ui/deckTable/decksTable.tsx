@@ -137,16 +137,24 @@ export const DecksTable = ({
               title={'Delete Pack'}
             />
             <TableHeadCell onClick={() => handleSort('name')}>
-              <Typography variant={'sub2'}>Name {renderSortArrow('name')}</Typography>
+              <Typography variant={'sub2'}>
+                <span className={s.cursor}>Name</span> {renderSortArrow('name')}
+              </Typography>
             </TableHeadCell>
             <TableHeadCell onClick={() => handleSort('cardsCount')}>
-              <Typography variant={'sub2'}>Cards {renderSortArrow('cardsCount')}</Typography>
+              <Typography variant={'sub2'}>
+                <span className={s.cursor}>Cards</span> {renderSortArrow('cardsCount')}
+              </Typography>
             </TableHeadCell>
             <TableHeadCell onClick={() => handleSort('updated')}>
-              <Typography variant={'sub2'}>Last updated {renderSortArrow('updated')}</Typography>
+              <Typography variant={'sub2'}>
+                <span className={s.cursor}>Last updated</span> {renderSortArrow('updated')}
+              </Typography>
             </TableHeadCell>
             <TableHeadCell onClick={() => handleSort('author.name')}>
-              <Typography variant={'sub2'}>Author {renderSortArrow('author.name')}</Typography>
+              <Typography variant={'sub2'}>
+                <span className={s.cursor}>Author</span> {renderSortArrow('author.name')}
+              </Typography>
             </TableHeadCell>
             <TableHeadCell>Actions</TableHeadCell>
           </TableRow>
@@ -159,10 +167,10 @@ export const DecksTable = ({
                   {deck.cover ? (
                     <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />
                   ) : (
-                    <img alt={'noCover'} className={s.deckCoverImg} src={noCoverImg} />
+                    <img alt={'no cover'} className={s.deckCoverImg} src={noCoverImg} />
                   )}
                   <Typography className={s.deckTitle} variant={'sub2'}>
-                    {deck.name}
+                    <span>{deck.name}</span>
                   </Typography>
                 </span>
               </TableCell>

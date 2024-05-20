@@ -12,14 +12,18 @@
 
   position: relative;
 
-  width: 20px;
-  height: 20px;
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
 
   color: var(--color-light-100);
 
   background-color: transparent;
   border: 2px solid var(--color-light-900);
-  border-radius: 5px;
+  border-radius: 2px;
 
   &::after {
     content: '';
@@ -36,11 +40,6 @@
     border-radius: 50%;
 
     transition: 0.2s ease-in-out;
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
   }
 
   &[data-state='checked'] {
@@ -80,6 +79,6 @@
 }
 
 .checkboxIndicator {
-  width: 15px;
-  height: 15px;
+  position: absolute;
+  inset: -2px;
 }

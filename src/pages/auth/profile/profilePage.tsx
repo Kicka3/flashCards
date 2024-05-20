@@ -2,14 +2,14 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '@/common/enums/enums'
+import { useFilter } from '@/common/hooks/useFilter'
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
-import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services/auth'
+import { useLogoutMutation, useUpdateUserMutation } from '@/services/auth'
 
-export const ProfilePage = ({}) => {
-  const { data } = useMeQuery()
+export const ProfilePage = () => {
+  const { me, refetch } = useFilter()
   const [updateProfile, isSuccess] = useUpdateUserMutation()
-  const { refetch } = useMeQuery()
 
   const [logout] = useLogoutMutation()
   const navigate = useNavigate()
@@ -21,7 +21,7 @@ export const ProfilePage = ({}) => {
   }, [isSuccess, refetch])
 
   const updateAvatar = async (avatar: File) => {
-    if (!data) {
+    if (!me) {
       return
     }
 
@@ -35,7 +35,7 @@ export const ProfilePage = ({}) => {
   }
 
   const updateNickname = async (formValues: UpdateUserFormValues) => {
-    if (!data) {
+    if (!me) {
       return
     }
 
@@ -47,7 +47,7 @@ export const ProfilePage = ({}) => {
     await updateProfilePromise
   }
 
-  if (!data) {
+  if (!me) {
     return null
   }
 
@@ -63,7 +63,7 @@ export const ProfilePage = ({}) => {
   return (
     <>
       <ProfileInfo
-        data={data}
+        data={me}
         logout={handleLogout}
         updateAvatar={updateAvatar}
         updateNickname={updateNickname}

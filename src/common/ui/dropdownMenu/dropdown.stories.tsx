@@ -5,8 +5,8 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
 import { store } from '@/services/store'
-import { IconDropDown } from '@/widgets/header/ui/icon-dropdown/iconDropdown'
-import { UserDropDown } from '@/widgets/header/ui/user-dropdown/userDropdown'
+import { IconDropDown } from '@/widgets/icon-dropdown'
+import { UserDropDown } from '@/widgets/user-dropdown'
 
 const meta = {
   argTypes: {

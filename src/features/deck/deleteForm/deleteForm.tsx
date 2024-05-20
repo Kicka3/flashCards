@@ -6,7 +6,7 @@ import s from './deleteForm.module.scss'
 
 type Props = {
   close: () => void
-  deleteAction: (id: string) => void
+  deleteAction?: (id: string) => void
   id: string | undefined
   isDeck: boolean
   isOpen: boolean
@@ -33,7 +33,7 @@ export const DeleteForm = ({
 }: Props) => {
   /** Кнопка Delete в модалке */
   const DeleteDeckHandler = () => {
-    if (id) {
+    if (deleteAction && id) {
       deleteAction(id)
       onOpenChange([false, undefined])
     }

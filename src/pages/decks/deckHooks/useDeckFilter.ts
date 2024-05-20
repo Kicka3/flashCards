@@ -86,12 +86,13 @@ export const useDeckFilter = () => {
 
   /** Ищу нужную колоду */
   const findDeck = useCallback(
-    (id: string) => {
+    (id: string | undefined) => {
       return mappedDecks?.find(d => d.id === id)
     },
     [mappedDecks]
   )
 
+  //!!!!!!!!!!!Уже есть в USEFILTER
   const paginationOptions = ['10', '20', '30', '50', '100']
 
   /** Возвращаем объект с данными и функциями для управления фильтрацией колод. */
@@ -107,7 +108,6 @@ export const useDeckFilter = () => {
     itemsPerPage,
     mappedDecks,
     maxCards,
-    me,
     minCards,
     minMaxValues,
     onChangeName,

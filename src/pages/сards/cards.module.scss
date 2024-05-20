@@ -2,6 +2,10 @@
   width: 100%;
 }
 
+.backBtn {
+  padding-left: 1px;
+}
+
 .backLink {
   display: inline-flex;
   gap: 6px;
@@ -85,4 +89,14 @@
   display: flex;
   justify-content: center;
   margin-bottom: 24px;
+}
+
+.answer,
+.question {
+  width: 300px;
+}
+
+.updated,
+.grade {
+  width: 150px;
 }
