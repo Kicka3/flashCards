@@ -23,13 +23,18 @@ import { PackIntro } from './packIntro/packIntro'
 
 export const Cards = () => {
   const { id: deckId } = useParams()
+
   const navigate = useNavigate()
+
   const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
     useFilter()
 
   const [search, setSearch] = useState('')
+
   const [orderBy, setOrderBy] = useState('')
+
   const debouncedSearch = useDebounce(search)
+
   const { data: cards } = useGetCardsQuery({
     id: deckId || '',
     params: {
@@ -39,7 +44,9 @@ export const Cards = () => {
       question: debouncedSearch,
     },
   })
+
   const { data: deck } = useGetDeckByIdQuery(deckId!)
+
   const [deleteCard] = useDeleteCardMutation()
 
   const learnDeckHandler = (deckId: string) => {
@@ -47,9 +54,11 @@ export const Cards = () => {
   }
 
   const isOwner = deck?.userId === me?.id
+
   const isEmpty = Boolean(deck?.cardsCount)
 
   const totalItems = cards?.pagination.totalItems || 0
+
   const moreThanOnePage = totalItems / 10 > 1
 
   const onChangeOrderBy = (columnName: string) => {

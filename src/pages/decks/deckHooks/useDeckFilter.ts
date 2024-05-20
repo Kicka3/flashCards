@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import { useFilter } from '@/common/hooks/useFilter'
 import { useGetMinMaxCardsQuery } from '@/services/cards'
@@ -13,14 +13,11 @@ export const useDeckFilter = () => {
     itemsPerPage,
     me,
     onChangeName,
-    orderBy,
     search,
     searchBy,
     setCurrentPage,
     setItemsPerPage,
     setSearch,
-    setSortedBy,
-    sortedString,
   } = useFilter()
 
   /** Slider Запрашиваем минимальное и максимальное количество карт для слайдера. */
@@ -51,6 +48,9 @@ export const useDeckFilter = () => {
     setSearch({})
   }
 
+  /** Сортировка */
+  const [orderBy, setOrderBy] = useState('')
+
   /** Запрашиваем колоды с использованием параметров фильтрации. */
   const {
     data: deckData,
@@ -63,7 +63,7 @@ export const useDeckFilter = () => {
     maxCardsCount: maxCards,
     minCardsCount: minCards,
     name: debounceName,
-    orderBy: sortedString,
+    orderBy: orderBy,
   })
 
   /** Преобразуем полученные данные в удобный формат. */
@@ -119,6 +119,6 @@ export const useDeckFilter = () => {
     searchBy,
     setCurrentPage,
     setItemsPerPage,
-    setSortedBy,
+    setOrderBy,
   }
 }

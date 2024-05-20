@@ -25,9 +25,11 @@ export const DecksContainer = ({}: Props) => {
     deckIsLoading,
     itemsPerPage,
     mappedDecks,
+    orderBy,
     paginationOptions,
     setCurrentPage,
     setItemsPerPage,
+    setOrderBy,
   } = useDeckFilter()
 
   const navigate = useNavigate()
@@ -68,6 +70,7 @@ export const DecksContainer = ({}: Props) => {
     navigate(`/decks/${deckId}`)
   }
 
+  //Сделать функции, для получения URL
   /** learn Deck забавная реализация */
   const learnDeckHandler = (deckId: string) => {
     navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
@@ -87,6 +90,8 @@ export const DecksContainer = ({}: Props) => {
           learnDeck={learnDeckHandler}
           onDeleteClick={onDeleteDeck}
           openDeck={openDeck}
+          orderBy={orderBy}
+          setOrderBy={setOrderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>
