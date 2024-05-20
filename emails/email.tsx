@@ -14,7 +14,7 @@ import {
 
 const logo = 'https://cdn-icons-png.flaticon.com/512/3813/3813681.png'
 const urlToProject = 'https://google.com'
-const projectWebName = 'Flashcards.com'
+const projectWebName = 'Flashcards'
 const recoverHref = 'http://localhost:3000/createNewPassword/##token##'
 
 export default function FlashCardsPasswordRecover() {
@@ -26,7 +26,13 @@ export default function FlashCardsPasswordRecover() {
         <Container style={container}>
           <Section style={coverSection}>
             <Section style={imageSection}>
-              <Img alt={"FlashCard's Logo"} height={'45'} src={logo} width={'75'} />
+              <Img
+                alt={"FlashCard's Logo"}
+                height={'45'}
+                src={logo}
+                style={imageItem}
+                width={'75'}
+              />
             </Section>
             <Section style={upperSection}>
               <Heading style={h1}>Dear, ##name##</Heading>
@@ -46,11 +52,11 @@ export default function FlashCardsPasswordRecover() {
             </Section>
           </Section>
           <Text style={footerText}>
-            This message was produced and distributed by Flashcards
-            <br />
+            This message was produced and distributed by{' '}
             <Link href={urlToProject} style={link} target={'_blank'}>
               {projectWebName}
             </Link>
+            <br />
           </Text>
         </Container>
       </Body>
@@ -98,13 +104,15 @@ const text = {
 }
 
 const imageSection = {
-  alignItems: 'center',
   backgroundColor: 'rgb(76, 76, 76)',
-  display: 'flex',
-  justifyContent: 'center',
   padding: '20px 0',
+  textAlign: 'center' as const,
 }
 
+const imageItem = {
+  display: 'block',
+  margin: '0 auto',
+}
 const coverSection = { backgroundColor: 'rgb(51, 51, 51)' }
 
 const upperSection = { padding: '25px 35px' }
@@ -124,8 +132,6 @@ const footerText = {
 }
 
 const recoverSection = {
-  display: 'flex',
-  justifyContent: 'center',
   marginTop: '30px',
 }
 
@@ -141,4 +147,5 @@ const button = {
   fontSize: '15px',
   fontWeight: '600',
   padding: '11px 23px',
+  textAlign: 'center' as const,
 }
