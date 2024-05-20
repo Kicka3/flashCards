@@ -4,10 +4,10 @@ import { Button } from '@/common/ui/button'
 import { Typography } from '@/common/ui/typography'
 import { getAvatarUrl } from '@/common/utils/getAvatarUrl'
 import { UserData } from '@/services/auth'
-import { UserDropDown } from '@/widgets/header/ui/user-dropdown/userDropdown'
+import { UserDropDown } from '@/widgets/user-dropdown'
 import clsx from 'clsx'
 
-import s from './profile.module.scss'
+import s from './headerProfile.module.scss'
 
 type Props = { profile: UserData | undefined } & ComponentPropsWithoutRef<'header'>
 
