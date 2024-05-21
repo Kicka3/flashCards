@@ -1,45 +1,48 @@
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import React, { ComponentPropsWithoutRef, ElementType, ReactNode, forwardRef } from 'react'
 
 import clsx from 'clsx'
 
 import s from './button.module.scss'
 
-type Props<T extends ElementType = 'button'> = {
+type ButtonOwnProps<T extends ElementType = 'button'> = {
   as?: T
   className?: string
   fullWidth?: boolean
   icon?: ReactNode
   variant?: 'icon' | 'link' | 'primary' | 'secondary'
-} & ComponentPropsWithoutRef<T>
+}
 
-export const Button = <T extends ElementType = 'button'>(
-  props: Props<T> & Omit<ComponentPropsWithoutRef<T>, keyof Props<T>>
-) => {
-  const {
-    as: Component = 'button',
-    children,
-    className,
-    fullWidth = false,
-    icon,
-    variant = 'primary',
-    ...rest
-  } = props
+type ButtonProps<T extends ElementType = 'button'> = ButtonOwnProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof ButtonOwnProps<T>>
 
-  const classNames = {
-    buttonStyles: clsx(
+export const Button = forwardRef(
+  <T extends ElementType = 'button'>(
+    {
+      as,
+      children,
+      className,
+      fullWidth = false,
+      icon,
+      variant = 'primary',
+      ...rest
+    }: ButtonProps<T>,
+    ref: React.ComponentPropsWithRef<T>['ref']
+  ) => {
+    const Component = as || 'button'
+
+    const classNames = clsx(
       s.button,
       s[variant],
       fullWidth && s.fullWidth,
       icon && s.withIcon,
       className
-    ),
-    iconWrapper: s.iconWrapper,
-  }
+    )
 
-  return (
-    <Component className={classNames.buttonStyles} {...rest}>
-      {icon && <div className={classNames.iconWrapper}>{icon}</div>}
-      {children}
-    </Component>
-  )
-}
+    return (
+      <Component className={classNames} ref={ref} {...rest}>
+        {icon && <div className={s.iconWrapper}>{icon}</div>}
+        {children}
+      </Component>
+    )
+  }
+)
