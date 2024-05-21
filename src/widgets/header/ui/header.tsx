@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom'
 
 import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
+import Profile from '@/layout/header/ui/header-profile/headerProfile'
 import { UserData } from '@/services/auth'
-import Profile from '@/widgets/header/ui/profile/profile'
-import clsx from 'clsx'
-
-import s from './header.module.scss'
 
 type Props = {
   isAuth: boolean
@@ -29,9 +26,9 @@ export const Header = ({ children, className, isAuth, isLoading, profile, ...res
   }
 
   return (
-    <header className={s.headerWrapper}>
-      <div className={clsx(s.header, className)} {...rest}>
-        <Link to={'/'}>HEADERlogo</Link>
+    <header>
+      <div {...rest}>
+        <Link to={'/'}>HEADERL ogo</Link>
         {content}
       </div>
     </header>

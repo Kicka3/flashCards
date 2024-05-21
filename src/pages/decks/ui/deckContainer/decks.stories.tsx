@@ -3,11 +3,10 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
+import { Loader } from '@/common/ui/loader'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer/decksContainer'
 import { store } from '@/services/store'
 import { fn } from '@storybook/test'
-
-import { Loader } from '../../../../common/ui/loader'
 
 const meta = {
   argTypes: {},
