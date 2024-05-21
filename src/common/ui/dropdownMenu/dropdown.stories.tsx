@@ -57,7 +57,9 @@ export const DropdownWithAvatar: Story = {
         description={user.description}
         email={user.email}
         img={user.img}
+        isOpen
         name={user.name}
+        toggleDropdown={() => {}}
       />
     )
   },

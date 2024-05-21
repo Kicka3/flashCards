@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import Edit2Outline from '@/assets/icons/components/Edit2Outline'
 import TrashOutline from '@/assets/icons/components/TrashOutline'
-import { ROUTES } from '@/common/enums/enums'
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useFilter } from '@/common/hooks/useFilter'
 import { GoBackButton } from '@/common/ui/backButton'
@@ -23,18 +22,12 @@ import { PackIntro } from './packIntro/packIntro'
 
 export const Cards = () => {
   const { id: deckId } = useParams()
-
-  const navigate = useNavigate()
-
   const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
     useFilter()
 
   const [search, setSearch] = useState('')
-
   const [orderBy, setOrderBy] = useState('')
-
   const debouncedSearch = useDebounce(search)
-
   const { data: cards } = useGetCardsQuery({
     id: deckId || '',
     params: {
@@ -44,21 +37,13 @@ export const Cards = () => {
       question: debouncedSearch,
     },
   })
-
   const { data: deck } = useGetDeckByIdQuery(deckId!)
-
   const [deleteCard] = useDeleteCardMutation()
 
-  const learnDeckHandler = (deckId: string) => {
-    navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
-  }
-
   const isOwner = deck?.userId === me?.id
-
   const isEmpty = Boolean(deck?.cardsCount)
 
   const totalItems = cards?.pagination.totalItems || 0
-
   const moreThanOnePage = totalItems / 10 > 1
 
   const onChangeOrderBy = (columnName: string) => {
@@ -80,20 +65,20 @@ export const Cards = () => {
   }
 
   const classNames = {
-    tableHeadCell: {
-      answer: clsx(s.answer, s.tableHeadCell, {
+    tableHeadCell_btn: {
+      answer: clsx(s.answer, s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'answer-asc',
         [s.desc]: orderBy === 'answer-desc',
       }),
-      grade: clsx(s.grade, s.tableHeadCell, {
+      grade: clsx(s.grade, s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'grade-asc',
         [s.desc]: orderBy === 'grade-desc',
       }),
-      question: clsx(s.question, s.tableHeadCell, {
+      question: clsx(s.question, s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'question-asc',
         [s.desc]: orderBy === 'question-desc',
       }),
-      updated: clsx(s.updated, s.tableHeadCell, {
+      updated: clsx(s.updated, s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'updated-asc',
         [s.desc]: orderBy === 'updated-desc',
       }),
@@ -103,7 +88,7 @@ export const Cards = () => {
   return (
     <section className={s.wrapper}>
       <GoBackButton className={s.backBtn} />
-      <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} learnDeck={learnDeckHandler} />
+      <PackIntro deck={deck} isEmpty={isEmpty} isOwner={isOwner} />
 
       {Boolean(isEmpty) && (
         <>
@@ -119,29 +104,41 @@ export const Cards = () => {
           <Table className={s.cardsTable}>
             <TableHead>
               <TableRow>
-                <TableHeadCell
-                  className={classNames.tableHeadCell.question}
-                  onClick={() => onChangeOrderBy('question')}
-                >
-                  Question
+                <TableHeadCell className={s.tableHeadCell}>
+                  <Button
+                    className={classNames.tableHeadCell_btn.question}
+                    onClick={() => onChangeOrderBy('question')}
+                    variant={'link'}
+                  >
+                    Question
+                  </Button>
                 </TableHeadCell>
-                <TableHeadCell
-                  className={classNames.tableHeadCell.answer}
-                  onClick={() => onChangeOrderBy('answer')}
-                >
-                  Answer
+                <TableHeadCell className={s.tableHeadCell}>
+                  <Button
+                    className={classNames.tableHeadCell_btn.answer}
+                    onClick={() => onChangeOrderBy('answer')}
+                    variant={'link'}
+                  >
+                    Answer
+                  </Button>
                 </TableHeadCell>
-                <TableHeadCell
-                  className={classNames.tableHeadCell.updated}
-                  onClick={() => onChangeOrderBy('updated')}
-                >
-                  Last Updated
+                <TableHeadCell className={s.tableHeadCell}>
+                  <Button
+                    className={classNames.tableHeadCell_btn.updated}
+                    onClick={() => onChangeOrderBy('updated')}
+                    variant={'link'}
+                  >
+                    Last Updated
+                  </Button>
                 </TableHeadCell>
-                <TableHeadCell
-                  className={classNames.tableHeadCell.grade}
-                  onClick={() => onChangeOrderBy('grade')}
-                >
-                  Grade
+                <TableHeadCell className={s.tableHeadCell} onClick={() => onChangeOrderBy('grade')}>
+                  <Button
+                    className={classNames.tableHeadCell_btn.grade}
+                    onClick={() => onChangeOrderBy('grade')}
+                    variant={'link'}
+                  >
+                    Grade
+                  </Button>
                 </TableHeadCell>
                 {isOwner && <TableHeadCell></TableHeadCell>}
               </TableRow>

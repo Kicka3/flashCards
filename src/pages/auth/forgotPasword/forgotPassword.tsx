@@ -10,8 +10,11 @@ import { Typography } from '@/common/ui/typography'
 import { FormValues, forgotPasswordSchema } from '@/pages/auth/forgotPasword/utils'
 import { RecoverPassword, useRecoverPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { render } from '@react-email/render'
 
 import s from './forgotPassword.module.scss'
+
+import FlashCardsPasswordRecover from '../../../../emails/email'
 
 type Props = {}
 
@@ -30,10 +33,14 @@ export const ForgotPassword = ({}: Props) => {
   const navigate = useNavigate()
   const [forgotPassword] = useRecoverPasswordMutation()
 
+  const html = render(<FlashCardsPasswordRecover />, {
+    pretty: true,
+  })
+
   const onSubmit = async ({ email }: FormValues) => {
     const recoverPassword: RecoverPassword = {
       email,
-      html: '',
+      html: html,
       subject: '',
     }
 

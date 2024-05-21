@@ -11,7 +11,7 @@ import { useAppOutletContext } from '@/common/hooks/useOutletContext'
 import { Loader } from '@/common/ui/loader'
 import Layout from '@/layout/layout'
 import { CheckEmail } from '@/pages/auth/checkEmail'
-import { CreateNewPassword } from '@/pages/auth/createNewPassword'
+import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
 import { ForgotPassword } from '@/pages/auth/forgotPasword'
 import { ProfilePage } from '@/pages/auth/profile'
 import { SignIn } from '@/pages/auth/signIn'
@@ -40,8 +40,8 @@ const publicRoutes: RouteObject[] = [
     path: ROUTES.CHECK_EMAIL,
   },
   {
-    element: <CreateNewPassword />,
-    path: ROUTES.CREATE_NEW_PASSWORD,
+    element: <CreateNewPasswordContainer />,
+    path: ROUTES.CREATE_NEW_PASSWORD_TOKEN,
   },
 ]
 

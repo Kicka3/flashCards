@@ -1,7 +1,7 @@
 export enum ROUTES {
   CARDS = '/decks/:id',
   CHECK_EMAIL = '/checkEmail',
-  CREATE_NEW_PASSWORD = '/createNewPassword',
+  CREATE_NEW_PASSWORD_TOKEN = '/createNewPassword/:token',
   DECKS = '/decks',
   FORGOT_PASSWORD = '/forgotPassword',
   LEARN_CARDS = '/decks/:id/learn',

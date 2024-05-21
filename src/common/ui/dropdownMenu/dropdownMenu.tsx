@@ -8,20 +8,22 @@ type Props = {
   children?: ReactNode
   defaultOpen?: boolean
   disabled?: boolean
+  isOpen?: boolean
+  onToggle?: (open: boolean) => void
   trigger?: ReactNode
 } & ComponentPropsWithoutRef<typeof DropdownMenu.Content>
+
 export const DropDownMenu = (props: Props) => {
-  const { children, defaultOpen, disabled, trigger, ...rest } = props
+  const { children, defaultOpen, disabled, isOpen, onToggle, trigger, ...rest } = props
 
   return (
     <>
-      <DropdownMenu.Root>
+      <DropdownMenu.Root onOpenChange={onToggle} open={isOpen}>
         <DropdownMenu.Trigger asChild className={s.dropDownMenuTrigger}>
           {trigger}
         </DropdownMenu.Trigger>
         <DropdownMenu.Portal>
           <DropdownMenu.Content
-            // Сделать через пропсы
             align={'end'}
             className={s.dropDownMenuContent}
             sideOffset={12}

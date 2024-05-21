@@ -34,15 +34,23 @@ export const CardForm = ({ card, onSendData, setIsOpen, title }: Props) => {
     resolver: zodResolver(CardSchema),
   })
 
+  const isStringAnswerImg = typeof answerImg === 'string'
+  const isStringQuestionImg = typeof questionImg === 'string'
+
   const onFormSubmit = (data: CardFormValues) => {
     const formData = new FormData()
-    const sentQuestionImg = questionImg === null ? '' : questionImg
-    const sentAnswerImg = answerImg === null ? '' : answerImg
+    const sentQuestionImg = questionImg || ''
+    const sentAnswerImg = answerImg || ''
+
+    if (!isStringQuestionImg) {
+      formData.append('questionImg', sentQuestionImg)
+    }
+    if (!isStringAnswerImg) {
+      formData.append('answerImg', sentAnswerImg)
+    }
 
     formData.append('question', data.question)
     formData.append('answer', data.answer)
-    formData.append('questionImg', sentQuestionImg)
-    formData.append('answerImg', sentAnswerImg)
     setIsOpen(false)
 
     onSendData(formData)

@@ -12,12 +12,10 @@ export const ImageLoader = forwardRef<HTMLInputElement, Props>(({ setPhoto, ...r
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
 
-    let err = null
-
     try {
       loaderSchema.parse(selectedFile)
+      selectedFile && setPhoto(selectedFile)
     } catch (error: unknown) {
-      err = error
       if (error instanceof ZodError) {
         // toast.error(error.errors?.[0]?.message ?? 'File validation error')
         console.log(error)
@@ -26,11 +24,6 @@ export const ImageLoader = forwardRef<HTMLInputElement, Props>(({ setPhoto, ...r
         console.log(error)
       }
     }
-
-    if (!err) {
-      selectedFile && setPhoto(selectedFile)
-    }
-    e.target.value = ''
   }
 
   return <input onChange={handleFileChange} ref={ref} type={'file'} {...rest} />

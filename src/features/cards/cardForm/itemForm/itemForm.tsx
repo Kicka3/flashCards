@@ -1,7 +1,7 @@
 import { ChangeEvent, useRef } from 'react'
 import { Control } from 'react-hook-form'
 
-import { Image } from '@/assets/icons/components'
+import { Image, TrashOutline } from '@/assets/icons/components'
 import { ImageFile } from '@/common/types/types'
 import { Button } from '@/common/ui/button'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
@@ -29,6 +29,10 @@ export const ItemForm = ({ control, errorMessage, image, label, name, setImage }
     file && setImage(file)
   }
 
+  const onRemoveImage = () => {
+    setImage(null)
+  }
+
   return (
     <div className={s.itemWrapper}>
       <ControlledTextField
@@ -41,13 +45,18 @@ export const ItemForm = ({ control, errorMessage, image, label, name, setImage }
 
       <div className={s.imageWrapper}>
         {image === null ? (
-          <Image />
+          <Image className={s.noImagePicture} />
         ) : (
-          <img
-            alt={'questionImg'}
-            className={s.image}
-            src={typeof image === 'string' ? image : URL.createObjectURL(image)}
-          />
+          <>
+            <img
+              alt={'questionImg'}
+              className={s.image}
+              src={typeof image === 'string' ? image : URL.createObjectURL(image)}
+            />
+            <Button className={s.deleteIcon} onClick={onRemoveImage} variant={'icon'}>
+              <TrashOutline height={24} width={24} />
+            </Button>
+          </>
         )}
       </div>
 
