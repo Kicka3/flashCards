@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import { useFilter } from '@/common/hooks/useFilter'
 import { useGetMinMaxCardsQuery } from '@/services/cards'
@@ -33,8 +33,6 @@ export const useDeckFilter = () => {
   const minCards = Number(search.get('minCardsCount') || 0)
   const maxCards = Number(search.get('maxCardsCount') || 15)
 
-  /** Tabs-слайдер */
-
   /** Получаем текущую вкладку из поискового запроса. */
   const getCurrentTab = search.get('currentTab') || 'allCards'
 
@@ -63,21 +61,21 @@ export const useDeckFilter = () => {
     maxCardsCount: maxCards,
     minCardsCount: minCards,
     name: debounceName,
-    orderBy: orderBy,
+    orderBy: orderBy || undefined,
   })
 
   /** Преобразуем полученные данные в удобный формат. */
-  const mappedDecks = deckData?.items.map(deck => ({
-    cards: deck.cardsCount,
-    cover: deck.cover,
-    created: deck.created,
-    createdBy: deck.author.name,
-    id: deck.id,
-    isPrivate: deck.isPrivate,
-    lastUpdated: deck.updated,
-    name: deck.name,
-    userId: deck.userId,
-  }))
+  // const mappedDecks = deckData?.items.map(deck => ({
+  //   cards: deck.cardsCount,
+  //   cover: deck.cover,
+  //   created: deck.created,
+  //   createdBy: deck.author.name,
+  //   id: deck.id,
+  //   isPrivate: deck.isPrivate,
+  //   lastUpdated: deck.updated,
+  //   name: deck.name,
+  //   userId: deck.userId,
+  // }))
 
   /** Проверяем, является ли текущий пользователь владельцем колоды. */
   const isOwner = (userId: string) => {
@@ -85,12 +83,16 @@ export const useDeckFilter = () => {
   }
 
   /** Ищу нужную колоду */
-  const findDeck = useCallback(
-    (id: string | undefined) => {
-      return mappedDecks?.find(d => d.id === id)
-    },
-    [mappedDecks]
-  )
+  // const findDeck = useCallback(
+  //   (id: string | undefined) => {
+  //     return mappedDecks?.find(d => d.id === id)
+  //   },
+  //   [mappedDecks]
+  // )
+
+  const findDeck = (id: string | undefined) => {
+    return deckData?.items.find(d => d.id === id)
+  }
 
   //!!!!!!!!!!!Уже есть в USEFILTER
   const paginationOptions = ['10', '20', '30', '50', '100']
@@ -106,7 +108,7 @@ export const useDeckFilter = () => {
     getCurrentTab,
     isOwner,
     itemsPerPage,
-    mappedDecks,
+    // mappedDecks,
     maxCards,
     minCards,
     minMaxValues,

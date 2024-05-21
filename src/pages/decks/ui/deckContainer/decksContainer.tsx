@@ -24,12 +24,10 @@ export const DecksContainer = ({}: Props) => {
     deckData,
     deckIsLoading,
     itemsPerPage,
-    mappedDecks,
-    orderBy,
+    // mappedDecks,
     paginationOptions,
     setCurrentPage,
     setItemsPerPage,
-    setOrderBy,
   } = useDeckFilter()
 
   const navigate = useNavigate()
@@ -80,18 +78,18 @@ export const DecksContainer = ({}: Props) => {
   const totalItems = deckData?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
 
+  console.log(deckData)
+
   return (
     <>
       <DeckHeader tabs={tabs} />
-      {mappedDecks?.length ? (
+      {deckData?.items.length ? (
         <DecksTable
-          decks={mappedDecks}
+          decks={deckData.items}
           isDeckBeingDeleted={isDeckBeingDeleted}
           learnDeck={learnDeckHandler}
           onDeleteClick={onDeleteDeck}
           openDeck={openDeck}
-          orderBy={orderBy}
-          setOrderBy={setOrderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>
