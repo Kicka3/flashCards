@@ -1,22 +1,10 @@
-.item {
-  @media (hover: hover) {
-    &:hover {
-      width: 94%;
-      background-color: var(--color-dark-500);
-    }
+.link {
+  &:hover,
+  &:focus {
+    box-shadow: none;
   }
 
-  @media (hover: none) {
-    &:active {
-      width: 94%;
-      background-color: var(--color-dark-500);
-    }
+  &:focus-visible {
+    outline: none;
   }
-}
-
-.linkLearn {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  text-decoration: none;
 }
