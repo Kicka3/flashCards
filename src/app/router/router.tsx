@@ -12,10 +12,10 @@ import { Loader } from '@/common/ui/loader'
 import Layout from '@/layout/layout'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
-import { ForgotPassword } from '@/pages/auth/forgotPasword'
+import { ForgotPasswordContainer } from '@/pages/auth/forgotPasword/forgotPasswordContainer'
 import { ProfilePage } from '@/pages/auth/profile'
-import { SignIn } from '@/pages/auth/signIn'
-import { SignUp } from '@/pages/auth/singUp'
+import { SignInContainer } from '@/pages/auth/signIn/signInContainer'
+import { SignUpContainer } from '@/pages/auth/singUp/signUpContainer'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import { LearnCards } from '@/pages/learnCards'
 import { PageNotFound } from '@/pages/pageNotFound'
@@ -23,15 +23,15 @@ import { Cards } from '@/pages/сards'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <ForgotPassword />,
+    element: <ForgotPasswordContainer />,
     path: ROUTES.FORGOT_PASSWORD,
   },
   {
-    element: <SignIn />,
+    element: <SignInContainer />,
     path: ROUTES.SIGN_IN,
   },
   {
-    element: <SignUp />,
+    element: <SignUpContainer />,
     path: ROUTES.SIGN_UP,
   },
   /* поправить email */

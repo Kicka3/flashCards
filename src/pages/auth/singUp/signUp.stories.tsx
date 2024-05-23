@@ -1,13 +1,13 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { SignUp } from '@/pages/auth/singUp/signUp'
+import { SignUpContainer } from '@/pages/auth/singUp/signUpContainer'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: SignUp,
+  component: SignUpContainer,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -19,7 +19,7 @@ const meta = {
   ],
   tags: ['autodocs'],
   title: 'Auth/SignUp',
-} satisfies Meta<typeof SignUp>
+} satisfies Meta<typeof SignUpContainer>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -31,7 +31,7 @@ export const SignUpTest: Story = {
   render: () => {
     return (
       <>
-        <SignUp />
+        <SignUpContainer />
       </>
     )
   },
