@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
@@ -9,12 +8,15 @@ import { ControlledCheckbox } from '@/common/ui/controlled/controlled-checkbox/c
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { Typography } from '@/common/ui/typography'
 import { FormValues, loginSchema } from '@/pages/auth/signIn/utils/loginSchema'
-import { useLoginMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './signIn.module.scss'
 
-export const SignIn = () => {
+type Props = {
+  onSubmit: (data: FormValues) => void
+}
+
+export const SignIn = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -27,16 +29,6 @@ export const SignIn = () => {
     },
     resolver: zodResolver(loginSchema),
   })
-
-  const [login] = useLoginMutation()
-
-  const onSubmit = async (data: FormValues) => {
-    try {
-      await login(data).unwrap()
-    } catch (error: any) {
-      toast.error(error?.data?.message ?? 'Some errors occurred while sign in')
-    }
-  }
 
   return (
     <Card>
@@ -60,7 +52,7 @@ export const SignIn = () => {
               errorMessage={errors.password?.message}
               label={'Password'}
               name={'password'}
-              placeholder={'Your password'}
+              placeholder={'Qwerty123'}
               variant={'password'}
             />
           </div>
@@ -72,7 +64,7 @@ export const SignIn = () => {
           />
         </div>
         <div className={s.forgotPasswordField}>
-          <Link className={s.forgotPasswordText} to={'/forgotPassword'}>
+          <Link className={s.forgotPasswordText} to={ROUTES.FORGOT_PASSWORD}>
             Forgot Password ?
           </Link>
         </div>
