@@ -1,4 +1,4 @@
-import { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image, TrashOutline } from '@/assets/icons/components'
@@ -121,7 +121,7 @@ export const DeckForm = ({
         <Button
           className={s.UploadImgBtn}
           fullWidth
-          onClick={e => {
+          onClick={(e: React.MouseEvent) => {
             e.preventDefault()
             openFiles()
           }}

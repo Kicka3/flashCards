@@ -13,12 +13,14 @@
   align-items: center;
 }
 
-.userName {
+.btnDropDown {
   all: unset;
-
   cursor: pointer;
-
   display: flex;
-  gap: 14px;
-  align-items: center;
+  border-radius: 50%;
+
+  &:hover,
+  &:active {
+    background: none;
+  }
 }

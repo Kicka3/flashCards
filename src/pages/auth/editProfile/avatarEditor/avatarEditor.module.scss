@@ -29,15 +29,16 @@
 }
 
 .avatarWrapper {
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-items: center;
+
   max-width: 96px;
 }
 
 .avatar {
-  position: relative;
-
   display: flex;
   align-self: center;
   justify-content: center;

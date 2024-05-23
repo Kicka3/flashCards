@@ -2,7 +2,7 @@ import { ComponentPropsWithoutRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { Button } from '@/common/ui/button'
-import { HeaderProfile } from '@/layout/header/ui/header-profile'
+import { Profile } from '@/layout/header/ui/header-profile/headerProfile'
 import { UserData } from '@/services/auth'
 import clsx from 'clsx'
 
@@ -38,7 +38,7 @@ function HeaderContent({
   }
 
   if (isAuth) {
-    return <HeaderProfile profile={profile} />
+    return <Profile profile={profile} />
   }
 
   const isSignIn = path === '/signIn'

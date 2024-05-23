@@ -8,30 +8,29 @@ import {
 
 import { ROUTES } from '@/common/enums/enums'
 import { useAppOutletContext } from '@/common/hooks/useOutletContext'
-import { Loader } from '@/common/ui/loader'
-import Layout from '@/layout/layout'
+import { Error } from '@/common/ui/toast/toast.stories'
+import { Layout } from '@/layout/layout'
 import { CheckEmail } from '@/pages/auth/checkEmail'
-import { CreateNewPassword } from '@/pages/auth/createNewPassword'
-import { ForgotPassword } from '@/pages/auth/forgotPasword'
+import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
+import { ForgotPasswordContainer } from '@/pages/auth/forgotPasword/forgotPasswordContainer'
 import { ProfilePage } from '@/pages/auth/profile'
-import { SignIn } from '@/pages/auth/signIn'
-import { SignUp } from '@/pages/auth/singUp'
+import { SignInContainer } from '@/pages/auth/signIn/signInContainer'
+import { SignUpContainer } from '@/pages/auth/singUp/signUpContainer'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import { LearnCards } from '@/pages/learnCards'
-import { PageNotFound } from '@/pages/pageNotFound'
 import { Cards } from '@/pages/сards'
 
 const publicRoutes: RouteObject[] = [
   {
-    element: <ForgotPassword />,
+    element: <ForgotPasswordContainer />,
     path: ROUTES.FORGOT_PASSWORD,
   },
   {
-    element: <SignIn />,
+    element: <SignInContainer />,
     path: ROUTES.SIGN_IN,
   },
   {
-    element: <SignUp />,
+    element: <SignUpContainer />,
     path: ROUTES.SIGN_UP,
   },
   /* поправить email */
@@ -40,8 +39,8 @@ const publicRoutes: RouteObject[] = [
     path: ROUTES.CHECK_EMAIL,
   },
   {
-    element: <CreateNewPassword />,
-    path: ROUTES.CREATE_NEW_PASSWORD,
+    element: <CreateNewPasswordContainer />,
+    path: ROUTES.CREATE_NEW_PASSWORD_TOKEN,
   },
 ]
 
@@ -66,34 +65,32 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
-function PrivateRoutes() {
-  const { isAuth, isLoading } = useAppOutletContext()
-
-  if (isLoading) {
-    return <Loader />
-  }
+const PrivateRoutes = () => {
+  const { isAuth } = useAppOutletContext()
 
   return isAuth ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
 }
 
-function PublicRoutes() {
-  const { isAuth, isLoading } = useAppOutletContext()
-
-  if (isLoading) {
-    return <Loader />
-  }
+const PublicRoutes = () => {
+  const { isAuth } = useAppOutletContext()
 
   return isAuth ? <Navigate to={ROUTES.DECKS} /> : <Outlet />
 }
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     children: [
-      { children: publicRoutes, element: <PublicRoutes /> },
-      { children: privateRoutes, element: <PrivateRoutes /> },
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      {
+        children: publicRoutes,
+        element: <PublicRoutes />,
+      },
     ],
     element: <Layout />,
-    errorElement: <PageNotFound />,
+    errorElement: <Error />,
     path: '/',
   },
 ])

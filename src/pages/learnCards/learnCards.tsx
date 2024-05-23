@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import { ArrowBackOutline } from '@/assets/icons/components'
+import { GoBackButton } from '@/common/ui/backButton'
 import { Button } from '@/common/ui/button'
 import { Card } from '@/common/ui/card'
 import { ControlledRadioGroup } from '@/common/ui/controlled'
@@ -29,7 +29,6 @@ const findKeyByValue = (obj: { [key: string]: string }, value: string) => {
 
 export const LearnCards = () => {
   const { id: deckId } = useParams()
-  const navigate = useNavigate()
 
   const { data: cardData } = useGetDeckToLearnQuery({ id: deckId || '' })
   const { data: deckData } = useGetDeckByIdQuery(deckId!)
@@ -53,16 +52,9 @@ export const LearnCards = () => {
     }
   }
 
-  const prevPage = () => {
-    navigate(-1)
-  }
-
   return (
     <section className={s.wrapper}>
-      <div className={s.backLink} onClick={prevPage}>
-        <ArrowBackOutline height={16} width={16} />
-        <Typography variant={'body2'}>Back</Typography>
-      </div>
+      <GoBackButton title={'Back'} />
 
       <Card>
         <div className={s.title}>

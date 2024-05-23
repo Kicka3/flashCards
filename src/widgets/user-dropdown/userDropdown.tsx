@@ -8,7 +8,6 @@ import { DropDownMenu } from '@/common/ui/dropdownMenu/dropdownMenu'
 import { DropdownSeparator } from '@/common/ui/dropdownMenu/dropdownSeparator'
 import { Typography } from '@/common/ui/typography'
 import { useLogoutMutation } from '@/services/auth'
-import { DropdownMenuLabel } from '@radix-ui/react-dropdown-menu'
 
 import s from './userDropdown.module.scss'
 
@@ -16,10 +15,12 @@ type Props = {
   description?: string
   email?: string
   img?: string
+  isOpen: boolean
   name?: string
+  toggleDropdown: (open: boolean) => void
 }
 
-export const UserDropDown = ({ description, email, img, name }: Props) => {
+export const UserDropDown = ({ description, email, img, isOpen, name, toggleDropdown }: Props) => {
   const navigate = useNavigate()
   const [logout] = useLogoutMutation()
 
@@ -32,27 +33,35 @@ export const UserDropDown = ({ description, email, img, name }: Props) => {
     }
   }
 
+  const onNavigateProfile = () => {
+    navigate(ROUTES.PROFILE)
+  }
+
   return (
-    <>
-      <DropDownMenu trigger={<img alt={description} src={img} width={36} />}>
-        <DropdownMenuLabel className={s.userItem}>
-          <img alt={''} className={s.avatar} src={img} />
-          <div className={s.userInfo}>
-            <Typography variant={'sub2'}>{name}</Typography>
-            <Typography variant={'caption'}>{email}</Typography>
-          </div>
-        </DropdownMenuLabel>
-        <DropdownSeparator />
-        <DropdownItem className={s.item} onClick={() => navigate(ROUTES.PROFILE)}>
-          <PersonOutline height={'16px'} width={'16px'} />
-          <Typography variant={'caption'}>My Profile</Typography>
-        </DropdownItem>
-        <DropdownSeparator />
-        <DropdownItem className={s.item} onClick={handleLogout}>
-          <LogOutOutline height={'16px'} width={'16px'} />
-          <Typography variant={'caption'}>Sign Out</Typography>
-        </DropdownItem>
-      </DropDownMenu>
-    </>
+    <DropDownMenu
+      isOpen={isOpen}
+      onToggle={toggleDropdown}
+      trigger={<img alt={description} src={img} width={36} />}
+    >
+      <div className={s.userItem}>
+        <img alt={'avatar'} className={s.avatar} src={img} />
+        <div className={s.userInfo}>
+          <Typography variant={'sub2'}>{name}</Typography>
+          <Typography variant={'caption'}>{email}</Typography>
+        </div>
+      </div>
+      <DropdownSeparator />
+      <DropdownItem className={s.item} onClick={onNavigateProfile}>
+        <PersonOutline height={'16px'} width={'16px'} />
+        <Typography as={'a'} variant={'caption'}>
+          My Profile
+        </Typography>
+      </DropdownItem>
+      <DropdownSeparator />
+      <DropdownItem className={s.item} onClick={handleLogout}>
+        <LogOutOutline height={'16px'} width={'16px'} />
+        <Typography variant={'caption'}>Sign Out</Typography>
+      </DropdownItem>
+    </DropDownMenu>
   )
 }

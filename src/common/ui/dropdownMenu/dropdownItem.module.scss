@@ -8,13 +8,19 @@
   align-items: center;
 
   width: 100%;
-  padding: 5px;
+  padding: 5px 2px;
 
   background-color: var(--color-dark-700);
   border-radius: 4px;
 
-  &[data-highlighted] {
-    width: 94%;
+  //& [data-highlighted] {
+  //  background-color: var(--color-dark-500);
+  //}
+
+  &:hover,
+  &:focus {
+    width: 100%;
+    color: var(--color-accent-500);
     background-color: var(--color-dark-500);
   }
 }

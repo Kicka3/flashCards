@@ -3,7 +3,7 @@
  * Do not make direct changes to the file.
  */
 
-
+/* eslint max-lines: off */
 export interface paths {
   "/v1/auth/login": {
     /**

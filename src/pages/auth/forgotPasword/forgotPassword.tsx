@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 import { ROUTES } from '@/common/enums/enums'
 import { Button } from '@/common/ui/button'
@@ -8,14 +7,13 @@ import { Card } from '@/common/ui/card'
 import { ControlledTextField } from '@/common/ui/controlled/controlled-textField'
 import { Typography } from '@/common/ui/typography'
 import { FormValues, forgotPasswordSchema } from '@/pages/auth/forgotPasword/utils'
-import { RecoverPassword, useRecoverPasswordMutation } from '@/services/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import s from './forgotPassword.module.scss'
 
-type Props = {}
+type Props = { onSubmit: ({ email }: FormValues) => void }
 
-export const ForgotPassword = ({}: Props) => {
+export const ForgotPassword = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { errors },
@@ -26,32 +24,6 @@ export const ForgotPassword = ({}: Props) => {
     },
     resolver: zodResolver(forgotPasswordSchema),
   })
-
-  const navigate = useNavigate()
-  const [forgotPassword] = useRecoverPasswordMutation()
-
-  const onSubmit = async ({ email }: FormValues) => {
-    const recoverPassword: RecoverPassword = {
-      email,
-      html: '',
-      subject: '',
-    }
-
-    try {
-      const result = await forgotPassword(recoverPassword).unwrap()
-
-      const promiseResult = Promise.resolve(result)
-
-      await toast.promise(promiseResult, {
-        pending: 'Sending email...',
-        success: 'Email sent successfully!',
-      })
-
-      navigate(ROUTES.CHECK_EMAIL)
-    } catch (error: any) {
-      toast.error(error?.data?.message ?? 'An error occurred while resetting the password:')
-    }
-  }
 
   return (
     <Card className={s.container}>
