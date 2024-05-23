@@ -11,7 +11,7 @@ import s from './headerProfile.module.scss'
 
 type Props = { profile: UserData | undefined } & ComponentPropsWithoutRef<'header'>
 
-const Profile = ({ className, profile, ...rest }: Props) => {
+export const Profile = ({ className, profile, ...rest }: Props) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = (open: boolean) => {
@@ -51,5 +51,3 @@ const Profile = ({ className, profile, ...rest }: Props) => {
     </div>
   )
 }
-
-export default Profile
