@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react'
+import React, { ChangeEvent, useRef } from 'react'
 import { Control } from 'react-hook-form'
 
 import { Image, TrashOutline } from '@/assets/icons/components'
@@ -64,7 +64,7 @@ export const ItemForm = ({ control, errorMessage, image, label, name, setImage }
       <Button
         className={s.uploadImgBtn}
         fullWidth
-        onClick={(e: any) => {
+        onClick={(e: React.MouseEvent) => {
           e.preventDefault()
           openFiles(ref)
         }}
