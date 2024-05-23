@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100%;
+}
+
+.noCardWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 70px;
+
+  .noCardInfo {
+    color: var(--color-dark-100);
+  }
+}
