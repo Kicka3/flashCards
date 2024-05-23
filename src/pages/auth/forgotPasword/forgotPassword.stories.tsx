@@ -1,13 +1,13 @@
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 
-import { ForgotPassword } from '@/pages/auth/forgotPasword/forgotPassword'
+import { ForgotPasswordContainer } from '@/pages/auth/forgotPasword/forgotPasswordContainer'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
   argTypes: {},
-  component: ForgotPassword,
+  component: ForgotPasswordContainer,
   decorators: [
     Story => (
       <BrowserRouter>
@@ -19,7 +19,7 @@ const meta = {
   ],
   tags: ['autodocs'],
   title: 'Auth/ForgotPassword',
-} satisfies Meta<typeof ForgotPassword>
+} satisfies Meta<typeof ForgotPasswordContainer>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -29,7 +29,7 @@ export const ForgotPasswordDefault: Story = {
   render: () => {
     return (
       <>
-        <ForgotPassword />
+        <ForgotPasswordContainer />
       </>
     )
   },
