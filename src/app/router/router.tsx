@@ -18,7 +18,7 @@ import { SignInContainer } from '@/pages/auth/signIn/signInContainer'
 import { SignUpContainer } from '@/pages/auth/singUp/signUpContainer'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import { LearnCards } from '@/pages/learnCards'
-import { Cards } from '@/pages/сards'
+import { CardsContainer } from '@/pages/сards'
 
 const publicRoutes: RouteObject[] = [
   {
@@ -52,7 +52,7 @@ const privateRoutes: RouteObject[] = [
         path: '/',
       },
       {
-        element: <Cards />,
+        element: <CardsContainer />,
         path: ROUTES.CARDS,
       },
       {
