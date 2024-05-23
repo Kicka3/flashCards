@@ -64,7 +64,7 @@ export const ItemForm = ({ control, errorMessage, image, label, name, setImage }
       <Button
         className={s.uploadImgBtn}
         fullWidth
-        onClick={e => {
+        onClick={(e: any) => {
           e.preventDefault()
           openFiles(ref)
         }}
