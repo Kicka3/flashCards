@@ -8,7 +8,7 @@ import { Card } from '@/common/ui/card'
 import { ControlledRadioGroup } from '@/common/ui/controlled'
 import { RadioItem } from '@/common/ui/radioGroup'
 import { Typography } from '@/common/ui/typography'
-import { grade } from '@/pages/learnCards/constant'
+import { grade } from '@/pages/learnCards/constants'
 import { useGetDeckByIdQuery, useGetDeckToLearnQuery, useSaveGradeMutation } from '@/services/decks'
 
 import s from './learnCards.module.scss'
