@@ -4,11 +4,11 @@ import { MemoryRouter } from 'react-router-dom'
 import { store } from '@/services/store'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { Cards } from '.'
+import { CardsContainer } from './cardsContainer'
 
 const meta = {
   argTypes: {},
-  component: Cards,
+  component: CardsContainer,
   decorators: [
     Story => (
       <MemoryRouter>
@@ -20,7 +20,7 @@ const meta = {
   ],
   tags: ['autodocs'],
   title: 'Pages/Cards',
-} satisfies Meta<typeof Cards>
+} satisfies Meta<typeof CardsContainer>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -28,6 +28,6 @@ type Story = StoryObj<typeof meta>
 export const CardsDefault: Story = {
   args: {},
   render: () => {
-    return <Cards />
+    return <CardsContainer />
   },
 }
