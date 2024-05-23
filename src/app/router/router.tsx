@@ -8,8 +8,8 @@ import {
 
 import { ROUTES } from '@/common/enums/enums'
 import { useAppOutletContext } from '@/common/hooks/useOutletContext'
-import { Loader } from '@/common/ui/loader'
-import Layout from '@/layout/layout'
+import { Error } from '@/common/ui/toast/toast.stories'
+import { Layout } from '@/layout/layout'
 import { CheckEmail } from '@/pages/auth/checkEmail'
 import { CreateNewPasswordContainer } from '@/pages/auth/createNewPassword/createNewPasswordContainer'
 import { ForgotPasswordContainer } from '@/pages/auth/forgotPasword/forgotPasswordContainer'
@@ -18,7 +18,6 @@ import { SignInContainer } from '@/pages/auth/signIn/signInContainer'
 import { SignUpContainer } from '@/pages/auth/singUp/signUpContainer'
 import { DecksContainer } from '@/pages/decks/ui/deckContainer'
 import { LearnCards } from '@/pages/learnCards'
-import { PageNotFound } from '@/pages/pageNotFound'
 import { Cards } from '@/pages/сards'
 
 const publicRoutes: RouteObject[] = [
@@ -66,34 +65,32 @@ const privateRoutes: RouteObject[] = [
   },
 ]
 
-function PrivateRoutes() {
-  const { isAuth, isLoading } = useAppOutletContext()
-
-  if (isLoading) {
-    return <Loader />
-  }
+const PrivateRoutes = () => {
+  const { isAuth } = useAppOutletContext()
 
   return isAuth ? <Outlet /> : <Navigate to={ROUTES.SIGN_IN} />
 }
 
-function PublicRoutes() {
-  const { isAuth, isLoading } = useAppOutletContext()
-
-  if (isLoading) {
-    return <Loader />
-  }
+const PublicRoutes = () => {
+  const { isAuth } = useAppOutletContext()
 
   return isAuth ? <Navigate to={ROUTES.DECKS} /> : <Outlet />
 }
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     children: [
-      { children: publicRoutes, element: <PublicRoutes /> },
-      { children: privateRoutes, element: <PrivateRoutes /> },
+      {
+        children: privateRoutes,
+        element: <PrivateRoutes />,
+      },
+      {
+        children: publicRoutes,
+        element: <PublicRoutes />,
+      },
     ],
     element: <Layout />,
-    errorElement: <PageNotFound />,
+    errorElement: <Error />,
     path: '/',
   },
 ])
