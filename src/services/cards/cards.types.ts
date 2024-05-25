@@ -30,7 +30,7 @@ export type GetCardsArgs = {
   answer?: string
   currentPage?: number
   itemsPerPage?: number
-  orderBy?: string
+  orderBy?: null | string
   question?: string
 }
 
