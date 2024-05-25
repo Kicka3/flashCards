@@ -14,7 +14,6 @@ import s from './cards.module.scss'
 type Props = {
   cards: Card[]
   currentPage: number
-  deleteCard: (cardId: string) => void
   isOwner: boolean
   itemsPerPage: string
   moreThanOnePage: boolean
@@ -22,6 +21,7 @@ type Props = {
   onChangeItemsCountPerPage: (page: string) => void
   onChangeOrderBy: (columnName: string) => void
   onChangeSearchField: (value: string) => void
+  onDeleteCard: (id: string) => void
   orderBy: string
   paginationOptions: string[]
   searchField: string
@@ -31,7 +31,6 @@ type Props = {
 export const Cards = ({
   cards,
   currentPage,
-  deleteCard,
   isOwner,
   itemsPerPage,
   moreThanOnePage,
@@ -39,6 +38,7 @@ export const Cards = ({
   onChangeItemsCountPerPage,
   onChangeOrderBy,
   onChangeSearchField,
+  onDeleteCard,
   orderBy,
   paginationOptions,
   searchField,
@@ -170,7 +170,7 @@ export const Cards = ({
                       }
                     />
 
-                    <Button onClick={() => deleteCard(card.id)} variant={'icon'}>
+                    <Button onClick={() => onDeleteCard(card.id)} variant={'icon'}>
                       <TrashOutline height={16} width={16} />
                     </Button>
                   </div>
