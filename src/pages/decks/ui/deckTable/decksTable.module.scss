@@ -21,6 +21,8 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
+
+  text-decoration: none;
 }
 
 .deckCoverImg {
@@ -57,31 +59,40 @@
 
 .tableHeadCell {
   cursor: pointer;
+  padding: 0;
 
-  &::after {
-    content: '';
+  .tableHeadCell_btn {
+    width: 100%;
+    height: 100%;
+    padding: 6px 24px;
+    color: var(--color-light-100);
 
-    transform: rotate(45deg) translate(4px, -6px);
+    &::after {
+      content: '';
 
-    display: inline-block;
+      transform: rotate(45deg) translate(8px, -5px);
 
-    width: 5px;
-    height: 5px;
+      display: inline-block;
 
-    border-top: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
+      width: 5px;
+      height: 5px;
 
-  &:hover {
-    background-color: var(--color-dark-300);
-  }
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
 
-  &.asc::after {
-    border-color: white;
-  }
+    &:focus-visible {
+      border-radius: 0;
+      outline-offset: 2px;
+    }
 
-  &.desc::after {
-    transform: rotate(-135deg) translate(-2px, 6px);
-    border-color: white;
+    &.asc::after {
+      border-color: white;
+    }
+
+    &.desc::after {
+      transform: rotate(-135deg) translate(-6px, 6px);
+      border-color: white;
+    }
   }
 }

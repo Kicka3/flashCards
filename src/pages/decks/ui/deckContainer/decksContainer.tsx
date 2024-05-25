@@ -1,14 +1,15 @@
-import { ErrorResponse, useNavigate } from 'react-router-dom'
+import { ErrorResponse } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import { ROUTES } from '@/common/enums/enums'
+import { paginationOptions } from '@/common/constants'
+import { useSearch } from '@/common/hooks/useSearch'
 import { Loader } from '@/common/ui/loader/loader'
 import { Pagination } from '@/common/ui/pagination'
 import { Typography } from '@/common/ui/typography'
-import { useDeckFilter } from '@/pages/decks/deckHooks'
 import { DeckHeader } from '@/pages/decks/ui/deckHeader'
 import { DecksTable } from '@/pages/decks/ui/deckTable/decksTable'
-import { useDeleteDeckMutation } from '@/services/decks/decks.service'
+import { useMeQuery } from '@/services/auth'
+import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.service'
 
 import s from './decks.module.scss'
 
@@ -20,17 +21,37 @@ type Props = {
 
 export const DecksContainer = ({}: Props) => {
   const {
+    clearFilter,
     currentPage,
-    deckData,
-    deckIsLoading,
+    currentTab,
+    debouncedSearch,
     itemsPerPage,
-    // mappedDecks,
-    paginationOptions,
-    setCurrentPage,
-    setItemsPerPage,
-  } = useDeckFilter()
+    maxCards,
+    minCards,
+    onChangeItemsPerPage,
+    onChangeOrderBy,
+    onChangePage,
+    onChangeSearchField,
+    onCommitSliderValues,
+    onTabValueChange,
+    orderBy,
+    searchField,
+  } = useSearch()
+  const { data: me } = useMeQuery()
 
-  const navigate = useNavigate()
+  const {
+    data: deckData,
+    isFetching: deckIsFetching,
+    isLoading: deckIsLoading,
+  } = useGetDecksQuery({
+    authorId: currentTab === 'userCards' ? me?.id : undefined,
+    currentPage,
+    itemsPerPage: itemsPerPage,
+    maxCardsCount: maxCards,
+    minCardsCount: minCards,
+    name: debouncedSearch,
+    orderBy: orderBy,
+  })
 
   /** Tabs Вынести в отдельный файл для констант?? */
   const tabs = [
@@ -63,33 +84,31 @@ export const DecksContainer = ({}: Props) => {
     }
   }
 
-  /** Open Deck */
-  const openDeck = (deckId: string) => {
-    navigate(`/decks/${deckId}`)
-  }
-
-  //Сделать функции, для получения URL
-  /** learn Deck забавная реализация */
-  const learnDeckHandler = (deckId: string) => {
-    navigate(ROUTES.LEARN_CARDS.replace(':id', deckId))
-  }
-
   /** Pagination */
   const totalItems = deckData?.pagination.totalItems || 0
   const moreThanOnePage = totalItems / Number(itemsPerPage) > 1
 
-  console.log(deckData)
-
   return (
     <>
-      <DeckHeader tabs={tabs} />
+      <DeckHeader
+        clearFilter={clearFilter}
+        currentTab={currentTab}
+        deckIsFetching={deckIsFetching}
+        maxCards={maxCards}
+        minCards={minCards}
+        onChangeSearchField={onChangeSearchField}
+        onCommitSliderValues={onCommitSliderValues}
+        onTabValueChange={onTabValueChange}
+        searchField={searchField}
+        tabs={tabs}
+      />
       {deckData?.items.length ? (
         <DecksTable
           decks={deckData.items}
           isDeckBeingDeleted={isDeckBeingDeleted}
-          learnDeck={learnDeckHandler}
-          onDeleteClick={onDeleteDeck}
-          openDeck={openDeck}
+          onChangeOrderBy={onChangeOrderBy}
+          onDeleteDeck={onDeleteDeck}
+          orderBy={orderBy}
         />
       ) : (
         <Typography variant={'sub1'}>Content is not found...</Typography>
@@ -100,8 +119,8 @@ export const DecksContainer = ({}: Props) => {
           currentPage={currentPage}
           defaultValue={paginationOptions[0]}
           itemsPerPage={Number(itemsPerPage)}
-          onChangeItemsPerPage={setItemsPerPage}
-          onChangePage={setCurrentPage}
+          onChangeItemsPerPage={onChangeItemsPerPage}
+          onChangePage={onChangePage}
           options={paginationOptions}
           totalCount={totalItems || 0}
         />
