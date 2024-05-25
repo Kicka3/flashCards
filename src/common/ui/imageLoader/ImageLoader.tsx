@@ -1,4 +1,5 @@
 import { ChangeEvent, ComponentPropsWithoutRef, ElementType, forwardRef } from 'react'
+import { toast } from 'react-toastify'
 
 import { ZodError } from 'zod'
 
@@ -17,11 +18,9 @@ export const ImageLoader = forwardRef<HTMLInputElement, Props>(({ setPhoto, ...r
       selectedFile && setPhoto(selectedFile)
     } catch (error: unknown) {
       if (error instanceof ZodError) {
-        // toast.error(error.errors?.[0]?.message ?? 'File validation error')
-        console.log(error)
+        toast.error(error.errors?.[0]?.message ?? 'File validation error')
       } else {
-        // toast.error(JSON.stringify(error))
-        console.log(error)
+        toast.error(JSON.stringify(error))
       }
     }
   }

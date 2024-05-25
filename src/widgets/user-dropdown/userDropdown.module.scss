@@ -3,11 +3,6 @@
   display: flex;
   gap: 6px;
   align-items: center;
-
-  &:hover,
-  &:focus {
-    background-color: var(--color-dark-500);
-  }
 }
 
 .userItem {

@@ -25,27 +25,30 @@ export const ProfileInfo = ({ data, logout, updateAvatar, updateNickname }: Prop
   const [editMode, setEditMode] = useState(false)
 
   return (
-    <Card>
+    <>
       <GoBackButton title={'Go back'} />
-      <Typography as={'h1'} className={s.header} variant={'h1'}>
-        Personal Information
-      </Typography>
-      <AvatarEditor
-        avatar={data.avatar}
-        editMode={editMode}
-        name={data.name}
-        updateAvatar={updateAvatar}
-      />
-      {editMode ? (
-        <EditProfileWithInput setEditMode={setEditMode} updateNickname={updateNickname} />
-      ) : (
-        <EditProfileWithoutInput
-          email={data.email}
-          logout={logout}
+
+      <Card>
+        <Typography as={'h1'} className={s.header} variant={'h1'}>
+          Personal Information
+        </Typography>
+        <AvatarEditor
+          avatar={data.avatar}
+          editMode={editMode}
           name={data.name}
-          setEditMode={setEditMode}
+          updateAvatar={updateAvatar}
         />
-      )}
-    </Card>
+        {editMode ? (
+          <EditProfileWithInput setEditMode={setEditMode} updateNickname={updateNickname} />
+        ) : (
+          <EditProfileWithoutInput
+            email={data.email}
+            logout={logout}
+            name={data.name}
+            setEditMode={setEditMode}
+          />
+        )}
+      </Card>
+    </>
   )
 }

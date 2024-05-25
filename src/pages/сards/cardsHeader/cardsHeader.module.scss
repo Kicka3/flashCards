@@ -1,15 +1,5 @@
-.noCardWrapper {
-  display: inline-flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 70px;
-
-  .noCardInfo {
-    color: var(--color-dark-100);
-  }
+.backBtn {
+  padding-left: 1px;
 }
 
 .packTitleWrapper {

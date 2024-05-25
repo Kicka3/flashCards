@@ -8,7 +8,7 @@ import { Card } from '@/common/ui/card'
 import { ControlledRadioGroup } from '@/common/ui/controlled'
 import { RadioItem } from '@/common/ui/radioGroup'
 import { Typography } from '@/common/ui/typography'
-import { grade } from '@/pages/learnCards/constant'
+import { grade } from '@/pages/learnCards/constants'
 import { useGetDeckByIdQuery, useGetDeckToLearnQuery, useSaveGradeMutation } from '@/services/decks'
 
 import s from './learnCards.module.scss'
@@ -76,7 +76,7 @@ export const LearnCards = () => {
             </div>
           )}
           <Typography className={s.tryCountText} variant={'body2'}>
-            Количество попыток: {cardData?.shots}
+            Количество попыток ответов на вопрос: {cardData?.shots}
           </Typography>
         </div>
 
