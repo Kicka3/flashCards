@@ -1,63 +1,40 @@
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useDebounce } from '@/common/hooks/useDebounce'
-import { useFilter } from '@/common/hooks/useFilter'
 import { Button } from '@/common/ui/button'
 import { Loader } from '@/common/ui/loader'
 import { Typography } from '@/common/ui/typography'
 import { CreateCard } from '@/features/cards/createCard'
 import { Cards } from '@/pages/сards/cards'
 import { CardsHeader } from '@/pages/сards/cardsHeader/cardsHeader'
-import { useDeleteCardMutation, useGetCardsQuery } from '@/services/cards'
-import { useGetDeckByIdQuery } from '@/services/decks'
+import { useCards } from '@/pages/сards/cardsHooks/useCards'
+import { usePagination } from '@/pages/сards/cardsHooks/usePagination'
 
 import s from './cardsContainer.module.scss'
 
 export const CardsContainer = () => {
   const { id } = useParams()
   const deckId = id || ''
-  const { currentPage, itemsPerPage, me, paginationOptions, setCurrentPage, setItemsPerPage } =
-    useFilter()
-
-  const [searchField, setSearchField] = useState('')
-  const [orderBy, setOrderBy] = useState('')
-  const debouncedSearch = useDebounce(searchField)
-  const { data: cards, isLoading: cardsIsLoading } = useGetCardsQuery({
-    id: deckId,
-    params: {
-      currentPage,
-      itemsPerPage: Number(itemsPerPage),
-      orderBy: orderBy,
-      question: debouncedSearch,
-    },
+  const { currentPage, itemsPerPage, paginationOptions, setCurrentPage, setItemsPerPage } =
+    usePagination()
+  const {
+    cards,
+    cardsIsLoading,
+    deck,
+    deleteCard,
+    isEmpty,
+    isOwner,
+    moreThanOnePage,
+    onChangeOrderBy,
+    orderBy,
+    searchField,
+    setSearchField,
+    totalItems,
+  } = useCards({
+    currentPage,
+    deckId,
+    itemsPerPage,
+    setCurrentPage,
   })
-  const { data: deck } = useGetDeckByIdQuery(deckId)
-  const [deleteCard] = useDeleteCardMutation()
-
-  const isOwner = deck?.userId === me?.id
-  const isEmpty = !deck?.cardsCount
-
-  const totalItems = cards?.pagination.totalItems || 0
-  const moreThanOnePage = totalItems / 10 > 1
-
-  const onChangeOrderBy = (columnName: string) => {
-    let newOrder = 'asc'
-
-    if (orderBy === `${columnName}-asc`) {
-      newOrder = 'desc'
-    }
-
-    setOrderBy(`${columnName}-${newOrder}`)
-
-    if (orderBy === `${columnName}-desc`) {
-      setOrderBy('') // сбрасываем сортировку полностью
-    }
-
-    if (currentPage !== 1) {
-      setCurrentPage(1) // при сортировке сбрасывать на 1 страницу
-    }
-  }
 
   if (cardsIsLoading) {
     return (
@@ -96,7 +73,7 @@ export const CardsContainer = () => {
         </div>
       ) : (
         <Cards
-          cards={cards?.items!}
+          cards={cards!}
           currentPage={currentPage}
           deleteCard={deleteCard}
           isOwner={isOwner}
