@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ErrorResponse } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { useDebounce } from '@/common/hooks/useDebounce'
 import { useMeQuery } from '@/services/auth'
@@ -32,6 +34,19 @@ export const useCards = ({ currentPage, deckId, itemsPerPage, setCurrentPage }: 
   const { data: deck } = useGetDeckByIdQuery(deckId)
   const [deleteCard] = useDeleteCardMutation()
 
+  const onDeleteCard = async (id: string) => {
+    try {
+      await toast.promise(deleteCard(id).unwrap(), {
+        pending: 'In progress',
+        success: 'Deck was deleted',
+      })
+    } catch (e: unknown) {
+      const err = e as ErrorResponse
+
+      toast.error(err?.data?.errorMessages[0]?.message ?? "Couldn't Delete")
+    }
+  }
+
   const isOwner = deck?.userId === me?.id
   const isEmpty = !deck?.cardsCount
 
@@ -57,11 +72,11 @@ export const useCards = ({ currentPage, deckId, itemsPerPage, setCurrentPage }: 
     cards: cards?.items,
     cardsIsLoading,
     deck,
-    deleteCard,
     isEmpty,
     isOwner,
     moreThanOnePage,
     onChangeOrderBy,
+    onDeleteCard,
     orderBy,
     searchField,
     setSearchField,

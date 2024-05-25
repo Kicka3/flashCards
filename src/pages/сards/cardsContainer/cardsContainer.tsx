@@ -20,11 +20,11 @@ export const CardsContainer = () => {
     cards,
     cardsIsLoading,
     deck,
-    deleteCard,
     isEmpty,
     isOwner,
     moreThanOnePage,
     onChangeOrderBy,
+    onDeleteCard,
     orderBy,
     searchField,
     setSearchField,
@@ -75,7 +75,6 @@ export const CardsContainer = () => {
         <Cards
           cards={cards!}
           currentPage={currentPage}
-          deleteCard={deleteCard}
           isOwner={isOwner}
           itemsPerPage={itemsPerPage}
           moreThanOnePage={moreThanOnePage}
@@ -83,6 +82,7 @@ export const CardsContainer = () => {
           onChangeItemsCountPerPage={setItemsPerPage}
           onChangeOrderBy={onChangeOrderBy}
           onChangeSearchField={setSearchField}
+          onDeleteCard={onDeleteCard}
           orderBy={orderBy}
           paginationOptions={paginationOptions}
           searchField={searchField}
