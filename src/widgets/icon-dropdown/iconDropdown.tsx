@@ -25,7 +25,7 @@ export const IconDropDown = ({ deck }: Props) => {
   const goBackHandler = () => {
     navigate(-1)
   }
-  /** DELETE */
+
   const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
 
   const onDeleteDeck = async (id: string) => {

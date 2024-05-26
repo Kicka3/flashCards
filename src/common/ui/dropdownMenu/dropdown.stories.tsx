@@ -72,6 +72,18 @@ export const DropdownWithIcons: Story = {
   },
 
   render: () => {
-    return <IconDropDown />
+    const deck = {
+      author: { id: 'string', name: 'string' },
+      cardsCount: 0,
+      cover: 'string',
+      created: 'string',
+      id: 'string',
+      isPrivate: false,
+      name: 'string',
+      updated: 'string',
+      userId: 'string',
+    }
+
+    return <IconDropDown deck={deck} />
   },
 }
