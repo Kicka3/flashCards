@@ -16,7 +16,7 @@ import { Deck, useDeleteDeckMutation } from '@/services/decks'
 import s from './iconDropdown.module.scss'
 
 type Props = {
-  deck: Deck
+  deck?: Deck
 }
 
 export const IconDropDown = ({ deck }: Props) => {
