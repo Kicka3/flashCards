@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
 import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
-import noCoverImg from '@/assets/img/noImage.png'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { Typography } from '@/common/ui/typography'
@@ -106,11 +105,7 @@ export const DecksTable = ({
             <TableRow key={deck.id}>
               <TableCell>
                 <Link className={s.tableImTitleWrapper} to={deck.id}>
-                  {deck.cover ? (
-                    <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />
-                  ) : (
-                    <img alt={'no cover'} className={s.deckCoverImg} src={noCoverImg} />
-                  )}
+                  {deck.cover && <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />}
                   <Typography className={s.deckTitle} variant={'sub2'}>
                     <span>{deck.name}</span>
                   </Typography>
