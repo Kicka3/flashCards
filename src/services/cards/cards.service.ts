@@ -13,23 +13,19 @@ const cardsService = baseApi.injectEndpoints({
 
           const invalidateBy = cardsService.util.selectInvalidatedBy(state, [{ type: 'Cards' }])
 
-          try {
-            const { data } = await queryFulfilled
+          const { data } = await queryFulfilled
 
-            invalidateBy.forEach(({ originalArgs }) => {
-              dispatch(
-                cardsService.util.updateQueryData('getCards', originalArgs, draft => {
-                  if (originalArgs !== 1) {
-                    return
-                  }
-                  draft.items.unshift(data)
-                  draft.items.pop()
-                })
-              )
-            })
-          } catch (e) {
-            console.log(e)
-          }
+          invalidateBy.forEach(({ originalArgs }) => {
+            dispatch(
+              cardsService.util.updateQueryData('getCards', originalArgs, draft => {
+                if (originalArgs !== 1) {
+                  return
+                }
+                draft.items.unshift(data)
+                draft.items.pop()
+              })
+            )
+          })
         },
         query: ({ args, id }) => ({
           body: args,
