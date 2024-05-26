@@ -160,7 +160,7 @@ export const decksApiService = baseApi.injectEndpoints({
           try {
             await queryFulfilled
           } catch {
-            updateResult.undo
+            updateResult.undo()
           }
         },
         query: args => ({
