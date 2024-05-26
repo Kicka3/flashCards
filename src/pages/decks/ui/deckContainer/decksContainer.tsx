@@ -13,13 +13,7 @@ import { useDeleteDeckMutation, useGetDecksQuery } from '@/services/decks/decks.
 
 import s from './decks.module.scss'
 
-type Props = {
-  /** Types for storybook */
-  isLoading?: boolean
-  onClick?: () => void
-}
-
-export const DecksContainer = ({}: Props) => {
+export const DecksContainer = () => {
   const {
     clearFilter,
     currentPage,

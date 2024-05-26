@@ -30,7 +30,7 @@ export const DeleteForm = ({ id, name, onDeleteDeck, trigger }: Props) => {
           <Typography variant={'body2'}>{`All cards will be deleted.`}</Typography>
         </div>
         <div className={s.BtnGroup}>
-          <Button onClick={close} variant={'secondary'}>
+          <Button onClick={() => setIsOpen(false)} variant={'secondary'}>
             Cancel
           </Button>
 

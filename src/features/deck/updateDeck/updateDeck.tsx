@@ -6,11 +6,8 @@ import { DeckForm, EditDeckType } from '@/features/deck/deckForm'
 import { DeckBodyRequest, useUpdateDecksMutation } from '@/services/decks'
 
 type Props = {
-  deck?: EditDeckType
-  // isOpen?: boolean
-  // onOpenChange?: (open: boolean) => void
-  // title: string
-  trigger?: ReactNode
+  deck: EditDeckType
+  trigger: ReactNode
 }
 
 export const UpdateDeck = ({ deck, trigger }: Props) => {
