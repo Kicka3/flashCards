@@ -6,7 +6,7 @@ export const useSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const searchField = searchParams.get('searchField') || ''
-  const orderBy = searchParams.get('orderBy') || null
+  const orderBy = searchParams.get('orderBy') || 'null'
   const currentPage = Number(searchParams.get('page')) || 1
   const itemsPerPage = Number(searchParams.get('itemsPerPage')) || 10
 
