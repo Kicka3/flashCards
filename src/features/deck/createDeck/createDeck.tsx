@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { ErrorResponse } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { useSearch } from '@/common/hooks'
 import { DeckForm } from '@/features/deck/deckForm'
 import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
@@ -12,6 +13,7 @@ type Props = {
 
 export const CreateDeck = ({ trigger }: Props) => {
   const [createDeck] = useCreateDeckMutation()
+  const { clearFilter } = useSearch()
   const title = 'Add New Deck'
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
@@ -27,6 +29,7 @@ export const CreateDeck = ({ trigger }: Props) => {
 
       toast.error(err?.data?.errorMessages[0]?.message ?? 'An unknown error occurred')
     }
+    clearFilter()
   }
 
   return (

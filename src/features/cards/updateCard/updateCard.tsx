@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { ErrorResponse } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { useSearch } from '@/common/hooks'
 import { Modal } from '@/common/ui/modal'
 import { Card, useUpdateCardMutation } from '@/services/cards'
 
@@ -16,11 +17,12 @@ type Props = {
 export const UpdateCard = ({ card, title, trigger }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [updateCard] = useUpdateCardMutation()
+  const { clearFilter } = useSearch()
 
-  const onUpdateCard = async (data: FormData) => {
+  const onUpdateCard = (data: FormData) => {
     try {
       if (card?.id) {
-        await toast.promise(updateCard({ args: data, id: card.id }), {
+        toast.promise(updateCard({ args: data, id: card.id }), {
           pending: 'In progress',
           success: 'Success',
         })
@@ -30,6 +32,7 @@ export const UpdateCard = ({ card, title, trigger }: Props) => {
 
       toast.error(err?.data?.errorMessages[0]?.message ?? 'Could not update')
     }
+    clearFilter()
   }
 
   return (

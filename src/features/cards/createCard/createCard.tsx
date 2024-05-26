@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react'
 import { ErrorResponse } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
+import { useSearch } from '@/common/hooks'
 import { Modal } from '@/common/ui/modal'
 import { useCreateCardMutation } from '@/services/cards'
 
@@ -15,7 +16,7 @@ type Props = {
 
 export const CreateCard = ({ deckId, title, trigger }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
+  const { clearFilter } = useSearch()
   const [createCard] = useCreateCardMutation()
 
   const onCreateCard = async (data: FormData) => {
@@ -31,6 +32,7 @@ export const CreateCard = ({ deckId, title, trigger }: Props) => {
 
       toast.error(err?.data?.errorMessages[0]?.message ?? 'Could not update')
     }
+    clearFilter()
   }
 
   return (
