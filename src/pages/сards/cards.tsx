@@ -15,14 +15,14 @@ type Props = {
   cards: Card[]
   currentPage: number
   isOwner: boolean
-  itemsPerPage: string
+  itemsPerPage: number
   moreThanOnePage: boolean
-  onChangeCurrentPage: (page: number) => void
-  onChangeItemsCountPerPage: (page: string) => void
+  onChangeItemsPerPage: (page: string) => void
   onChangeOrderBy: (columnName: string) => void
+  onChangePage: (page: number) => void
   onChangeSearchField: (value: string) => void
   onDeleteCard: (id: string) => void
-  orderBy: string
+  orderBy: null | string
   paginationOptions: string[]
   searchField: string
   totalItems: number
@@ -34,9 +34,9 @@ export const Cards = ({
   isOwner,
   itemsPerPage,
   moreThanOnePage,
-  onChangeCurrentPage,
-  onChangeItemsCountPerPage,
+  onChangeItemsPerPage,
   onChangeOrderBy,
+  onChangePage,
   onChangeSearchField,
   onDeleteCard,
   orderBy,
@@ -106,7 +106,7 @@ export const Cards = ({
                 Last Updated
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell} onClick={() => onChangeOrderBy('grade')}>
+            <TableHeadCell className={s.tableHeadCell}>
               <Button
                 className={classNames.tableHeadCell_btn.grade}
                 onClick={() => onChangeOrderBy('grade')}
@@ -187,8 +187,8 @@ export const Cards = ({
           currentPage={currentPage}
           defaultValue={paginationOptions[0]}
           itemsPerPage={Number(itemsPerPage)}
-          onChangeItemsPerPage={onChangeItemsCountPerPage}
-          onChangePage={onChangeCurrentPage}
+          onChangeItemsPerPage={onChangeItemsPerPage}
+          onChangePage={onChangePage}
           options={paginationOptions}
           totalCount={totalItems || 0}
         />

@@ -21,6 +21,8 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
+
+  text-decoration: none;
 }
 
 .deckCoverImg {
@@ -53,4 +55,44 @@
 
 .arrowWrapper {
   position: relative;
+}
+
+.tableHeadCell {
+  cursor: pointer;
+  padding: 0;
+
+  .tableHeadCell_btn {
+    width: 100%;
+    height: 100%;
+    padding: 6px 24px;
+    color: var(--color-light-100);
+
+    &::after {
+      content: '';
+
+      transform: rotate(45deg) translate(8px, -5px);
+
+      display: inline-block;
+
+      width: 5px;
+      height: 5px;
+
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
+
+    &:focus-visible {
+      border-radius: 0;
+      outline-offset: 2px;
+    }
+
+    &.asc::after {
+      border-color: white;
+    }
+
+    &.desc::after {
+      transform: rotate(-135deg) translate(-6px, 6px);
+      border-color: white;
+    }
+  }
 }

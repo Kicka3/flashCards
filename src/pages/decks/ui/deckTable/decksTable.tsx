@@ -1,169 +1,111 @@
-import { useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-import {
-  ArrowIosDownOutline,
-  ArrowIosUp,
-  Edit2Outline,
-  PlayCircleOutline,
-  TrashOutline,
-} from '@/assets/icons/components'
+import { Edit2Outline, PlayCircleOutline, TrashOutline } from '@/assets/icons/components'
 import noCoverImg from '@/assets/img/noImage.png'
 import { Button } from '@/common/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeadCell, TableRow } from '@/common/ui/table'
 import { Typography } from '@/common/ui/typography'
 import { DeleteForm } from '@/features/deck/deleteForm'
 import { UpdateDeck } from '@/features/deck/updateDeck'
-import { useDeckFilter, useSortDecks } from '@/pages/decks/deckHooks'
-import { MyDeck } from '@/services/decks'
+import { useMeQuery } from '@/services/auth'
+import { Deck } from '@/services/decks'
 import clsx from 'clsx'
 
 import s from './decksTable.module.scss'
 
 type Props = {
-  decks: MyDeck[]
+  decks: Deck[]
   isDeckBeingDeleted: boolean
-  learnDeck: (deckId: string) => void
-  onDeleteClick?: (deckId: string) => void
-  onEditClick?: (deckId: string) => void
-  openDeck: (deckId: string) => void
+  onChangeOrderBy: (columnName: string) => void
+  onDeleteDeck: (id: string) => void
+  orderBy: null | string
 }
 
 export const DecksTable = ({
   decks,
   isDeckBeingDeleted,
-  learnDeck,
-  onDeleteClick,
-  openDeck,
+  onChangeOrderBy,
+  onDeleteDeck,
+  orderBy,
 }: Props) => {
-  const [deleteForm, setDeleteForm] = useState<[boolean, string | undefined]>([false, undefined])
-  const [openEditMode, setOpenEditMode] = useState(false)
-  /** Пользовател. хуки */
-  const { findDeck, isOwner, orderBy, setSortedBy } = useDeckFilter()
-  const { handleSort, sortedDecks } = useSortDecks(decks, orderBy, setSortedBy)
-
-  /** Сохраняю ID колоды */
-  const [getDeckId, setGetDeckId] = useState<string | undefined>('')
-
-  const closeDeleteFormHandler = useCallback(() => {
-    setDeleteForm([false, undefined])
-  }, [])
-
-  /** Удаляю по id из form*/
-  const onDeleteDeck = async (id: string) => {
-    if (id) {
-      onDeleteClick?.(id)
-    }
+  /** Проверяем, является ли текущий пользователь владельцем колоды. */
+  const { data: me } = useMeQuery()
+  const isOwner = (userId: string) => {
+    return userId === me?.id
   }
 
-  /** Delete Deck */
-  const deleteDeckHandler = (id: string) => () => {
-    setGetDeckId(id)
-    const deckName = findDeck(id)
-
-    setDeleteForm([true, deckName?.name])
-
-    return deckName?.name
-  }
-
-  /** Update Deck */
-  const editDeckHandler = useCallback(
-    (id: string) => () => {
-      const deckToEdit = findDeck(id)
-
-      setGetDeckId(id)
-      setOpenEditMode(true)
-
-      return deckToEdit
-    },
-    [findDeck]
-  )
-
-  const openDeckHandler = (deckId: string) => {
-    openDeck(deckId)
-  }
-
-  const onLearnDeck = (deckId: string) => {
-    learnDeck(deckId)
-  }
-
-  /** Функция для отрисовки стрелки сортировки */
-  const renderSortArrow = useCallback(
-    (key: string) => {
-      if (orderBy?.key === key) {
-        return (
-          <span className={s.arrowWrapper}>
-            {orderBy.direction === 'asc' ? (
-              <ArrowIosUp className={s.arrow} height={16} width={16} />
-            ) : (
-              <ArrowIosDownOutline className={s.arrow} height={16} width={16} />
-            )}
-          </span>
-        )
-      }
-
-      return null
-    },
-    [orderBy]
-  )
-
+  /** Сортировка */
   const classNames = {
     disabledIcon: clsx(isDeckBeingDeleted && s.disableIcon),
+    tableHeadCell_btn: {
+      authorName: clsx(s.question, s.tableHeadCell_btn, {
+        [s.asc]: orderBy === 'author.name-asc',
+        [s.desc]: orderBy === 'author.name-desc',
+      }),
+      cardsCount: clsx(s.grade, s.tableHeadCell_btn, {
+        [s.asc]: orderBy === 'cardsCount-asc',
+        [s.desc]: orderBy === 'cardsCount-desc',
+      }),
+      name: clsx(s.answer, s.tableHeadCell_btn, {
+        [s.asc]: orderBy === 'name-asc',
+        [s.desc]: orderBy === 'name-desc',
+      }),
+      updated: clsx(s.updated, s.tableHeadCell_btn, {
+        [s.asc]: orderBy === 'updated-asc',
+        [s.desc]: orderBy === 'updated-desc',
+      }),
+    },
   }
 
   return (
     <>
-      {getDeckId && (
-        <UpdateDeck
-          deck={findDeck(getDeckId)}
-          isOpen={openEditMode}
-          onOpenChange={setOpenEditMode}
-          title={'Update Deck'}
-        />
-      )}
-
       <Table className={s.tableContainer}>
         <TableHead>
           <TableRow>
-            <DeleteForm
-              close={closeDeleteFormHandler}
-              deleteAction={id => {
-                onDeleteDeck(id)
-              }}
-              id={getDeckId}
-              isDeck
-              isOpen={deleteForm[0]}
-              name={deleteForm[1]}
-              onOpenChange={setDeleteForm}
-              title={'Delete Pack'}
-            />
-            <TableHeadCell onClick={() => handleSort('name')}>
-              <Typography variant={'sub2'}>
-                <span className={s.cursor}>Name</span> {renderSortArrow('name')}
-              </Typography>
+            <TableHeadCell className={s.tableHeadCell}>
+              <Button
+                className={classNames.tableHeadCell_btn.name}
+                onClick={() => onChangeOrderBy('name')}
+                variant={'link'}
+              >
+                <Typography variant={'sub2'}>Name</Typography>
+              </Button>
             </TableHeadCell>
-            <TableHeadCell onClick={() => handleSort('cardsCount')}>
-              <Typography variant={'sub2'}>
-                <span className={s.cursor}>Cards</span> {renderSortArrow('cardsCount')}
-              </Typography>
+            <TableHeadCell className={s.tableHeadCell}>
+              <Button
+                className={classNames.tableHeadCell_btn.cardsCount}
+                onClick={() => onChangeOrderBy('cardsCount')}
+                variant={'link'}
+              >
+                <Typography variant={'sub2'}>Cards</Typography>
+              </Button>
             </TableHeadCell>
-            <TableHeadCell onClick={() => handleSort('updated')}>
-              <Typography variant={'sub2'}>
-                <span className={s.cursor}>Last updated</span> {renderSortArrow('updated')}
-              </Typography>
+            <TableHeadCell className={s.tableHeadCell}>
+              <Button
+                className={classNames.tableHeadCell_btn.updated}
+                onClick={() => onChangeOrderBy('updated')}
+                variant={'link'}
+              >
+                <Typography variant={'sub2'}>Last updated</Typography>
+              </Button>
             </TableHeadCell>
-            <TableHeadCell onClick={() => handleSort('author.name')}>
-              <Typography variant={'sub2'}>
-                <span className={s.cursor}>Author</span> {renderSortArrow('author.name')}
-              </Typography>
+            <TableHeadCell className={s.tableHeadCell}>
+              <Button
+                className={classNames.tableHeadCell_btn.authorName}
+                onClick={() => onChangeOrderBy('author.name')}
+                variant={'link'}
+              >
+                <Typography variant={'sub2'}>Author</Typography>
+              </Button>
             </TableHeadCell>
             <TableHeadCell>Actions</TableHeadCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {sortedDecks?.map(deck => (
+          {decks?.map(deck => (
             <TableRow key={deck.id}>
               <TableCell>
-                <span className={s.tableImTitleWrapper} onClick={() => openDeckHandler(deck.id)}>
+                <Link className={s.tableImTitleWrapper} to={deck.id}>
                   {deck.cover ? (
                     <img alt={'cover'} className={s.deckCoverImg} src={deck.cover} />
                   ) : (
@@ -172,60 +114,68 @@ export const DecksTable = ({
                   <Typography className={s.deckTitle} variant={'sub2'}>
                     <span>{deck.name}</span>
                   </Typography>
-                </span>
+                </Link>
               </TableCell>
-              <TableCell className={s.deckPointer}>{deck.cards}</TableCell>
+              <TableCell className={s.deckPointer}>{deck.cardsCount}</TableCell>
               <TableCell className={s.deckPointer}>
-                {new Date(deck.lastUpdated).toLocaleDateString('ru-ru')}
+                {new Date(deck.updated).toLocaleDateString('ru-ru')}
               </TableCell>
-              <TableCell className={s.deckPointer}>{deck.createdBy}</TableCell>
+              <TableCell className={s.deckPointer}>{deck.author.name}</TableCell>
               <TableCell>
                 {isOwner(deck.userId) ? (
                   <div className={s.iconsContainer}>
                     <Button
-                      className={deck.cards === 0 ? s.disableIcon : ''}
-                      disabled={!deck.cards}
-                      onClick={() => onLearnDeck(deck.id)}
+                      as={deck.cardsCount === 0 ? 'button' : Link}
+                      className={deck.cardsCount === 0 ? s.disableIcon : ''}
+                      disabled={deck.cardsCount === 0}
+                      to={`${deck.id}/learn`}
                       variant={'icon'}
                     >
                       <PlayCircleOutline
-                        className={clsx(deck.cards === 0 && s.disableIcon)}
+                        className={clsx(deck.cardsCount === 0 && s.disableIcon)}
                         height={'16px'}
                         width={'16px'}
                       />
                     </Button>
+                    <UpdateDeck
+                      deck={deck}
+                      trigger={
+                        <Button as={'div'} variant={'icon'}>
+                          <Edit2Outline height={16} width={16} />
+                        </Button>
+                      }
+                    />
+                    <DeleteForm
+                      id={deck.id}
+                      name={deck.name}
+                      onDeleteDeck={onDeleteDeck}
+                      trigger={
+                        <Button as={'div'} disabled={isDeckBeingDeleted} variant={'icon'}>
+                          <TrashOutline
+                            className={classNames.disabledIcon}
+                            height={'16px'}
+                            width={'16px'}
+                          />
+                        </Button>
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div className={s.iconsContainer}>
                     <Button
-                      disabled={isDeckBeingDeleted}
-                      onClick={editDeckHandler(deck.id)}
+                      as={deck.cardsCount === 0 ? 'button' : Link}
+                      className={deck.cardsCount === 0 ? s.disableIcon : ''}
+                      disabled={deck.cardsCount === 0}
+                      to={`${deck.id}/learn`}
                       variant={'icon'}
                     >
-                      <Edit2Outline
-                        className={classNames.disabledIcon}
-                        height={'16px'}
-                        width={'16px'}
-                      />
-                    </Button>
-                    <Button
-                      disabled={isDeckBeingDeleted}
-                      onClick={deleteDeckHandler(deck.id)}
-                      variant={'icon'}
-                    >
-                      <TrashOutline
-                        className={classNames.disabledIcon}
+                      <PlayCircleOutline
+                        className={clsx(deck.cardsCount === 0 && s.disableIcon)}
                         height={'16px'}
                         width={'16px'}
                       />
                     </Button>
                   </div>
-                ) : (
-                  <Button
-                    className={clsx(deck.cards === 0 && s.disableIcon)}
-                    disabled={!deck.cards}
-                    onClick={() => onLearnDeck(deck.id)}
-                    variant={'icon'}
-                  >
-                    <PlayCircleOutline height={'16px'} width={'16px'} />
-                  </Button>
                 )}
               </TableCell>
             </TableRow>

@@ -54,11 +54,11 @@ export const LearnCards = () => {
 
   return (
     <section className={s.wrapper}>
-      <GoBackButton title={'Back'} />
+      <GoBackButton className={s.backLink} title={'Back to Decks List'} />
 
       <Card>
         <div className={s.title}>
-          <Typography variant={'h1'}>Learn {deckData?.name}</Typography>
+          <Typography variant={'h1'}>Learn ”{deckData?.name}”</Typography>
         </div>
         <div className={s.questionSection}>
           <Typography className={s.question} variant={'sub1'}>

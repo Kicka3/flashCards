@@ -53,9 +53,11 @@ export const ItemForm = ({ control, errorMessage, image, label, name, setImage }
               className={s.image}
               src={typeof image === 'string' ? image : URL.createObjectURL(image)}
             />
-            <Button className={s.deleteIcon} onClick={onRemoveImage} variant={'icon'}>
-              <TrashOutline height={24} width={24} />
-            </Button>
+            <div className={s.btnWrapper}>
+              <Button onClick={onRemoveImage} variant={'icon'}>
+                <TrashOutline height={18} width={18} />
+              </Button>
+            </div>
           </>
         )}
       </div>

@@ -20,7 +20,7 @@ export const UpdateCard = ({ card, title, trigger }: Props) => {
   const onUpdateCard = async (data: FormData) => {
     try {
       if (card?.id) {
-        await toast.promise(updateCard({ args: data, id: card.id }).unwrap(), {
+        await toast.promise(updateCard({ args: data, id: card.id }), {
           pending: 'In progress',
           success: 'Success',
         })

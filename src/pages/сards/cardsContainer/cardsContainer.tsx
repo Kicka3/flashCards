@@ -7,34 +7,32 @@ import { CreateCard } from '@/features/cards/createCard'
 import { Cards } from '@/pages/сards/cards'
 import { CardsHeader } from '@/pages/сards/cardsHeader/cardsHeader'
 import { useCards } from '@/pages/сards/cardsHooks/useCards'
-import { usePagination } from '@/pages/сards/cardsHooks/usePagination'
 
 import s from './cardsContainer.module.scss'
 
 export const CardsContainer = () => {
   const { id } = useParams()
   const deckId = id || ''
-  const { currentPage, itemsPerPage, paginationOptions, setCurrentPage, setItemsPerPage } =
-    usePagination()
+
   const {
     cards,
     cardsIsLoading,
+    currentPage,
     deck,
     isEmpty,
     isOwner,
+    itemsPerPage,
     moreThanOnePage,
+    onChangeItemsPerPage,
     onChangeOrderBy,
+    onChangePage,
+    onChangeSearchField,
     onDeleteCard,
     orderBy,
+    paginationOptions,
     searchField,
-    setSearchField,
     totalItems,
-  } = useCards({
-    currentPage,
-    deckId,
-    itemsPerPage,
-    setCurrentPage,
-  })
+  } = useCards({ deckId })
 
   if (cardsIsLoading) {
     return (
@@ -78,10 +76,10 @@ export const CardsContainer = () => {
           isOwner={isOwner}
           itemsPerPage={itemsPerPage}
           moreThanOnePage={moreThanOnePage}
-          onChangeCurrentPage={setCurrentPage}
-          onChangeItemsCountPerPage={setItemsPerPage}
+          onChangeItemsPerPage={onChangeItemsPerPage}
           onChangeOrderBy={onChangeOrderBy}
-          onChangeSearchField={setSearchField}
+          onChangePage={onChangePage}
+          onChangeSearchField={onChangeSearchField}
           onDeleteCard={onDeleteCard}
           orderBy={orderBy}
           paginationOptions={paginationOptions}

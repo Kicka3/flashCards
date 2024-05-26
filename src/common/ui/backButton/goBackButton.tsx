@@ -8,12 +8,16 @@ import s from './backButton.module.scss'
 
 type Props = {
   className?: string
+  path?: string
   title?: string
 }
 
-export const GoBackButton = ({ className, title = 'Return to Previous Page' }: Props) => {
+export const GoBackButton = ({ className, path, title = 'Return to Previous Page' }: Props) => {
   const navigate = useNavigate()
-  const goBackHandler = () => navigate(-1)
+
+  const goBackHandler = () => {
+    path ? navigate(path) : navigate(-1)
+  }
 
   const classNames = {
     btnStyles: clsx(className, s.backTo),

@@ -7,13 +7,12 @@ import { useCreateDeckMutation } from '@/services/decks/decks.service'
 import { DeckBodyRequest } from '@/services/decks/decks.types'
 
 type Props = {
-  disabled?: boolean
-  title: string
-  trigger?: ReactNode
+  trigger: ReactNode
 }
 
-export const CreateDeck = ({ title, trigger }: Props) => {
+export const CreateDeck = ({ trigger }: Props) => {
   const [createDeck] = useCreateDeckMutation()
+  const title = 'Add New Deck'
 
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 

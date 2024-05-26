@@ -1,3 +1,5 @@
+import { ReactNode, useState } from 'react'
+
 import { Button } from '@/common/ui/button'
 import { Modal } from '@/common/ui/modal'
 import { Typography } from '@/common/ui/typography'
@@ -5,56 +7,34 @@ import { Typography } from '@/common/ui/typography'
 import s from './deleteForm.module.scss'
 
 type Props = {
-  close: () => void
-  deleteAction?: (id: string) => void
-  id: string | undefined
-  isDeck: boolean
-  isOpen: boolean
-  name: string | undefined
-  onOpenChange: (value: [boolean, string | undefined]) => void
-  title: string
+  id: string
+  name: string
+  onDeleteDeck: (id: string) => void
+  trigger: ReactNode
 }
 
-/** Функция-адаптер, которая принимает onOpenChange и возвращает функцию, соответствующую типу (open: boolean) => void */
-const adaptOnOpenChange =
-  (onOpenChange: (value: [boolean, string | undefined]) => void) => (open: boolean) => {
-    onOpenChange([open, undefined])
-  }
-
-export const DeleteForm = ({
-  close,
-  deleteAction,
-  id,
-  isDeck,
-  isOpen,
-  name,
-  onOpenChange,
-  title,
-}: Props) => {
+export const DeleteForm = ({ id, name, onDeleteDeck, trigger }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const title = 'Delete Pack'
   /** Кнопка Delete в модалке */
   const DeleteDeckHandler = () => {
-    if (deleteAction && id) {
-      deleteAction(id)
-      onOpenChange([false, undefined])
-    }
+    onDeleteDeck(id)
+    setIsOpen(false)
   }
 
   return (
-    <Modal onOpenChange={adaptOnOpenChange(onOpenChange)} open={isOpen} title={title}>
+    <Modal onOpenChange={setIsOpen} open={isOpen} title={title} trigger={trigger}>
       <div className={s.deleteForm}>
         <div className={s.bodyText}>
           <Typography variant={'body2'}>{`Do you really want to remove ${name} ?`}</Typography>
           <Typography variant={'body2'}>{`All cards will be deleted.`}</Typography>
         </div>
         <div className={s.BtnGroup}>
-          <Button onClick={close} variant={'secondary'}>
+          <Button onClick={() => setIsOpen(false)} variant={'secondary'}>
             Cancel
           </Button>
-          {isDeck ? (
-            <Button onClick={DeleteDeckHandler}>Delete Pack</Button>
-          ) : (
-            <Button onClick={DeleteDeckHandler}>Delete Card</Button>
-          )}
+
+          <Button onClick={DeleteDeckHandler}>Delete Card</Button>
         </div>
       </div>
     </Modal>
