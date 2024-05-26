@@ -18,7 +18,7 @@ type Props = {
 export const CardsHeader = ({ deck, isEmpty, isOwner }: Props) => {
   return (
     <>
-      <GoBackButton className={s.backBtn} />
+      <GoBackButton className={s.backBtn} path={'/decks'} />
 
       <div className={s.packIntro}>
         <div className={s.packTitleWrapper}>
