@@ -16,7 +16,7 @@ import { Deck, useDeleteDeckMutation } from '@/services/decks'
 import s from './iconDropdown.module.scss'
 
 type Props = {
-  deck?: Deck
+  deck: Deck
 }
 
 export const IconDropDown = ({ deck }: Props) => {
@@ -25,7 +25,7 @@ export const IconDropDown = ({ deck }: Props) => {
   const goBackHandler = () => {
     navigate(-1)
   }
-  /** DELETE */
+
   const [deleteDeck, { isLoading: isDeckBeingDeleted }] = useDeleteDeckMutation()
 
   const onDeleteDeck = async (id: string) => {
