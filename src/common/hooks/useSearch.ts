@@ -82,6 +82,7 @@ export const useSearch = () => {
 
       params.set('minCardsCount', minMaxCounts[0].toString())
       params.set('maxCardsCount', minMaxCounts[1].toString())
+      params.set('page', '1')
 
       return params
     })
