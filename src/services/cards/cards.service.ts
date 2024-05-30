@@ -1,3 +1,4 @@
+import { formDataToJSON } from '@/common/utils/formDataToJSON'
 import { baseApi } from '@/services/base-api'
 
 import { Card, CardsResponse, GetCardsArgs, MinMaxResponse } from './cards.types'
@@ -5,8 +6,27 @@ import { Card, CardsResponse, GetCardsArgs, MinMaxResponse } from './cards.types
 const cardsService = baseApi.injectEndpoints({
   endpoints: builder => {
     return {
-      createCard: builder.mutation<void, { args: FormData; id: string }>({
+      createCard: builder.mutation<Card, { args: FormData; id: string }>({
         invalidatesTags: ['Cards', 'Decks'],
+        async onQueryStarted(_, { dispatch, getState, queryFulfilled }) {
+          const state = getState()
+
+          const invalidateBy = cardsService.util.selectInvalidatedBy(state, [{ type: 'Cards' }])
+
+          const { data } = await queryFulfilled
+
+          invalidateBy.forEach(({ originalArgs }) => {
+            dispatch(
+              cardsService.util.updateQueryData('getCards', originalArgs, draft => {
+                if (originalArgs !== 1) {
+                  return
+                }
+                draft.items.unshift(data)
+                draft.items.pop()
+              })
+            )
+          })
+        },
         query: ({ args, id }) => ({
           body: args,
           method: 'POST',
@@ -15,6 +35,33 @@ const cardsService = baseApi.injectEndpoints({
       }),
       deleteCard: builder.mutation<unknown, string>({
         invalidatesTags: ['Cards', 'Decks'],
+        async onQueryStarted(id, { dispatch, getState, queryFulfilled }) {
+          const state = getState()
+          const patchResults: any[] = []
+
+          const invalidateBy = cardsService.util.selectInvalidatedBy(state, [{ type: 'Cards' }])
+
+          invalidateBy.forEach(({ originalArgs }) => {
+            patchResults.push(
+              dispatch(
+                cardsService.util.updateQueryData('getCards', originalArgs, draft => {
+                  const itemToUpdateIndex = draft.items.findIndex(card => card.id === id)
+
+                  if (itemToUpdateIndex === -1) {
+                    return
+                  }
+                  draft.items.splice(itemToUpdateIndex, 1)
+                })
+              )
+            )
+          })
+
+          try {
+            await queryFulfilled
+          } catch {
+            patchResults.forEach(patchResults => patchResults.undo())
+          }
+        },
         query: id => ({
           method: 'DELETE',
           url: `/v1/cards/${id}`,
@@ -41,33 +88,34 @@ const cardsService = baseApi.injectEndpoints({
       }),
       updateCard: builder.mutation<void, { args: FormData; id: string }>({
         invalidatesTags: ['Cards'],
-        async onQueryStarted({ id, ...patch }, { dispatch, getState, queryFulfilled }) {
+        async onQueryStarted({ args, id }, { dispatch, getState, queryFulfilled }) {
           const state = getState()
-          /* any так как не типизируется */
-          const patchResults: any = []
 
-          cardsService.util
-            .selectInvalidatedBy(state, [{ type: 'Cards' }])
-            .forEach(({ endpointName, originalArgs }) => {
-              if (endpointName !== 'getCards') {
-                return
-              }
+          const formatedArgs = formDataToJSON(args) // Преобразуем FormData в JSON объект
+
+          const patchResults: any[] = []
+
+          const invalidateBy = cardsService.util.selectInvalidatedBy(state, [{ type: 'Cards' }])
+
+          invalidateBy.forEach(({ originalArgs }) => {
+            patchResults.push(
               dispatch(
-                cardsService.util.updateQueryData(endpointName, originalArgs, draft => {
-                  const itemToUpdate = draft.items.find(card => card.id === id)
+                cardsService.util.updateQueryData('getCards', originalArgs, draft => {
+                  const itemToUpdateIndex = draft.items.findIndex(card => card.id === id)
 
-                  if (!itemToUpdate) {
+                  if (itemToUpdateIndex === -1) {
                     return
                   }
-                  Object.assign(itemToUpdate, patch)
+                  Object.assign(draft.items[itemToUpdateIndex], formatedArgs)
                 })
               )
-            })
+            )
+          })
 
           try {
             await queryFulfilled
           } catch {
-            patchResults.forEach((patch: any) => patch.undo())
+            patchResults.forEach(patchResults => patchResults.undo())
           }
         },
         query: ({ args, id }) => ({

@@ -35,6 +35,31 @@
 .deckImgWrapper {
   position: relative;
   display: flex;
+
+  .btnWrapper {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+
+    padding: 3px;
+
+    background-color: var(--color-dark-300);
+    border-radius: 4px;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: var(--color-dark-100);
+    }
+
+   &:focus {
+    outline: 2px solid var(--color-light-100);
+  }
+
+    .btnRemoveCover {
+      padding: 0;
+    }
+  }
 }
 
 .deckImg {
@@ -44,32 +69,6 @@
 
   background-position: left;
   border-radius: 4px;
-}
-
-.deleteDeckIcon {
-  cursor: pointer;
-
-  position: absolute;
-  top: 30px;
-  right: 10px;
-  bottom: 347px;
-
-  padding: 3px;
-
-  background-color: var(--color-dark-300);
-  border-radius: 4px;
-
-  fill: var(--color-light-100);
-
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: var(--color-dark-100);
-  }
-
-  &:focus {
-    outline: 2px solid var(--color-light-100);
-  }
 }
 
 .openFilesInput {

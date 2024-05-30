@@ -2,13 +2,12 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ROUTES } from '@/common/enums/enums'
-import { useFilter } from '@/common/hooks/useFilter'
 import { UpdateUserFormValues } from '@/pages/auth/editProfile/editProfileWithInput/utils/editWithInputSchema'
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
-import { useLogoutMutation, useUpdateUserMutation } from '@/services/auth'
+import { useLogoutMutation, useMeQuery, useUpdateUserMutation } from '@/services/auth'
 
 export const ProfilePage = () => {
-  const { me, refetch } = useFilter()
+  const { data: me, refetch } = useMeQuery()
   const [updateProfile, isSuccess] = useUpdateUserMutation()
 
   const [logout] = useLogoutMutation()

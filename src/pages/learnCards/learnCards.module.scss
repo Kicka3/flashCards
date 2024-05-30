@@ -3,26 +3,7 @@
 }
 
 .backLink {
-  cursor: pointer;
-
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-
-  margin-bottom: 15px;
-  padding-right: 3px;
-
-  color: var(color-ligh-100);
-  text-decoration: none;
-
-  border-radius: 3px;
-
-  transition: 0.3s;
-
-  &:hover {
-    background-color: var(--color-accent-500);
-    box-shadow: 0 0 5px var(--color-accent-500);
-  }
+  margin-bottom: 36px;
 }
 
 .title {
@@ -37,6 +18,7 @@
 
   span {
     font-weight: var(--font-weight-regular);
+    word-break: break-all;
   }
 }
 

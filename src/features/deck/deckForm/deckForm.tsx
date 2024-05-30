@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, RefObject, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Image, TrashOutline } from '@/assets/icons/components'
@@ -40,7 +40,7 @@ export const DeckForm = ({
   trigger,
 }: Props) => {
   /** Стейт для фото */
-  const [photo, setPhoto] = useState<File | null | string>(null)
+  const [photo, setPhoto] = useState<File | null | string>(deck?.cover || null)
 
   const fileInputRef: RefObject<HTMLInputElement> = useRef(null)
 
@@ -49,20 +49,10 @@ export const DeckForm = ({
     formState: { errors },
     handleSubmit,
     reset,
-    setValue,
   } = useForm<AddDeckFormValues>({
-    defaultValues: { isPrivate: false, name: '' },
+    defaultValues: { isPrivate: deck?.isPrivate || false, name: deck?.name || '' },
     resolver: zodResolver(addDeckSchema),
   })
-
-  /** Когда компонента монитурется, проверяем deck и устанавливаем занчения для полей */
-  useEffect(() => {
-    if (deck) {
-      setValue('name', deck.name || '')
-      setValue('isPrivate', deck.isPrivate || false)
-      setPhoto(deck.cover ?? null)
-    }
-  }, [deck, setValue])
 
   /** Отправляем на сервер */
   const onSubmit = async (data: AddDeckFormValues) => {
@@ -111,9 +101,11 @@ export const DeckForm = ({
           {uploadedImg && (
             <div className={s.deckImgWrapper}>
               <img alt={'Image not found'} className={s.deckImg} src={uploadedImg} />
-              <Button onClick={removeCoverImg} variant={'icon'}>
-                <TrashOutline className={s.deleteDeckIcon} height={24} width={24} />
-              </Button>
+              <div className={s.btnWrapper}>
+                <Button className={s.btnRemoveCover} onClick={removeCoverImg} variant={'link'}>
+                  <TrashOutline height={18} width={18} />
+                </Button>
+              </div>
             </div>
           )}
           <ImageLoader className={s.openFilesInput} ref={fileInputRef} setPhoto={setPhoto} />

@@ -8,7 +8,7 @@ import { Card } from '@/common/ui/card'
 import { ControlledRadioGroup } from '@/common/ui/controlled'
 import { RadioItem } from '@/common/ui/radioGroup'
 import { Typography } from '@/common/ui/typography'
-import { grade } from '@/pages/learnCards/constant'
+import { grade } from '@/pages/learnCards/constants'
 import { useGetDeckByIdQuery, useGetDeckToLearnQuery, useSaveGradeMutation } from '@/services/decks'
 
 import s from './learnCards.module.scss'
@@ -54,11 +54,12 @@ export const LearnCards = () => {
 
   return (
     <section className={s.wrapper}>
-      <GoBackButton title={'Back'} />
+
+      <GoBackButton className={s.backLink} title={'Back to Decks List'} />
 
       <Card>
         <div className={s.title}>
-          <Typography variant={'h1'}>Learn {deckData?.name}</Typography>
+          <Typography variant={'h1'}>Learn ”{deckData?.name}”</Typography>
         </div>
         <div className={s.questionSection}>
           <Typography className={s.question} variant={'sub1'}>

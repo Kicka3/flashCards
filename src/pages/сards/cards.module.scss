@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-.backBtn {
-  padding-left: 1px;
-}
-
 .backLink {
   display: inline-flex;
   gap: 6px;
@@ -112,4 +108,10 @@
 .updated,
 .grade {
   width: 150px;
+}
+
+.loaderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

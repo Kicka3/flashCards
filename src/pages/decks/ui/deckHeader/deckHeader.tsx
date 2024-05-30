@@ -5,29 +5,38 @@ import { Tabs } from '@/common/ui/tabs'
 import { TextField } from '@/common/ui/textField'
 import { Typography } from '@/common/ui/typography'
 import { CreateDeck } from '@/features/deck/createDeck/createDeck'
-import { useDeckFilter } from '@/pages/decks/deckHooks'
+import { useGetMinMaxCardsQuery } from '@/services/cards'
 import { TabsType } from '@/services/common.types'
 
 import s from './deckHeader.module.scss'
 
 type Props = {
+  clearFilter: () => void
+  currentTab: string
+  deckIsFetching: boolean
   isLoading?: boolean
+  maxCards: number
+  minCards: number
+  onChangeSearchField: (searchField: string) => void
+  onCommitSliderValues: (minMaxCounts: number[]) => void
+  onTabValueChange: (tabValue: string) => void
+  searchField: string
   tabs: TabsType[]
 }
 
-export const DeckHeader = ({ tabs }: Props) => {
-  const {
-    clearFilter,
-    deckIsFetching,
-    getCurrentTab,
-    maxCards,
-    minCards,
-    minMaxValues,
-    onChangeName,
-    onCommitSliderValues,
-    onTabValueChange,
-    searchBy,
-  } = useDeckFilter()
+export const DeckHeader = ({
+  clearFilter,
+  currentTab,
+  deckIsFetching,
+  maxCards,
+  minCards,
+  onChangeSearchField,
+  onCommitSliderValues,
+  onTabValueChange,
+  searchField,
+  tabs,
+}: Props) => {
+  const { data: minMaxValues } = useGetMinMaxCardsQuery()
 
   const onClearFilters = () => {
     clearFilter()
@@ -38,7 +47,6 @@ export const DeckHeader = ({ tabs }: Props) => {
       <div className={s.deckHead}>
         <Typography variant={'h1'}>Decks list</Typography>
         <CreateDeck
-          title={'Add New Deck'}
           trigger={
             <Button as={'div'} variant={'primary'}>
               Add New Deck
@@ -49,9 +57,9 @@ export const DeckHeader = ({ tabs }: Props) => {
       <div className={s.deckFilterWrapper}>
         <div>
           <TextField
-            onChange={onChangeName}
+            onChange={onChangeSearchField}
             placeholder={'Search deck'}
-            value={searchBy}
+            value={searchField}
             variant={'search'}
           />
         </div>
@@ -63,7 +71,7 @@ export const DeckHeader = ({ tabs }: Props) => {
               label={'Show decks cards'}
               onTabValueChange={onTabValueChange}
               tabs={tabs}
-              value={getCurrentTab || tabs[0].value}
+              value={currentTab || tabs[0].value}
             />
           </div>
           <Slider
