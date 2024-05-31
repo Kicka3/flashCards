@@ -5,6 +5,7 @@
 .iconsContainer {
   display: flex;
   gap: 10px;
+  justify-content: center;
 }
 
 .cursor {
@@ -65,7 +66,10 @@
     width: 100%;
     height: 100%;
     padding: 6px 24px;
+
     color: var(--color-light-100);
+
+    border-radius: 0;
 
     &::after {
       content: '';
@@ -94,5 +98,23 @@
       transform: rotate(-135deg) translate(-6px, 6px);
       border-color: white;
     }
+
+    &:hover {
+      background-color: var(--color-dark-300);
+    }
   }
+}
+
+.cardsCount,
+.actions {
+  width: 130px;
+}
+
+.actions {
+  cursor: default;
+  padding: 6px 24px;
+}
+
+.updated {
+  width: 180px;
 }
