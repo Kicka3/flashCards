@@ -66,7 +66,7 @@
   }
 
   &:focus {
-    border: 2px solid var(--color-info-700);
+    border: 2px solid var(--color-light-100);
   }
 
   &:active {
@@ -180,14 +180,4 @@
 
 .eyeIconError {
   color: var(--color-danger-300);
-}
-
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px var(--color-dark-900) inset !important;
-  caret-color: #fff !important;
-
-  -webkit-text-fill-color: var(--color-light-100) !important;
 }

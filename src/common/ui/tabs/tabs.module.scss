@@ -84,7 +84,7 @@
     &.tabsTrigger[data-state='active'] {
       background-color: var(--color-dark-700);
       border: transparent;
-      outline: 2px solid var(--color-info-900);
+      outline: 2px solid var(--color-light-100);
     }
 
     & + :nth-child(2) {

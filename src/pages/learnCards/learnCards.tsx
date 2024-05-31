@@ -54,6 +54,7 @@ export const LearnCards = () => {
 
   return (
     <section className={s.wrapper}>
+
       <GoBackButton className={s.backLink} title={'Back to Decks List'} />
 
       <Card>

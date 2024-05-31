@@ -20,7 +20,7 @@
   transition: background-color 0.2s ease;
 
   &:focus-visible {
-    outline: 2px solid var(--color-info-500);
+    outline: 2px solid var(--color-light-100);
     outline-offset: 2px;
   }
 }
@@ -28,6 +28,10 @@
 .primary {
   background-color: var(--color-accent-500);
   box-shadow: 0 4px 25px 0 rgb(var(--color-accent-500-s), 35%); /* stylelint-disable-line */
+
+  &:hover {
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300-s), 35%); /* stylelint-disable-line */
+  }
 
   &:active {
     background-color: var(--color-accent-700);
@@ -40,18 +44,16 @@
     background-color: var(--color-accent-900);
     box-shadow: 0 4px 18px 0 rgba(var(--color-accent-900-s), 35%); /* stylelint-disable-line */
   }
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--color-accent-300);
-      box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300-s), 35%); /* stylelint-disable-line */
-    }
-  }
 }
 
 .secondary {
   background-color: var(--color-dark-300);
   box-shadow: 0 4px 18px 0 rgba(109 109 109 / 22%);
+
+  &:hover {
+    background-color: var(--color-dark-300);
+    box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300-s), 35%); /* stylelint-disable-line */
+  }
 
   &:active {
     background-color: var(--color-dark-500);
@@ -63,13 +65,6 @@
     color: var(--color-light-900);
     background-color: var(--color-dark-300);
     box-shadow: 0 4px 18px 0 rgba(var(--color-accent-900-s), 35%); /* stylelint-disable-line */
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      background-color: var(--color-dark-100);
-      box-shadow: 0 4px 18px 0 rgba(var(--color-accent-300-s), 35%); /* stylelint-disable-line */
-    }
   }
 }
 

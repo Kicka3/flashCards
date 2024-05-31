@@ -27,6 +27,10 @@ export const Profile = ({ className, profile, ...rest }: Props) => {
 
   const avatar = getAvatarUrl({ avatar: profile?.avatar, name: profile?.name })
 
+  const onToggleDropDown = () => {
+    toggleDropdown(!isDropdownOpen)
+  }
+
   return (
     <div className={clsx(s.profile, className)} {...rest}>
       <Typography variant={'sub1'}>{profile?.name}</Typography>
@@ -34,7 +38,7 @@ export const Profile = ({ className, profile, ...rest }: Props) => {
         aria-expanded={isDropdownOpen}
         aria-haspopup={'true'}
         className={s.btnDropDown}
-        onClick={() => toggleDropdown(!isDropdownOpen)}
+        onClick={onToggleDropDown}
         onKeyDown={handleKeyDown}
       >
         <div className={s.avatar}>

@@ -49,7 +49,7 @@ export const DeckHeader = ({
         <CreateDeck
           trigger={
             <Button as={'div'} variant={'primary'}>
-              Add new deck
+              Add New Deck
             </Button>
           }
         />
