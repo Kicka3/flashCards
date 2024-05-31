@@ -67,11 +67,9 @@ export const Pagination = ({
       /** если стартовая страница больше 2, то вторым в массив попадает ...*/
       if (startPage > 2) {
         pageNumbers.push(
-          <button className={s.page} disabled key={'startEllipsis'}>
-            <Typography as={'span'} variant={'body2'}>
-              ...
-            </Typography>
-          </button>
+          <Typography as={'span'} variant={'body2'}>
+            ...
+          </Typography>
         )
       }
     }
@@ -79,7 +77,7 @@ export const Pagination = ({
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <button
-          className={`${s.page} ${currentPage === i ? s.active : ''}`}
+          className={`${s.page} ${currentPage === i && s.active}`}
           key={i}
           onClick={() => onChangePageCallback(i)}
         >
@@ -93,11 +91,9 @@ export const Pagination = ({
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         pageNumbers.push(
-          <button className={s.page} disabled key={'endEllipsis'}>
-            <Typography as={'span'} variant={'body2'}>
-              ...
-            </Typography>
-          </button>
+          <Typography as={'span'} variant={'body2'}>
+            ...
+          </Typography>
         )
       }
       /** и в конце последняя страница */
