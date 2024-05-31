@@ -36,20 +36,27 @@ export const DecksTable = ({
   /** Сортировка */
   const classNames = {
     disabledIcon: clsx(isDeckBeingDeleted && s.disableIcon),
+    tableHeadCell: {
+      actions: clsx(s.actions, s.tableHeadCell),
+      authorName: clsx(s.authorName, s.tableHeadCell),
+      cardsCount: clsx(s.cardsCount, s.tableHeadCell),
+      name: clsx(s.name, s.tableHeadCell),
+      updated: clsx(s.updated, s.tableHeadCell),
+    },
     tableHeadCell_btn: {
-      authorName: clsx(s.question, s.tableHeadCell_btn, {
+      authorName: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'author.name-asc',
         [s.desc]: orderBy === 'author.name-desc',
       }),
-      cardsCount: clsx(s.grade, s.tableHeadCell_btn, {
+      cardsCount: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'cardsCount-asc',
         [s.desc]: orderBy === 'cardsCount-desc',
       }),
-      name: clsx(s.answer, s.tableHeadCell_btn, {
+      name: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'name-asc',
         [s.desc]: orderBy === 'name-desc',
       }),
-      updated: clsx(s.updated, s.tableHeadCell_btn, {
+      updated: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'updated-asc',
         [s.desc]: orderBy === 'updated-desc',
       }),
@@ -61,43 +68,43 @@ export const DecksTable = ({
       <Table className={s.tableContainer}>
         <TableHead>
           <TableRow>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.name}>
               <Button
                 className={classNames.tableHeadCell_btn.name}
                 onClick={() => onChangeOrderBy('name')}
                 variant={'link'}
               >
-                <Typography variant={'sub2'}>Name</Typography>
+                Name
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.cardsCount}>
               <Button
                 className={classNames.tableHeadCell_btn.cardsCount}
                 onClick={() => onChangeOrderBy('cardsCount')}
                 variant={'link'}
               >
-                <Typography variant={'sub2'}>Cards</Typography>
+                Cards
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.updated}>
               <Button
                 className={classNames.tableHeadCell_btn.updated}
                 onClick={() => onChangeOrderBy('updated')}
                 variant={'link'}
               >
-                <Typography variant={'sub2'}>Last updated</Typography>
+                Last updated
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.authorName}>
               <Button
                 className={classNames.tableHeadCell_btn.authorName}
                 onClick={() => onChangeOrderBy('author.name')}
                 variant={'link'}
               >
-                <Typography variant={'sub2'}>Author</Typography>
+                Author
               </Button>
             </TableHeadCell>
-            <TableHeadCell>Actions</TableHeadCell>
+            <TableHeadCell className={classNames.tableHeadCell.actions}>Actions</TableHeadCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -117,61 +124,47 @@ export const DecksTable = ({
               </TableCell>
               <TableCell className={s.deckPointer}>{deck.author.name}</TableCell>
               <TableCell>
-                {isOwner(deck.userId) ? (
-                  <div className={s.iconsContainer}>
-                    <Button
-                      as={deck.cardsCount === 0 ? 'button' : Link}
-                      className={deck.cardsCount === 0 ? s.disableIcon : ''}
-                      disabled={deck.cardsCount === 0}
-                      to={`${deck.id}/learn`}
-                      variant={'icon'}
-                    >
-                      <PlayCircleOutline
-                        className={clsx(deck.cardsCount === 0 && s.disableIcon)}
-                        height={'16px'}
-                        width={'16px'}
-                      />
-                    </Button>
-                    <UpdateDeck
-                      deck={deck}
-                      trigger={
-                        <Button as={'div'} variant={'icon'}>
-                          <Edit2Outline height={16} width={16} />
-                        </Button>
-                      }
+                <div className={s.iconsContainer}>
+                  <Button
+                    as={deck.cardsCount === 0 ? 'button' : Link}
+                    className={deck.cardsCount === 0 ? s.disableIcon : ''}
+                    disabled={deck.cardsCount === 0}
+                    to={`${deck.id}/learn`}
+                    variant={'icon'}
+                  >
+                    <PlayCircleOutline
+                      className={clsx(deck.cardsCount === 0 && s.disableIcon)}
+                      height={'16px'}
+                      width={'16px'}
                     />
-                    <DeleteForm
-                      id={deck.id}
-                      name={deck.name}
-                      onDeleteDeck={onDeleteDeck}
-                      trigger={
-                        <Button as={'div'} disabled={isDeckBeingDeleted} variant={'icon'}>
-                          <TrashOutline
-                            className={classNames.disabledIcon}
-                            height={'16px'}
-                            width={'16px'}
-                          />
-                        </Button>
-                      }
-                    />
-                  </div>
-                ) : (
-                  <div className={s.iconsContainer}>
-                    <Button
-                      as={deck.cardsCount === 0 ? 'button' : Link}
-                      className={deck.cardsCount === 0 ? s.disableIcon : ''}
-                      disabled={deck.cardsCount === 0}
-                      to={`${deck.id}/learn`}
-                      variant={'icon'}
-                    >
-                      <PlayCircleOutline
-                        className={clsx(deck.cardsCount === 0 && s.disableIcon)}
-                        height={'16px'}
-                        width={'16px'}
+                  </Button>
+                  {isOwner(deck.userId) && (
+                    <>
+                      <UpdateDeck
+                        deck={deck}
+                        trigger={
+                          <Button as={'div'} variant={'icon'}>
+                            <Edit2Outline height={16} width={16} />
+                          </Button>
+                        }
                       />
-                    </Button>
-                  </div>
-                )}
+                      <DeleteForm
+                        id={deck.id}
+                        name={deck.name}
+                        onDeleteDeck={onDeleteDeck}
+                        trigger={
+                          <Button as={'div'} disabled={isDeckBeingDeleted} variant={'icon'}>
+                            <TrashOutline
+                              className={classNames.disabledIcon}
+                              height={'16px'}
+                              width={'16px'}
+                            />
+                          </Button>
+                        }
+                      />
+                    </>
+                  )}
+                </div>
               </TableCell>
             </TableRow>
           ))}

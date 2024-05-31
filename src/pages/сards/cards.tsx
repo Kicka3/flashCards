@@ -45,16 +45,23 @@ export const Cards = ({
   totalItems,
 }: Props) => {
   const classNames = {
+    tableHeadCell: {
+      actions: clsx(s.actions, s.tableHeadCell),
+      answer: clsx(s.answer, s.tableHeadCell),
+      grade: clsx(s.grade, s.tableHeadCell),
+      question: clsx(s.question, s.tableHeadCell),
+      updated: clsx(s.updated, s.tableHeadCell),
+    },
     tableHeadCell_btn: {
-      answer: clsx(s.answer, s.tableHeadCell_btn, {
+      answer: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'answer-asc',
         [s.desc]: orderBy === 'answer-desc',
       }),
-      grade: clsx(s.grade, s.tableHeadCell_btn, {
+      grade: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'grade-asc',
         [s.desc]: orderBy === 'grade-desc',
       }),
-      question: clsx(s.question, s.tableHeadCell_btn, {
+      question: clsx(s.tableHeadCell_btn, {
         [s.asc]: orderBy === 'question-asc',
         [s.desc]: orderBy === 'question-desc',
       }),
@@ -79,7 +86,7 @@ export const Cards = ({
       <Table className={s.cardsTable}>
         <TableHead>
           <TableRow>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.question}>
               <Button
                 className={classNames.tableHeadCell_btn.question}
                 onClick={() => onChangeOrderBy('question')}
@@ -88,7 +95,7 @@ export const Cards = ({
                 Question
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.answer}>
               <Button
                 className={classNames.tableHeadCell_btn.answer}
                 onClick={() => onChangeOrderBy('answer')}
@@ -97,7 +104,7 @@ export const Cards = ({
                 Answer
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.updated}>
               <Button
                 className={classNames.tableHeadCell_btn.updated}
                 onClick={() => onChangeOrderBy('updated')}
@@ -106,7 +113,7 @@ export const Cards = ({
                 Last Updated
               </Button>
             </TableHeadCell>
-            <TableHeadCell className={s.tableHeadCell}>
+            <TableHeadCell className={classNames.tableHeadCell.grade}>
               <Button
                 className={classNames.tableHeadCell_btn.grade}
                 onClick={() => onChangeOrderBy('grade')}
@@ -115,7 +122,9 @@ export const Cards = ({
                 Grade
               </Button>
             </TableHeadCell>
-            {isOwner && <TableHeadCell></TableHeadCell>}
+            {isOwner && (
+              <TableHeadCell className={classNames.tableHeadCell.actions}></TableHeadCell>
+            )}
           </TableRow>
         </TableHead>
         <TableBody>
