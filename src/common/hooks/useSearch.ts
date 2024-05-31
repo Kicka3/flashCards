@@ -18,55 +18,38 @@ export const useSearch = () => {
     if (orderBy === `${columnName}-asc`) {
       newOrder = 'desc'
     }
+    if (orderBy === `${columnName}-desc`) {
+      searchParams.delete('orderBy')
+    } else {
+      searchParams.set('orderBy', `${columnName}-${newOrder}`)
+    }
+    searchParams.set('page', '1')
 
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
-
-      if (orderBy === `${columnName}-desc`) {
-        params.delete('orderBy')
-      } else {
-        params.set('orderBy', `${columnName}-${newOrder}`)
-      }
-      params.set('page', '1')
-
-      return params
-    })
+    setSearchParams(searchParams)
   }
 
   const onChangeSearchField = (searchField: string) => {
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
+    if (!searchField) {
+      searchParams.delete('searchField')
+    } else {
+      searchParams.set('searchField', searchField)
+    }
+    searchParams.set('page', '1')
 
-      if (!searchField) {
-        params.delete('searchField')
-      } else {
-        params.set('searchField', searchField)
-      }
-      params.set('page', '1')
-
-      return params
-    })
+    setSearchParams(searchParams)
   }
 
   const onChangePage = (page: number) => {
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
+    searchParams.set('page', page.toString())
 
-      params.set('page', page.toString())
-
-      return params
-    })
+    setSearchParams(searchParams)
   }
 
   const onChangeItemsPerPage = (count: string) => {
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
+    searchParams.set('itemsPerPage', count)
+    searchParams.set('page', '1')
 
-      params.set('itemsPerPage', count)
-      params.set('page', '1')
-
-      return params
-    })
+    setSearchParams(searchParams)
   }
 
   // decks
@@ -77,15 +60,10 @@ export const useSearch = () => {
 
   /** Обработчик применения значений слайдера для фильтрации колод по количеству карт. */
   const onCommitSliderValues = (minMaxCounts: number[]) => {
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
-
-      params.set('minCardsCount', minMaxCounts[0].toString())
-      params.set('maxCardsCount', minMaxCounts[1].toString())
-      params.set('page', '1')
-
-      return params
-    })
+    searchParams.set('minCardsCount', minMaxCounts[0].toString())
+    searchParams.set('maxCardsCount', minMaxCounts[1].toString())
+    searchParams.set('page', '1')
+    setSearchParams(searchParams)
   }
 
   /** Очищаем фильтры. */
@@ -95,14 +73,9 @@ export const useSearch = () => {
 
   // Обработчик изменения текущей вкладки.
   const onTabValueChange = (tabValue: string) => {
-    setSearchParams(prevParams => {
-      const params = new URLSearchParams(prevParams)
-
-      params.set('currentTab', tabValue)
-      params.set('page', '1')
-
-      return params
-    })
+    searchParams.set('currentTab', tabValue)
+    searchParams.set('page', '1')
+    setSearchParams(searchParams)
   }
 
   return {
