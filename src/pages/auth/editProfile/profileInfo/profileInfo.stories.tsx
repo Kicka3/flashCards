@@ -1,5 +1,3 @@
-import { Router } from 'react-router-dom'
-
 import { ProfileInfo } from '@/pages/auth/editProfile/profileInfo/profileInfo'
 import { Meta, StoryObj } from '@storybook/react'
 
@@ -33,9 +31,9 @@ export const EditProfileTest: Story = {
   render: args => {
     return (
       <>
-        <Router location={''} navigator={}>
-          <ProfileInfo {...args} />
-        </Router>
+        {/*<Router location={''} navigator={}>*/}
+        <ProfileInfo {...args} />
+        {/*</Router>*/}
       </>
     )
   },
