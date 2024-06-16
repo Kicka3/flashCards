@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/common/ui/button'
 import { Profile } from '@/layout/header/ui/header-profile/headerProfile'
 import { UserData } from '@/services/auth'
+import AppLogo from '@/assets/img/logo.png'
 import clsx from 'clsx'
 
 import s from './header.module.scss'
@@ -20,7 +21,9 @@ export const Header = ({ children, className, isAuth, isLoading, profile, ...res
   return (
     <header className={s.headerWrapper}>
       <div className={clsx(s.header, className)} {...rest}>
-        <Link to={'/'}>HEADERlogo</Link>
+        <Link to={'/'}>
+          <img className={s.headerLogo} src={AppLogo} alt={'AppLogo'} />
+        </Link>
         <HeaderContent isAuth={isAuth} isLoading={isLoading} path={pathname} profile={profile} />
       </div>
     </header>
