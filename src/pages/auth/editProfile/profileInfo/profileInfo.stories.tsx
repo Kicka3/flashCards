@@ -29,12 +29,6 @@ export const EditProfileTest: Story = {
     },
   },
   render: args => {
-    return (
-      <>
-        {/*<Router location={''} navigator={}>*/}
-        <ProfileInfo {...args} />
-        {/*</Router>*/}
-      </>
-    )
+    return <ProfileInfo {...args} />
   },
 }
